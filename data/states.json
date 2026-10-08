@@ -60,7 +60,7 @@
     "visited": true,
     "favorite": true,
     "wontGo": false,
-    "note": ""
+    "note": "I kinda lived here."
   },
   {
     "state": "Florida",
@@ -130,7 +130,7 @@
     "visited": true,
     "favorite": true,
     "wontGo": false,
-    "note": ""
+    "note": "I kinda lived here."
   },
   {
     "state": "Maine",
@@ -212,9 +212,9 @@
   {
     "state": "New Jersey",
     "visited": true,
-    "favorite": false,
+    "favorite": true,
     "wontGo": false,
-    "note": ""
+    "note": "I lived here."
   },
   {
     "state": "New Mexico",
@@ -228,7 +228,7 @@
     "visited": true,
     "favorite": true,
     "wontGo": false,
-    "note": ""
+    "note": "I lived here."
   },
   {
     "state": "North Carolina",
@@ -260,7 +260,7 @@
   },
   {
     "state": "Oregon",
-    "visited": false,
+    "visited": true,
     "favorite": false,
     "wontGo": false,
     "note": ""

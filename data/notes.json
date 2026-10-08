@@ -1,19 +1,19 @@
 [
   {
-    "title": "African Ingenuity",
-    "text": "Traditional values as opposed to alien.",
-    "tag": "1930s",
-    "collection": "Time Is Not Linear",
-    "date": "2021-03-28",
-    "order": 1,
-    "image": ""
-  },
-  {
     "title": "Culture",
     "text": "Until we set clear, ascertained, and inflexible definitions of who we are, what we do, and how we do, we will continue to be despondent, pliant people.",
     "tag": "",
     "collection": "The Perpetual Notes of AK",
     "date": "2020-05-10",
+    "order": 1,
+    "image": ""
+  },
+  {
+    "title": "African Ingenuity",
+    "text": "Traditional values as opposed to alien.",
+    "tag": "1930s",
+    "collection": "Time Is Not Linear",
+    "date": "2021-03-28",
     "order": 1,
     "image": ""
   },
@@ -106,5 +106,14 @@
     "date": "2021-03-28",
     "order": 9,
     "image": ""
+  },
+  {
+    "title": "We did it, Ama.",
+    "text": "Of course, we did.",
+    "tag": "",
+    "collection": "The Perpetual Notes of AK",
+    "date": "2026-10-08",
+    "order": 999,
+    "image": "/assets/notes/3f300886f67180b8bc70c6625a9e97dc.jpg"
   }
 ]
