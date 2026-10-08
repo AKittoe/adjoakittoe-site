@@ -1585,6 +1585,8 @@
     .mn .mn-label { font-size: 13px; letter-spacing: 0.1px; }
     .mn-hub .mn-label { font-weight: 500; }
     .mn .mn-sub { font-size: 10px; letter-spacing: 0.4px; text-transform: none; font-style: italic; }
+    #map-svg text { text-rendering: geometricPrecision; }
+    @media (max-width: 768px) { .mn .mn-label { font-size: 24px; stroke-width: 7px; } .mn .mn-sub { font-size: 16px; font-style: normal; letter-spacing: 0.3px; } .mn-hub .mn-num { font-size: 15px; } }
     .mi-zone { width: 12px; height: 12px; border-radius: 50%; background: #5d7d63; opacity: 0.85; }
     .mi-dotk { width: 9px; height: 9px; border-radius: 50%; background: #2b2b2b; margin: 0 1.5px; }
     .mi-ringk { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid #2b2b2b; box-sizing: border-box; }
@@ -6956,6 +6958,12 @@ function cook(g) {
       const sync = () => { const on = document.body.dataset.page === 'about'; mine.forEach(el => { el.style.display = on ? '' : 'none'; }); };
       function load() {
         if (loaded) return; loaded = true;
+        // Live site: our own About-only button that opens the NeetoCal booking page (no floating widget anywhere else)
+        if (location.protocol.startsWith('http') && !/claude\.ai$|claudeusercontent\.com$/.test(location.hostname)) {
+          const a = document.createElement('a'); a.id = 'nc-mock'; a.className = 'nc-btn'; a.href = 'https://adjoa.neetocal.com/30mincc'; a.target = '_blank'; a.rel = 'noopener';
+          a.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Schedule a meeting';
+          document.body.appendChild(a); mine.add(a); sync(); return;
+        }
         window.neetoCal = window.neetoCal || { embed: function () { (neetoCal.q = neetoCal.q || []).push(arguments); } };
         const isNeeto = n => n.nodeType === 1 && n.tagName !== 'SCRIPT' && (/neeto/i.test((n.id || '') + ' ' + (n.className && n.className.baseVal !== undefined ? n.className.baseVal : n.className || '')) || !!(n.querySelector && n.querySelector('[class*="neeto" i], [id*="neeto" i], iframe[src*="neeto"]')));
         const mo = new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => { if (isNeeto(n)) { mine.add(n); sync(); } })));
