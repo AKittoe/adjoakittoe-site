@@ -1,0 +1,33 @@
+name: Sync from Notion
+
+on:
+  workflow_dispatch:          # the "Run workflow" button
+  schedule:
+    - cron: '0 8 * * *'       # every night, about 4am Eastern
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pull from Notion
+        run: node scripts/sync-notion.mjs
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      - name: Save changes
+        run: |
+          git config user.name "notion-sync"
+          git config user.email "notion-sync@users.noreply.github.com"
+          git add data assets || true
+          if git diff --cached --quiet; then
+            echo "Nothing changed in Notion."
+          else
+            git commit -m "Sync from Notion"
+            git push
+          fi

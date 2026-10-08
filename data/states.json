@@ -1,0 +1,359 @@
+[
+  {
+    "state": "Alabama",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Alaska",
+    "visited": true,
+    "favorite": true,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Arizona",
+    "visited": true,
+    "favorite": true,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Arkansas",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "California",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Colorado",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Connecticut",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Delaware",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "District of Columbia",
+    "visited": true,
+    "favorite": true,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Florida",
+    "visited": false,
+    "favorite": false,
+    "wontGo": true,
+    "note": "The one state I won’t go to."
+  },
+  {
+    "state": "Georgia",
+    "visited": true,
+    "favorite": true,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Hawaii",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Idaho",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Illinois",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Indiana",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Iowa",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Kansas",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Kentucky",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Louisiana",
+    "visited": true,
+    "favorite": true,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Maine",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Maryland",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Massachusetts",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Michigan",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Minnesota",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Mississippi",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Missouri",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Montana",
+    "visited": true,
+    "favorite": true,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Nebraska",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Nevada",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "New Hampshire",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "New Jersey",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "New Mexico",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "New York",
+    "visited": true,
+    "favorite": true,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "North Carolina",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "North Dakota",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Ohio",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Oklahoma",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Oregon",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Pennsylvania",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Rhode Island",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "South Carolina",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "South Dakota",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Tennessee",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Texas",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Utah",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Vermont",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Virginia",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Washington",
+    "visited": true,
+    "favorite": true,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "West Virginia",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Wisconsin",
+    "visited": false,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  },
+  {
+    "state": "Wyoming",
+    "visited": true,
+    "favorite": false,
+    "wontGo": false,
+    "note": ""
+  }
+]
