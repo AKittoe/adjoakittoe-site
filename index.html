@@ -2442,6 +2442,10 @@
     .nc-btn:hover { background: #5d544d; color: #fff; }
     .nc-modal { position: fixed; inset: 0; z-index: 2100; display: none; align-items: center; justify-content: center; padding: 16px; }
     .nc-modal.open { display: flex; }
+    .nc-sheet.nc-fsheet { display: block; width: min(1000px, 100%); height: min(720px, calc(100vh - 32px)); overflow: hidden; padding-top: 40px; }
+    .nc-fsheet iframe { width: 100%; height: calc(100% - 28px); border: 0; display: block; }
+    .nc-fsheet .nc-ext { position: absolute; top: 12px; left: 18px; font-size: 13px; color: #6d635b; }
+    .nc-fsheet .nc-x { z-index: 2; }
     .nc-back { position: absolute; inset: 0; background: rgba(30,26,22,0.4); }
     .nc-sheet { position: relative; background: #fff; border-radius: 14px; width: min(900px, 100%); max-height: calc(100vh - 32px); overflow: auto; display: grid; grid-template-columns: 230px 1fr 170px; gap: 0; box-shadow: 0 24px 60px rgba(0,0,0,0.25); font-size: 14px; color: #222; }
     .nc-x, .nc-x:hover { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 22px; color: #666; cursor: pointer; margin: 0; padding: 4px 8px; }
@@ -6960,9 +6964,17 @@ function cook(g) {
         if (loaded) return; loaded = true;
         // Live site: our own About-only button that opens the NeetoCal booking page (no floating widget anywhere else)
         if (location.protocol.startsWith('http') && !/claude\.ai$|claudeusercontent\.com$/.test(location.hostname)) {
-          const a = document.createElement('a'); a.id = 'nc-mock'; a.className = 'nc-btn'; a.href = 'https://adjoa.neetocal.com/30mincc'; a.target = '_blank'; a.rel = 'noopener';
-          a.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Schedule a meeting';
-          document.body.appendChild(a); mine.add(a); sync(); return;
+          const URL_ = 'https://adjoa.neetocal.com/30mincc';
+          const b = document.createElement('button'); b.type = 'button'; b.id = 'nc-mock'; b.className = 'nc-btn';
+          b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Schedule a meeting';
+          const d = document.createElement('div'); d.id = 'nc-modal'; d.className = 'nc-modal nc-live';
+          d.innerHTML = '<div class="nc-back"></div><div class="nc-sheet nc-fsheet" role="dialog" aria-label="Schedule a meeting"><button type="button" class="nc-x" aria-label="Close">×</button><iframe title="Schedule a meeting" loading="lazy"></iframe><a class="nc-ext" href="' + URL_ + '" target="_blank" rel="noopener">Open in a new tab ↗</a></div>';
+          document.body.append(b, d); mine.add(b); mine.add(d);
+          const fr = d.querySelector('iframe'); const close = () => d.classList.remove('open');
+          b.addEventListener('click', () => { if (!fr.src) fr.src = URL_; d.classList.add('open'); });
+          d.querySelector('.nc-x').addEventListener('click', close); d.querySelector('.nc-back').addEventListener('click', close);
+          document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+          sync(); return;
         }
         window.neetoCal = window.neetoCal || { embed: function () { (neetoCal.q = neetoCal.q || []).push(arguments); } };
         const isNeeto = n => n.nodeType === 1 && n.tagName !== 'SCRIPT' && (/neeto/i.test((n.id || '') + ' ' + (n.className && n.className.baseVal !== undefined ? n.className.baseVal : n.className || '')) || !!(n.querySelector && n.querySelector('[class*="neeto" i], [id*="neeto" i], iframe[src*="neeto"]')));
@@ -7282,7 +7294,7 @@ function cook(g) {
         if (secs[0]) { secs[0].querySelector('.st-h span').textContent = visited.length; secs[0].querySelector('ul').innerHTML = visited.map(li).join(''); }
         if (secs[1]) { secs[1].querySelector('.st-h span').textContent = togo.length; secs[1].querySelector('ul').innerHTML = togo.map(li).join(''); }
         const bar = document.querySelector('.ab-bar[title*="of 50"]');
-        if (bar) { const pct = Math.round(n / 50 * 100); bar.title = `${n} of 50 states${dc ? ', plus D.C.' : ''}`; const fill = bar.querySelector('span'); if (fill) fill.style.width = pct + '%'; const lab = bar.previousElementSibling; if (lab && lab.classList.contains('ab-pct')) lab.textContent = pct + '%'; }
+        if (bar) { const pct = Math.round(n / 50 * 100); bar.title = `${n} of 50 states${dc ? ', plus D.C.' : ''}`; const fill = bar.querySelector('span'); if (fill) fill.style.width = pct + '%'; const lab = bar.previousElementSibling; if (lab && lab.classList.contains('ab-pct')) lab.textContent = pct + '%'; const of = bar.nextElementSibling; if (of && of.classList.contains('ab-of')) of.textContent = `${n} of 50`; }
       });
     })();
     // Live site: pages, guides, recipes, and Projects built in Notion
