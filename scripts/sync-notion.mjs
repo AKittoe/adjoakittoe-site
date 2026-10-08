@@ -12,6 +12,7 @@ const DB = {
   guideItems: 'a735e91ed0f946eaaf75dd87155ed61a', // Guide Items
   hover: 'b6288723f6a04132b48ce0a2e6910332',      // Hover Images
   projects: '1a8da941e0cd4524ba50c1e11da6d9b9',   // Projects
+  seeds: 'ccb69c16f1024169b288d7f13c5df17d',      // Seeds (from the seed bed)
 };
 
 const headers = { Authorization: `Bearer ${TOKEN}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' };
@@ -74,6 +75,8 @@ for (const p of await queryAll(DB.projects)) {
   projects.push({ name: plain(pr.Name), status: plain(pr.Status), description: plain(pr.Description), page: plain(pr['Links to page']), link: pr.Link?.url || '', color: pr['Hover color']?.select?.name || '', order: pr.Order?.number ?? 999 });
 }
 projects.sort((a, b) => a.order - b.order);
+
+const seeds = (await queryAll(DB.seeds)).filter(p => check(p.properties.Approved)).map(p => ({ note: plain(p.properties.Note), date: p.created_time })).filter(x => x.note).sort((a, b) => a.date.localeCompare(b.date));
 
 const hover = {};
 for (const p of await queryAll(DB.hover)) {
@@ -265,5 +268,5 @@ pieces.sort((a, b) => a.order - b.order || (b.date || '').localeCompare(a.date |
 
 await mkdir('data', { recursive: true });
 const save = (f, d) => writeFile(`data/${f}`, JSON.stringify(d, null, 2) + '\n');
-await Promise.all([save('notes.json', notes), save('states.json', states), save('pieces.json', pieces), save('projects.json', projects)]);
-console.log(`Saved ${notes.length} notes, ${states.length} states, ${pieces.length} pages, ${projects.length} projects.`);
+await Promise.all([save('notes.json', notes), save('states.json', states), save('pieces.json', pieces), save('projects.json', projects), save('seeds.json', seeds)]);
+console.log(`Saved ${notes.length} notes, ${states.length} states, ${pieces.length} pages, ${projects.length} projects, ${seeds.length} seeds.`);

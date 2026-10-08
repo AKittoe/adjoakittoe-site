@@ -6075,8 +6075,9 @@ function cook(g) {
     });
 
     // Copy link to a page
-    document.querySelectorAll('[data-copy-page]').forEach(btn => {
-      btn.addEventListener('click', async () => {
+    document.addEventListener('click', e => { const btn = e.target.closest('[data-copy-page]'); if (btn) copyPageLink(btn); });
+    async function copyPageLink(btn) {
+      {
         const url = location.href.split('#')[0] + '#' + btn.dataset.copyPage;
         let ok = false;
         try { await navigator.clipboard.writeText(url); ok = true; } catch (e) {
@@ -6088,8 +6089,8 @@ function cook(g) {
         tip.textContent = ok ? 'Link copied' : url;
         btn.classList.add('show-tip');
         setTimeout(() => btn.classList.remove('show-tip'), ok ? 1600 : 4000);
-      });
-    });
+      }
+    }
 
     // ===== MAP: built from the site's own pages, so it stays current =====
     const SiteMap = (function () {
@@ -6485,14 +6486,15 @@ function cook(g) {
     }
     document.querySelectorAll('.sg-demo-form .ab-sendbtn, .sg-rf-send').forEach(b => b.addEventListener('click', () => checkForm(b.closest('form'))));
 
-    // Contact form: Netlify handles delivery on the live site; show a thank-you either way
+    // Contact form: sends to the Contact Inbox in Notion on the live site; shows a thank-you either way
     (function () {
       const f = document.querySelector('.ab-form:not(.sg-demo-form)'); if (!f) return;
       const send = () => {
         if (!checkForm(f)) return;
         const done = () => { f.hidden = true; f.parentElement.querySelector('.ab-thanks').hidden = false; };
         if (location.protocol.startsWith('http') && !location.hostname.endsWith('claude.ai') && !location.hostname.endsWith('claudeusercontent.com')) {
-          fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(f)).toString() }).then(done).catch(done);
+          const fd = new FormData(f);
+          fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: fd.get('name'), email: fd.get('email'), topic: fd.get('topic'), message: fd.get('message') }) }).then(done).catch(done);
         } else done();
       };
       f.querySelector('.ab-sendbtn').addEventListener('click', send);
@@ -6908,12 +6910,18 @@ function cook(g) {
         g.addEventListener('mouseenter', show); g.addEventListener('click', show); g.addEventListener('mouseleave', () => tip.classList.remove('on'));
         bed.appendChild(g); count.textContent = n + (n === 1 ? ' seed' : ' seeds');
       };
-      SEEDS.forEach(s => plant(s.x, s.t, s.d));
+      const LIVE = location.protocol.startsWith('http') && !/claude\.ai$|claudeusercontent\.com$/.test(location.hostname);
+      if (!LIVE) SEEDS.forEach(s => plant(s.x, s.t, s.d));
+      else fetch('/data/seeds.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : []).then(list => {
+        (list || []).forEach((sd, k) => plant(40 + ((k * 97) % 520), sd.note, sd.date ? new Date(sd.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : ''));
+        if (!(list || []).length) count.textContent = '';
+      }).catch(() => {});
       const doPlant = () => {
         const t = note.value.trim(); if (!t) { note.focus(); return; }
         const used = [...bed.querySelectorAll('.sg-sprout path')].map(p => parseFloat(p.getAttribute('d').slice(1)));
         let x = 40; for (let k = 0; k < 40; k++) { const c = 30 + Math.random() * 540; if (used.every(u => Math.abs(u - c) > 28)) { x = c; break; } }
         plant(x, t, 'Just now'); note.value = '';
+        if (LIVE) fetch('/api/seed', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ note: t }) }).catch(() => {});
         msg.textContent = 'Planted. It stays in the bed for everyone once I\'ve read it.';
         bed.lastElementChild.dispatchEvent(new Event('mouseenter')); setTimeout(() => tip.classList.remove('on'), 2600);
       };
