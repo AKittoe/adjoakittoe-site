@@ -1,5 +1,26 @@
 [
   {
+    "slug": "project-x",
+    "template": "Essay",
+    "title": "Project X",
+    "section": "Vibe Projects",
+    "zone": "The Invisible Calendar",
+    "tags": [],
+    "dek": "Not sure",
+    "sideLine": "",
+    "meta": "",
+    "date": "2026-10-08",
+    "ai": false,
+    "readTime": 1,
+    "replace": false,
+    "serves": null,
+    "time": "",
+    "order": 999,
+    "about": "Testing my sync",
+    "html": "",
+    "items": []
+  },
+  {
     "slug": "essay-fonio",
     "template": "Essay",
     "title": "Fonio: A Small Grain With a Long Memory",
