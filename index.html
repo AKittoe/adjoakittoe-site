@@ -2804,7 +2804,8 @@
     .st-heart { color: #d6dd5c; font-size: 12px; margin-left: 2px; }
     .st-no { position: relative; text-decoration: line-through; text-decoration-thickness: 1.5px; cursor: help; outline: none; }
     .st-tip { position: absolute; left: 0; bottom: calc(100% + 8px); white-space: nowrap; background: #f4efe3; color: #4a1c14; font-size: 12px; line-height: 1.3; padding: 6px 10px; border-radius: 6px; box-shadow: 0 8px 20px rgba(0,0,0,0.25); opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity 0.15s, transform 0.15s; text-decoration: none; display: inline-block; z-index: 5; }
-    .st-no:hover .st-tip, .st-no:focus .st-tip { opacity: 1; transform: translateY(0); }
+    .st-no:hover .st-tip, .st-no:focus .st-tip, .st-has:hover .st-tip, .st-has:focus .st-tip { opacity: 1; transform: translateY(0); }
+    .st-has { position: relative; cursor: help; outline: none; border-bottom: 1px dotted rgba(244,239,227,0.5); }
     body:is([data-page="states"],[data-page="notfound"]) .sg-form input { background: rgba(244,239,227,0.08); color: #f4efe3; border-color: rgba(244,239,227,0.2); }
     body:is([data-page="states"],[data-page="notfound"]) .sg-form input::placeholder { color: #c9a99f; }
     body:is([data-page="states"],[data-page="notfound"]) .dd-btn, body:is([data-page="states"],[data-page="notfound"]) .sg-play { color: #f4efe3; border-color: rgba(244,239,227,0.3); background: transparent; }
@@ -2828,6 +2829,53 @@
     .nf-wander, .nf-wander:hover { font: inherit; font-size: 14px; background: #d6dd5c; color: #3b1d36; border: 0; border-radius: 999px; padding: 8px 16px; cursor: pointer; }
     .nf-wander:hover { background: #f4efe3; }
     @media (max-width: 640px) { .nf-wrap { gap: 36px; min-height: 0; padding-top: 24px; } .nf-card { width: 220px; margin: 0 auto; } .nf-num { font-size: 72px; } }
+    /* Pages built in Notion */
+    .np-wrap { max-width: 720px; }
+    .np-head { margin-bottom: 36px; }
+    .np-body { font-size: 16px; line-height: 1.75; color: #2b2b2b; }
+    .np-body p { margin: 0 0 18px; }
+    .np-sec { scroll-margin-top: 24px; }
+    .np-h2 { font-size: 22px !important; font-weight: 500 !important; margin: 44px 0 14px !important; }
+    .np-h3 { font-size: 17px !important; font-weight: 500 !important; margin: 30px 0 10px !important; }
+    .np-h4 { font-size: 11px !important; text-transform: uppercase; letter-spacing: 1.5px; color: #999; font-weight: 500 !important; margin: 26px 0 10px !important; }
+    .np-hl { background: #d6dd5c; color: inherit; padding: 0 2px; border-radius: 2px; }
+    .np-muted { color: #888; }
+    .np-body code { font-family: 'IBM Plex Mono', monospace; font-size: 0.88em; background: #f2efe8; padding: 1px 5px; border-radius: 4px; }
+    .np-list { margin: 0 0 18px; padding-left: 22px; } .np-list li { margin-bottom: 6px; }
+    .np-check { list-style: none; padding-left: 0; } .np-box { display: inline-block; width: 13px; height: 13px; border: 1.5px solid #999; border-radius: 3px; margin-right: 8px; vertical-align: -1px; } .np-box.on { background: #3b1d36; border-color: #3b1d36; }
+    .np-steps { list-style: none; counter-reset: np; padding: 0; margin: 0 0 22px; }
+    .np-steps > li { counter-increment: np; position: relative; padding-left: 44px; margin-bottom: 16px; }
+    .np-steps > li::before { content: counter(np); position: absolute; left: 0; top: 1px; width: 28px; height: 28px; border-radius: 50%; background: #3b1d36; color: #f4efe3; font: 500 13px 'IBM Plex Mono', monospace; display: flex; align-items: center; justify-content: center; }
+    .np-dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; margin: 0 0 22px; } .np-dl dt { font-weight: 500; } .np-dl dd { margin: 0; color: #555; }
+    .np-quote { margin: 26px 0; padding: 4px 0 4px 22px; border-left: 3px solid #c9d23f; font-size: 20px; line-height: 1.5; } .np-quote p { margin: 0 0 8px !important; } .np-quote cite { display: block; font-size: 13px; font-style: normal; color: #888; font-family: 'IBM Plex Mono', monospace; }
+    .np-note { display: flex; gap: 12px; background: #f4efe3; border-radius: 10px; padding: 16px 18px; margin: 0 0 22px; font-size: 15px; line-height: 1.6; } .np-note > div > :last-child { margin-bottom: 0; } .np-note-i { font-size: 18px; line-height: 1.3; }
+    .np-tip { margin: 8px 0 0; padding: 10px 14px; background: #eef3ee; border-radius: 8px; font-size: 14px; color: #4f6f55; }
+    .np-hr { border: 0; border-top: 1px solid rgba(0,0,0,0.1); margin: 36px 0; }
+    .np-code { background: #1c1b19; color: #ece7da; padding: 16px 18px; border-radius: 10px; overflow-x: auto; font: 13px/1.6 'IBM Plex Mono', monospace; margin: 0 0 22px; }
+    .np-code code { background: none !important; color: inherit !important; padding: 0 !important; font-size: inherit !important; }
+    .np-fig { margin: 0 0 24px; } .np-fig img { width: 100%; border-radius: 10px; display: block; } .np-fig figcaption, .np-gallery figcaption, .np-slides figcaption { font-size: 13px; color: #888; margin-top: 8px; }
+    .np-fig.np-wide { width: min(100vw - 48px, 1100px); max-width: none; }
+    .np-cols { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 18px; margin: 0 0 22px; } .np-cols .np-fig { margin: 0; }
+    .np-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0 0 24px; } .np-gallery figure, .np-slides figure { margin: 0; } .np-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; display: block; }
+    .np-slides { position: relative; margin: 0 0 24px; } .np-slides-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; scrollbar-width: none; } .np-slides-track::-webkit-scrollbar { display: none; }
+    .np-slides-track figure { flex: 0 0 100%; scroll-snap-align: start; } .np-slides-track img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; display: block; }
+    .np-prev, .np-next { position: absolute; top: 40%; width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(254,253,251,0.92); cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,0.15); } .np-prev { left: 10px; } .np-next { right: 10px; }
+    .np-table-wrap { overflow-x: auto; margin: 0 0 24px; } .np-table { width: 100%; border-collapse: collapse; font-size: 14px; } .np-table th, .np-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #ebe6dc; vertical-align: top; } .np-table thead th { font-weight: 500; color: #777; font-size: 12px; } .np-facts th { width: 34%; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #999; font-weight: 500; }
+    .np-timeline { margin: 0 0 26px; border: 1px solid #ebe6dc; border-radius: 12px; padding: 14px; } .np-tl-ticks { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; } .np-tl-tick { flex: 0 0 auto; border: 1px solid #e3ddd1; background: transparent; border-radius: 10px; padding: 8px 12px; text-align: left; cursor: pointer; font: inherit; display: flex; flex-direction: column; gap: 2px; max-width: 180px; } .np-tl-tick b { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 13px; } .np-tl-tick span { font-size: 12px; color: #777; } .np-tl-tick.on { background: #3b1d36; border-color: #3b1d36; color: #f4efe3; } .np-tl-tick.on span { color: #d6dd5c; } .np-tl-d { display: none; margin: 10px 4px 0 !important; } .np-tl-d.on { display: block; }
+    .np-toggle { border-bottom: 1px solid #ebe6dc; padding: 12px 0; } .np-toggle summary { cursor: pointer; font-weight: 500; } .np-toggle[open] summary { margin-bottom: 10px; }
+    .np-video { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; padding: 0; border-radius: 10px; overflow: hidden; background: #3b1d36; cursor: pointer; margin: 0 0 24px; } .np-video img { width: 100%; height: 100%; object-fit: cover; display: block; } .np-video-cap { position: absolute; left: 14px; bottom: 12px; color: #f4efe3; font-size: 14px; text-shadow: 0 1px 6px rgba(0,0,0,0.5); } .np-video:hover .rc-play { background: #d6dd5c; }
+    .np-linkcard { display: flex; flex-direction: column; gap: 4px; border: 1px solid #ebe6dc; border-radius: 10px; padding: 14px 16px; margin: 0 0 22px; color: inherit; text-decoration: none; } .np-linkcard span { font-size: 12px; color: #999; font-family: 'IBM Plex Mono', monospace; } .np-linkcard:hover { border-color: #3b1d36; }
+    .np-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 0 0 24px; } .np-stats > div { border: 1px solid #ebe6dc; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 4px; } .np-stat-n { font: 500 28px 'IBM Plex Mono', monospace; color: #3b1d36; } .np-stat-l { font-size: 13px; color: #777; line-height: 1.4; }
+    .np-cite a { text-decoration: none; color: #5d7d63; font-size: 11px; font-weight: 500; padding: 0 2px; }
+    .np-sources { font-size: 14px; color: #555; padding-left: 20px; } .np-sources li { margin-bottom: 8px; scroll-margin-top: 24px; } .np-sources li:target { background: #f6f3c9; }
+    .np-hov { position: relative; border-bottom: 1px dotted #999; cursor: default; outline: none; } .np-hov-card { position: absolute; left: 0; bottom: calc(100% + 8px); width: 200px; background: #fefdfb; border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,0.18); padding: 8px; opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity 0.18s, transform 0.18s; z-index: 30; } .np-hov-wide .np-hov-card { width: 300px; } .np-hov-card img { width: 100%; border-radius: 6px; display: block; } .np-hov-card span { display: block; font-size: 12px; color: #777; margin-top: 6px; line-height: 1.4; } .np-hov:hover .np-hov-card, .np-hov:focus .np-hov-card { opacity: 1; transform: translateY(0); }
+    .np-serves { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: #777; margin: -4px 0 14px; } .np-sv, .np-sv:focus { width: 26px !important; height: 26px !important; min-width: 0 !important; padding: 0 !important; margin: 0 !important; border-radius: 50% !important; border: 1px solid #d8d2c6 !important; background: transparent !important; color: #2b2b2b !important; cursor: pointer; font-size: 15px !important; line-height: 1 !important; display: inline-flex; align-items: center; justify-content: center; box-shadow: none !important; } .np-sv:hover { background: #3b1d36 !important; color: #f4efe3 !important; border-color: #3b1d36 !important; } .np-serves b { color: #2b2b2b; min-width: 14px; text-align: center; }
+    .np-ingr { list-style: none; padding: 0; margin: 0 0 22px; } .np-ingr li { padding: 8px 0; border-bottom: 1px solid #ebe6dc; } .np-amt { font-family: 'IBM Plex Mono', monospace; font-weight: 500; color: #3b1d36; }
+    .np-tagline { display: flex; gap: 8px; margin-bottom: 8px; } .np-tagline span { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a4532f; }
+    .np-coll .np-sec { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; } .np-coll .np-sec > :not(figure) { grid-column: 1 / -1; } .np-coll .np-sec figure { margin: 0; } .np-coll .np-sec figure img { aspect-ratio: 4 / 5; object-fit: cover; }
+    .np-page .lf-pill-wrap .lf-toc.open { display: block; }
+    @media (max-width: 640px) { .np-cols { grid-template-columns: 1fr; } .np-gallery, .np-coll .np-sec { grid-template-columns: repeat(2, minmax(0, 1fr)); } .np-dl { grid-template-columns: 1fr; gap: 2px; } .np-dl dd { margin-bottom: 10px; } .np-fig.np-wide { width: 100%; } .np-hov-card { width: 160px; } }
+    .pj-c8:hover { background: #4f6f8a; border-color: #4f6f8a; color: #f4efe3; }
     /* Dark theme (first pass): invert the palette, then flip real colors back so photos,
        swatches, covers, charts, and embeds keep their true colors */
     html[data-theme="dark"] { background: #fefdfb; filter: invert(0.92) hue-rotate(180deg); }
@@ -7173,7 +7221,7 @@ function cook(g) {
     // State Tracker: name on hover (read only)
     (function () {
       const map = document.getElementById('st-map'); if (!map) return; const nm = document.getElementById('st-name');
-      map.addEventListener('mouseover', e => { const pth = e.target.closest('path'); if (pth) nm.textContent = pth.dataset.name + (pth.dataset.fav ? ' ♥' : '') + (pth.classList.contains('on') ? ' · visited' : (pth.dataset.no ? ' · not going' : '')); });
+      map.addEventListener('mouseover', e => { const pth = e.target.closest('path'); if (pth) nm.textContent = pth.dataset.name + (pth.dataset.fav ? ' ♥' : '') + (pth.dataset.note ? ' · ' + pth.dataset.note : (pth.classList.contains('on') ? ' · visited' : (pth.dataset.no ? ' · not going' : ''))); });
       map.addEventListener('mouseleave', () => { nm.textContent = 'Hover a state'; });
     })();
     // Live site: Notes and State Tracker come from Notion (synced into /data by GitHub)
@@ -7201,6 +7249,7 @@ function cook(g) {
           pth.classList.toggle('on', !!x.visited);
           if (x.favorite) pth.dataset.fav = '1'; else delete pth.dataset.fav;
           if (x.wontGo) pth.dataset.no = '1'; else delete pth.dataset.no;
+          if (x.note) pth.dataset.note = x.note; else delete pth.dataset.note;
           const t = pth.querySelector('title'); if (t) t.textContent = pth.dataset.name + (x.favorite ? ' ♥' : '') + (x.visited ? ' · visited' : '');
         });
         const DC = 'District of Columbia';
@@ -7210,12 +7259,101 @@ function cook(g) {
         const secs = document.querySelectorAll('#states .st-lists section');
         const li = x => {
           if (x.wontGo) return `<li><span class="st-no" tabindex="0">${esc(x.state)}${x.note ? `<span class="st-tip" role="tooltip">${esc(x.note)}</span>` : ''}</span></li>`;
-          return `<li>${esc(x.state)}${x.favorite ? ' <span class="st-heart" aria-label="a favorite">♥</span>' : ''}</li>`;
+          const heart = x.favorite ? ' <span class="st-heart" aria-label="a favorite">♥</span>' : '';
+          if (x.note) return `<li><span class="st-has" tabindex="0">${esc(x.state)}<span class="st-tip" role="tooltip">${esc(x.note)}</span></span>${heart}</li>`;
+          return `<li>${esc(x.state)}${heart}</li>`;
         };
         if (secs[0]) { secs[0].querySelector('.st-h span').textContent = visited.length; secs[0].querySelector('ul').innerHTML = visited.map(li).join(''); }
         if (secs[1]) { secs[1].querySelector('.st-h span').textContent = togo.length; secs[1].querySelector('ul').innerHTML = togo.map(li).join(''); }
         const bar = document.querySelector('.ab-bar[title*="of 50"]');
         if (bar) { const pct = Math.round(n / 50 * 100); bar.title = `${n} of 50 states${dc ? ', plus D.C.' : ''}`; const fill = bar.querySelector('span'); if (fill) fill.style.width = pct + '%'; const lab = bar.previousElementSibling; if (lab && lab.classList.contains('ab-pct')) lab.textContent = pct + '%'; }
+      });
+    })();
+    // Live site: pages, guides, recipes, and Projects built in Notion
+    (function () {
+      if (!location.protocol.startsWith('http')) return;
+      const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      const get = u => fetch(u, { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null);
+      const my = d => d ? new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+      const zslug = z => String(z || '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const host = document.getElementById('home').parentNode;
+      const tbTpl = document.querySelector('#essay-bag .lf-toolbar');
+      const toolbar = (slug, back) => tbTpl ? tbTpl.outerHTML.replace(/essay-bag/g, slug).replace(/data-page="vibe-projects"/, `data-page="${back}"`).replace(/Back to Vibe Projects/g, back === 'essays' ? 'Back to Essays' : 'Back to Vibe Projects') : '';
+      const aiFlag = '<p class="ai-flag"><span class="ai-pill" title="Drafted with AI. See the AI use page.">AI drafted</span> <a href="#" data-page="ai-use">How I use AI</a></p>';
+      const pill = t => `<div class="lf-pill-wrap"><div class="lf-toc np-toc"></div><button type="button" class="lf-pill np-pill" aria-expanded="false"><span class="lf-pill-icon">☰</span><span class="np-pill-label">${esc(t)}</span></button></div>`;
+      const ICON = ['#3b1d36', '#5d7d63', '#a4532f', '#4f6f8a', '#82566f', '#66692f'];
+      function guideSections(items) {
+        const groups = []; const by = {};
+        items.forEach(it => { if (!by[it.section]) { by[it.section] = []; groups.push(it.section); } by[it.section].push(it); });
+        return groups.map((name, gi) => {
+          const its = by[name]; const id = 'np-g-' + gi + '-' + zslug(name);
+          const link = (it, cls, inner) => it.page ? `<a class="${cls} ws-tool-link" href="#" data-page="${esc(it.page)}">${inner}</a>` : it.link ? `<a class="${cls}" href="${esc(it.link)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="${cls}">${inner}</div>`;
+          let html = '';
+          const cards = its.filter(i => i.type === 'Photo card'), steps = its.filter(i => i.type === 'Step'), tools = its.filter(i => i.type === 'Tool'), shop = its.filter(i => i.type === 'Shop item'), notes = its.filter(i => i.type === 'Note');
+          if (cards.length) html += `<div class="ws-cards">${cards.map(c => `<figure class="ws-card">${c.image ? `<img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy">` : `<div class="ws-ph" style="aspect-ratio:4 / 5"><span>${esc(c.name)}</span></div>`}<figcaption><span>${esc(c.name)}</span>${c.link || c.page ? '<span class="ws-arr">↗</span>' : ''}</figcaption></figure>`).join('')}</div>`;
+          if (steps.length) html += `<div class="ws-steps">${steps.map((st, k) => `<div class="ws-step"><span class="ws-n">${String(k + 1).padStart(2, '0')}</span><h3>${esc(st.name)}</h3><p>${esc(st.note)}</p></div>`).join('')}</div>`;
+          if (tools.length) html += `<div class="ws-tools">${tools.map((t, k) => link(t, 'ws-tool', `<span class="ws-ic" style="background:${esc(t.color || ICON[k % ICON.length])}">${esc((t.name || '?')[0])}</span><span class="ws-tn">${esc(t.name)}</span><span class="ws-tr">${esc(t.note)}</span>`)).join('')}</div>`;
+          if (shop.length) html += `<div class="ws-shop">${shop.map(it => `<a class="ws-prod" href="${esc(it.link || '#')}"${it.link ? ' target="_blank" rel="noopener"' : ''}><div class="ws-pimg">${it.image ? `<img src="${esc(it.image)}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover">` : ''}</div><span class="ws-pn">${esc(it.name)}</span><span class="ws-pc">${esc(it.category || it.note)}${it.link ? ' · Shop ↗' : ''}</span></a>`).join('')}</div>`;
+          if (notes.length) html += notes.map(n => `<p class="ws-note">${esc(n.name)}${n.note ? ' ' + esc(n.note) : ''}</p>`).join('');
+          return `<section class="ws-sec np-sec" id="${id}" data-toc="${esc(name)}"><h2 class="ws-h">${esc(name)}</h2>${html}</section>`;
+        }).join('');
+      }
+      function build(p) {
+        const back = p.section === 'Essays' ? 'essays' : 'vibe-projects';
+        const kicker = `${esc(p.zone)}${p.section === 'Vibe Projects' ? ' · Vibe project' : ''}`;
+        const meta = [my(p.date), p.template === 'Recipe' ? (p.serves ? `Serves ${p.serves}` : '') : `${p.readTime} min read`, p.template === 'Recipe' ? p.time : '', p.meta].filter(Boolean).map(esc).join(' · ');
+        const el = document.createElement('div'); el.id = p.slug; el.className = 'page np-page' + (p.template === 'Collection' ? ' np-coll' : '');
+        if (p.template === 'Guide') {
+          el.innerHTML = `${toolbar(p.slug, back)}<div class="ws-wrap"><div class="ws-side"><div class="lf-kicker">${kicker}</div><h1 class="lf-title">${esc(p.title)}</h1>${p.ai ? aiFlag : ''}${p.dek ? `<p class="lf-dek">${esc(p.dek)}</p>` : ''}${p.sideLine ? `<p class="ws-side-p">${esc(p.sideLine)}</p>` : ''}<div class="ws-meta">${meta}</div></div><div class="ws-main"><div class="np-body">${p.html}</div>${guideSections(p.items || [])}</div></div>${pill(p.title)}`;
+        } else {
+          const tagline = p.template === 'Recipe' && p.tags.length ? `<div class="np-tagline">${p.tags.map(t => `<span>#${esc(t)}</span>`).join('')}</div>` : '';
+          el.innerHTML = `${toolbar(p.slug, back)}<div class="np-wrap"><div class="np-head"><div class="lf-kicker">${kicker}</div>${tagline}<h1 class="lf-title">${esc(p.title)}</h1>${p.ai ? aiFlag : ''}${p.dek ? `<p class="lf-dek">${esc(p.dek)}</p>` : ''}<div class="lf-meta">${meta}</div></div><div class="np-body"${p.serves ? ` data-serves="${p.serves}"` : ''}>${p.html}</div></div>${pill(p.title)}`;
+        }
+        host.insertBefore(el, document.getElementById('home').nextSibling);
+        // section pill
+        const secs = [...el.querySelectorAll('.np-sec[data-toc]')]; const wrap = el.querySelector('.lf-pill-wrap');
+        if (!secs.length) wrap.remove(); else {
+          const toc = wrap.querySelector('.np-toc'), btn = wrap.querySelector('.np-pill'), label = wrap.querySelector('.np-pill-label');
+          toc.innerHTML = secs.map(sc => `<a href="#${sc.id}" data-sec="${sc.id}">${esc(sc.dataset.toc)}</a>`).join('');
+          btn.addEventListener('click', e => { e.stopPropagation(); btn.setAttribute('aria-expanded', toc.classList.toggle('open')); });
+          toc.addEventListener('click', e => { const a = e.target.closest('a[data-sec]'); if (!a) return; e.preventDefault(); document.getElementById(a.dataset.sec).scrollIntoView({ behavior: 'smooth', block: 'start' }); toc.classList.remove('open'); });
+          document.addEventListener('click', e => { if (!e.target.closest('.lf-pill-wrap')) toc.classList.remove('open'); });
+          window.addEventListener('scroll', () => { if (!el.classList.contains('active')) return; let cur = secs[0]; secs.forEach(sc => { if (sc.getBoundingClientRect().top < innerHeight * 0.4) cur = sc; }); label.textContent = cur.dataset.toc; }, { passive: true });
+        }
+        el.querySelectorAll('sup.np-cite a').forEach(a => { const src = document.getElementById(a.dataset.src); if (src) a.title = src.textContent; });
+        // list row
+        const listPage = document.getElementById(back), list = listPage && listPage.querySelector('.es-list');
+        if (list) {
+          const z = zslug(p.zone);
+          const li = document.createElement('li'); li.className = 'bk-row es-row'; li.dataset.zone = z; li.dataset.tags = [z, ...p.tags.map(zslug)].join(' ');
+          li.innerHTML = `<a href="#" data-page="${esc(p.slug)}">${esc(p.title)}</a> ${p.ai ? '<span class="ai-pill" title="Drafted with AI. See the AI use page.">AI drafted</span>' : ''}<span class="es-zone">${esc(p.zone)}</span>${p.tags.length ? `<span class="es-tags">${p.tags.map(t => `<span>#${esc(t)}</span>`).join('')}</span>` : ''}<span class="bk-rule"></span><span class="bk-date">${esc(my(p.date))}</span>`;
+          list.prepend(li);
+          const empty = listPage.querySelector('.es-empty'); if (empty) empty.style.display = 'none';
+          listPage.querySelectorAll('.es-chips .bk-chip').forEach(ch => { const k = ch.dataset.zone, sp = ch.querySelector('span'); if (!sp) return; sp.textContent = [...list.querySelectorAll('.es-row')].filter(r => k === 'all' || r.dataset.zone === k || (r.dataset.tags || '').split(' ').includes(k)).length; });
+        }
+      }
+      // keep built pages in step with page switching
+      const _sp = showPage; showPage = function (id) { document.querySelectorAll('.np-page.active').forEach(x => x.classList.remove('active')); return _sp(id); };
+      // interactions
+      document.addEventListener('click', e => {
+        const nx = e.target.closest('.np-prev, .np-next'); if (nx) { const tr = nx.parentNode.querySelector('.np-slides-track'); tr.scrollBy({ left: (nx.classList.contains('np-next') ? 1 : -1) * tr.clientWidth, behavior: 'smooth' }); return; }
+        const tk = e.target.closest('.np-tl-tick'); if (tk) { const w = tk.closest('.np-timeline'); w.querySelectorAll('.np-tl-tick, .np-tl-d').forEach(x => x.classList.toggle('on', x.dataset.i === tk.dataset.i)); return; }
+        const sv = e.target.closest('.np-sv'); if (sv) {
+          const body = sv.closest('.np-body'), base = +body.dataset.serves || 1, b = sv.parentNode.querySelector('b'); const n = Math.max(1, +b.textContent + (+sv.dataset.d)); b.textContent = n;
+          const nice = x => { const w = Math.floor(x), f = x - w, fr = [[0, ''], [.125, '⅛'], [.25, '¼'], [1 / 3, '⅓'], [.5, '½'], [2 / 3, '⅔'], [.75, '¾'], [1, '']]; let best = fr[0]; fr.forEach(c => { if (Math.abs(c[0] - f) < Math.abs(best[0] - f)) best = c; }); const ww = best[0] === 1 ? w + 1 : w; return (ww ? ww + (best[1] ? ' ' : '') : '') + best[1] || '0'; };
+          body.querySelectorAll('.np-amt').forEach(a => { a.textContent = nice(+a.dataset.amt * n / base); }); return;
+        }
+        const vd = e.target.closest('.np-video'); if (vd) { const m = document.getElementById('vs-modal'); if (!m) return; const st = m.querySelector('.vs-stage'); st.innerHTML = ''; const f = document.createElement('iframe'); f.src = vd.dataset.embed; f.allow = 'autoplay; fullscreen; picture-in-picture'; f.allowFullscreen = true; st.appendChild(f); m.querySelector('.vs-cap b').textContent = vd.dataset.title || ''; m.querySelector('.vs-cap span').textContent = ''; m.classList.add('on'); m.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+      });
+      get('/data/pieces.json').then(list => {
+        if (!Array.isArray(list)) return;
+        [...list].reverse().forEach(p => { if (!p || !p.slug) return; const old = document.getElementById(p.slug); if (old && p.replace) { old.remove(); document.querySelectorAll(`.es-row a[data-page="${p.slug}"]`).forEach(a => a.closest('.es-row').remove()); } if (!document.getElementById(p.slug)) build(p); });
+        const id = decodeURIComponent(location.hash.slice(1)); if (id && document.getElementById(id) && document.getElementById(id).classList.contains('np-page')) showPage(id);
+      });
+      get('/data/projects.json').then(list => {
+        const grid = document.querySelector('#projects .pj-grid'); if (!grid || !Array.isArray(list) || !list.length) return;
+        const C = { Chartreuse: 1, Eggplant: 2, Sage: 3, Rust: 4, Maroon: 5, Lilac: 6, Olive: 7, Slate: 8 };
+        grid.innerHTML = list.map(p => { const cls = `pj-card pj-c${C[p.color] || 1}`; const inner = `<span class="pj-status">${esc(p.status)}</span><h2 class="pj-t">${esc(p.name)}</h2><p class="pj-d">${esc(p.description)}</p>${p.page || p.link ? `<span class="pj-go">Open ${p.link && !p.page ? '↗' : '→'}</span>` : ''}`; return p.page ? `<a class="${cls}" href="#" data-page="${esc(p.page)}">${inner}</a>` : p.link ? `<a class="${cls}" href="${esc(p.link)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="${cls}">${inner}</div>`; }).join('');
       });
     })();
     // Open a page directly from a shared link (#page-id)
