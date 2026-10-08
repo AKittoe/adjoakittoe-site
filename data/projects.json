@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Vibe Projects",
+    "status": "10 pieces",
+    "description": "Experiments made with AI: essays, research, and visual studies, sorted by zone.",
+    "page": "vibe-projects",
+    "link": "",
+    "color": "Chartreuse",
+    "order": 1
+  },
+  {
+    "name": "Nkwa ne Nsu",
+    "status": "In progress · Members only",
+    "description": "A members-only archival database on African diasporic art, history, and more.",
+    "page": "",
+    "link": "",
+    "color": "Eggplant",
+    "order": 2
+  },
+  {
+    "name": "The Badwo House",
+    "status": "In progress · Private",
+    "description": "A private home database.",
+    "page": "",
+    "link": "",
+    "color": "Sage",
+    "order": 3
+  },
+  {
+    "name": "State Tracker",
+    "status": "Ongoing",
+    "description": "Every state I’ve visited, on the way to all 50.",
+    "page": "states",
+    "link": "",
+    "color": "Rust",
+    "order": 4
+  },
+  {
+    "name": "Sow It Goes",
+    "status": "Coming soon",
+    "description": "A membership-based newsletter, like Substack, sent digitally and in print by mail.",
+    "page": "",
+    "link": "",
+    "color": "Maroon",
+    "order": 5
+  },
+  {
+    "name": "Eco-friendly 3D printing",
+    "status": "In progress",
+    "description": "3D printing with lower-impact materials and less waste.",
+    "page": "",
+    "link": "",
+    "color": "Lilac",
+    "order": 6
+  },
+  {
+    "name": "HAM radio",
+    "status": "Studying",
+    "description": "Learning radio technician skills and working toward my HAM radio license.",
+    "page": "",
+    "link": "",
+    "color": "Olive",
+    "order": 7
+  }
+]
