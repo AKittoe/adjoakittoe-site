@@ -99,21 +99,21 @@
     "image": ""
   },
   {
-    "title": "Dawn of Creation",
-    "text": "\"In the African conception, sacred, cyclical time gives meaning to ordinary, lineal time. The circle/sphere adds dimension to the line as it envelops it. The sphere is multidimensional, and it is cursed. Sacred time is not \"past\" because it is not part of a lineal construct. The ancestors lives in the present, and the future lives in us. Sacred time is eternal and therefore it has the ability to join past, present and future in one space of supreme valuation.\" Marimba Ani",
-    "tag": "",
-    "collection": "Time Is Not Linear",
-    "date": "2021-03-28",
-    "order": 9,
-    "image": ""
-  },
-  {
     "title": "We did it, Ama.",
     "text": "Of course, we did.",
     "tag": "",
     "collection": "Time Is Not Linear",
     "date": "2026-10-08",
-    "order": 999,
+    "order": 9,
     "image": "/assets/notes/3f300886f67180b8bc70c6625a9e97dc.jpg"
+  },
+  {
+    "title": "Dawn of Creation",
+    "text": "\"In the African conception, sacred, cyclical time gives meaning to ordinary, lineal time. The circle/sphere adds dimension to the line as it envelops it. The sphere is multidimensional, and it is cursed. Sacred time is not \"past\" because it is not part of a lineal construct. The ancestors lives in the present, and the future lives in us. Sacred time is eternal and therefore it has the ability to join past, present and future in one space of supreme valuation.\" Marimba Ani",
+    "tag": "",
+    "collection": "Time Is Not Linear",
+    "date": "2021-03-28",
+    "order": 10,
+    "image": ""
   }
 ]
