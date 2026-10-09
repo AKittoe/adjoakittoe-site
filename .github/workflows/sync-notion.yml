@@ -1,12 +1,16 @@
 name: Sync from Notion
 
 on:
-  workflow_dispatch:          # the "Run workflow" button
+  workflow_dispatch:
   schedule:
-    - cron: '0 8 * * *'       # every night, about 4am Eastern
+    - cron: '17 * * * *'
 
 permissions:
   contents: write
+
+concurrency:
+  group: notion-sync
+  cancel-in-progress: false
 
 jobs:
   sync:
@@ -16,6 +20,8 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+      - name: Photo resizer
+        run: npm install --no-save --no-package-lock sharp@0.33.5
       - name: Pull from Notion
         run: node scripts/sync-notion.mjs
         env:
@@ -24,7 +30,7 @@ jobs:
         run: |
           git config user.name "notion-sync"
           git config user.email "notion-sync@users.noreply.github.com"
-          git add data assets || true
+          git add -A data assets || true
           if git diff --cached --quiet; then
             echo "Nothing changed in Notion."
           else
