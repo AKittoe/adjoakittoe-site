@@ -1,5 +1,31 @@
 [
   {
+    "slug": "example-long-read",
+    "template": "Long read",
+    "title": "EXAMPLE: Long read",
+    "section": "Essays",
+    "zone": "The Invisible Calendar",
+    "tags": [],
+    "dek": "The Systems Beneath layout: one narrow column, small bold section headings.",
+    "sideLine": "",
+    "meta": "",
+    "date": "2026-10-08",
+    "ai": false,
+    "readTime": 1,
+    "sources": 1,
+    "replace": false,
+    "preview": true,
+    "serves": null,
+    "time": "",
+    "order": 999,
+    "about": "",
+    "next": "",
+    "thanks": "",
+    "html": "<section class=\"lf-section np-sec\" data-toc=\"EXAMPLE: Long read\" id=\"example-long-read-top\"><div class=\"sg-callout\">Working example of the <strong>Long read</strong> template (same layout as The Systems Beneath). See it at <a class=\"ab-link\" href=\"http://adjoakittoe.com/#example-long-read\" target=\"_blank\" rel=\"noopener\"><strong>adjoakittoe.com/#example-long-read</strong><span class=\"ab-ext\">↗</span></a>. It uses the same building blocks as EXAMPLE: Essay. The differences: one narrow column, small bold section headings, and side notes show as note boxes under their line instead of in a margin.</div><p>The opening sits under the title.<sup class=\"cite\"><a href=\"#example-long-read-src-1\" data-cite=\"1\">1</a></sup></p><div class=\"ic-wrap\"><div class=\"ic-ctrl\"><button type=\"button\" class=\"ic-prev\" aria-label=\"Earlier\">←</button><button type=\"button\" class=\"ic-next\" aria-label=\"Later\">→</button></div><div class=\"ic-time\"><button type=\"button\" class=\"ic-tick on\" data-i=\"0\"><span class=\"ic-y\">1929</span><span class=\"ic-t\">The word</span></button><button type=\"button\" class=\"ic-tick\" data-i=\"1\"><span class=\"ic-y\">1991</span><span class=\"ic-t\">Revival</span></button></div><div class=\"ic-detail\"><p class=\"ic-d on\" data-i=\"0\"><strong>1929.</strong> Hedden names the foodshed.</p><p class=\"ic-d\" data-i=\"1\"><strong>1991.</strong> Getz brings the word back.</p></div></div></section><section class=\"lf-section np-sec\" data-toc=\"1929: The word\" id=\"example-long-read-1929-the-word\"><h3 class=\"lf-h\">1929: The word</h3><p>A section with a glossary list.</p><dl class=\"sg-dl\"><dt>What it is</dt><dd> the land and routes that feed a place.</dd><dt>What a map can show</dt><dd> where food comes from.</dd></dl></section><div class=\"lf-divider\"></div><section class=\"lf-section np-sec\" data-toc=\"Sources\" id=\"example-long-read-sources\"><h3 class=\"lf-src-head\">Sources</h3><ol class=\"lf-sources\"><li class=\"lf-src\" id=\"example-long-read-src-1\"><span class=\"lf-src-n\">1</span><div><div class=\"lf-src-title\"><a href=\"https://example.com/\" target=\"_blank\" rel=\"noopener\">Hedden, How Great Cities Are Fed ↗</a> <span class=\"lf-tag\">Book</span></div><div class=\"lf-src-note\">Where the word comes from.</div></div></li></ol></section>",
+    "nav": [],
+    "items": []
+  },
+  {
     "slug": "example-essay",
     "template": "Essay",
     "title": "EXAMPLE: Essay with every building block",
@@ -13,14 +39,84 @@
     "meta": "Meta note: extra words after the date",
     "date": "2026-10-08",
     "ai": false,
-    "readTime": 5,
+    "readTime": 6,
+    "sources": 2,
     "replace": false,
     "preview": true,
     "serves": null,
     "time": "",
     "order": 999,
-    "about": "",
-    "html": "<section class=\"np-sec np-first\"><div class=\"np-note\"><span class=\"np-note-i\">👀</span><div>Working example of the <strong>Essay</strong> template with every building block. See it on your site at <a href=\"http://adjoakittoe.com/#example-essay\" target=\"_blank\" rel=\"noopener\" class=\"ab-link\"><strong>adjoakittoe.com/#example-essay</strong><span class=\"ab-ext\">↗</span></a> (Preview is checked, so it is not listed anywhere). Each gray line explains the block right under it. To start a real essay: open the ••• menu at the top right of this page → <strong>Duplicate</strong>, rename it, change the <strong>Slug</strong>, delete the gray lines and this box, then write.</div></div><p>Text before the first heading is the opening of the essay. It has no section name.</p></section><section class=\"np-sec\" id=\"example-essay-text-styles\" data-toc=\"Text styles\"><h2 class=\"np-h2\">Text styles</h2><p><span class=\"np-muted\">Heading 1: type /h1 and press Enter. Every Heading 1 starts a new section, and its name appears in the section menu pill at the bottom of the page.</span></p><h3 class=\"np-h3\">A Heading 2 is a subsection</h3><p><span class=\"np-muted\">Type /h2. For a smaller heading type /h3.</span></p><h4 class=\"np-h4\">A Heading 3 is a small heading</h4><p>This paragraph has <strong>bold</strong>, <em>italic</em>, <s>crossed out</s>, <mark class=\"np-hl\">a chartreuse highlight</mark>, <span class=\"np-muted\">muted gray words</span>, and <code>inline code</code>.</p><p><span class=\"np-muted\">How: select the words, then use the toolbar that pops up. B = bold, i = italic, S = crossed out. Highlight: click A (color) → under Background pick Yellow. Muted: click A → under Text pick Gray. Inline code: click the &lt;&gt; button.</span></p></section><section class=\"np-sec\" id=\"example-essay-links\" data-toc=\"Links\"><h2 class=\"np-h2\">Links</h2><p><span class=\"np-muted\">Link to any website: select the words → click Link in the toolbar → paste the address. On the site it gets a dotted underline and a small ↗.</span></p><p>Read more from <a href=\"https://wholegrainscouncil.org/\" target=\"_blank\" rel=\"noopener\" class=\"ab-link\">the Whole Grains Council<span class=\"ab-ext\">↗</span></a>.</p><p><span class=\"np-muted\">Link to another page on your site: type @ then start typing the page title, and pick it. The page must be a row in Essays &amp; Vibe Projects.</span></p><p>See the <a href=\"#\" data-page=\"example-recipe\" class=\"ab-link\">EXAMPLE: Recipe</a> for the recipe layout.</p></section><section class=\"np-sec\" id=\"example-essay-citations\" data-toc=\"Citations\"><h2 class=\"np-h2\">Citations</h2><p><span class=\"np-muted\">Type a number in square brackets right after a sentence, like <sup class=\"np-cite\"><a href=\"#example-essay-src-1\" data-src=\"example-essay-src-1\">1</a></sup>. On the site it becomes a small raised number that shows the source when hovered. The source itself goes in the numbered list under the Sources heading at the very end of the page.</span></p><p>Fonio has been grown in West Africa for thousands of years.<sup class=\"np-cite\"><a href=\"#example-essay-src-1\" data-src=\"example-essay-src-1\">1</a></sup></p></section><section class=\"np-sec\" id=\"example-essay-lists\" data-toc=\"Lists\"><h2 class=\"np-h2\">Lists</h2><p><span class=\"np-muted\">Plain bullets: type - and a space.</span></p><ul class=\"np-list\"><li>First thing</li><li>Second thing</li></ul><p><span class=\"np-muted\">Numbered steps with round number badges: type 1. and a space, and start every item with bold words.</span></p><ol class=\"np-steps\"><li><strong>Rinse the grain.</strong> The bold words become the step title.</li><li><strong>Toast it.</strong> Every item in the list needs bold words at the start, or it shows as a plain list.</li></ol><p><span class=\"np-muted\">Glossary (term on the left, meaning on the right): bullets where every item starts with a bold word followed by a colon.</span></p><dl class=\"np-dl\"><dt>Fonio</dt><dd> a tiny, fast-cooking grain.</dd><dt>Teff</dt><dd> the grain used to make injera.</dd></dl><p><span class=\"np-muted\">Checklist: type [] and a space.</span></p><ul class=\"np-list np-check\"><li><span class=\"np-box on\"></span>A done item</li><li><span class=\"np-box\"></span>An open item</li></ul></section><section class=\"np-sec\" id=\"example-essay-quotes\" data-toc=\"Quotes\"><h2 class=\"np-h2\">Quotes</h2><p><span class=\"np-muted\">Type &quot; and a space for a quote block. To add who said it: inside the quote press Shift+Enter for a new line, then type ~ and the name. That line becomes the attribution.</span></p><blockquote class=\"np-quote\"><p>Write the quote here.</p><cite>Name of the person</cite></blockquote></section><section class=\"np-sec\" id=\"example-essay-note-boxes\" data-toc=\"Note boxes\"><h2 class=\"np-h2\">Note boxes</h2><p><span class=\"np-muted\">Type /callout. The icon you pick shows on the site. Click the icon to change it.</span></p><div class=\"np-note\"><span class=\"np-note-i\">🌱</span><div>A note box. Use it for asides.</div></div><p><span class=\"np-muted\">Row of big numbers: a callout with the 📊 icon. One number per line (Shift+Enter between lines). Make the number bold, then the label after it.</span></p><div class=\"np-stats\"><div><span class=\"np-stat-n\">33%</span><span class=\"np-stat-l\"> example label one</span></div><div><span class=\"np-stat-n\">1,200</span><span class=\"np-stat-l\"> example label two</span></div><div><span class=\"np-stat-n\">8</span><span class=\"np-stat-l\"> example label three</span></div></div></section><section class=\"np-sec\" id=\"example-essay-tables\" data-toc=\"Tables\"><h2 class=\"np-h2\">Tables</h2><p><span class=\"np-muted\">Type /table. Click the table → ••• (Options) → turn on Header row. The first row becomes the table header.</span></p><div class=\"np-table-wrap\"><table class=\"np-table\"><thead><tr><th>Grain</th><th>Cook time</th><th>Origin</th></tr></thead><tbody><tr><td>Fonio</td><td>5 min</td><td>West Africa</td></tr><tr><td>Teff</td><td>20 min</td><td>Ethiopia</td></tr></tbody></table></div><p><span class=\"np-muted\">Facts table: same, but leave Header row off and use two columns. Label on the left, value on the right.</span></p><div class=\"np-table-wrap\"><table class=\"np-table np-facts\"><tbody><tr><th>Grown in</th><td>West Africa</td></tr><tr><th>Cook time</th><td>About 5 minutes</td></tr></tbody></table></div><p><span class=\"np-muted\">Clickable timeline: type /toggle and name it exactly Timeline. Inside it, add a table with Header row on and three columns: Year, Title, Detail.</span></p><div class=\"np-timeline\"><div class=\"np-tl-ticks\"><button type=\"button\" class=\"np-tl-tick on\" data-i=\"0\"><b>2015</b><span>First event</span></button><button type=\"button\" class=\"np-tl-tick\" data-i=\"1\"><b>2020</b><span>Second event</span></button></div><div class=\"np-tl-detail\"><p class=\"np-tl-d on\" data-i=\"0\"><strong>2015.</strong> What happened. This shows when someone clicks the year.</p><p class=\"np-tl-d\" data-i=\"1\"><strong>2020.</strong> Another detail.</p></div></div></section><section class=\"np-sec\" id=\"example-essay-images\" data-toc=\"Images\"><h2 class=\"np-h2\">Images</h2><p><span class=\"np-muted\">Type /image → Upload → pick the photo. Click below the photo to write a caption. The sample photos on this page are placeholders. Swap in yours.</span></p><figure class=\"np-fig\"><img src=\"/assets/pieces/68a217cc39c647128e1193e050bdf0cf.jpg\" alt=\"A caption shows under the photo\" loading=\"lazy\"><figcaption>A caption shows under the photo</figcaption></figure><p><span class=\"np-muted\">Edge to edge: end the caption with (wide).</span></p><figure class=\"np-fig np-wide\"><img src=\"/assets/pieces/b0fa5ce79b164378add070fd97154b10.jpg\" alt=\"This photo stretches edge to edge\" loading=\"lazy\"><figcaption>This photo stretches edge to edge </figcaption></figure><p><span class=\"np-muted\">Side by side: drag one image next to another until a blue vertical line appears, and Notion makes columns.</span></p><div class=\"np-cols\" style=\"--n:2\"><div><figure class=\"np-fig\"><img src=\"/assets/pieces/14dcf496457e4bf79c8301d6c926e5a8.jpg\" alt=\"Left photo\" loading=\"lazy\"><figcaption>Left photo</figcaption></figure></div><div><figure class=\"np-fig\"><img src=\"/assets/pieces/10348f2039e445ffafafe0c4bb7c7f7d.jpg\" alt=\"Right photo\" loading=\"lazy\"><figcaption>Right photo</figcaption></figure></div></div><p><span class=\"np-muted\">Slideshow with arrows: /toggle named exactly Slideshow, with images inside it.</span></p><div class=\"np-slides\"><div class=\"np-slides-track\"><figure><img src=\"/assets/pieces/152b07e6db24439992b8fd2572e39d69.jpg\" alt=\"Slide one\" loading=\"lazy\"><figcaption>Slide one</figcaption></figure><figure><img src=\"/assets/pieces/1411cfb379a54ddc916cd704e89ffa6b.jpg\" alt=\"Slide two\" loading=\"lazy\"><figcaption>Slide two</figcaption></figure><figure><img src=\"/assets/pieces/75613d0d20bf4b42a8cebd569357151e.jpg\" alt=\"Slide three\" loading=\"lazy\"><figcaption>Slide three</figcaption></figure></div><button type=\"button\" class=\"np-prev\" aria-label=\"Previous\">←</button><button type=\"button\" class=\"np-next\" aria-label=\"Next\">→</button></div><p><span class=\"np-muted\">Photo grid: /toggle named exactly Gallery, with images inside it.</span></p><div class=\"np-gallery\"><figure><img src=\"/assets/pieces/54a295cb65b64192a58bda3224c35b73.jpg\" alt=\"Grid one\" loading=\"lazy\"><figcaption>Grid one</figcaption></figure><figure><img src=\"/assets/pieces/61c437ccafe841a9994f71a434aba758.jpg\" alt=\"Grid two\" loading=\"lazy\"><figcaption>Grid two</figcaption></figure><figure><img src=\"/assets/pieces/0434be1dd08f4ef7886a12566cdda2cd.jpg\" alt=\"Grid three\" loading=\"lazy\"><figcaption>Grid three</figcaption></figure></div></section><section class=\"np-sec\" id=\"example-essay-photo-on-hover\" data-toc=\"Photo on hover\"><h2 class=\"np-h2\">Photo on hover</h2><p><span class=\"np-muted\">Select the word → click A (color) → under Text pick Purple. Then open the Hover Images database and add a row whose Name is the same word, add the photo in Image, and check Publish. There is already an example row named fonio: add any photo to it and check Publish to see this one work.</span></p><p>This is a sentence about fonio with a photo on hover.</p></section><section class=\"np-sec\" id=\"example-essay-video-and-link-cards\" data-toc=\"Video and link cards\"><h2 class=\"np-h2\">Video and link cards</h2><p><span class=\"np-muted\">Video: type /video → Embed link → paste a YouTube or Vimeo address. On the site it becomes a card that plays in the middle of the screen.</span></p><p><span class=\"np-muted\">Link card: paste any web address on an empty line and choose Create bookmark from the menu that pops up.</span></p><p><span class=\"np-muted\">Download button: type /file → Upload → pick a PDF. The caption becomes the button text.</span></p></section><section class=\"np-sec\" id=\"example-essay-other-blocks\" data-toc=\"Other blocks\"><h2 class=\"np-h2\">Other blocks</h2><p><span class=\"np-muted\">Question that opens and closes: /toggle with any name other than Slideshow, Gallery, or Timeline.</span></p><details class=\"np-toggle\"><summary>A question people ask?</summary><p>The answer shows when someone clicks.</p></details><p><span class=\"np-muted\">Divider line: type --- (three dashes).</span></p><hr class=\"np-hr\"><p><span class=\"np-muted\">Code box: type /code.</span></p><pre class=\"np-code\"><code>Anything typed here keeps its spacing.</code></pre></section><section class=\"np-sec\" id=\"example-essay-sources\" data-toc=\"Sources\"><h2 class=\"np-h2\">Sources</h2><p><span class=\"np-muted\">Heading 1 named exactly Sources, then a numbered list. Item 1 matches <sup class=\"np-cite\"><a href=\"#example-essay-src-1\" data-src=\"example-essay-src-1\">1</a></sup> in the text, item 2 matches <sup class=\"np-cite\"><a href=\"#example-essay-src-2\" data-src=\"example-essay-src-2\">2</a></sup>, and so on.</span></p><ol class=\"np-sources\"><li id=\"example-essay-src-1\">Example source: author, title, and a <a href=\"https://wholegrainscouncil.org/\" target=\"_blank\" rel=\"noopener\" class=\"ab-link\">link<span class=\"ab-ext\">↗</span></a>.</li></ol></section>",
+    "about": "About this piece: a short note about the page. It opens from the ? button at the bottom right.",
+    "next": "What's next: what you plan to add.",
+    "thanks": "Acknowledgments: who helped.",
+    "html": "<section class=\"mo-sec np-sec np-intro\" id=\"example-essay-top\"><div class=\"mo-row\"><div class=\"mo-text\"><div class=\"sg-callout\">Working example of the <strong>Essay</strong> template (the Fonio layout: big section headings, side notes in the margin, section menu pill at the bottom). It shows every building block from the Style Guide. See it at <a class=\"ab-link\" href=\"http://adjoakittoe.com/#example-essay\" target=\"_blank\" rel=\"noopener\"><strong>adjoakittoe.com/#example-essay</strong><span class=\"ab-ext\">↗</span></a>. Each gray line explains the block right under it. To start your own: ••• (top right) → <strong>Duplicate</strong> → rename it, change the <strong>Slug</strong>, delete the gray lines and this box.</div><p><span class=\"muted\">Text before the first Heading 1 is the opening. It has no section name.</span></p><p>This opening paragraph has a side note in the margin. Fonio has been grown in West Africa for thousands of years.<sup class=\"cite\"><a href=\"#example-essay-src-1\" data-cite=\"1\">1</a></sup></p></div><div class=\"mo-side\"><p class=\"mo-sn\"><span>a</span> This is a side note. Make one by clicking at the end of a paragraph or list item, pressing Enter, pressing Tab (it tucks under the line above), then typing /callout.</p></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-text\" data-toc=\"Text\"><h2 class=\"mo-h\">Text</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Heading 1 (/h1) starts a section. Its name goes in the section menu pill. Heading 2 (/h2) and Heading 3 (/h3) are smaller headings inside a section.</span></p><h4 class=\"sg-h\" id=\"example-essay-a-heading-2\">A Heading 2</h4><h5 class=\"sg-h\" id=\"example-essay-a-heading-3\">A Heading 3</h5><p>Body text with <strong>bold</strong>, <em>italic</em>, <s>struck</s>, <mark>a highlight</mark>, <span class=\"muted\">muted words</span>, a key like <kbd>⌘</kbd> + <kbd>K</kbd>, a <span class=\"lf-tag\">Tag</span>, and <code>inline code</code>.</p><p><span class=\"muted\">Bold, italic, struck: select words → B, i, S in the toolbar. Highlight: A (color) → Background → Yellow. Muted: A → Text → Gray. Tag: A → Background → Gray. Key: inline code with 1 to 3 characters (select → click the &lt;&gt; button). Longer inline code stays code.</span></p></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-links\" data-toc=\"Links\"><h2 class=\"mo-h\">Links</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Dotted link leaving the site, with ↗: select words → Link → paste a web address.</span></p><p>Read more from <a class=\"ab-link\" href=\"https://wholegrainscouncil.org/\" target=\"_blank\" rel=\"noopener\">the Whole Grains Council<span class=\"ab-ext\">↗</span></a>.</p><p><span class=\"muted\">Internal link with →: type @ and pick a page from Essays &amp; Vibe Projects.</span></p><p>See <a href=\"#\" data-page=\"example-recipe\" class=\"site-link\">EXAMPLE: Recipe <span>→</span></a> for the recipe layout.</p><p><span class=\"muted\">Green in-text link (used rarely, inside a sentence): select words → Link → search and pick a page from Essays &amp; Vibe Projects.</span></p><p>This sentence has <a href=\"#\" data-page=\"example-recipe\">a green link to the recipe</a> inside it.</p><p><span class=\"muted\">Jump down the page with ↓: right-click a heading → Copy link to block. Then select words → Link → paste.</span></p><p><span class=\"muted\">Button: a line that is only a bold link.</span></p><p><a href=\"#\" data-page=\"example-recipe\" class=\"sg-btn\">Open the recipe</a></p><p><span class=\"muted\">Download button: /file → Upload a PDF. The caption is the button text.</span></p><p><a href=\"/assets/files/dummy-pdf.pdf\" class=\"cv-download site-link\" download>Download the sample PDF <span><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4v11\"/><path d=\"m7 10 5 5 5-5\"/><path d=\"M5 20h14\"/></svg></span></a></p></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-citations\" data-toc=\"Citations\"><h2 class=\"mo-h\">Citations</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Type [1] right after a sentence. For two sources type [1, 2]. Hover the number on the site to see the source pop up. The sources themselves go in the Sources section at the end.</span></p><p>One cup of dry fonio makes about four cups cooked.<sup class=\"cite\"><a href=\"#example-essay-src-1\" data-cite=\"1\">1</a>,<a href=\"#example-essay-src-2\" data-cite=\"2\">2</a></sup></p></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-lists\" data-toc=\"Lists\"><h2 class=\"mo-h\">Lists</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Bullets: - and a space. Press Tab on a new line to nest one.</span></p><ul class=\"lf-list\"><li>Unordered item</li><li>With a nested list<ul class=\"lf-list\"><li>Nested item</li></ul></li><li>Last item</li></ul><p><span class=\"muted\">Numbers: 1. and a space.</span></p><ol class=\"lf-list\"><li>Ordered item</li><li>Second</li><li>Third</li></ol><p><span class=\"muted\">Numbered step with a badge: a numbered list where every item starts with bold words. The bold words become the step heading.</span></p><div class=\"lf-step\"><span class=\"lf-step-n\">1</span><h4>Rinse the grain.</h4></div><p>Cover it with water and swirl.</p><div class=\"lf-step\"><span class=\"lf-step-n\">2</span><h4>Toast it.</h4></div><p>Two minutes in a little oil.</p><p><span class=\"muted\">Glossary: bullets where every item starts with a bold word and a colon.</span></p><dl class=\"sg-dl\"><dt>Fonio</dt><dd> a tiny, fast-cooking grain.</dd><dt>Teff</dt><dd> the grain used to make injera.</dd></dl></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-quotes\" data-toc=\"Quotes\"><h2 class=\"mo-h\">Quotes</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Block quote: type &quot; and a space. Who said it: Shift+Enter inside the quote, then ~ and the name.</span></p><blockquote class=\"sg-bq\">Someone else&#39;s words go here.<cite>Source name</cite></blockquote><p><span class=\"muted\">Pull quote (larger): start the quote with a quotation mark.</span></p><blockquote class=\"wk-quote\">&quot;A line worth stopping on.&quot;<cite>Bee</cite></blockquote><p><span class=\"muted\">Note box: /callout with any icon except the special ones below.</span></p><div class=\"sg-callout\"><strong>Note.</strong> A callout box for a tip, warning, or aside.</div></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-code\" data-toc=\"Code\"><h2 class=\"mo-h\">Code</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">/code makes a code box with a Copy code button under it.</span></p><pre class=\"sg-code\"><code>const fonio = { cups: 1, cooked: 4, minutes: 5 };</code></pre><button type=\"button\" class=\"sg-copy site-link\">Copy code <span>⧉</span></button></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-tables\" data-toc=\"Tables\"><h2 class=\"mo-h\">Tables</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Table with a header: /table → click the table → ••• → turn on Header row. Put a bold-only line right above it to give it a title.</span></p><div class=\"lf-box\"><div class=\"lf-box-title\">Table with a header</div><div class=\"lf-table-wrap\"><table class=\"lf-table\"><thead><tr><th>Grain</th><th>Cook time</th><th>Yield</th></tr></thead><tbody><tr><td>Fonio</td><td>5 min</td><td>1 → 4 cups</td></tr></tbody></table></div></div><p><span class=\"muted\">Facts table (also called a catalog entry): Header row off, two columns. Labels sit on the left.</span></p><div class=\"lf-box lf-plain\"><div class=\"lf-box-title\">Catalog entry</div><table><tr><th>Object</th><td>What it is</td></tr><tr><th>Region</th><td>Where it comes from</td></tr></table></div><p><span class=\"muted\">Hover rows (rows tint when hovered): ••• → turn on Header column instead of Header row.</span></p><div class=\"lf-box lf-hover\"><div class=\"lf-box-title\">Hover rows</div><table><tr><th>Row one</th><td>Rows tint when you hover them.</td></tr><tr><th>Row two</th><td>Useful for scannable lists.</td></tr></table></div></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-images\" data-toc=\"Images\"><h2 class=\"mo-h\">Images</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">/image → Upload. Click under the photo to write the caption. Every photo opens bigger when clicked. Add a credit after a | in the caption. Shapes: end the caption with (square), (round), (circle), or (wide) for edge to edge, or (tilt) for a photo that tilts on hover.</span></p></div><div class=\"mo-side\"></div></div><figure class=\"lf-figure\"><img class=\"sg-img rect sg-pop\" src=\"/assets/pieces/68a217cc39c647128e1193e050bdf0cf.jpg\" alt=\"A photo with a credit on the right\" loading=\"lazy\"><figcaption><span>A photo with a credit on the right</span><span class=\"lf-credit\">Adjoa Kittoe</span></figcaption></figure><figure class=\"lf-figure\"><img class=\"sg-img sq sg-pop\" src=\"/assets/pieces/b5d5ef0a090e422ea324b444ff1c99fc.jpg\" alt=\"A square photo\" loading=\"lazy\"><figcaption><span>A square photo</span></figcaption></figure><figure class=\"lf-figure\"><img class=\"sg-img circle sg-pop\" src=\"/assets/pieces/b2de8f3391be4c5786d66fc10d61d840.jpg\" alt=\"A circle photo\" loading=\"lazy\"><figcaption><span>A circle photo</span></figcaption></figure><figure class=\"lf-figure\"><div class=\"wh-tilt\"><img class=\"sg-img rect sg-pop\" src=\"/assets/pieces/ea2e26e91dd74d31a25dbb0bf258a5f1.jpg\" alt=\"Hover me\" loading=\"lazy\"></div><figcaption><span>Hover me</span></figcaption></figure><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Side by side: drag one image next to another until a blue line appears.</span></p></div><div class=\"mo-side\"></div></div><div class=\"np-cols\" style=\"--n:2\"><div><figure class=\"lf-figure\"><img class=\"sg-img rect sg-pop\" src=\"/assets/pieces/14dcf496457e4bf79c8301d6c926e5a8.jpg\" alt=\"Left\" loading=\"lazy\"><figcaption><span>Left</span></figcaption></figure></div><div><figure class=\"lf-figure\"><img class=\"sg-img rect sg-pop\" src=\"/assets/pieces/10348f2039e445ffafafe0c4bb7c7f7d.jpg\" alt=\"Right\" loading=\"lazy\"><figcaption><span>Right</span></figcaption></figure></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-slideshow-gallery-tabs\" data-toc=\"Slideshow, gallery, tabs\"><h2 class=\"mo-h\">Slideshow, gallery, tabs</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Slideshow with ‹ › arrows: /toggle named exactly Slideshow with images inside. Each caption shows under the slides.</span></p></div><div class=\"mo-side\"></div></div><div class=\"mo-car\" data-car><div class=\"mo-black mo-car-stage\"><div class=\"mo-slide active\"><img src=\"/assets/pieces/152b07e6db24439992b8fd2572e39d69.jpg\" alt=\"First slide caption.\" loading=\"lazy\"></div><div class=\"mo-slide\"><img src=\"/assets/pieces/1411cfb379a54ddc916cd704e89ffa6b.jpg\" alt=\"Second slide caption.\" loading=\"lazy\"></div><div class=\"mo-slide\"><img src=\"/assets/pieces/75613d0d20bf4b42a8cebd569357151e.jpg\" alt=\"Third slide caption.\" loading=\"lazy\"></div><button class=\"mo-car-prev\" aria-label=\"Previous\">‹</button><button class=\"mo-car-next\" aria-label=\"Next\">›</button></div><ol class=\"mo-car-caps\"><li class=\"active\">First slide caption.</li><li>Second slide caption.</li><li>Third slide caption.</li></ol></div><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Gallery grid: /toggle named exactly Gallery with images inside.</span></p></div><div class=\"mo-side\"></div></div><div class=\"sg-gal\"><img class=\"sg-gal-img sg-pop\" src=\"/assets/pieces/54a295cb65b64192a58bda3224c35b73.jpg\" alt=\"One\" loading=\"lazy\"><img class=\"sg-gal-img sg-pop\" src=\"/assets/pieces/61c437ccafe841a9994f71a434aba758.jpg\" alt=\"Two\" loading=\"lazy\"><img class=\"sg-gal-img sg-pop\" src=\"/assets/pieces/0434be1dd08f4ef7886a12566cdda2cd.jpg\" alt=\"Three\" loading=\"lazy\"></div><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Tabs: /toggle named exactly Tabs. Inside it, one toggle per tab: its name is the tab label, what&#39;s inside is the tab.</span></p></div><div class=\"mo-side\"></div></div><div class=\"mo-tabs\" data-tabs><div class=\"mo-tabbar\"><button class=\"active\" data-t=\"0\">Tab one</button><button data-t=\"1\">Tab two</button></div><div class=\"mo-tab active\"><p>Tabbed content, one panel at a time.</p></div><div class=\"mo-tab\"><p>The second panel.</p></div></div><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Accordion: /toggle with any other name.</span></p><details class=\"sg-acc\"><summary>An accordion: click to open</summary><p>Hidden content that expands in place.</p></details><p><span class=\"muted\">Year accordion (like Now): /toggle named with just a year, with bullets inside. The count of updates is added for you.</span></p><div class=\"lu\"><section class=\"lu-year\"><button type=\"button\" class=\"lu-yhead\" aria-expanded=\"false\"><span class=\"lu-y\">2024</span><span class=\"lu-count\">3 updates</span><span class=\"lu-tog\">+</span></button><ul class=\"lu-list\"><li>First update</li><li>Second update</li><li>Third update</li></ul></section></div></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-data\" data-toc=\"Data\"><h2 class=\"mo-h\">Data</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Big stats: /callout with the 📊 icon. One per line (Shift+Enter): bold number first, then the label.</span></p><div class=\"cs-stats\"><div><span class=\"cs-num\">+82%</span><span class=\"cs-lab\"> A big stat with a label</span></div><div><span class=\"cs-num\">45+</span><span class=\"cs-lab\"> Another stat</span></div><div><span class=\"cs-num\">3</span><span class=\"cs-lab\"> A third</span></div></div><p><span class=\"muted\">Progress bars: /callout with the 📈 icon. One per line: a label, then a percent.</span></p><div class=\"sg-row np-progress\"><span>Progress</span><span class=\"ab-bar\"><span style=\"width:62%\"></span></span><span class=\"ab-pct\">62%</span></div><div class=\"sg-row np-progress\"><span>Tarot deck</span><span class=\"ab-bar\"><span style=\"width:13%\"></span></span><span class=\"ab-pct\">13%</span></div><p><span class=\"muted\">Color swatches: /callout with the 🎨 icon and hex codes.</span></p><div class=\"sg-swatches\"><span style=\"background:#5d7d63\" title=\"#5d7d63\"></span><span style=\"background:#a85a3a\" title=\"#a85a3a\"></span><span style=\"background:#4a7fb5\" title=\"#4a7fb5\"></span><span style=\"background:#b8922e\" title=\"#b8922e\"></span><span style=\"background:#82566f\" title=\"#82566f\"></span><span style=\"background:#2b2b2b\" title=\"#2b2b2b\"></span></div><p><span class=\"muted\">Woven stripe (for special moments): /callout with the 🧵 icon, nothing inside.</span></p><div class=\"af-weave\"></div></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-timeline\" data-toc=\"Timeline\"><h2 class=\"mo-h\">Timeline</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">/toggle named exactly Timeline. Inside it a table with Header row on and three columns: Year, Title, Detail. Click a year or use the arrows.</span></p></div><div class=\"mo-side\"></div></div><div class=\"ic-wrap\"><div class=\"ic-ctrl\"><button type=\"button\" class=\"ic-prev\" aria-label=\"Earlier\">←</button><button type=\"button\" class=\"ic-next\" aria-label=\"Later\">→</button></div><div class=\"ic-time\"><button type=\"button\" class=\"ic-tick on\" data-i=\"0\"><span class=\"ic-y\">1929</span><span class=\"ic-t\">A first moment</span></button><button type=\"button\" class=\"ic-tick\" data-i=\"1\"><span class=\"ic-y\">1991</span><span class=\"ic-t\">The word comes back</span></button><button type=\"button\" class=\"ic-tick\" data-i=\"2\"><span class=\"ic-y\">2026</span><span class=\"ic-t\">Today</span></button></div><div class=\"ic-detail\"><p class=\"ic-d on\" data-i=\"0\"><strong>1929.</strong> Each point opens a short note below.</p><p class=\"ic-d\" data-i=\"1\"><strong>1991.</strong> Use the arrows, tap a year, or scroll sideways.</p><p class=\"ic-d\" data-i=\"2\"><strong>2026.</strong> Notes can hold a sentence or two.</p></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-archival-pieces\" data-toc=\"Archival pieces\"><h2 class=\"mo-h\">Archival pieces</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Specimen card: /toggle named Specimen: and a number. Inside: one image and a two-column table (no header). Put several Specimen toggles in a row and they sit side by side.</span></p></div><div class=\"mo-side\"></div></div><div class=\"ed-page np-ed\"><div class=\"ed-cards\"><article class=\"ed-card\"><div class=\"ed-card-photo\"><img src=\"/assets/pieces/9f3d727330ae470881a0f7328b29ac21.jpg\" alt=\"\" class=\"sg-pop\"><span class=\"ed-card-no\">010</span></div><dl><dt>Classification no.</dt><dd>AK-010</dd><dt>Subject</dt><dd>Palm Nut Soup, Fonio</dd><dt>Made by</dt><dd>Adjoa Kittoe</dd></dl></article><article class=\"ed-card\"><div class=\"ed-card-photo\"><img src=\"/assets/pieces/2bcdaf1f8ceb4113832ca62f37542500.jpg\" alt=\"\" class=\"sg-pop\"><span class=\"ed-card-no\">011</span></div><dl><dt>Classification no.</dt><dd>AK-011</dd><dt>Subject</dt><dd>Agege Bread Pudding</dd></dl></article></div></div><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Card that flips: /toggle named Flip card: and a title. Inside: a line of text (front) and one image (back). Tap it on the site to turn it.</span></p><div class=\"wh-flip\" tabindex=\"0\"><div class=\"wh-flip-in\"><div class=\"wh-face\"><h5>Ode to Yaaba</h5><p>Mother&#39;s day, daily.</p><span class=\"ed-mono\">Tap to turn</span></div><div class=\"wh-face wh-back\"><img src=\"/assets/pieces/1f3d439429464d2ebf52947ed28b5319.jpg\" alt=\"\"></div></div></div></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-essay-media\" data-toc=\"Media\"><h2 class=\"mo-h\">Media</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Photo on hover: color the word purple (A → Text → Purple), then add a row with the same word in Hover Images. The row named fonio is set up for this one.</span></p><p>This is a sentence about <span class=\"ab-photo\" tabindex=\"0\">fonio<template class=\"ab-photo-art\"><figure class=\"ab-photo-card\"><img src=\"/assets/hover/3f300886f6718162b268e25a2a97c55f.jpg\" alt=\"Fonio drying in the sun\"><figcaption>Fonio drying in the sun</figcaption></figure></template></span> with a photo on hover.</p><p><span class=\"muted\">Video that plays in the middle of the screen: /video → Embed link → paste a YouTube or Vimeo address.</span></p></div><div class=\"mo-side\"></div></div><button type=\"button\" class=\"np-video\" data-embed=\"https://www.youtube-nocookie.com/embed/jNQXAC9IVRw?autoplay=1\" data-title=\"A short video\"><img src=\"https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg\" alt=\"\" loading=\"lazy\"><span class=\"rc-play\" aria-hidden=\"true\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M7 4.5v15l13-7.5z\"/></svg></span><span class=\"np-video-cap\">A short video</span></button><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Audio player: /audio → Upload an audio file. The caption is the track name.</span></p><p><span class=\"muted\">Link card: paste a web address on an empty line → choose Create bookmark.</span></p><p><span class=\"muted\">Divider: type --- (three dashes).</span></p><div class=\"lf-divider\"></div></div><div class=\"mo-side\"></div></div></section><div class=\"lf-divider\"></div><section class=\"mo-sources np-sec\" data-toc=\"Sources\" id=\"example-essay-sources\"><h3 class=\"lf-src-head\">Sources</h3><p><span class=\"muted\">Heading 1 named exactly Sources, then a numbered list. Item 1 matches [1]. On each item: link the title, color a word gray background for its tag (like Brand or Book), then Shift+Enter and write a short note.</span></p><ol class=\"lf-sources\"><li class=\"lf-src\" id=\"example-essay-src-1\"><span class=\"lf-src-n\">1</span><div><div class=\"lf-src-title\"><a href=\"https://yolele.com/\" target=\"_blank\" rel=\"noopener\">Yolélé Fonio, product packaging ↗</a> <span class=\"lf-tag\">Brand</span></div><div class=\"lf-src-note\">Cooking time, yield, and history, as printed on the bag.</div></div></li><li class=\"lf-src\" id=\"example-essay-src-2\"><span class=\"lf-src-n\">2</span><div><div class=\"lf-src-title\"><a href=\"https://wholegrainscouncil.org/\" target=\"_blank\" rel=\"noopener\">Whole Grains Council, Fonio ↗</a> <span class=\"lf-tag\">Site</span></div><div class=\"lf-src-note\">A second source with its own note.</div></div></li></ol></section>",
+    "nav": [
+      {
+        "id": "example-essay-text",
+        "label": "Text",
+        "color": ""
+      },
+      {
+        "id": "example-essay-links",
+        "label": "Links",
+        "color": ""
+      },
+      {
+        "id": "example-essay-citations",
+        "label": "Citations",
+        "color": ""
+      },
+      {
+        "id": "example-essay-lists",
+        "label": "Lists",
+        "color": ""
+      },
+      {
+        "id": "example-essay-quotes",
+        "label": "Quotes",
+        "color": ""
+      },
+      {
+        "id": "example-essay-code",
+        "label": "Code",
+        "color": ""
+      },
+      {
+        "id": "example-essay-tables",
+        "label": "Tables",
+        "color": ""
+      },
+      {
+        "id": "example-essay-images",
+        "label": "Images",
+        "color": ""
+      },
+      {
+        "id": "example-essay-slideshow-gallery-tabs",
+        "label": "Slideshow, gallery, tabs",
+        "color": ""
+      },
+      {
+        "id": "example-essay-data",
+        "label": "Data",
+        "color": ""
+      },
+      {
+        "id": "example-essay-timeline",
+        "label": "Timeline",
+        "color": ""
+      },
+      {
+        "id": "example-essay-archival-pieces",
+        "label": "Archival pieces",
+        "color": ""
+      },
+      {
+        "id": "example-essay-media",
+        "label": "Media",
+        "color": ""
+      }
+    ],
     "items": []
   },
   {
@@ -38,13 +134,48 @@
     "date": "2026-10-08",
     "ai": false,
     "readTime": 2,
+    "sources": 1,
     "replace": false,
     "preview": true,
     "serves": 4,
     "time": "25 minutes",
     "order": 999,
     "about": "",
-    "html": "<section class=\"np-sec np-first\"><div class=\"np-note\"><span class=\"np-note-i\">👀</span><div>Working example of the <strong>Recipe</strong> template. See it on your site at <a href=\"http://adjoakittoe.com/#example-recipe\" target=\"_blank\" rel=\"noopener\" class=\"ab-link\"><strong>adjoakittoe.com/#example-recipe</strong><span class=\"ab-ext\">↗</span></a> (Preview is checked, so it is not listed anywhere). Gray lines explain the block under them. To start a real recipe: open the ••• menu at the top right of this page → <strong>Duplicate</strong>, rename it, change the <strong>Slug</strong>, delete the gray lines and this box.</div></div></section><section class=\"np-sec\" id=\"example-recipe-ingredients\" data-toc=\"Ingredients\"><h2 class=\"np-h2\">Ingredients</h2><div class=\"np-serves\">Serves <button type=\"button\" class=\"np-sv\" data-d=\"-1\" aria-label=\"Fewer\">−</button><b>4</b><button type=\"button\" class=\"np-sv\" data-d=\"1\" aria-label=\"More\">+</button></div><p><span class=\"np-muted\">Heading 1 named exactly Ingredients. Then a bulleted list. Start each line with the amount (1, ½, 1 1/2, 2.5) and a unit (cup, tbsp, tsp, g, oz, can, clove, pinch...). Those amounts change when someone presses − or + next to Serves. Serves comes from the Serves property (4 here).</span></p><ul class=\"np-ingr\"><li><span class=\"np-amt\" data-amt=\"1\">1</span> <span class=\"np-unit\">cup</span> fonio</li><li><span class=\"np-amt\" data-amt=\"2\">2</span> <span class=\"np-unit\">cups</span> water</li><li><span class=\"np-amt\" data-amt=\"0.5\">½</span> <span class=\"np-unit\">tsp</span> salt</li><li><span class=\"np-amt\" data-amt=\"2\">2</span> <span class=\"np-unit\">tbsp</span> olive oil</li><li><span class=\"np-amt\" data-amt=\"1\">1</span> <span class=\"np-unit\">small</span> onion, diced</li><li><span class=\"np-amt\" data-amt=\"2\">2</span> <span class=\"np-unit\">cloves</span> garlic</li></ul></section><section class=\"np-sec\" id=\"example-recipe-method\" data-toc=\"Method\"><h2 class=\"np-h2\">Method</h2><p><span class=\"np-muted\">Heading 1 named exactly Method. Then a numbered list. Start each step with bold words: they become the step title. To add a margin tip beside a step: click at the end of the step, press Enter, press Tab (indents it under the step), type /callout and write the tip.</span></p><ol class=\"np-steps np-method\"><li><strong>Rinse the fonio.</strong> Put it in a fine strainer and rinse until the water runs clear.<aside class=\"np-tip\">This is a margin tip. It shows beside step 1 on the site.</aside></li><li><strong>Toast it.</strong> Warm the oil in a pot, add the onion and garlic, then stir in the fonio for two minutes.</li><li><strong>Steam it.</strong> Add the water and salt, cover, and cook on low for five minutes. Fluff with a fork.</li></ol></section><section class=\"np-sec\" id=\"example-recipe-to-serve\" data-toc=\"To serve\"><h2 class=\"np-h2\">To serve</h2><p><span class=\"np-muted\">Any other Heading 1 (To serve, Notes) is a normal section. It shows in the section menu.</span></p><p>Serve warm with greens.</p></section><section class=\"np-sec\" id=\"example-recipe-notes\" data-toc=\"Notes\"><h2 class=\"np-h2\">Notes</h2><p>Keeps three days in the fridge.</p></section><section class=\"np-sec\" id=\"example-recipe-sources\" data-toc=\"Sources\"><h2 class=\"np-h2\">Sources</h2><p><span class=\"np-muted\">Heading 1 named exactly Sources, then a numbered list. Typing <sup class=\"np-cite\"><a href=\"#example-recipe-src-1\" data-src=\"example-recipe-src-1\">1</a></sup> anywhere in the page links to item 1 here.</span></p><ol class=\"np-sources\"><li id=\"example-recipe-src-1\">Example source: the name of the book or site, and the link.</li></ol></section>",
+    "next": "",
+    "thanks": "",
+    "html": "<section class=\"mo-sec np-sec np-intro\" id=\"example-recipe-top\"><div class=\"mo-row\"><div class=\"mo-text\"><div class=\"sg-callout\">Working example of the <strong>Recipe</strong> template (same layout as Curried Fonio Pilaf). See it at <a class=\"ab-link\" href=\"http://adjoakittoe.com/#example-recipe\" target=\"_blank\" rel=\"noopener\"><strong>adjoakittoe.com/#example-recipe</strong><span class=\"ab-ext\">↗</span></a>. The section menu on the right is made from your Heading 1s. Side notes sit in the margin. To start your own: ••• (top right) → <strong>Duplicate</strong> → rename it, change the <strong>Slug</strong>, delete the gray lines and this box.</div></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-recipe-headnote\" data-toc=\"Headnote\"><h2 class=\"mo-h\">Headnote</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Every Heading 1 becomes a section and a link in the side menu. Ingredients, Method, and Notes get their colors automatically.</span></p><p>A five-minute grain and a ten-minute pilaf. Onion and ginger do most of the work.<sup class=\"cite\"><a href=\"#example-recipe-src-1\" data-cite=\"1\">1</a></sup></p></div><div class=\"mo-side\"><p class=\"mo-sn\"><span>a</span> Side note in the margin. Make one: click at the end of the paragraph or step, press Enter, press Tab, type /callout. Side notes get letters a, b, c for you.</p></div></div></section><section class=\"mo-sec np-sec\" id=\"example-recipe-ingredients\" data-toc=\"Ingredients\" style=\"--c:#d0644a\"><h2 class=\"mo-h\">Ingredients</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Heading 1 named exactly Ingredients, then bullets. Start each with an amount and a unit (cup, tbsp, tsp, g, oz, can, clove, small, pinch). The Serves buttons (from the Serves property) multiply the amounts. A line with no amount is left as is.</span></p><div class=\"rc-yield\"><span>Serves</span><button class=\"active\" data-mult=\"1\">4</button><button data-mult=\"2\">8</button><button data-mult=\"3\">12</button></div><ul class=\"rc-ing\"><li><span class=\"rc-q\" data-q=\"0.5\">½</span> <span class=\"rc-u\">cup</span> fonio</li><li><span class=\"rc-q\" data-q=\"1\">1</span> <span class=\"rc-u\">tbsp</span> oil, for coating the fonio</li><li><span class=\"rc-q\" data-q=\"1\">1</span> <span class=\"rc-u\">cup</span> water</li><li><span class=\"rc-q\" data-q=\"0.5\">½</span> <span class=\"rc-u\">tsp</span> salt</li><li><span class=\"rc-q\" data-q=\"1\">1</span> <span class=\"rc-u\">small</span> onion, diced</li><li><span class=\"rc-q\" data-q=\"\"></span> <span class=\"rc-u\"></span> Herbs and a lime, to finish</li></ul></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-recipe-method\" data-toc=\"Method\" style=\"--c:#4a7fb5\"><h2 class=\"mo-h\">Method</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Heading 1 named exactly Method, then a numbered list. Start each step with bold words.</span></p><ol class=\"rc-steps\"><li><strong>Cook the fonio.</strong> Coat the fonio with the oil, add the water and salt, cover, and cook on low about 5 minutes.<sup class=\"cite\"><a href=\"#example-recipe-src-1\" data-cite=\"1\">1</a></sup></li><li><strong>Build the base.</strong> Sauté the onion in a large pan for 3 to 5 minutes.</li><li><strong>Fold.</strong> Fold in the fonio and turn off the heat.</li></ol></div><div class=\"mo-side\"><p class=\"mo-sn\"><span>b</span> Soggy? Cook off the remaining liquid. Dry? Add a spoonful of water.</p></div></div><figure class=\"lf-figure\"><img class=\"sg-img rect sg-pop\" src=\"/assets/pieces/312d9802139f49b48a715632d646dc6c.jpg\" alt=\"Five minutes, lid on.\" loading=\"lazy\"><figcaption><span>Five minutes, lid on.</span><span class=\"lf-credit\">AI drafted · Illustration</span></figcaption></figure></section><section class=\"mo-sec np-sec\" id=\"example-recipe-to-serve\" data-toc=\"To serve\"><h2 class=\"mo-h\">To serve</h2><div class=\"mo-row\"><div class=\"mo-text\"><p>Finish with herbs and a squeeze of lime.</p></div><div class=\"mo-side\"></div></div></section><section class=\"mo-sec np-sec\" id=\"example-recipe-notes\" data-toc=\"Notes\" style=\"--c:#b8922e\"><h2 class=\"mo-h\">Notes</h2><div class=\"mo-row\"><div class=\"mo-text\"><p><span class=\"muted\">Heading 1 named exactly Notes, then bullets.</span></p><ul class=\"rc-notes\"><li>Fonio is forgiving, so small changes in water are fine.</li><li>Make it a bowl with roasted vegetables.</li></ul></div><div class=\"mo-side\"></div></div></section><div class=\"lf-divider\"></div><section class=\"mo-sources np-sec\" data-toc=\"Sources\" id=\"example-recipe-sources\"><h3 class=\"lf-src-head\">Sources</h3><ol class=\"lf-sources\"><li class=\"lf-src\" id=\"example-recipe-src-1\"><span class=\"lf-src-n\">1</span><div><div class=\"lf-src-title\"><a href=\"https://yolele.com/\" target=\"_blank\" rel=\"noopener\">Yolélé Fonio, product packaging ↗</a> <span class=\"lf-tag\">Brand</span></div><div class=\"lf-src-note\">Cooking time and yield, as printed on the bag.</div></div></li></ol></section>",
+    "nav": [
+      {
+        "id": "example-recipe-headnote",
+        "label": "Headnote",
+        "color": ""
+      },
+      {
+        "id": "example-recipe-ingredients",
+        "label": "Ingredients",
+        "color": "#d0644a"
+      },
+      {
+        "id": "example-recipe-method",
+        "label": "Method",
+        "color": "#4a7fb5"
+      },
+      {
+        "id": "example-recipe-to-serve",
+        "label": "To serve",
+        "color": ""
+      },
+      {
+        "id": "example-recipe-notes",
+        "label": "Notes",
+        "color": "#b8922e"
+      },
+      {
+        "id": "example-recipe-sources",
+        "label": "Sources",
+        "color": ""
+      }
+    ],
     "items": []
   },
   {
@@ -60,13 +191,17 @@
     "date": "2026-10-08",
     "ai": false,
     "readTime": 1,
+    "sources": 0,
     "replace": false,
     "preview": true,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "",
-    "html": "<section class=\"np-sec np-first\"><div class=\"np-note\"><span class=\"np-note-i\">👀</span><div>Working example of the <strong>Collection</strong> template. See it at <a href=\"http://adjoakittoe.com/#example-collection\" target=\"_blank\" rel=\"noopener\" class=\"ab-link\"><strong>adjoakittoe.com/#example-collection</strong><span class=\"ab-ext\">↗</span></a>. Add image blocks (type /image → Upload). The caption you type under each image shows under it on the site.</div></div><figure class=\"np-fig\"><img src=\"/assets/pieces/08cf7df773cb49528dcddf00256bf89f.jpg\" alt=\"First thing I love right now\" loading=\"lazy\"><figcaption>First thing I love right now</figcaption></figure><figure class=\"np-fig\"><img src=\"/assets/pieces/769f012a12c742638a72b73b7466a332.jpg\" alt=\"Second thing\" loading=\"lazy\"><figcaption>Second thing</figcaption></figure><figure class=\"np-fig\"><img src=\"/assets/pieces/b467093b5f7944edbc6d62c912d36b8f.jpg\" alt=\"Third thing\" loading=\"lazy\"><figcaption>Third thing</figcaption></figure></section>",
+    "next": "",
+    "thanks": "",
+    "html": "<div class=\"sg-callout\">Working example of the <strong>Collection</strong> template. See it at <a class=\"ab-link\" href=\"http://adjoakittoe.com/#example-collection\" target=\"_blank\" rel=\"noopener\"><strong>adjoakittoe.com/#example-collection</strong><span class=\"ab-ext\">↗</span></a>. Add image blocks (type /image → Upload). The caption you type under each image shows under it on the site.</div><figure class=\"lf-figure\"><img class=\"sg-img rect sg-pop\" src=\"/assets/pieces/08cf7df773cb49528dcddf00256bf89f.jpg\" alt=\"First thing I love right now\" loading=\"lazy\"><figcaption><span>First thing I love right now</span></figcaption></figure><figure class=\"lf-figure\"><img class=\"sg-img rect sg-pop\" src=\"/assets/pieces/769f012a12c742638a72b73b7466a332.jpg\" alt=\"Second thing\" loading=\"lazy\"><figcaption><span>Second thing</span></figcaption></figure><figure class=\"lf-figure\"><img class=\"sg-img rect sg-pop\" src=\"/assets/pieces/b467093b5f7944edbc6d62c912d36b8f.jpg\" alt=\"Third thing\" loading=\"lazy\"><figcaption><span>Third thing</span></figcaption></figure>",
+    "nav": [],
     "items": []
   },
   {
@@ -82,13 +217,17 @@
     "date": "2026-10-08",
     "ai": false,
     "readTime": 1,
+    "sources": 0,
     "replace": false,
     "preview": true,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "",
-    "html": "<section class=\"np-sec np-first\"><div class=\"np-note\"><span class=\"np-note-i\">👀</span><div>Working example of the <strong>Guide</strong> template (same layout as The Pantry, Work[space]flow, What&#39;s in My Bag). See it at <a href=\"http://adjoakittoe.com/#example-guide\" target=\"_blank\" rel=\"noopener\" class=\"ab-link\"><strong>adjoakittoe.com/#example-guide</strong><span class=\"ab-ext\">↗</span></a>. The tiles on the right do not come from this page. They come from rows in the <strong>Guide Items</strong> database whose <strong>Page</strong> is set to EXAMPLE: Guide. Open Guide Items to see one example row of every type.</div></div><p><span class=\"np-muted\">Anything you write here shows above the tiles in the right column.</span></p><p>A short intro to this guide.</p></section>",
+    "next": "",
+    "thanks": "",
+    "html": "<section class=\"ws-sec np-sec\" id=\"example-guide-top\"><div class=\"sg-callout\">Working example of the <strong>Guide</strong> template, used for The Pantry, Work[space]flow, What&#39;s in My Bag, and Film Simulations. See it at <a class=\"ab-link\" href=\"http://adjoakittoe.com/#example-guide\" target=\"_blank\" rel=\"noopener\"><strong>adjoakittoe.com/#example-guide</strong><span class=\"ab-ext\">↗</span></a>. Two kinds of pieces go on the right side: cards you write here on this page (the film recipe cards below), and tiles from the <strong>Guide Items</strong> database (photo cards, steps, tools, shop items).</div><p><span class=\"muted\">Anything before the first Heading 1 shows at the top of the right column.</span></p><p>I shoot a Fujifilm X100VI. These are the film simulation recipes I keep on the camera.</p></section><section class=\"ws-sec np-sec\" id=\"example-guide-the-recipes\" data-toc=\"The recipes\"><h2 class=\"ws-h\">The recipes</h2><p><span class=\"muted\">Heading 1 = a section. Each Heading 2 inside it = one numbered card, like each film simulation recipe. With two or more cards, a row of jump chips appears at the top for you.</span></p><p><span class=\"muted\">Inside a card: a line starting with Base: becomes the label next to the title. Images become the example photos. A two-column table (Header row off) becomes the settings. A line starting with Recipe by becomes the credit.</span></p><div class=\"fj-index\"><a href=\"#example-guide-alpine-negative\" class=\"fj-chip\" data-jump=\"example-guide-alpine-negative\"><span>01</span>Alpine Negative</a><a href=\"#example-guide-kodak-tri-x-400\" class=\"fj-chip\" data-jump=\"example-guide-kodak-tri-x-400\"><span>02</span>Kodak Tri-X 400</a></div><article class=\"fj-rec\" id=\"example-guide-alpine-negative\" data-toc=\"Alpine Negative\"><div class=\"fj-head\"><span class=\"fj-n\">01</span><h3>Alpine Negative</h3><span class=\"fj-base\">Classic Negative</span></div><div class=\"fj-body\"><div class=\"fj-ex\"><img class=\"sg-pop\" src=\"/assets/pieces/df2d540f8c214595a622c9f3dda09488.jpg\" alt=\"\" loading=\"lazy\" style=\"width:100%;aspect-ratio:3 / 2;object-fit:cover;border-radius:10px\"><img class=\"sg-pop\" src=\"/assets/pieces/429f8a8b9d4c42bb975724bd089c9175.jpg\" alt=\"\" loading=\"lazy\" style=\"width:100%;aspect-ratio:3 / 2;object-fit:cover;border-radius:10px\"></div><div class=\"lf-box lf-plain fj-set\"><table><tr><th>Dynamic range</th><td>DR400</td></tr><tr><th>Grain</th><td>Off</td></tr><tr><th>White balance</th><td>Auto, +2 Red, -4 Blue</td></tr></table></div><p class=\"fj-src\">Recipe by <a class=\"ab-link\" href=\"https://www.osan-bilgi.com/alpine-negative\" target=\"_blank\" rel=\"noopener\">Osan Bilgi<span class=\"ab-ext\">↗</span></a></p></div></article><article class=\"fj-rec\" id=\"example-guide-kodak-tri-x-400\" data-toc=\"Kodak Tri-X 400\"><div class=\"fj-head\"><span class=\"fj-n\">02</span><h3>Kodak Tri-X 400</h3><span class=\"fj-base\">Acros + R</span></div><div class=\"fj-body\"><div class=\"fj-ex\"><img class=\"sg-pop\" src=\"/assets/pieces/26acaf1bccaa4609a513598c9af5f63c.jpg\" alt=\"\" loading=\"lazy\" style=\"width:100%;aspect-ratio:3 / 2;object-fit:cover;border-radius:10px\"></div><div class=\"lf-box lf-plain fj-set\"><table><tr><th>Dynamic range</th><td>DR200</td></tr><tr><th>Grain</th><td>Strong, Large</td></tr></table></div><p class=\"fj-src\">Recipe by Fuji X Weekly</p></div></article></section>",
+    "nav": [],
     "items": [
       {
         "name": "Photo card example",
@@ -201,13 +340,17 @@
     "date": "2026-10-08",
     "ai": false,
     "readTime": 1,
+    "sources": 0,
     "replace": false,
     "preview": false,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "Testing my sync",
+    "next": "",
+    "thanks": "",
     "html": "",
+    "nav": [],
     "items": []
   },
   {
@@ -226,13 +369,17 @@
     "date": "2026-10-01",
     "ai": true,
     "readTime": 4,
+    "sources": 0,
     "replace": false,
     "preview": false,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "",
+    "next": "",
+    "thanks": "Facts come from Yolélé's fonio packaging and brand listings. Drafted with Claude by Anthropic; illustrations are placeholders.",
     "html": "",
+    "nav": [],
     "items": []
   },
   {
@@ -251,13 +398,17 @@
     "date": "2026-10-01",
     "ai": true,
     "readTime": 1,
+    "sources": 0,
     "replace": false,
     "preview": false,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "",
+    "next": "",
+    "thanks": "Built on the curried pilaf idea printed on Yolélé's fonio packaging.",
     "html": "",
+    "nav": [],
     "items": []
   },
   {
@@ -273,13 +424,17 @@
     "date": "2026-10-01",
     "ai": true,
     "readTime": 1,
+    "sources": 0,
     "replace": false,
     "preview": false,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "",
+    "next": "",
+    "thanks": "",
     "html": "",
+    "nav": [],
     "items": []
   },
   {
@@ -297,13 +452,17 @@
     "date": "2026-10-01",
     "ai": true,
     "readTime": 4,
+    "sources": 0,
     "replace": false,
     "preview": false,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "",
+    "next": "",
+    "thanks": "",
     "html": "",
+    "nav": [],
     "items": []
   },
   {
@@ -319,13 +478,17 @@
     "date": "2026-10-01",
     "ai": true,
     "readTime": 3,
+    "sources": 0,
     "replace": false,
     "preview": false,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "",
+    "next": "",
+    "thanks": "",
     "html": "",
+    "nav": [],
     "items": []
   },
   {
@@ -341,13 +504,17 @@
     "date": "2026-09-01",
     "ai": true,
     "readTime": 3,
+    "sources": 0,
     "replace": false,
     "preview": false,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "",
+    "next": "",
+    "thanks": "",
     "html": "",
+    "nav": [],
     "items": []
   },
   {
@@ -363,13 +530,17 @@
     "date": "2026-03-01",
     "ai": true,
     "readTime": 1,
+    "sources": 0,
     "replace": false,
     "preview": false,
     "serves": null,
     "time": "",
     "order": 999,
     "about": "",
+    "next": "",
+    "thanks": "",
     "html": "",
+    "nav": [],
     "items": []
   }
 ]
