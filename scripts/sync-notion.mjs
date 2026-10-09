@@ -86,7 +86,8 @@ for (const p of await queryAll(DB.hover)) {
 }
 
 // ---------- long pages ----------
-const pieceRows = (await queryAll(DB.pieces)).filter(p => check(p.properties.Publish));
+// Publish = live and listed. Preview = built at its link only (adjoakittoe.com/#slug), never listed.
+const pieceRows = (await queryAll(DB.pieces)).filter(p => check(p.properties.Publish) || check(p.properties.Preview));
 const slugById = {};
 for (const p of pieceRows) slugById[p.id.replace(/-/g, '')] = plain(p.properties.Slug) || slugify(plain(p.properties.Title));
 
@@ -261,12 +262,12 @@ for (const p of pieceRows) {
     slug, template, title: plain(pr.Title), section: pr.Section?.select?.name || 'Vibe Projects', zone: pr.Zone?.select?.name || '',
     tags: (pr.Tags?.multi_select || []).map(t => t.name), dek: plain(pr.Dek), sideLine: plain(pr['Side line']), meta: plain(pr['Meta note']),
     date: pr.Date?.date?.start || '', ai: check(pr['AI drafted']), readTime: pr['Read time (min)']?.number || Math.max(1, Math.ceil(words / 230)),
-    replace: check(pr['Replace built page']), serves: pr.Serves?.number || null, time: plain(pr['Total time']), order: pr.Order?.number ?? 999, about: plain(pr['About this piece']), html: body, items,
+    replace: check(pr['Replace built page']), preview: !check(pr.Publish), serves: pr.Serves?.number || null, time: plain(pr['Total time']), order: pr.Order?.number ?? 999, about: plain(pr['About this piece']), html: body, items,
   });
 }
 pieces.sort((a, b) => a.order - b.order || (b.date || '').localeCompare(a.date || ''));
 
 await mkdir('data', { recursive: true });
 const save = (f, d) => writeFile(`data/${f}`, JSON.stringify(d, null, 2) + '\n');
-await Promise.all([save('notes.json', notes), save('states.json', states), save('pieces.json', pieces), save('projects.json', projects), save('seeds.json', seeds)]);
+await Promise.all([save('notes.json', notes), save('states.json', states), save('pieces.json', pieces), save('projects.json', projects), save('seeds.json', seeds), save('hover.json', hover)]);
 console.log(`Saved ${notes.length} notes, ${states.length} states, ${pieces.length} pages, ${projects.length} projects, ${seeds.length} seeds.`);

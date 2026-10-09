@@ -1629,6 +1629,7 @@
     #hover-card.hc-photo { width: 220px; }
     .ab-photo-card { margin: 0; background: #fefdfb; padding: 6px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.18); }
     .ab-photo-card img { width: 100%; display: block; border-radius: 6px; }
+    .ab-photo-card figcaption { font-size: 12px; color: #6d635b; padding: 6px 2px 0; line-height: 1.35; }
     .ab-photo.open + .ab-photo-inline, .ab-photo-inline { display: block; max-width: 220px; margin: 8px 0 4px; }
 
     .wk-links { display: flex; gap: 22px; flex-wrap: wrap; }
@@ -7268,6 +7269,21 @@ function cook(g) {
         if (feed && perpetual.length) feed.innerHTML = perpetual.map(n => `<div class="feed-item"><div class="feed-item-title">${esc(n.title)}</div><p>${esc(n.text)}</p><div class="feed-item-meta">${esc(longDate(n.date))}</div></div>`).join('');
       });
 
+      // Hover Images (Notion): swap the photo and caption on any hover word with the same name
+      get('/data/hover.json').then(map => {
+        if (!map || typeof map !== 'object') return;
+        document.querySelectorAll('.ab-photo').forEach(el => {
+          const name = (el.firstChild && el.firstChild.nodeType === 3 ? el.firstChild.textContent : '').trim().toLowerCase();
+          const h = map[name]; if (!h) return;
+          if (h.wide) el.setAttribute('data-wide', ''); 
+          const tpl = el.querySelector('template.ab-photo-art'); if (!tpl || !h.image) return;
+          const fig = tpl.content.querySelector('figure') || tpl.content.appendChild(Object.assign(document.createElement('figure'), { className: 'ab-photo-card' }));
+          let img = fig.querySelector('img'); if (!img) { img = document.createElement('img'); fig.prepend(img); }
+          img.src = h.image; if (h.caption) img.alt = h.caption;
+          let cap = fig.querySelector('figcaption'); if (h.caption) { if (!cap) { cap = document.createElement('figcaption'); fig.append(cap); } cap.textContent = h.caption; }
+        });
+      });
+
       get('/data/states.json').then(list => {
         if (!Array.isArray(list) || !list.length) return;
         const by = Object.fromEntries(list.map(x => [x.state, x]));
@@ -7349,9 +7365,9 @@ function cook(g) {
           window.addEventListener('scroll', () => { if (!el.classList.contains('active')) return; let cur = secs[0]; secs.forEach(sc => { if (sc.getBoundingClientRect().top < innerHeight * 0.4) cur = sc; }); label.textContent = cur.dataset.toc; }, { passive: true });
         }
         el.querySelectorAll('sup.np-cite a').forEach(a => { const src = document.getElementById(a.dataset.src); if (src) a.title = src.textContent; });
-        // list row
+        // list row (preview pages are only reachable by their link)
         const listPage = document.getElementById(back), list = listPage && listPage.querySelector('.es-list');
-        if (list) {
+        if (list && !p.preview) {
           const z = zslug(p.zone);
           const li = document.createElement('li'); li.className = 'bk-row es-row'; li.dataset.zone = z; li.dataset.tags = [z, ...p.tags.map(zslug)].join(' ');
           li.innerHTML = `<a href="#" data-page="${esc(p.slug)}">${esc(p.title)}</a> ${p.ai ? '<span class="ai-pill" title="Drafted with AI. See the AI use page.">AI drafted</span>' : ''}<span class="es-zone">${esc(p.zone)}</span>${p.tags.length ? `<span class="es-tags">${p.tags.map(t => `<span>#${esc(t)}</span>`).join('')}</span>` : ''}<span class="bk-rule"></span><span class="bk-date">${esc(my(p.date))}</span>`;
