@@ -13,7 +13,18 @@ const DB = {
   hover: 'b6288723f6a04132b48ce0a2e6910332',      // Hover Images
   projects: '1a8da941e0cd4524ba50c1e11da6d9b9',   // Projects
   seeds: 'ccb69c16f1024169b288d7f13c5df17d',      // Seeds (from the seed bed)
+  siteText: 'e0cc95bb4b614f469dd6b46bd28cf0fb',   // Site Text (every heading and paragraph on the main pages)
+  life: '337855e9a340441babb8635db71c5c15',       // Life Updates (Now page)
+  published: 'd118cdf7a55348a4b35f4380e2a17e34',  // Published
+  stack: '9f5c1f4ef2c54e00b8b599fde961f6f1',      // Stack (Bookmarks)
+  bookmarks: 'd3df2165dac64f58bb18c0edff9eb02f',  // Bookmarks & Blogroll
+  shelf: '2eb428337da9497ba42716c77eacc641',      // Shelf (books, shows, podcasts, music)
+  events: 'b31f534e4f464931b9bfbe56b0ca944d',     // Events
+  resources: '66b0bda8a1ab432186ac44caf727c4f8',  // Resources
+  photography: '6d53b91ce5e24ff5bae6858768caea7b',// Photography
+  academia: 'b34ae81e18ea4ed2b7a093baf55bfbff',   // Academia
 };
+const LETTERBOXD = 'eauxjai';
 
 const headers = { Authorization: `Bearer ${TOKEN}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -464,7 +475,127 @@ for (const p of pieceRows) {
 
 pieces.sort((a, b) => a.order - b.order || (b.date || '').localeCompare(a.date || ''));
 
+
+// ---------- everything else on the site ----------
+// Each part is separate: if one database is not shared with the integration, the rest still sync.
+const extra = {};
+async function part(name, fn) { try { extra[name] = await fn(); } catch (e) { console.warn(`Skipped ${name}: ${e.message}`); } }
+const num = p => p?.number ?? null;
+const sel = p => p?.select?.name || '';
+const url = p => p?.url || '';
+const ord = (a, b) => (a.order ?? 999) - (b.order ?? 999);
+// rich text -> small HTML (bold, italic, code, highlight, links). The site restyles links to match.
+function inl(rt) {
+  let out = '', i = 0; rt = rt || [];
+  while (i < rt.length) {
+    const href = rt[i].href || rt[i].text?.link?.url || ''; let chunk = '';
+    while (i < rt.length && (rt[i].href || rt[i].text?.link?.url || '') === href) {
+      const t = rt[i]; const a = t.annotations || {}; let h = esc(t.plain_text).replace(/\n/g, '<br>');
+      if (a.code) h = `<code>${h}</code>`; if (a.bold) h = `<strong>${h}</strong>`; if (a.italic) h = `<em>${h}</em>`;
+      if (a.strikethrough) h = `<s>${h}</s>`; if (a.underline) h = `<u>${h}</u>`; if (a.color === 'yellow_background') h = `<mark>${h}</mark>`;
+      chunk += h; i++;
+    }
+    out += href ? `<a href="${esc(href)}">${chunk}</a>` : chunk;
+  }
+  return out;
+}
+const rtOf = p => p?.title || p?.rich_text || [];
+const UA = { 'User-Agent': 'Mozilla/5.0 (compatible; adjoakittoe-site-sync)' };
+async function getText(u) { try { const r = await fetch(u, { headers: UA, redirect: 'follow' }); return r.ok ? await r.text() : ''; } catch { return ''; } }
+const meta = (h, k) => { const m = h.match(new RegExp(`<meta[^>]+(?:property|name)=["']${k}["'][^>]*>`, 'i')); const c = m && m[0].match(/content=["']([^"']*)["']/i); return c ? c[1].replace(/&amp;/g, '&').replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').trim() : ''; };
+const ytId = u => (String(u).match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/) || [])[1] || '';
+const vimeoId = u => (String(u).match(/vimeo\.com\/(?:video\/)?(\d+)/) || [])[1] || '';
+
+await part('text', async () => {
+  const out = {};
+  for (const p of await queryAll(DB.siteText)) { const key = plain(p.properties.Key); if (!key) continue; out[key] = { html: inl(rtOf(p.properties.Text)), text: plain(p.properties.Text) }; }
+  return out;
+});
+
+await part('life', async () => (await queryAll(DB.life)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
+  text: plain(pr.Update), year: sel(pr.Year), group: plain(pr.Group), link: url(pr.Link), words: plain(pr['Link words']), link2: url(pr['Link 2']), words2: plain(pr['Link 2 words']), arrow: check(pr['Arrow link']), order: num(pr.Order) }; }).sort(ord));
+
+await part('published', async () => (await queryAll(DB.published)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
+  title: plain(pr.Title), section: sel(pr.Section), link: url(pr.Link), sub: plain(pr.Subtitle), note: plain(pr.Note), extra: url(pr['Extra link']), extraWords: plain(pr['Extra link words']), order: num(pr.Order) }; }).sort(ord));
+
+await part('stack', async () => (await queryAll(DB.stack)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
+  name: plain(pr.Name), description: plain(pr.Description), cost: sel(pr.Cost), color: plain(pr['Icon color']), link: url(pr.Link), order: num(pr.Order) }; })
+  .sort((a, b) => (a.order ?? 1e9) - (b.order ?? 1e9) || a.name.localeCompare(b.name)));
+
+await part('bookmarks', async () => (await queryAll(DB.bookmarks)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
+  title: plain(pr.Title), tab: sel(pr.Tab), link: url(pr.Link), tags: (pr.Tags?.multi_select || []).map(t => t.name), date: plain(pr.Date), note: plain(pr.Note), color: sel(pr.Color), order: num(pr.Order) }; }).sort(ord));
+
+await part('shelf', async () => {
+  const items = [];
+  for (const p of (await queryAll(DB.shelf)).filter(p => check(p.properties.Publish))) {
+    const pr = p.properties; const it = { title: plain(pr.Title), type: sel(pr.Type), status: sel(pr.Status), creator: plain(pr.Creator), link: url(pr.Link), rating: num(pr.Rating), order: num(pr.Order), cover: await saveProp(p, pr.Cover, 'shelf') };
+    // Music: fill the title, line, and cover from the link's preview card (refreshed every sync)
+    if (it.type === 'Music' && it.link) {
+      const h = await getText(it.link);
+      if (h) {
+        if (!it.title) it.title = meta(h, 'og:title');
+        if (!it.creator) it.creator = meta(h, 'og:description').replace(/\s+/g, ' ').slice(0, 110);
+        if (!it.cover) it.cover = await saveFile(meta(h, 'og:image'), 'shelf', 'og-' + p.id.replace(/-/g, ''));
+      }
+    }
+    if (it.title) items.push(it);
+  }
+  items.sort(ord);
+  // Films: straight from the Letterboxd diary feed
+  const films = []; const rss = await getText(`https://letterboxd.com/${LETTERBOXD}/rss/`);
+  for (const m of rss.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
+    const x = m[1]; const tag = t => ((x.match(new RegExp(`<${t}>([\\s\\S]*?)</${t}>`)) || [])[1] || '').replace(/<!\[CDATA\[|\]\]>/g, '').trim();
+    const title = tag('letterboxd:filmTitle'); if (!title || films.some(f => f.title === title)) continue;
+    const img = (tag('description').match(/<img[^>]+src="([^"]+)"/) || [])[1] || '';
+    films.push({ title, year: tag('letterboxd:filmYear'), rating: parseFloat(tag('letterboxd:memberRating')) || null, link: tag('link'), watched: tag('letterboxd:watchedDate'), cover: await saveFile(img, 'shelf', 'lb-' + slugify(title + '-' + tag('letterboxd:filmYear'))) });
+    if (films.length >= 12) break;
+  }
+  return { items, films };
+});
+
+await part('events', async () => (await queryAll(DB.events)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
+  key: 'ev-' + slugify(plain(pr.Event)) + '-' + (pr.Date?.date?.start || '').slice(0, 10), title: plain(pr.Event), start: (pr.Date?.date?.start || '').slice(0, 10), end: (pr.Date?.date?.end || '').slice(0, 10),
+  label: plain(pr['Date label']), time: plain(pr.Time), detail: plain(pr.Detail), city: plain(pr.City), where: plain(pr.Where), host: plain(pr.Host), cost: plain(pr.Cost),
+  format: sel(pr.Format), desc: plain(pr.Description), rsvp: url(pr['RSVP link']), rsvpSite: plain(pr['RSVP site']), link: url(pr.Link), linkWords: plain(pr['Link words']) }; }).filter(e => e.title && e.start));
+
+await part('resources', async () => {
+  const out = [];
+  for (const p of (await queryAll(DB.resources)).filter(p => check(p.properties.Publish))) {
+    const pr = p.properties; const vl = url(pr['Video link']);
+    const yt = ytId(vl), vm = vimeoId(vl);
+    const file = await saveProp(p, pr['Video file'], 'resources');
+    out.push({ name: plain(pr.Name), category: sel(pr.Category), label: plain(pr.Label), description: plain(pr.Description), deadline: plain(pr.Deadline), link: url(pr.Link),
+      groups: check(pr['Groups doing the work']), media: sel(pr['Media type']), order: num(pr.Order),
+      video: yt ? `https://www.youtube.com/embed/${yt}?autoplay=1` : vm ? `https://player.vimeo.com/video/${vm}?autoplay=1` : file || vl,
+      thumb: yt ? `https://i.ytimg.com/vi/${yt}/hqdefault.jpg` : '' });
+  }
+  return out.sort(ord);
+});
+
+await part('photography', async () => {
+  const out = [];
+  for (const p of (await queryAll(DB.photography)).filter(p => check(p.properties.Publish))) {
+    const pr = p.properties; const title = plain(pr.Series); const id = p.id.replace(/-/g, '');
+    const photos = [];
+    // photos placed in the page body (with captions) come first, then the Photos property
+    try { let k = 0; for (const b of await children(p.id)) if (b.type === 'image') { const src = await saveFile(fileUrl(b.image), 'photos', `${id}-b${k++}`); if (src) photos.push({ src, cap: (b.image.caption || []).map(t => t.plain_text).join('') }); } } catch {}
+    let k = 0; for (const f of pr.Photos?.files || []) { const src = await saveFile(fileUrl(f), 'photos', `${id}-${k++}`); if (src) photos.push({ src, cap: '' }); }
+    out.push({ title, subtitle: plain(pr.Subtitle), years: plain(pr.Years), medium: sel(pr.Medium), cats: (pr.Categories?.multi_select || []).map(c => c.name), description: plain(pr.Description), photos, order: num(pr.Order) });
+  }
+  return out.sort(ord);
+});
+
+await part('academia', async () => {
+  const out = [];
+  for (const p of (await queryAll(DB.academia)).filter(p => check(p.properties.Publish))) {
+    const pr = p.properties; const file = await saveProp(p, pr.File, 'academia');
+    out.push({ title: plain(pr.Title), type: sel(pr.Type), venue: plain(pr.Venue), year: plain(pr.Year), link: file || url(pr.Link), description: plain(pr.Description), order: num(pr.Order) });
+  }
+  return out.sort((a, b) => ord(a, b) || String(b.year).localeCompare(String(a.year)));
+});
+
 await mkdir('data', { recursive: true });
 const save = (f, d) => writeFile(`data/${f}`, JSON.stringify(d, null, 2) + '\n');
-await Promise.all([save('notes.json', notes), save('states.json', states), save('pieces.json', pieces), save('projects.json', projects), save('seeds.json', seeds), save('hover.json', hover)]);
+await Promise.all([save('notes.json', notes), save('states.json', states), save('pieces.json', pieces), save('projects.json', projects), save('seeds.json', seeds), save('hover.json', hover), ...Object.entries(extra).map(([k, v]) => save(`${k}.json`, v))]);
+console.log(`Also saved: ${Object.keys(extra).join(', ')}.`);
 console.log(`Saved ${notes.length} notes, ${states.length} states, ${pieces.length} pages, ${projects.length} projects, ${seeds.length} seeds.`);
