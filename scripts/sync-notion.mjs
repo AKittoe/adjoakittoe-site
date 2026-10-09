@@ -82,7 +82,9 @@ const hover = {};
 for (const p of await queryAll(DB.hover)) {
   const pr = p.properties; if (!check(pr.Publish)) continue;
   const name = plain(pr.Name); if (!name) continue;
-  hover[name.toLowerCase()] = { image: await saveProp(p, pr.Image, 'hover'), caption: plain(pr.Caption), link: pr.Link?.url || '', wide: check(pr.Wide) };
+  // Image upload wins; Image link (a web address of a photo) is the fallback
+  const image = (await saveProp(p, pr.Image, 'hover')) || (pr['Image link']?.url ? await saveFile(pr['Image link'].url, 'hover', p.id.replace(/-/g, '')) : '');
+  hover[name.toLowerCase()] = { image, caption: plain(pr.Caption), link: pr.Link?.url || '', wide: check(pr.Wide) };
 }
 
 // ---------- long pages ----------
@@ -97,118 +99,247 @@ for (const p of await queryAll(DB.guideItems)) {
   guideRows.push({ pageIds: (pr.Page?.relation || []).map(r => r.id.replace(/-/g, '')), name: plain(pr.Name), section: plain(pr.Section) || 'More', type: pr.Type?.select?.name || 'Tool', note: plain(pr.Note), category: plain(pr.Category), link: pr.Link?.url || '', page: plain(pr['Links to page']), color: plain(pr['Icon color']), order: pr.Order?.number ?? 999, image: await saveProp(p, pr.Image, 'guide') });
 }
 
-function rich(rt = []) {
+// ---------- turning Notion blocks into the site's own components ----------
+// Every block below outputs the same markup as the hand-built pages and the Style Guide,
+// so it picks up the same look and behavior.
+const txt = rt => (rt || []).map(t => t.plain_text).join('');
+const ARROW_DL = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>';
+const SEC_COLORS = { ingredients: '#d0644a', method: '#4a7fb5', notes: '#b8922e' };
+const idOf = s => String(s || '').replace(/-/g, '');
+
+function hoverSpan(inner, word) {
+  const h = hover[word.trim().toLowerCase()];
+  if (!h || !h.image) return inner;
+  return `<span class="ab-photo"${h.wide ? ' data-wide' : ''} tabindex="0">${inner}<template class="ab-photo-art"><figure class="ab-photo-card"><img src="${esc(h.image)}" alt="${esc(h.caption || word)}">${h.caption ? `<figcaption>${esc(h.caption)}</figcaption>` : ''}</figure></template></span>`;
+}
+
+function rich(rt = [], ctx = {}) {
   return rt.map(t => {
-    let s = esc(t.plain_text);
+    const raw = t.plain_text;
+    let s = esc(raw).replace(/\n/g, '<br>');
     const a = t.annotations || {};
-    if (a.code) s = `<code>${s}</code>`;
+    if (a.code) s = raw.trim().length <= 3 ? `<kbd>${s}</kbd>` : `<code>${s}</code>`;
     if (a.bold) s = `<strong>${s}</strong>`;
     if (a.italic) s = `<em>${s}</em>`;
     if (a.strikethrough) s = `<s>${s}</s>`;
     if (a.underline) s = `<u>${s}</u>`;
-    if (a.color === 'yellow_background') s = `<mark class="np-hl">${s}</mark>`;
-    else if (a.color === 'gray') s = `<span class="np-muted">${s}</span>`;
-    else if (a.color === 'purple') {
-      const h = hover[t.plain_text.trim().toLowerCase()];
-      if (h && h.image) s = `<span class="np-hov${h.wide ? ' np-hov-wide' : ''}" tabindex="0">${s}<span class="np-hov-card"><img src="${esc(h.image)}" alt="">${h.caption ? `<span>${esc(h.caption)}</span>` : ''}</span></span>`;
-    }
-    const mentionPage = t.type === 'mention' && t.mention?.type === 'page' ? t.mention.page.id.replace(/-/g, '') : null;
-    if (mentionPage && slugById[mentionPage]) s = `<a href="#" data-page="${esc(slugById[mentionPage])}" class="ab-link">${s}</a>`;
-    else if (t.href) {
-      const m = t.href.match(/notion\.so\/.*?([0-9a-f]{32})/);
-      if (m && slugById[m[1]]) s = `<a href="#" data-page="${esc(slugById[m[1]])}" class="ab-link">${s}</a>`;
-      else s = `<a href="${esc(t.href)}" target="_blank" rel="noopener" class="ab-link">${s}<span class="ab-ext">↗</span></a>`;
+    if (a.color === 'yellow_background') s = `<mark>${s}</mark>`;
+    else if (a.color === 'gray') s = `<span class="muted">${s}</span>`;
+    else if (a.color === 'gray_background') s = `<span class="lf-tag">${s}</span>`;
+    else if (a.color === 'purple') s = hoverSpan(s, raw);
+    // links
+    const mention = t.type === 'mention' && t.mention?.type === 'page' ? idOf(t.mention.page.id) : null;
+    if (mention) {
+      const slug = slugById[mention];
+      if (slug) s = `<a href="#" data-page="${esc(slug)}" class="site-link">${s} <span>→</span></a>`;
+    } else if (t.href) {
+      const block = t.href.match(/#([0-9a-f]{32})$/);
+      const pageM = t.href.match(/([0-9a-f]{32})(?:[?#]|$)/);
+      if (block && ctx.anchors && ctx.anchors[block[1]]) s = `<a href="#${ctx.anchors[block[1]]}" class="site-link sg-jump" data-jump="${ctx.anchors[block[1]]}">${s} <span>↓</span></a>`;
+      else if (pageM && slugById[pageM[1]]) s = `<a href="#" data-page="${esc(slugById[pageM[1]])}">${s}</a>`;
+      else if (/^https?:/.test(t.href)) s = `<a class="ab-link" href="${esc(t.href)}" target="_blank" rel="noopener">${s}<span class="ab-ext">↗</span></a>`;
     }
     return s;
   }).join('');
 }
-const txt = rt => (rt || []).map(t => t.plain_text).join('');
-const cites = (html, slug) => html.replace(/\[(\d{1,2})\]/g, (_, n) => `<sup class="np-cite"><a href="#${slug}-src-${n}" data-src="${slug}-src-${n}">${n}</a></sup>`);
+// [1] or [1, 4] after a sentence becomes the site's citation marker with the pop-up source
+const cites = (html, ctx) => html.replace(/\[(\d{1,2}(?:\s*,\s*\d{1,2})*)\]/g, (_, list) =>
+  `<sup class="cite">${list.split(/\s*,\s*/).map(n => `<a href="#${ctx.slug}-src-${n}" data-cite="${n}">${n}</a>`).join(',')}</sup>`);
+// gray instruction lines keep [1] as typed
+const para = (rt, ctx) => (rt.length && rt.every(r => r.annotations?.color === 'gray')) ? rich(rt, ctx) : cites(rich(rt, ctx), ctx);
 
-async function blocksToHtml(blocks, ctx) {
-  let out = '';
+// One Notion line split into lines (Shift+Enter), each a list of rich text pieces
+function lines(rt = []) {
+  const out = [[]];
+  for (const r of rt) r.plain_text.split('\n').forEach((p, k) => { if (k) out.push([]); if (p) out[out.length - 1].push({ ...r, plain_text: p }); });
+  return out.filter(l => l.length);
+}
+
+// Sources list entry: title (linked) with an optional gray-background tag; next line is the note
+function sourceItem(x, n, ctx) {
+  const ls = lines(x.numbered_list_item.rich_text);
+  const first = ls[0] || [], rest = ls.slice(1);
+  const tags = first.filter(r => r.annotations?.color === 'gray_background').map(r => `<span class="lf-tag">${esc(r.plain_text.trim())}</span>`).join(' ');
+  const titleParts = first.filter(r => r.annotations?.color !== 'gray_background');
+  const href = titleParts.find(r => r.href)?.href;
+  const title = esc(titleParts.map(r => r.plain_text).join('').trim().replace(/[.,;:]$/, ''));
+  const titleHtml = href ? `<a href="${esc(href)}" target="_blank" rel="noopener">${title} ↗</a>` : title;
+  let note = rest.map(l => rich(l, ctx)).join('<br>');
+  if (x.children) note += x.children.filter(c => c.type === 'paragraph').map(c => rich(c.paragraph.rich_text, ctx)).join('<br>');
+  return `<li class="lf-src" id="${ctx.slug}-src-${n}"><span class="lf-src-n">${n}</span><div><div class="lf-src-title">${titleHtml}${tags ? ' ' + tags : ''}</div><div class="lf-src-note">${note}</div></div></li>`;
+}
+
+const UNITS = 'cups?|tbsp|tsp|tablespoons?|teaspoons?|g|kg|ml|l|oz|lbs?|pounds?|pinch(?:es)?|cloves?|cans?|small|medium|large|bunch(?:es)?|sprigs?|slices?|pieces?|handfuls?|sticks?|stalks?|inch(?:es)?';
+function ingredient(x) {
+  const frac = { '½': .5, '⅓': 1 / 3, '⅔': 2 / 3, '¼': .25, '¾': .75, '⅛': .125 };
+  const s = txt(x.bulleted_list_item.rich_text).trim();
+  const m = s.match(new RegExp(`^((?:\\d+\\s+)?(?:\\d+\\/\\d+|\\d*\\.?\\d+|[½⅓⅔¼¾⅛])(?:\\s*[½⅓⅔¼¾⅛])?)\\s*(${UNITS})?\\b\\s*(.*)$`, 'i'));
+  if (!m) return `<li><span class="rc-q" data-q=""></span> <span class="rc-u"></span> ${esc(s)}</li>`;
+  let n = 0; for (const part of m[1].trim().split(/\s+/)) { if (frac[part]) n += frac[part]; else if (part.includes('/')) { const [a, c] = part.split('/'); n += a / c; } else if (/^\d*\.?\d+[½⅓⅔¼¾⅛]$/.test(part)) { n += parseFloat(part) + frac[part.slice(-1)]; } else n += parseFloat(part); }
+  return `<li><span class="rc-q" data-q="${+n.toFixed(4)}">${esc(m[1].trim())}</span> <span class="rc-u">${esc(m[2] || '')}</span> ${esc(m[3])}</li>`;
+}
+
+async function saveImg(v, id) { return saveFile(fileUrl(v), 'pieces', idOf(id)); }
+
+// An image block: caption keywords pick the shape. (wide) (square) (round) (circle) (tilt). "caption | credit" adds a credit.
+async function figure(b, ctx) {
+  let cap = txt(b.image.caption).trim();
+  const flags = {}; cap = cap.replace(/\((wide|square|round|circle|tilt)\)/gi, (_, f) => { flags[f.toLowerCase()] = 1; return ''; }).trim();
+  const src = await saveImg(b.image, b.id); if (!src) return '';
+  ctx.images.push({ src, cap });
+  const [text, credit] = cap.split(/\s*\|\s*/);
+  const shape = flags.square ? ' sq' : flags.round ? ' round' : flags.circle ? ' circle' : ' rect';
+  const img = `<img class="sg-img${shape} sg-pop" src="${esc(src)}" alt="${esc(text || '')}" loading="lazy">`;
+  const fc = text || credit ? `<figcaption><span>${esc(text || '')}</span>${credit ? `<span class="lf-credit">${esc(credit)}</span>` : ''}</figcaption>` : '';
+  if (flags.tilt) return `<figure class="lf-figure"><div class="wh-tilt">${img}</div>${fc}</figure>`;
+  return `<figure class="lf-figure${flags.wide ? ' np-wide' : ''}">${img}${fc}</figure>`;
+}
+
+// Pull nested callouts out of a block's children: they become side notes
+function splitKids(kids = []) { return { kids: kids.filter(k => k.type !== 'callout'), notes: kids.filter(k => k.type === 'callout') }; }
+
+async function toggle(b, ctx) {
+  const label = txt(b.toggle.rich_text).trim(); const kids = b.children || [];
+  if (/^slideshow$/i.test(label)) {
+    const imgs = []; for (const k of kids) if (k.type === 'image') { const src = await saveImg(k.image, k.id); if (src) imgs.push({ src, cap: txt(k.image.caption) }); }
+    return `<div class="mo-car" data-car><div class="mo-black mo-car-stage">${imgs.map((m, i) => `<div class="mo-slide${i ? '' : ' active'}"><img src="${esc(m.src)}" alt="${esc(m.cap)}" loading="lazy"></div>`).join('')}<button class="mo-car-prev" aria-label="Previous">‹</button><button class="mo-car-next" aria-label="Next">›</button></div><ol class="mo-car-caps">${imgs.map((m, i) => `<li${i ? '' : ' class="active"'}>${esc(m.cap)}</li>`).join('')}</ol></div>`;
+  }
+  if (/^gallery$/i.test(label)) {
+    const imgs = []; for (const k of kids) if (k.type === 'image') { const src = await saveImg(k.image, k.id); if (src) imgs.push({ src, cap: txt(k.image.caption) }); }
+    return `<div class="sg-gal">${imgs.map(m => `<img class="sg-gal-img sg-pop" src="${esc(m.src)}" alt="${esc(m.cap)}" loading="lazy">`).join('')}</div>`;
+  }
+  if (/^timeline$/i.test(label)) {
+    const tbl = kids.find(k => k.type === 'table'); const rows = (tbl?.children || []).map(r => r.table_row.cells);
+    const data = (tbl?.table?.has_column_header ? rows.slice(1) : rows).filter(r => r.length >= 2);
+    return `<div class="ic-wrap"><div class="ic-ctrl"><button type="button" class="ic-prev" aria-label="Earlier">←</button><button type="button" class="ic-next" aria-label="Later">→</button></div><div class="ic-time">${data.map((r, k) => `<button type="button" class="ic-tick${k ? '' : ' on'}" data-i="${k}"><span class="ic-y">${esc(txt(r[0]))}</span><span class="ic-t">${esc(txt(r[1]))}</span></button>`).join('')}</div><div class="ic-detail">${data.map((r, k) => `<p class="ic-d${k ? '' : ' on'}" data-i="${k}"><strong>${esc(txt(r[0]))}.</strong> ${para(r[2] || r[1], ctx)}</p>`).join('')}</div></div>`;
+  }
+  if (/^tabs$/i.test(label)) {
+    const tabs = kids.filter(k => k.type === 'toggle');
+    const panes = []; for (const t of tabs) panes.push(await html(t.children || [], ctx));
+    return `<div class="mo-tabs" data-tabs><div class="mo-tabbar">${tabs.map((t, i) => `<button${i ? '' : ' class="active"'} data-t="${i}">${esc(txt(t.toggle.rich_text))}</button>`).join('')}</div>${panes.map((p, i) => `<div class="mo-tab${i ? '' : ' active'}">${p}</div>`).join('')}</div>`;
+  }
+  if (/^(\d{4})$/.test(label)) {
+    const items = kids.filter(k => /list_item/.test(k.type));
+    return `<div class="lu"><section class="lu-year"><button type="button" class="lu-yhead" aria-expanded="false"><span class="lu-y">${esc(label)}</span><span class="lu-count">${items.length} update${items.length === 1 ? '' : 's'}</span><span class="lu-tog">+</span></button><ul class="lu-list">${items.map(x => `<li>${para(x[x.type].rich_text, ctx)}</li>`).join('')}</ul></section></div>`;
+  }
+  const specimen = label.match(/^specimen\s*:?\s*(.*)$/i);
+  if (specimen) {
+    const im = kids.find(k => k.type === 'image'); const src = im ? await saveImg(im.image, im.id) : '';
+    const tbl = kids.find(k => k.type === 'table'); const rows = (tbl?.children || []).map(r => r.table_row.cells);
+    return `<article class="ed-card"><div class="ed-card-photo">${src ? `<img src="${esc(src)}" alt="" class="sg-pop">` : ''}<span class="ed-card-no">${esc(specimen[1] || '')}</span></div><dl>${rows.map(r => `<dt>${esc(txt(r[0]))}</dt><dd>${rich(r[1] || [], ctx)}</dd>`).join('')}</dl></article>`;
+  }
+  const flip = label.match(/^flip card\s*:?\s*(.*)$/i);
+  if (flip) {
+    const im = kids.find(k => k.type === 'image'); const src = im ? await saveImg(im.image, im.id) : '';
+    const words = kids.filter(k => k.type === 'paragraph').map(k => `<p>${rich(k.paragraph.rich_text, ctx)}</p>`).join('');
+    return `<div class="wh-flip" tabindex="0"><div class="wh-flip-in"><div class="wh-face"><h5>${esc(flip[1])}</h5>${words}<span class="ed-mono">Tap to turn</span></div><div class="wh-face wh-back">${src ? `<img src="${esc(src)}" alt="">` : ''}</div></div></div>`;
+  }
+  return `<details class="sg-acc"><summary>${rich(b.toggle.rich_text, ctx)}</summary>${await html(kids, ctx)}</details>`;
+}
+
+async function callout(b, ctx) {
+  const v = b.callout, icon = v.icon?.emoji || '';
+  const ls = lines(v.rich_text);
+  if (icon === '📊') return `<div class="cs-stats">${ls.map(([n, ...rest]) => `<div><span class="cs-num">${esc(n.plain_text.trim())}</span><span class="cs-lab">${rich(rest, ctx)}</span></div>`).join('')}</div>`;
+  if (icon === '📈') return ls.map(l => { const s = txt(l); const m = s.match(/^(.*?)(\d{1,3})\s*%\s*$/); if (!m) return ''; const p = Math.min(100, +m[2]); return `<div class="sg-row np-progress"><span>${esc(m[1].trim())}</span><span class="ab-bar"><span style="width:${p}%"></span></span><span class="ab-pct">${p}%</span></div>`; }).join('');
+  if (icon === '🎨') { const hexes = txt(v.rich_text).match(/#[0-9a-f]{6}\b|#[0-9a-f]{3}\b/gi) || []; return `<div class="sg-swatches">${hexes.map(h => `<span style="background:${h}" title="${h}"></span>`).join('')}</div>`; }
+  if (icon === '🧵') return `<div class="af-weave"></div>`;
+  const inner = rich(v.rich_text, ctx) + (b.children ? await html(b.children, ctx) : '');
+  return `<div class="sg-callout">${cites(inner, ctx)}</div>`;
+}
+
+async function table(b, ctx, title) {
+  const v = b.table, rows = (b.children || []).map(r => r.table_row.cells);
+  const head = title ? `<div class="lf-box-title">${title}</div>` : '';
+  if (v.has_column_header) return `<div class="lf-box">${head}<div class="lf-table-wrap"><table class="lf-table"><thead><tr>${rows[0].map(c => `<th>${rich(c, ctx)}</th>`).join('')}</tr></thead><tbody>${rows.slice(1).map(r => `<tr>${r.map(c => `<td>${para(c, ctx)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`;
+  const cls = v.has_row_header ? 'lf-box lf-hover' : 'lf-box lf-plain';
+  return `<div class="${cls}">${head}<table>${rows.map(r => `<tr><th>${rich(r[0], ctx)}</th>${r.slice(1).map(c => `<td>${para(c, ctx)}</td>`).join('')}</tr>`).join('')}</table></div>`;
+}
+
+const boldOnly = b => b.type === 'paragraph' && b.paragraph.rich_text.length && b.paragraph.rich_text.every(r => r.annotations?.bold) && !b.paragraph.rich_text.some(r => r.href);
+
+// Render a list of blocks into units: { html, notes, wide }. wide = full-width piece (images, slides) that ends a side-note row.
+async function units(blocks, ctx) {
+  const out = [];
   for (let i = 0; i < blocks.length; i++) {
     const b = blocks[i], t = b.type, v = b[t] || {};
+    const push = (h, extra = {}) => { if (h) out.push({ html: h, notes: [], ...extra }); };
     if (t === 'bulleted_list_item' || t === 'numbered_list_item' || t === 'to_do') {
       const run = [b]; while (blocks[i + 1] && blocks[i + 1].type === t) run.push(blocks[++i]);
-      if (ctx.sources && t === 'numbered_list_item') {
-        out += `<ol class="np-sources">${(await Promise.all(run.map(async (x, k) => `<li id="${ctx.slug}-src-${k + 1}">${rich(x[t].rich_text)}</li>`))).join('')}</ol>`; continue;
+      const notes = []; run.forEach(x => notes.push(...splitKids(x.children).notes));
+      if (ctx.sec === 'sources' && t === 'numbered_list_item') { push(`<ol class="lf-sources">${run.map(x => sourceItem(x, ++ctx.srcN, ctx)).join('')}</ol>`); continue; }
+      if (ctx.sec === 'ingredients' && t === 'bulleted_list_item') {
+        const base = ctx.serves || 0;
+        const yieldBar = base && !ctx.yieldShown ? `<div class="rc-yield"><span>Serves</span>${[1, 2, 3].map(k => `<button${k === 1 ? ' class="active"' : ''} data-mult="${k}">${base * k}</button>`).join('')}</div>` : '';
+        ctx.yieldShown = true;
+        push(`${yieldBar}<ul class="rc-ing">${run.map(ingredient).join('')}</ul>`); continue;
       }
-      if (ctx.ingredients && t === 'bulleted_list_item') { out += ingredients(run); continue; }
       const boldStart = x => x[t].rich_text?.[0]?.annotations?.bold;
+      const item = async x => { const { kids } = splitKids(x.children); return para(x[t].rich_text, ctx) + (kids.length ? await html(kids, ctx) : ''); };
       if (t === 'numbered_list_item' && run.every(boldStart)) {
-        const items = [];
-        for (const x of run) { let inner = rich(x[t].rich_text); if (x.children) inner += await blocksToHtml(x.children, { ...ctx, inStep: true }); items.push(`<li>${cites(inner, ctx.slug)}</li>`); }
-        out += `<ol class="np-steps${ctx.method ? ' np-method' : ''}">${items.join('')}</ol>`; continue;
+        if (ctx.sec === 'method') { const start = ctx.step + 1; ctx.step += run.length; out.push({ html: `<ol class="rc-steps"${start > 1 ? ` start="${start}"` : ''}>${(await Promise.all(run.map(async x => `<li>${await item(x)}</li>`))).join('')}</ol>`, notes }); continue; }
+        let h = ''; for (const x of run) { const [first, ...rest] = x[t].rich_text; const { kids } = splitKids(x.children); h += `<div class="lf-step"><span class="lf-step-n">${++ctx.stepBadge}</span><h4>${esc(first.plain_text.trim())}</h4></div>${rest.length ? `<p>${para(rest, ctx).replace(/^\s+/, '')}</p>` : ''}${kids.length ? await html(kids, ctx) : ''}`; }
+        out.push({ html: h, notes }); continue;
       }
-      if (t === 'bulleted_list_item' && run.every(x => boldStart(x) && /:\s*$/.test(x[t].rich_text[0].plain_text) || (boldStart(x) && x[t].rich_text[1]?.plain_text?.startsWith(':')))) {
-        out += `<dl class="np-dl">${run.map(x => { const [first, ...rest] = x[t].rich_text; return `<dt>${esc(first.plain_text.replace(/:\s*$/, ''))}</dt><dd>${rich(rest).replace(/^:\s*/, '')}</dd>`; }).join('')}</dl>`; continue;
+      if (t === 'bulleted_list_item' && run.every(x => boldStart(x) && (/:\s*$/.test(x[t].rich_text[0].plain_text) || x[t].rich_text[1]?.plain_text?.startsWith(':')))) {
+        out.push({ html: `<dl class="sg-dl">${run.map(x => { const [first, ...rest] = x[t].rich_text; return `<dt>${esc(first.plain_text.replace(/:\s*$/, ''))}</dt><dd>${para(rest, ctx).replace(/^:\s*/, '')}</dd>`; }).join('')}</dl>`, notes }); continue;
       }
+      if (ctx.sec === 'notes' && t === 'bulleted_list_item') { out.push({ html: `<ul class="rc-notes">${(await Promise.all(run.map(async x => `<li>${await item(x)}</li>`))).join('')}</ul>`, notes }); continue; }
       const tag = t === 'numbered_list_item' ? 'ol' : 'ul';
-      const items = [];
-      for (const x of run) { let inner = t === 'to_do' ? `<span class="np-box${x.to_do.checked ? ' on' : ''}"></span>${rich(x[t].rich_text)}` : rich(x[t].rich_text); if (x.children) inner += await blocksToHtml(x.children, ctx); items.push(`<li>${cites(inner, ctx.slug)}</li>`); }
-      out += `<${tag} class="np-list${t === 'to_do' ? ' np-check' : ''}">${items.join('')}</${tag}>`; continue;
+      const lis = await Promise.all(run.map(async x => `<li>${t === 'to_do' ? `<span class="np-box${x.to_do.checked ? ' on' : ''}"></span>` : ''}${await item(x)}</li>`));
+      out.push({ html: `<${tag} class="lf-list${t === 'to_do' ? ' np-check' : ''}">${lis.join('')}</${tag}>`, notes }); continue;
     }
     switch (t) {
-      case 'paragraph': { const h = rich(v.rich_text); if (h) out += `<p>${cites(h, ctx.slug)}</p>`; if (b.children) out += `<div class="np-indent">${await blocksToHtml(b.children, ctx)}</div>`; break; }
-      case 'heading_1': case 'heading_2': case 'heading_3': {
-        const level = { heading_1: 2, heading_2: 3, heading_3: 4 }[t]; const label = txt(v.rich_text);
-        if (level === 2) { ctx.sources = /^sources$/i.test(label); ctx.ingredients = /^ingredients$/i.test(label); ctx.method = /^method$/i.test(label); out += `</section><section class="np-sec" id="${ctx.slug}-${slugify(label) || 's' + i}" data-toc="${esc(label)}">`; }
-        out += `<h${level} class="np-h${level}">${rich(v.rich_text)}</h${level}>`;
-        if (ctx.ingredients && ctx.serves) out += `<div class="np-serves">Serves <button type="button" class="np-sv" data-d="-1" aria-label="Fewer">−</button><b>${ctx.serves}</b><button type="button" class="np-sv" data-d="1" aria-label="More">+</button></div>`;
-        break;
+      case 'paragraph': {
+        const { kids, notes } = splitKids(b.children);
+        const rt = v.rich_text;
+        if (!rt.length && !kids.length) { if (notes.length) out.push({ html: '', notes }); break; }
+        // a bold-only line right above a table is that table's title
+        if (boldOnly(b) && blocks[i + 1]?.type === 'table') { out.push({ html: await table(blocks[++i], ctx, esc(txt(rt))), notes, wide: false }); break; }
+        // a line that is only a bold link is a button
+        if (rt.length && rt.every(r => r.href && r.annotations?.bold)) {
+          const href = rt[0].href, pm = href.match(/([0-9a-f]{32})(?:[?#]|$)/), slug = pm && slugById[pm[1]];
+          out.push({ html: slug ? `<p><a href="#" data-page="${esc(slug)}" class="sg-btn">${esc(txt(rt))}</a></p>` : `<p><a class="sg-btn" href="${esc(href)}" target="_blank" rel="noopener">${esc(txt(rt))}</a></p>`, notes }); break;
+        }
+        // a gray line in a guide card that starts with Base: or Recipe by
+        const plainTxt = txt(rt).trim();
+        if (ctx.inCard && /^base\s*:/i.test(plainTxt)) { ctx.card.base = plainTxt.replace(/^base\s*:\s*/i, ''); break; }
+        if (ctx.inCard && /^(recipe by|source:|via)\b/i.test(plainTxt)) { out.push({ html: `<p class="fj-src">${rich(rt, ctx)}</p>`, notes }); break; }
+        out.push({ html: (rt.length ? `<p>${para(rt, ctx)}</p>` : '') + (kids.length ? await html(kids, ctx) : ''), notes }); break;
+      }
+      case 'heading_2': case 'heading_3': {
+        const lvl = t === 'heading_2' ? 4 : 5;
+        push(`<h${lvl} class="sg-h" id="${ctx.anchors[idOf(b.id)] || ''}">${rich(v.rich_text, ctx)}</h${lvl}>`); break;
       }
       case 'quote': {
-        const lines = rich(v.rich_text).split('\n'); let cite = '';
-        if (lines.length > 1 && /^~\s*/.test(lines[lines.length - 1])) cite = lines.pop().replace(/^~\s*/, '');
-        out += `<blockquote class="np-quote"><p>${lines.join('<br>')}</p>${cite ? `<cite>${cite}</cite>` : ''}</blockquote>`; break;
+        const ls = lines(v.rich_text); let cite = '';
+        if (ls.length > 1 && /^~\s*/.test(txt(ls[ls.length - 1]))) cite = txt(ls.pop()).replace(/^~\s*/, '');
+        const body = ls.map(l => rich(l, ctx)).join('<br>'); const pull = /^["“]/.test(txt(ls[0] || []));
+        push(`<blockquote class="${pull ? 'wk-quote' : 'sg-bq'}">${cites(body, ctx)}${cite ? `<cite>${esc(cite)}</cite>` : ''}</blockquote>`); break;
       }
-      case 'callout': {
-        const icon = v.icon?.emoji || '';
-        if (icon === '📊') {
-          const lines = []; let cur = [];
-          for (const r of v.rich_text) { const parts = r.plain_text.split('\n'); parts.forEach((p, k) => { if (k > 0) { lines.push(cur); cur = []; } if (p) cur.push({ ...r, plain_text: p }); }); }
-          lines.push(cur);
-          out += `<div class="np-stats">${lines.filter(l => l.length).map(l => { const [n, ...rest] = l; return `<div><span class="np-stat-n">${esc(n.plain_text)}</span><span class="np-stat-l">${rich(rest)}</span></div>`; }).join('')}</div>`; break;
-        }
-        const inner = rich(v.rich_text) + (b.children ? await blocksToHtml(b.children, ctx) : '');
-        out += ctx.inStep ? `<aside class="np-tip">${inner}</aside>` : `<div class="np-note">${icon ? `<span class="np-note-i">${esc(icon)}</span>` : ''}<div>${inner}</div></div>`; break;
-      }
-      case 'divider': out += '<hr class="np-hr">'; break;
-      case 'code': out += `<pre class="np-code"><code>${esc(txt(v.rich_text))}</code></pre>`; break;
+      case 'callout': push(await callout(b, ctx)); break;
+      case 'divider': push('<div class="lf-divider"></div>'); break;
+      case 'code': push(`<pre class="sg-code"><code>${esc(txt(v.rich_text))}</code></pre><button type="button" class="sg-copy site-link">Copy code <span>⧉</span></button>`); break;
       case 'image': {
-        const cap = txt(v.caption); const wide = /\(wide\)\s*$/i.test(cap);
-        const src = await saveFile(fileUrl(v), 'pieces', b.id.replace(/-/g, ''));
-        if (src) { ctx.images.push({ src, cap: cap.replace(/\(wide\)\s*$/i, '').trim() }); out += `<figure class="np-fig${wide ? ' np-wide' : ''}"><img src="${esc(src)}" alt="${esc(cap.replace(/\(wide\)\s*$/i, '').trim())}" loading="lazy">${cap ? `<figcaption>${rich(v.caption).replace(/\(wide\)\s*$/i, '')}</figcaption>` : ''}</figure>`; }
-        break;
+        // images in a guide card collect into the card's example strip
+        if (ctx.inCard) { const src = await saveImg(v, b.id); if (src) ctx.card.photos.push({ src, cap: txt(v.caption) }); break; }
+        push(await figure(b, ctx), { wide: true }); break;
       }
       case 'column_list': {
-        const cols = await Promise.all((b.children || []).map(c => blocksToHtml(c.children || [], ctx)));
-        out += `<div class="np-cols" style="--n:${cols.length}">${cols.map(c => `<div>${c}</div>`).join('')}</div>`; break;
+        const cols = []; for (const c of b.children || []) cols.push(await html(c.children || [], ctx));
+        push(`<div class="np-cols" style="--n:${cols.length}">${cols.map(c => `<div>${c}</div>`).join('')}</div>`, { wide: true }); break;
       }
       case 'toggle': {
-        const label = txt(v.rich_text).trim(); const kids = b.children || [];
-        if (/^(slideshow|gallery)$/i.test(label)) {
-          const imgs = [];
-          for (const k of kids) if (k.type === 'image') { const src = await saveFile(fileUrl(k.image), 'pieces', k.id.replace(/-/g, '')); if (src) imgs.push({ src, cap: txt(k.image.caption) }); }
-          out += /^slideshow$/i.test(label)
-            ? `<div class="np-slides"><div class="np-slides-track">${imgs.map(m => `<figure><img src="${esc(m.src)}" alt="${esc(m.cap)}" loading="lazy">${m.cap ? `<figcaption>${esc(m.cap)}</figcaption>` : ''}</figure>`).join('')}</div><button type="button" class="np-prev" aria-label="Previous">←</button><button type="button" class="np-next" aria-label="Next">→</button></div>`
-            : `<div class="np-gallery">${imgs.map(m => `<figure><img src="${esc(m.src)}" alt="${esc(m.cap)}" loading="lazy">${m.cap ? `<figcaption>${esc(m.cap)}</figcaption>` : ''}</figure>`).join('')}</div>`;
-          break;
+        // several Specimen toggles in a row sit side by side
+        if (/^specimen\b/i.test(txt(v.rich_text).trim())) {
+          const run = [b]; while (blocks[i + 1]?.type === 'toggle' && /^specimen\b/i.test(txt(blocks[i + 1].toggle.rich_text).trim())) run.push(blocks[++i]);
+          let h = ''; for (const x of run) h += await toggle(x, ctx); push(`<div class="ed-page np-ed"><div class="ed-cards">${h}</div></div>`, { wide: true }); break;
         }
-        if (/^timeline$/i.test(label)) {
-          const tbl = kids.find(k => k.type === 'table'); const rows = (tbl?.children || []).map(r => r.table_row.cells);
-          const data = (tbl?.table?.has_column_header ? rows.slice(1) : rows).filter(r => r.length >= 2);
-          out += `<div class="np-timeline"><div class="np-tl-ticks">${data.map((r, k) => `<button type="button" class="np-tl-tick${k ? '' : ' on'}" data-i="${k}"><b>${rich(r[0])}</b><span>${rich(r[1])}</span></button>`).join('')}</div><div class="np-tl-detail">${data.map((r, k) => `<p class="np-tl-d${k ? '' : ' on'}" data-i="${k}"><strong>${rich(r[0])}.</strong> ${rich(r[2] || r[1])}</p>`).join('')}</div></div>`;
-          break;
-        }
-        out += `<details class="np-toggle"><summary>${rich(v.rich_text)}</summary>${await blocksToHtml(kids, ctx)}</details>`; break;
+        const h = await toggle(b, ctx); push(h, { wide: /class="(mo-car|sg-gal|ic-wrap|mo-tabs)/.test(h) }); break;
       }
       case 'table': {
-        const rows = (b.children || []).map(r => r.table_row.cells);
-        if (v.has_column_header) out += `<div class="np-table-wrap"><table class="np-table"><thead><tr>${rows[0].map(c => `<th>${rich(c)}</th>`).join('')}</tr></thead><tbody>${rows.slice(1).map(r => `<tr>${r.map(c => `<td>${rich(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-        else out += `<div class="np-table-wrap"><table class="np-table np-facts"><tbody>${rows.map(r => `<tr><th>${rich(r[0])}</th>${r.slice(1).map(c => `<td>${rich(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-        break;
+        if (ctx.inCard && !v.has_column_header) { const rows = (b.children || []).map(r => r.table_row.cells); ctx.card.settings = `<div class="lf-box lf-plain fj-set"><table>${rows.map(r => `<tr><th>${rich(r[0], ctx)}</th>${r.slice(1).map(c => `<td>${rich(c, ctx)}</td>`).join('')}</tr>`).join('')}</table></div>`; break; }
+        push(await table(b, ctx), { wide: true }); break;
       }
       case 'video': {
         const url = fileUrl(v); let embed = '';
@@ -216,55 +347,121 @@ async function blocksToHtml(blocks, ctx) {
         if (yt) embed = `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1`; else if (vm) embed = `https://player.vimeo.com/video/${vm[1]}?autoplay=1`;
         const thumb = yt ? `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg` : '';
         const cap = txt(v.caption);
-        if (embed) out += `<button type="button" class="np-video" data-embed="${esc(embed)}" data-title="${esc(cap)}">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy">` : ''}<span class="rc-play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>${cap ? `<span class="np-video-cap">${esc(cap)}</span>` : ''}</button>`;
-        else if (url) out += `<a class="np-linkcard" href="${esc(url)}" target="_blank" rel="noopener"><b>${esc(cap || url)}</b><span>${esc(url.replace(/^https?:\/\//, '').split('/')[0])} ↗</span></a>`;
+        if (embed) push(`<button type="button" class="np-video" data-embed="${esc(embed)}" data-title="${esc(cap)}">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy">` : ''}<span class="rc-play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>${cap ? `<span class="np-video-cap">${esc(cap)}</span>` : ''}</button>`, { wide: true });
+        else if (url) push(`<a class="np-linkcard" href="${esc(url)}" target="_blank" rel="noopener"><b>${esc(cap || url)}</b><span>${esc(url.replace(/^https?:\/\//, '').split('/')[0])} ↗</span></a>`);
+        break;
+      }
+      case 'audio': {
+        const src = await saveFile(fileUrl(v), 'files', idOf(b.id)); const cap = txt(v.caption) || 'Recording';
+        if (src) push(`<div class="lb-tracks"><div class="lb-track np-audio"><button type="button" class="lb-play" aria-label="Play">▶</button><div class="lb-tinfo"><div class="lb-tt">${esc(cap)}</div><div class="lb-wave">${Array.from({ length: 30 }, (_, k) => `<i style="height:${6 + ((k * 37) % 23)}px"></i>`).join('')}</div><div class="lb-ts">Tap to play</div></div><audio preload="none" src="${esc(src)}"></audio></div></div>`);
         break;
       }
       case 'bookmark': case 'embed': case 'link_preview': {
         const url = v.url || ''; const cap = txt(v.caption);
-        if (url) out += `<a class="np-linkcard" href="${esc(url)}" target="_blank" rel="noopener"><b>${esc(cap || url.replace(/^https?:\/\//, ''))}</b><span>${esc(url.replace(/^https?:\/\//, '').split('/')[0])} ↗</span></a>`; break;
+        if (url) push(`<a class="np-linkcard" href="${esc(url)}" target="_blank" rel="noopener"><b>${esc(cap || url.replace(/^https?:\/\//, ''))}</b><span>${esc(url.replace(/^https?:\/\//, '').split('/')[0])} ↗</span></a>`); break;
       }
       case 'file': case 'pdf': {
         const name = v.name || txt(v.caption) || 'Download';
-        const src = await saveFile(fileUrl(v), 'files', slugify(name) || b.id.replace(/-/g, ''));
-        if (src) out += `<p><a class="site-link np-download" href="${esc(src)}" download>${esc(txt(v.caption) || name)} <span>↓</span></a></p>`; break;
+        const src = await saveFile(fileUrl(v), 'files', slugify(name) || idOf(b.id));
+        if (src) push(`<p><a href="${esc(src)}" class="cv-download site-link" download>${esc(txt(v.caption) || name)} <span>${ARROW_DL}</span></a></p>`); break;
       }
       default: break;
     }
   }
   return out;
 }
+// Plain rendering (no side-note column): side notes show as callout boxes under their block
+async function html(blocks, ctx) {
+  return (await units(blocks, ctx)).map(u => u.html + u.notes.map(n => `<div class="sg-callout">${rich(n.callout.rich_text, ctx)}</div>`).join('')).join('');
+}
+// Side-note layout (Essay and Recipe): text on the left, notes in the margin; full-width pieces break the rows
+function rows(list, ctx) {
+  let out = '', text = '', side = '';
+  const flush = () => { if (text || side) out += `<div class="mo-row"><div class="mo-text">${text}</div><div class="mo-side">${side}</div></div>`; text = side = ''; };
+  for (const u of list) {
+    if (u.wide) { flush(); out += u.html; continue; }
+    text += u.html;
+    side += u.notes.map(n => `<p class="mo-sn"><span>${String.fromCharCode(97 + (ctx.letter++ % 26))}</span> ${cites(rich(n.callout.rich_text, ctx), ctx)}</p>`).join('');
+  }
+  flush(); return out;
+}
 
-const UNITS = 'cups?|tbsp|tsp|tablespoons?|teaspoons?|g|kg|ml|l|oz|lbs?|pounds?|pinch(?:es)?|cloves?|cans?|small|medium|large|bunch(?:es)?|sprigs?|slices?|pieces?|handfuls?';
-function ingredients(run) {
-  const frac = { '½': .5, '⅓': 1 / 3, '⅔': 2 / 3, '¼': .25, '¾': .75, '⅛': .125 };
-  return `<ul class="np-ingr">${run.map(x => {
-    const s = txt(x.bulleted_list_item.rich_text).trim();
-    const m = s.match(new RegExp(`^((?:\\d+\\s+)?(?:\\d+\\/\\d+|\\d*\\.?\\d+|[½⅓⅔¼¾⅛])(?:\\s*[½⅓⅔¼¾⅛])?)\\s*(${UNITS})?\\b\\s*(.*)$`, 'i'));
-    if (!m) return `<li>${rich(x.bulleted_list_item.rich_text)}</li>`;
-    let n = 0; for (const part of m[1].trim().split(/\s+/)) { if (frac[part]) n += frac[part]; else if (part.includes('/')) { const [a, c] = part.split('/'); n += a / c; } else if (/^\d*\.?\d+[½⅓⅔¼¾⅛]$/.test(part)) { n += parseFloat(part) + frac[part.slice(-1)]; } else n += parseFloat(part); }
-    return `<li><span class="np-amt" data-amt="${n}">${esc(m[1].trim())}</span>${m[2] ? ` <span class="np-unit">${esc(m[2])}</span>` : ''} ${esc(m[3])}</li>`;
-  }).join('')}</ul>`;
+// Split the page at each Heading 1 and lay it out for its template
+async function layout(blocks, ctx) {
+  // anchors for "jump down the page" links: heading blocks get ids
+  const used = new Set();
+  const mk = label => { let id = `${ctx.slug}-${slugify(label) || 's'}`; let k = 2; while (used.has(id)) id = `${ctx.slug}-${slugify(label)}-${k++}`; used.add(id); return id; };
+  ctx.anchors = {};
+  const sections = [{ title: '', id: `${ctx.slug}-top`, blocks: [] }];
+  for (const b of blocks) {
+    if (b.type === 'heading_1') { const title = txt(b.heading_1.rich_text).trim(); const id = mk(title); ctx.anchors[idOf(b.id)] = id; sections.push({ title, id, blocks: [] }); }
+    else { if (/^heading_[23]$/.test(b.type)) ctx.anchors[idOf(b.id)] = mk(txt(b[b.type].rich_text)); sections[sections.length - 1].blocks.push(b); }
+  }
+  const T = ctx.template; let out = ''; const nav = [];
+  for (const s of sections) {
+    const key = s.title.toLowerCase();
+    ctx.sec = /^sources$/.test(key) ? 'sources' : /^ingredients$/.test(key) ? 'ingredients' : /^method$/.test(key) ? 'method' : /^notes$/.test(key) ? 'notes' : '';
+    if (T !== 'Recipe' && ctx.sec !== 'sources') ctx.sec = '';
+    if (!s.title && !s.blocks.length) continue;
+    if (ctx.sec === 'sources') {
+      const list = await html(s.blocks, ctx);
+      out += T === 'Long read' ? `<div class="lf-divider"></div><section class="lf-section np-sec" data-toc="Sources" id="${s.id}"><h3 class="lf-src-head">Sources</h3>${list}</section>`
+        : `<div class="lf-divider"></div><section class="mo-sources np-sec" data-toc="Sources" id="${s.id}"><h3 class="lf-src-head">Sources</h3>${list}</section>`;
+      if (T === 'Recipe') nav.push({ id: s.id, label: 'Sources', color: '' });
+      continue;
+    }
+    if (T === 'Long read') {
+      out += `<section class="lf-section np-sec" data-toc="${esc(s.title || ctx.title)}" id="${s.id}">${s.title ? `<h3 class="lf-h">${esc(s.title)}</h3>` : ''}${await html(s.blocks, ctx)}</section>`;
+    } else if (T === 'Guide') {
+      // Heading 2 inside a guide section = one card (like each film simulation recipe)
+      let h = '', cards = []; let i = 0; const bl = s.blocks;
+      const pre = []; while (i < bl.length && bl[i].type !== 'heading_2') pre.push(bl[i++]);
+      h += await html(pre, ctx);
+      while (i < bl.length) {
+        const head = bl[i++]; const body = []; while (i < bl.length && bl[i].type !== 'heading_2') body.push(bl[i++]);
+        ctx.inCard = true; ctx.card = { photos: [], base: '', settings: '' };
+        const inner = await html(body, ctx); const card = ctx.card; ctx.inCard = false;
+        const n = String(cards.length + 1).padStart(2, '0'); const title = txt(head.heading_2.rich_text).trim(); const cid = ctx.anchors[idOf(head.id)];
+        cards.push({ n, title, cid });
+        h += `<article class="fj-rec" id="${cid}" data-toc="${esc(title)}"><div class="fj-head"><span class="fj-n">${n}</span><h3>${esc(title)}</h3>${card.base ? `<span class="fj-base">${esc(card.base)}</span>` : ''}</div><div class="fj-body">${card.photos.length ? `<div class="fj-ex">${card.photos.map(p => `<img class="sg-pop" src="${esc(p.src)}" alt="${esc(p.cap)}" loading="lazy" style="width:100%;aspect-ratio:3 / 2;object-fit:cover;border-radius:10px">`).join('')}</div>` : ''}${card.settings}${inner}</div></article>`;
+      }
+      const index = cards.length > 1 ? `<div class="fj-index">${cards.map(c => `<a href="#${c.cid}" class="fj-chip" data-jump="${c.cid}"><span>${c.n}</span>${esc(c.title)}</a>`).join('')}</div>` : '';
+      if (index) h = h.replace(/(<article class="fj-rec")/, index + '$1');
+      out += `<section class="ws-sec np-sec" id="${s.id}"${s.title ? ` data-toc="${esc(s.title)}"` : ''}>${s.title ? `<h2 class="ws-h">${esc(s.title)}</h2>` : ''}${h}</section>`;
+    } else if (T === 'Collection') {
+      out += `${s.title ? `<h2 class="mo-h">${esc(s.title)}</h2>` : ''}${await html(s.blocks, ctx)}`;
+    } else {
+      // Essay and Recipe: the Fonio layout, with side notes in the margin
+      const color = T === 'Recipe' ? SEC_COLORS[key] || '' : '';
+      const list = await units(s.blocks, ctx);
+      if (!s.title) { out += `<section class="mo-sec np-sec np-intro" id="${s.id}">${rows(list, ctx)}</section>`; continue; }
+      out += `<section class="mo-sec np-sec" id="${s.id}" data-toc="${esc(s.title)}"${color ? ` style="--c:${color}"` : ''}><h2 class="mo-h">${esc(s.title)}</h2>${rows(list, ctx)}</section>`;
+      nav.push({ id: s.id, label: s.title, color });
+    }
+  }
+  return { html: out, nav };
 }
 
 const pieces = [];
 for (const p of pieceRows) {
-  const pr = p.properties; const id = p.id.replace(/-/g, '');
+  const pr = p.properties; const id = idOf(p.id);
   const slug = slugById[id];
   const template = pr.Template?.select?.name || ((pr.Tags?.multi_select || []).some(t => t.name === 'recipe') ? 'Recipe' : 'Essay');
-  const ctx = { slug, images: [], serves: pr.Serves?.number || 0 };
-  let body = '';
-  try { body = await blocksToHtml(await children(p.id), ctx); } catch (e) { console.warn(`Skipped body of ${slug}: ${e.message}`); }
-  body = `<section class="np-sec np-first">${body}</section>`.replace(/<section class="np-sec np-first"><\/section>/, '');
-  const words = body.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+  const ctx = { slug, template, title: plain(pr.Title), images: [], serves: pr.Serves?.number || 0, srcN: 0, step: 0, stepBadge: 0, letter: 0 };
+  let body = { html: '', nav: [] };
+  try { body = await layout(await children(p.id), ctx); } catch (e) { console.warn(`Skipped body of ${slug}: ${e.message}`); }
+  const words = body.html.replace(/<template[\s\S]*?<\/template>/g, '').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
   const items = guideRows.filter(g => g.pageIds.includes(id)).sort((a, b) => a.order - b.order).map(({ pageIds, ...g }) => g);
   pieces.push({
     slug, template, title: plain(pr.Title), section: pr.Section?.select?.name || 'Vibe Projects', zone: pr.Zone?.select?.name || '',
     tags: (pr.Tags?.multi_select || []).map(t => t.name), dek: plain(pr.Dek), sideLine: plain(pr['Side line']), meta: plain(pr['Meta note']),
     date: pr.Date?.date?.start || '', ai: check(pr['AI drafted']), readTime: pr['Read time (min)']?.number || Math.max(1, Math.ceil(words / 230)),
-    replace: check(pr['Replace built page']), preview: !check(pr.Publish), serves: pr.Serves?.number || null, time: plain(pr['Total time']), order: pr.Order?.number ?? 999, about: plain(pr['About this piece']), html: body, items,
+    sources: ctx.srcN, replace: check(pr['Replace built page']), preview: !check(pr.Publish), serves: pr.Serves?.number || null, time: plain(pr['Total time']),
+    order: pr.Order?.number ?? 999, about: plain(pr['About this piece']), next: plain(pr["What's next"]), thanks: plain(pr.Acknowledgments),
+    html: body.html, nav: body.nav, items,
   });
 }
+
 pieces.sort((a, b) => a.order - b.order || (b.date || '').localeCompare(a.date || ''));
 
 await mkdir('data', { recursive: true });

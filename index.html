@@ -2883,6 +2883,25 @@
     .np-page .lf-pill-wrap .lf-toc.open { display: block; }
     @media (max-width: 640px) { .np-cols { grid-template-columns: 1fr; } .np-gallery, .np-coll .np-sec { grid-template-columns: repeat(2, minmax(0, 1fr)); } .np-dl { grid-template-columns: 1fr; gap: 2px; } .np-dl dd { margin-bottom: 10px; } .np-fig.np-wide { width: 100%; } .np-hov-card { width: 160px; } }
     .pj-c8:hover { background: #4f6f8a; border-color: #4f6f8a; color: #f4efe3; }
+    /* Notion-built pages: small additions so site components sit right */
+    .np-page .lf-figure img.sg-img { width: 100%; height: auto; }
+    .np-page .lf-figure img.sg-img.sq, .np-page .lf-figure img.sg-img.circle { aspect-ratio: 1; object-fit: cover; max-width: 320px; }
+    .np-page .lf-figure img.sg-img.round { border-radius: 18px; }
+    .np-page .mo-car-stage .mo-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .np-page .mo-car-stage { background: #111; }
+    .np-page .np-progress { margin: 0 0 12px; }
+    .np-page .np-ed { margin: 0 0 24px; }
+    .np-page .ed-card-photo img { width: 100%; display: block; }
+    .np-page .wh-flip.on .wh-flip-in { transform: rotateY(180deg); }
+    .np-page .wh-tilt { width: min(260px, 100%); }
+    .np-page .wh-tilt img { aspect-ratio: auto; }
+    .np-pi { position: fixed; }
+    .np-page .fj-ex img { display: block; }
+    .np-page .mo-text > .lf-step:first-child, .np-page .mo-text > p:first-child { margin-top: 0; }
+    .np-page :is(.wk-quote, .sg-bq, .sg-callout, .cs-stats, .sg-swatches, .lf-box, .mo-tabs, .lu, .ic-wrap, .mo-car, .sg-gal, .lf-figure, .lb-tracks, .wh-flip, .sg-dl) { margin-bottom: 24px; }
+    .np-page .af-weave { margin: 24px 0; }
+    .np-page .np-progress:last-of-type { margin-bottom: 24px; }
+
     /* Dark theme (first pass): invert the palette, then flip real colors back so photos,
        swatches, covers, charts, and embeds keep their true colors */
     html[data-theme="dark"] { background: #fefdfb; filter: invert(0.92) hue-rotate(180deg); }
@@ -6012,7 +6031,8 @@ function cook(g) {
         setTimeout(() => el.classList.remove('flash'), 1200);
       }
 
-      document.querySelectorAll('sup.cite a').forEach(a => {
+      function bindCite(a) {
+        if (a.dataset.bound) return; a.dataset.bound = '1';
         if (!touch) {
           a.addEventListener('mouseenter', () => show(a));
           a.addEventListener('mouseleave', () => { hideTimer = setTimeout(hide, 180); });
@@ -6023,7 +6043,9 @@ function cook(g) {
           hide();
           flash(a.getAttribute('href').slice(1));
         });
-      });
+      }
+      window.__bindCite = bindCite;
+      document.querySelectorAll('sup.cite a').forEach(bindCite);
       pop.addEventListener('mouseenter', () => clearTimeout(hideTimer));
       pop.addEventListener('mouseleave', () => { hideTimer = setTimeout(hide, 180); });
       pop.addEventListener('click', (e) => {
@@ -6579,7 +6601,8 @@ function cook(g) {
     })();
 
     // About: photos float up on hover (desktop); tap shows them inline (phones)
-    document.querySelectorAll('.ab-photo').forEach(el => {
+    function bindAbPhoto(el) {
+      if (el.dataset.bound) return; el.dataset.bound = '1';
       const art = el.querySelector('.ab-photo-art');
       if (canHover) {
         el.addEventListener('mouseenter', e => { hoverCard.innerHTML = art.innerHTML; hoverCard.classList.add('hc-photo'); hoverCard.classList.toggle('hc-wide', el.hasAttribute('data-wide')); setHoverTarget(e, true); hoverCard.classList.add('show'); startHoverLoop(); });
@@ -6592,7 +6615,9 @@ function cook(g) {
           const d = document.createElement('div'); d.className = 'ab-photo-inline'; d.innerHTML = art.innerHTML; el.parentElement.appendChild(d);
         });
       }
-    });
+    }
+    window.__bindAbPhoto = bindAbPhoto;
+    document.querySelectorAll('.ab-photo').forEach(bindAbPhoto);
 
     // Links that open a Bookmarks tab (e.g. Shelf)
     document.addEventListener('click', e => {
@@ -6601,7 +6626,7 @@ function cook(g) {
     });
 
     // Long-form food pieces: progress bar, active section in side menu, tabs, carousel, servings
-    document.querySelectorAll('.mo-page').forEach(page => {
+    function initMoPage(page) {
       const links = [...page.querySelectorAll('.mo-nav a')];
       const secs = links.map(a => document.getElementById(a.dataset.sec));
       function onScroll() {
@@ -6631,12 +6656,14 @@ function cook(g) {
         page.querySelectorAll('.rc-yield button').forEach(x => x.classList.toggle('active', x === b));
         page.querySelectorAll('.rc-q').forEach(q => { if (!q.dataset.q) return; const v = parseFloat(q.dataset.q) * +b.dataset.mult; q.textContent = fr(v); const u = q.nextElementSibling; if (u && u.classList.contains('rc-u')) { const base = u.dataset.u || (u.dataset.u = u.textContent); u.textContent = (v > 1 && base === 'cup') ? 'cups' : base; } });
       }));
-    });
+    }
+    window.__initMoPage = initMoPage;
+    document.querySelectorAll('.mo-page').forEach(initMoPage);
 
     // Reading progress bar on every essay, recipe, and long-form piece
     (function () {
       const bar = document.getElementById('read-progress'), fill = bar.querySelector('span');
-      const isEssay = id => /^(essay-|altar-|recipe-)/.test(id) || id === 'styleguide' || id === 'edition';
+      const isEssay = id => /^(essay-|altar-|recipe-)/.test(id) || id === 'styleguide' || id === 'edition' || !!(document.getElementById(id) && document.getElementById(id).classList.contains('np-page'));
       function update() {
         const pg = document.querySelector('.page.active');
         const on = pg && isEssay(pg.id);
@@ -6766,7 +6793,7 @@ function cook(g) {
     });
 
     // Interactive timelines: tap a year, use the arrows, or arrow keys
-    document.querySelectorAll('.ic-wrap').forEach(w => {
+    function initTimeline(w) {
       const ticks = [...w.querySelectorAll('.ic-tick')], notes = [...w.querySelectorAll('.ic-d')], line = w.querySelector('.ic-time');
       let i = 0;
       const sel = n => {
@@ -6779,7 +6806,9 @@ function cook(g) {
       w.querySelector('.ic-prev').addEventListener('click', () => sel(i - 1));
       w.querySelector('.ic-next').addEventListener('click', () => sel(i + 1));
       line.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); sel(i + 1); ticks[i].focus(); } if (e.key === 'ArrowLeft') { e.preventDefault(); sel(i - 1); ticks[i].focus(); } });
-    });
+    }
+    window.__initTimeline = initTimeline;
+    document.querySelectorAll('.ic-wrap').forEach(initTimeline);
 
     // Shelf ratings: data-rating="4" or "3.5" draws stars
     document.querySelectorAll('.sh-rate[data-rating]').forEach(r => {
@@ -7344,27 +7373,47 @@ function cook(g) {
       }
       function build(p) {
         const back = p.section === 'Essays' ? 'essays' : 'vibe-projects';
+        const T = p.template === 'Long read' ? 'Long read' : p.template;
         const kicker = `${esc(p.zone)}${p.section === 'Vibe Projects' ? ' · Vibe project' : ''}`;
-        const meta = [my(p.date), p.template === 'Recipe' ? (p.serves ? `Serves ${p.serves}` : '') : `${p.readTime} min read`, p.template === 'Recipe' ? p.time : '', p.meta].filter(Boolean).map(esc).join(' · ');
-        const el = document.createElement('div'); el.id = p.slug; el.className = 'page np-page' + (p.template === 'Collection' ? ' np-coll' : '');
-        if (p.template === 'Guide') {
-          el.innerHTML = `${toolbar(p.slug, back)}<div class="ws-wrap"><div class="ws-side"><div class="lf-kicker">${kicker}</div><h1 class="lf-title">${esc(p.title)}</h1>${p.ai ? aiFlag : ''}${p.dek ? `<p class="lf-dek">${esc(p.dek)}</p>` : ''}${p.sideLine ? `<p class="ws-side-p">${esc(p.sideLine)}</p>` : ''}<div class="ws-meta">${meta}</div></div><div class="ws-main"><div class="np-body">${p.html}</div>${guideSections(p.items || [])}</div></div>${pill(p.title)}`;
+        const meta = [my(p.date), T === 'Recipe' ? (p.serves ? `Serves ${p.serves}` : '') : `${p.readTime} min read`, T === 'Recipe' ? p.time : '', p.sources ? `${p.sources} source${p.sources === 1 ? '' : 's'}` : '', p.meta].filter(Boolean).map(esc).join(' · ');
+        const tagline = p.tags.length ? `<div class="mo-tagline">${p.tags.map(t => `<span>#${esc(t)}</span>`).join('')}</div>` : '';
+        const head = `<div class="lf-kicker">${kicker}</div>${tagline}<h1 class="lf-title">${esc(p.title)}</h1>${p.ai ? aiFlag : ''}${p.dek ? `<p class="lf-dek">${esc(p.dek)}</p>` : ''}<div class="lf-meta">${meta}</div>`;
+        const info = (p.about || p.next || p.thanks) ? (() => { const tabs = [['about', 'About', p.about], ['next', "What's next", p.next], ['ack', 'Acknowledgments', p.thanks]].filter(t => t[2]); return `<div class="pi on np-pi"><div class="pi-card" role="dialog" aria-label="About this piece"><div class="pi-tabs">${tabs.map((t, i) => `<button type="button"${i ? '' : ' class="active"'} data-pi="${t[0]}">${t[1]}</button>`).join('')}</div>${tabs.map((t, i) => `<div class="pi-pane${i ? '' : ' active'}" data-pi-pane="${t[0]}">${t[2].split(/\n+/).map(x => `<p>${esc(x)}</p>`).join('')}</div>`).join('')}</div><button type="button" class="pi-btn" aria-label="About this piece" aria-expanded="false">?</button></div>`; })() : '';
+        const el = document.createElement('div'); el.id = p.slug;
+        if (T === 'Guide') {
+          el.className = 'page np-page';
+          el.innerHTML = `${toolbar(p.slug, back)}<div class="ws-wrap"><div class="ws-side"><div class="lf-kicker">${kicker}</div><h1 class="lf-title" data-toc="${esc(p.title)}">${esc(p.title)}</h1>${p.ai ? aiFlag : ''}${p.dek ? `<p class="lf-dek">${esc(p.dek)}</p>` : ''}${p.sideLine ? `<p class="ws-side-p">${esc(p.sideLine)}</p>` : ''}<div class="ws-meta">${meta}</div></div><div class="ws-main">${p.html}${guideSections(p.items || [])}</div></div>${pill(p.title)}${info}`;
+        } else if (T === 'Long read') {
+          el.className = 'page lf-page np-page';
+          el.innerHTML = `${toolbar(p.slug, back)}<section class="lf-section np-sec" data-toc="${esc(p.title)}" id="${p.slug}-head">${head}</section>${p.html.replace(/^<section class="lf-section np-sec" data-toc="[^"]*" id="[^"]*-top">([\s\S]*?)<\/section>/, (m, inner) => inner.trim() ? `<section class="lf-section np-intro">${inner}</section>` : '')}${pill(p.title)}${info}`;
+        } else if (T === 'Recipe') {
+          el.className = 'page mo-page np-page';
+          const nav = (p.nav || []).map(n => `<a href="#${n.id}" data-sec="${n.id}"${n.color ? ` style="--c:${n.color}"` : ''}>${esc(n.label)}</a>`).join('');
+          el.innerHTML = `${toolbar(p.slug, back)}<div class="mo-grid mo-grid-right"><div class="mo-main">${head}${p.html}</div><nav class="mo-nav" aria-label="Sections">${nav}</nav></div>${info}`;
+        } else if (T === 'Collection') {
+          el.className = 'page np-page np-coll';
+          el.innerHTML = `${toolbar(p.slug, back)}<div class="np-wrap"><div class="np-head">${head}</div><div class="np-body">${p.html}</div></div>${info}`;
         } else {
-          const tagline = p.template === 'Recipe' && p.tags.length ? `<div class="np-tagline">${p.tags.map(t => `<span>#${esc(t)}</span>`).join('')}</div>` : '';
-          el.innerHTML = `${toolbar(p.slug, back)}<div class="np-wrap"><div class="np-head"><div class="lf-kicker">${kicker}</div>${tagline}<h1 class="lf-title">${esc(p.title)}</h1>${p.ai ? aiFlag : ''}${p.dek ? `<p class="lf-dek">${esc(p.dek)}</p>` : ''}<div class="lf-meta">${meta}</div></div><div class="np-body"${p.serves ? ` data-serves="${p.serves}"` : ''}>${p.html}</div></div>${pill(p.title)}`;
+          // Essay: the Fonio layout, side notes in the margin, section pill at the bottom
+          el.className = 'page mo-page np-page';
+          el.innerHTML = `${toolbar(p.slug, back)}<div class="mo-grid mo-grid-solo"><div class="mo-main">${head.replace('<h1 class="lf-title">', `<h1 class="lf-title" id="${p.slug}-head" data-toc="${esc(p.title)}">`)}${p.html}</div></div>${pill(p.title)}${info}`;
         }
         host.insertBefore(el, document.getElementById('home').nextSibling);
         // section pill
-        const secs = [...el.querySelectorAll('.np-sec[data-toc]')]; const wrap = el.querySelector('.lf-pill-wrap');
-        if (!secs.length) wrap.remove(); else {
+        const secs = [...el.querySelectorAll('[data-toc]')].filter(x => x.id); const wrap = el.querySelector('.lf-pill-wrap');
+        if (wrap && secs.length < 2) wrap.remove(); else if (wrap) {
           const toc = wrap.querySelector('.np-toc'), btn = wrap.querySelector('.np-pill'), label = wrap.querySelector('.np-pill-label');
           toc.innerHTML = secs.map(sc => `<a href="#${sc.id}" data-sec="${sc.id}">${esc(sc.dataset.toc)}</a>`).join('');
           btn.addEventListener('click', e => { e.stopPropagation(); btn.setAttribute('aria-expanded', toc.classList.toggle('open')); });
           toc.addEventListener('click', e => { const a = e.target.closest('a[data-sec]'); if (!a) return; e.preventDefault(); document.getElementById(a.dataset.sec).scrollIntoView({ behavior: 'smooth', block: 'start' }); toc.classList.remove('open'); });
           document.addEventListener('click', e => { if (!e.target.closest('.lf-pill-wrap')) toc.classList.remove('open'); });
-          window.addEventListener('scroll', () => { if (!el.classList.contains('active')) return; let cur = secs[0]; secs.forEach(sc => { if (sc.getBoundingClientRect().top < innerHeight * 0.4) cur = sc; }); label.textContent = cur.dataset.toc; }, { passive: true });
+          window.addEventListener('scroll', () => { if (!el.classList.contains('active')) return; let cur = secs[0]; secs.forEach(sc => { if (sc.getBoundingClientRect().top < innerHeight * 0.4) cur = sc; }); label.textContent = cur.dataset.toc; toc.querySelectorAll('a').forEach(a => a.classList.toggle('current', a.dataset.sec === cur.id)); }, { passive: true });
         }
-        el.querySelectorAll('sup.np-cite a').forEach(a => { const src = document.getElementById(a.dataset.src); if (src) a.title = src.textContent; });
+        // same behaviors as the hand-built pages
+        el.querySelectorAll('sup.cite a').forEach(a => window.__bindCite && window.__bindCite(a));
+        el.querySelectorAll('.ab-photo').forEach(x => window.__bindAbPhoto && window.__bindAbPhoto(x));
+        el.querySelectorAll('.ic-wrap').forEach(x => window.__initTimeline && window.__initTimeline(x));
+        if (window.__initMoPage) window.__initMoPage(el);
         // list row (preview pages are only reachable by their link)
         const listPage = document.getElementById(back), list = listPage && listPage.querySelector('.es-list');
         if (list && !p.preview) {
@@ -7378,6 +7427,18 @@ function cook(g) {
       }
       // keep built pages in step with page switching
       const _sp = showPage; showPage = function (id) { document.querySelectorAll('.np-page.active').forEach(x => x.classList.remove('active')); return _sp(id); };
+      // interactions only Notion-built pages need (hand-built ones are bound at load)
+      document.addEventListener('click', e => {
+        const np = e.target.closest('.np-page'); if (!np) return;
+        const yh = e.target.closest('.lu-yhead'); if (yh) { const y = yh.closest('.lu-year'); const o = y.classList.toggle('lu-open'); yh.setAttribute('aria-expanded', o); return; }
+        const cp = e.target.closest('.sg-copy'); if (cp) { const txt = cp.previousElementSibling.textContent; (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).catch(() => {}); const l = cp.firstChild; l.textContent = 'Copied '; setTimeout(() => { l.textContent = 'Copy code '; }, 1400); return; }
+        const jp = e.target.closest('[data-jump]'); if (jp) { e.preventDefault(); const t = document.getElementById(jp.dataset.jump); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+        const pb = e.target.closest('.np-pi .pi-btn'); if (pb) { e.stopPropagation(); const box = pb.closest('.np-pi'); pb.setAttribute('aria-expanded', box.classList.toggle('open')); return; }
+        const pt = e.target.closest('.np-pi .pi-tabs button'); if (pt) { e.stopPropagation(); const box = pt.closest('.np-pi'); box.querySelectorAll('.pi-tabs button').forEach(x => x.classList.toggle('active', x === pt)); box.querySelectorAll('.pi-pane').forEach(x => x.classList.toggle('active', x.dataset.piPane === pt.dataset.pi)); return; }
+        if (!e.target.closest('.np-pi')) np.querySelectorAll('.np-pi.open').forEach(x => x.classList.remove('open'));
+        const fl = e.target.closest('.wh-flip'); if (fl) { fl.classList.toggle('on'); return; }
+        const au = e.target.closest('.np-audio .lb-play'); if (au) { const tr = au.closest('.np-audio'), a = tr.querySelector('audio'); document.querySelectorAll('.np-audio audio').forEach(x => { if (x !== a) { x.pause(); x.closest('.np-audio').querySelector('.lb-play').textContent = '▶'; } }); if (a.paused) { a.play(); au.textContent = '❚❚'; } else { a.pause(); au.textContent = '▶'; } a.onended = () => { au.textContent = '▶'; }; a.ontimeupdate = () => { const m = Math.floor(a.currentTime / 60), sc = String(Math.floor(a.currentTime % 60)).padStart(2, '0'); tr.querySelector('.lb-ts').textContent = `${m}:${sc}`; }; return; }
+      });
       // interactions
       document.addEventListener('click', e => {
         const nx = e.target.closest('.np-prev, .np-next'); if (nx) { const tr = nx.parentNode.querySelector('.np-slides-track'); tr.scrollBy({ left: (nx.classList.contains('np-next') ? 1 : -1) * tr.clientWidth, behavior: 'smooth' }); return; }
