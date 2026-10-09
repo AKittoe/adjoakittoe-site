@@ -340,7 +340,7 @@
     "date": "2026-10-08",
     "ai": false,
     "readTime": 1,
-    "sources": 0,
+    "sources": 1,
     "replace": false,
     "preview": false,
     "serves": null,
@@ -349,8 +349,14 @@
     "about": "Testing my sync",
     "next": "",
     "thanks": "",
-    "html": "",
-    "nav": [],
+    "html": "<section class=\"mo-sec np-sec\" id=\"project-x-trying-to-make-sure-im-understanding-this-right\" data-toc=\"Trying to make sure I’m understanding this right\"><h2 class=\"mo-h\">Trying to make sure I’m understanding this right</h2><div class=\"mo-row\"><div class=\"mo-text\"><h4 class=\"sg-h\" id=\"project-x-one-thing-i-noticed-about-header-2-is-how-it-looks-here\">One thing I noticed about header 2 is how it looks here</h4><h5 class=\"sg-h\" id=\"project-x-then-when-im-in-header-3-i-do-a-little-bit-of-this\">Then when I’m in header 3 I do a little bit of this</h5><p>The world may never oworld, but in gray. </p><p>One thing I do want see is how efveyrthing looks when you’re actually typing a sentence. It’s been a while since I’ve typed something just because. Lately everything has some type of KPI attached to it. I’m over it. In the mean twhile </p><p>testing this </p><p>It doesn’r really feel like it gives room for hover over the middle of a chat. <sup class=\"cite\"><a href=\"#project-x-src-1\" data-cite=\"1\">1</a></sup></p><div class=\"sg-callout\">Not sure if this is exactly what I was thinking about</div><ol class=\"lf-list\"><li>After that this is step one</li><li>Thsi is step 2</li></ol><dl class=\"sg-dl\"><dt>Love</dt><dd>The only thing that matters</dd></dl><p>This is what it looks like when we have a citation <sup class=\"cite\"><a href=\"#project-x-src-2\" data-cite=\"2\">2</a></sup> in the middle of a sentence. Also whe nwe <mark>highlight</mark>. This is a link <a class=\"ab-link\" href=\"http://www.facebook.com/\" target=\"_blank\" rel=\"noopener\">outside<span class=\"ab-ext\">↗</span></a>. And when it comes to a link inside we do <a class=\"ab-link\" href=\"https://app.notion.com/p/1a8da941e0cd4524ba50c1e11da6d9b9\" target=\"_blank\" rel=\"noopener\">Projects<span class=\"ab-ext\">↗</span></a>  internal this should work. Lastly, if we want something inside rare case  hope it went to photography. <br><br><a class=\"ab-link\" href=\"http://www.freshfoodconnect.org/\" target=\"_blank\" rel=\"noopener\"><strong>A bold link.</strong><span class=\"ab-ext\">↗</span></a></p><div class=\"cs-stats\"><div><span class=\"cs-num\">22%</span><span class=\"cs-lab\"> open rate</span></div><div><span class=\"cs-num\">5K</span><span class=\"cs-lab\"> lovers</span></div></div></div><div class=\"mo-side\"></div></div></section><div class=\"lf-divider\"></div><section class=\"mo-sources np-sec\" data-toc=\"Sources\" id=\"project-x-sources\"><h3 class=\"lf-src-head\">Sources</h3><ol class=\"lf-sources\"><li class=\"lf-src\" id=\"project-x-src-1\"><span class=\"lf-src-n\">1</span><div><div class=\"lf-src-title\"><a href=\"http://www.adjoakittoe.com/\" target=\"_blank\" rel=\"noopener\">How it looks to do your best ↗</a> <span class=\"lf-tag\">Site</span></div><div class=\"lf-src-note\">Cooking time and yield, from the bag.</div></div></li></ol></section>",
+    "nav": [
+      {
+        "id": "project-x-trying-to-make-sure-im-understanding-this-right",
+        "label": "Trying to make sure I’m understanding this right",
+        "color": ""
+      }
+    ],
     "items": []
   },
   {
