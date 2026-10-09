@@ -1,0 +1,578 @@
+[
+  {
+    "title": "Forager Project",
+    "section": "Projects & campaigns",
+    "date": "Recipe development",
+    "org": "Instagram Live and recipe development",
+    "link": "https://www.instagram.com/tv/CFK3PflHi2G/",
+    "photo": "",
+    "order": 1
+  },
+  {
+    "title": "Chef Adwoa",
+    "section": "Projects & campaigns",
+    "date": "Social media",
+    "org": "Influencer, personal blog",
+    "link": "",
+    "photo": "",
+    "order": 2
+  },
+  {
+    "title": "Perfume & Light",
+    "section": "Projects & campaigns",
+    "date": "Photography",
+    "org": "Beauty",
+    "link": "",
+    "photo": "",
+    "order": 3
+  },
+  {
+    "title": "Nuori Skincare",
+    "section": "Projects & campaigns",
+    "date": "Creative direction",
+    "org": "Influencer, beauty · Photography by Kwame Williams",
+    "link": "https://nuori.com",
+    "photo": "",
+    "order": 4
+  },
+  {
+    "title": "Yolele: Pumpkin Ice Cream",
+    "section": "Projects & campaigns",
+    "date": "Creative direction",
+    "org": "Influencer, culinary arts · Photography by Kwame Williams",
+    "link": "https://www.instagram.com/reels/Cki72BNr_36/",
+    "photo": "",
+    "order": 5
+  },
+  {
+    "title": "Planner Productivity",
+    "section": "Projects & campaigns",
+    "date": "Photography",
+    "org": "Influencer, productivity",
+    "link": "",
+    "photo": "",
+    "order": 6
+  },
+  {
+    "title": "North Star Collective",
+    "section": "Styling & photography",
+    "date": "2025",
+    "org": "PR support and styling, KTLA feature",
+    "link": "",
+    "photo": "",
+    "order": 7
+  },
+  {
+    "title": "Woodford Reserve",
+    "section": "Styling & photography",
+    "date": "2023",
+    "org": "Styling and photography",
+    "link": "https://theknockturnal.com/woodford-reserve-unveils-the-limited-edition-secretariat-cup-ahead-of-the-kentucky-derby/",
+    "photo": "",
+    "order": 8
+  },
+  {
+    "title": "Anthropologie",
+    "section": "Styling & photography",
+    "date": "2022",
+    "org": "Styling and photography",
+    "link": "https://www.anthropologie.com/stories-home-ada-supper-club-recipes",
+    "photo": "",
+    "order": 9
+  },
+  {
+    "title": "Director of Project Management",
+    "section": "Earlier",
+    "date": "2020 – 2022",
+    "org": "Aya Hospitality, LLC",
+    "link": "",
+    "photo": "",
+    "order": 10
+  },
+  {
+    "title": "Lead Line Cook",
+    "section": "Earlier",
+    "date": "2021",
+    "org": "Coast and Valley",
+    "link": "",
+    "photo": "",
+    "order": 11
+  },
+  {
+    "title": "Education Program Coordinator",
+    "section": "Earlier",
+    "date": "2021",
+    "org": "Christopher Kimball's Milk Street",
+    "link": "",
+    "photo": "",
+    "order": 12
+  },
+  {
+    "title": "Food Editor",
+    "section": "Earlier",
+    "date": "2020 – 2021",
+    "org": "Food Startup Help",
+    "link": "",
+    "photo": "",
+    "order": 13
+  },
+  {
+    "title": "Garde Manger",
+    "section": "Earlier",
+    "date": "2020",
+    "org": "Marcus at NoHu",
+    "link": "",
+    "photo": "",
+    "order": 14
+  },
+  {
+    "title": "Line Cook",
+    "section": "Earlier",
+    "date": "2020",
+    "org": "Lea",
+    "link": "",
+    "photo": "",
+    "order": 15
+  },
+  {
+    "title": "Lead Line Cook",
+    "section": "Earlier",
+    "date": "2019 – 2020",
+    "org": "The Wing",
+    "link": "",
+    "photo": "",
+    "order": 16
+  },
+  {
+    "title": "Office Manager",
+    "section": "Earlier",
+    "date": "2018 – 2019",
+    "org": "Uncommon Schools",
+    "link": "",
+    "photo": "",
+    "order": 17
+  },
+  {
+    "title": "Direct Support Professional",
+    "section": "Earlier",
+    "date": "2015 – 2018",
+    "org": "AHRC",
+    "link": "",
+    "photo": "",
+    "order": 18
+  },
+  {
+    "title": "Office Assistant",
+    "section": "Earlier",
+    "date": "2011 – 2014",
+    "org": "SUNY Old Westbury",
+    "link": "",
+    "photo": "",
+    "order": 19
+  },
+  {
+    "title": "Public Relations Lead",
+    "section": "Earlier",
+    "date": "2011 – 2014",
+    "org": "OWWR",
+    "link": "",
+    "photo": "",
+    "order": 20
+  },
+  {
+    "title": "Policy Working Group Member",
+    "section": "Outside the 9 to 5",
+    "date": "2026 – Present",
+    "org": "Food for the Spirit",
+    "link": "https://foodforthespirit.org/2026/07/14/building-power-together-our-2026-policy-working-group-is-underway/",
+    "photo": "",
+    "order": 21
+  },
+  {
+    "title": "Rapid Response Committee Member",
+    "section": "Outside the 9 to 5",
+    "date": "2024 – 2026",
+    "org": "Black Farmer Fund",
+    "link": "",
+    "photo": "",
+    "order": 22
+  },
+  {
+    "title": "Community Ambassador",
+    "section": "Outside the 9 to 5",
+    "date": "2020 – 2026",
+    "org": "Notion",
+    "link": "",
+    "photo": "",
+    "order": 23
+  },
+  {
+    "title": "Award Judge",
+    "section": "Perhaps in the Past",
+    "date": "2024 – 2026",
+    "org": "James Beard Foundation",
+    "link": "",
+    "photo": "",
+    "order": 24
+  },
+  {
+    "title": "Climate Corps Fellow",
+    "section": "Perhaps in the Past",
+    "date": "2025",
+    "org": "Environmental Defense Fund",
+    "link": "",
+    "photo": "",
+    "order": 25
+  },
+  {
+    "title": "Program Coordinator, FBBS-CME",
+    "section": "Perhaps in the Past",
+    "date": "2025",
+    "org": "Down North Foundation",
+    "link": "",
+    "photo": "",
+    "order": 26
+  },
+  {
+    "title": "Steering Committee, Board Member",
+    "section": "Perhaps in the Past",
+    "date": "2023",
+    "org": "BIFU",
+    "link": "",
+    "photo": "",
+    "order": 27
+  },
+  {
+    "title": "Board Member",
+    "section": "Perhaps in the Past",
+    "date": "2023",
+    "org": "STEAM URBAN",
+    "link": "",
+    "photo": "",
+    "order": 28
+  },
+  {
+    "title": "Founding Member, NJ Chapter",
+    "section": "Perhaps in the Past",
+    "date": "2023",
+    "org": "National Young Farmers Coalition",
+    "link": "",
+    "photo": "",
+    "order": 29
+  },
+  {
+    "title": "Featured in For The Culture: Phenomenal Black Women and Femmes in Food",
+    "section": "Perhaps in the Past",
+    "date": "2023",
+    "org": "",
+    "link": "",
+    "photo": "",
+    "order": 30
+  },
+  {
+    "title": "DE&I Community Manager, Board Member",
+    "section": "Perhaps in the Past",
+    "date": "2022",
+    "org": "Montclair Community Farms",
+    "link": "",
+    "photo": "",
+    "order": 31
+  },
+  {
+    "title": "Farm Co-Manager",
+    "section": "Perhaps in the Past",
+    "date": "2022",
+    "org": "Al-Munir Farms",
+    "link": "",
+    "photo": "",
+    "order": 32
+  },
+  {
+    "title": "Internal Policies Committee Member",
+    "section": "Perhaps in the Past",
+    "date": "2022",
+    "org": "Black Farmers United",
+    "link": "",
+    "photo": "",
+    "order": 33
+  },
+  {
+    "title": "Volunteer Chef",
+    "section": "Perhaps in the Past",
+    "date": "2022",
+    "org": "Off Their Plate",
+    "link": "",
+    "photo": "",
+    "order": 34
+  },
+  {
+    "title": "Contributor, For the Culture",
+    "section": "Perhaps in the Past",
+    "date": "2021",
+    "org": "Food & Wine",
+    "link": "",
+    "photo": "",
+    "order": 35
+  },
+  {
+    "title": "Member",
+    "section": "Perhaps in the Past",
+    "date": "2021",
+    "org": "MAPP Impact",
+    "link": "",
+    "photo": "",
+    "order": 36
+  },
+  {
+    "title": "Co-Founder",
+    "section": "Perhaps in the Past",
+    "date": "2021",
+    "org": "Notionette Magazine",
+    "link": "",
+    "photo": "",
+    "order": 37
+  },
+  {
+    "title": "Columnist",
+    "section": "Perhaps in the Past",
+    "date": "2021",
+    "org": "Taste Afriq",
+    "link": "",
+    "photo": "",
+    "order": 38
+  },
+  {
+    "title": "Advisory Council Member",
+    "section": "Perhaps in the Past",
+    "date": "2020 – 2022",
+    "org": "Just Call Me Chef",
+    "link": "",
+    "photo": "",
+    "order": 39
+  },
+  {
+    "title": "Freelance Recipe Developer",
+    "section": "Perhaps in the Past",
+    "date": "2020 – 2021",
+    "org": "Forager Project",
+    "link": "",
+    "photo": "",
+    "order": 40
+  },
+  {
+    "title": "Featured Chef",
+    "section": "Perhaps in the Past",
+    "date": "2020",
+    "org": "Ada's Supper Club",
+    "link": "",
+    "photo": "",
+    "order": 41
+  },
+  {
+    "title": "Volunteer",
+    "section": "Perhaps in the Past",
+    "date": "2020",
+    "org": "James Beard House",
+    "link": "",
+    "photo": "",
+    "order": 42
+  },
+  {
+    "title": "Assistant Chef",
+    "section": "Perhaps in the Past",
+    "date": "2020",
+    "org": "Campbell's Dinner Insurance",
+    "link": "",
+    "photo": "",
+    "order": 43
+  },
+  {
+    "title": "Event Support",
+    "section": "Perhaps in the Past",
+    "date": "2019 – 2020",
+    "org": "Sankofa Supper Club",
+    "link": "",
+    "photo": "",
+    "order": 44
+  },
+  {
+    "title": "Future of Food 50",
+    "section": "Recognition",
+    "date": "Sept 2023",
+    "org": "Cherry Bombe",
+    "link": "https://kitchenartsandletters.com/products/cherry-bombe-23",
+    "photo": "",
+    "order": 45
+  },
+  {
+    "title": "Black Women in Food: Culinarian",
+    "section": "Recognition",
+    "date": "Mar 2023",
+    "org": "Dine Diaspora",
+    "link": "https://www.blackwomeninfood.org/",
+    "photo": "",
+    "order": 46
+  },
+  {
+    "title": "GROW Fellow",
+    "section": "Recognition",
+    "date": "2023",
+    "org": "Vital Voices",
+    "link": "https://www.vitalvoices.org/fellow/adjoa-kittoe-2/",
+    "photo": "",
+    "order": 47
+  },
+  {
+    "title": "Legacy Network Fellow",
+    "section": "Recognition",
+    "date": "Jul 2022",
+    "org": "James Beard Foundation",
+    "link": "https://www.jamesbeard.org/stories/introducing-the-2022-2023-legacy-network-cohort",
+    "photo": "",
+    "order": 48
+  },
+  {
+    "title": "Forté Fellow",
+    "section": "Recognition",
+    "date": "2022",
+    "org": "Forté Foundation",
+    "link": "",
+    "photo": "",
+    "order": 49
+  },
+  {
+    "title": "Member",
+    "section": "Recognition",
+    "date": "2022",
+    "org": "Black Farmers United",
+    "link": "https://www.blackfarmersunited.org/membership/adjoa-kittoe",
+    "photo": "",
+    "order": 50
+  },
+  {
+    "title": "Chefs Boot Camp for Policy and Change",
+    "section": "Recognition",
+    "date": "2021",
+    "org": "James Beard Foundation",
+    "link": "",
+    "photo": "",
+    "order": 51
+  },
+  {
+    "title": "Food Writing: Pitching Your Work (Course)",
+    "section": "Certificates & Coursework",
+    "date": "2021",
+    "org": "Carnegie Center for Literacy and Learning",
+    "link": "",
+    "photo": "",
+    "order": 52
+  },
+  {
+    "title": "Safety and Sanitation (Course)",
+    "section": "Certificates & Coursework",
+    "date": "2021",
+    "org": "American Culinary Federation",
+    "link": "",
+    "photo": "",
+    "order": 53
+  },
+  {
+    "title": "Project Management Essentials Certified (PMEC)",
+    "section": "Certificates & Coursework",
+    "date": "2021",
+    "org": "Management and Strategy Institute",
+    "link": "",
+    "photo": "",
+    "order": 54
+  },
+  {
+    "title": "ServSafe Food Handler Certification",
+    "section": "Certificates & Coursework",
+    "date": "2020",
+    "org": "National Restaurant Association",
+    "link": "",
+    "photo": "",
+    "order": 55
+  },
+  {
+    "title": "Food and Beverage Management Certification",
+    "section": "Certificates & Coursework",
+    "date": "2020",
+    "org": "Bocconi University",
+    "link": "",
+    "photo": "",
+    "order": 56
+  },
+  {
+    "title": "Hospitality and Tourism Management Certification",
+    "section": "Certificates & Coursework",
+    "date": "2020",
+    "org": "Florida Atlantic University, College of Business",
+    "link": "",
+    "photo": "",
+    "order": 57
+  },
+  {
+    "title": "NS350 Food Safety & Microbiology (Course)",
+    "section": "Certificates & Coursework",
+    "date": "2020",
+    "org": "Purdue Global University",
+    "link": "",
+    "photo": "",
+    "order": 58
+  },
+  {
+    "title": "Lead Line Cook",
+    "section": "In kitchens (Archive)",
+    "date": "2021",
+    "org": "Coast and Valley",
+    "link": "",
+    "photo": "",
+    "order": 59
+  },
+  {
+    "title": "Education Program Coordinator",
+    "section": "In kitchens (Archive)",
+    "date": "2021",
+    "org": "Christopher Kimball's Milk Street",
+    "link": "",
+    "photo": "",
+    "order": 60
+  },
+  {
+    "title": "Freelance Recipe Developer",
+    "section": "In kitchens (Archive)",
+    "date": "2020 – 2021",
+    "org": "Forager Project",
+    "link": "",
+    "photo": "",
+    "order": 61
+  },
+  {
+    "title": "Garde Manger",
+    "section": "In kitchens (Archive)",
+    "date": "2020",
+    "org": "Marcus at NoHu",
+    "link": "",
+    "photo": "",
+    "order": 62
+  },
+  {
+    "title": "Line Cook",
+    "section": "In kitchens (Archive)",
+    "date": "2020",
+    "org": "Lea",
+    "link": "",
+    "photo": "",
+    "order": 63
+  },
+  {
+    "title": "Lead Line Cook",
+    "section": "In kitchens (Archive)",
+    "date": "2019 – 2020",
+    "org": "The Wing",
+    "link": "",
+    "photo": "",
+    "order": 64
+  }
+]

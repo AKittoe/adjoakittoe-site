@@ -1,4 +1,708 @@
 {
+  "portfolio-321": {
+    "html": "+42%",
+    "text": "+42%"
+  },
+  "portfolio-328": {
+    "html": "average social growth",
+    "text": "average social growth"
+  },
+  "portfolio-314": {
+    "html": "students served",
+    "text": "students served"
+  },
+  "portfolio-339": {
+    "html": "Social Media Management, Project Management, SOPs, Conflict Management, Data Entry, Analysis &amp; Assessment, Tracking, Budget Management, Strategic Planning, Procurement, Content Marketing, Inbound Marketing, Brand Marketing, Influencer Marketing",
+    "text": "Social Media Management, Project Management, SOPs, Conflict Management, Data Entry, Analysis & Assessment, Tracking, Budget Management, Strategic Planning, Procurement, Content Marketing, Inbound Marketing, Brand Marketing, Influencer Marketing"
+  },
+  "case-overstory-006": {
+    "html": "Brand strategy and market activation for brands navigating growth, launch, and identity.",
+    "text": "Brand strategy and market activation for brands navigating growth, launch, and identity."
+  },
+  "portfolio-315": {
+    "html": "10",
+    "text": "10"
+  },
+  "footer-021": {
+    "html": "Lofi Soul, by Zephira Music",
+    "text": "Lofi Soul, by Zephira Music"
+  },
+  "portfolio-317": {
+    "html": "50+",
+    "text": "50+"
+  },
+  "footer-004": {
+    "html": "Archive",
+    "text": "Archive"
+  },
+  "footer-001": {
+    "html": "Site",
+    "text": "Site"
+  },
+  "case-ffc-001": {
+    "html": "Fresh Food Connect: Marketing Operations",
+    "text": "Fresh Food Connect: Marketing Operations"
+  },
+  "footer-022": {
+    "html": "Listen",
+    "text": "Listen"
+  },
+  "portfolio-332": {
+    "html": "Recipe &amp; Menu Development, Food Writing &amp; Editing, Event Planning, Catering, Food Styling",
+    "text": "Recipe & Menu Development, Food Writing & Editing, Event Planning, Catering, Food Styling"
+  },
+  "portfolio-310": {
+    "html": "shorter review cycles",
+    "text": "shorter review cycles"
+  },
+  "case-ffc-009": {
+    "html": "Results",
+    "text": "Results"
+  },
+  "case-overstory-008": {
+    "html": "Client projects and outcomes to be added.",
+    "text": "Client projects and outcomes to be added."
+  },
+  "portfolio-331": {
+    "html": "African, Caribbean, French, Italian, Modern American, Plant Based, Wellness Focused",
+    "text": "African, Caribbean, French, Italian, Modern American, Plant Based, Wellness Focused"
+  },
+  "portfolio-311": {
+    "html": "EDF",
+    "text": "EDF"
+  },
+  "case-overstory-003": {
+    "html": "Context",
+    "text": "Context"
+  },
+  "footer-007": {
+    "html": "Credits",
+    "text": "Credits"
+  },
+  "portfolio-325": {
+    "html": "15+",
+    "text": "15+"
+  },
+  "footer-003": {
+    "html": "Appendix",
+    "text": "Appendix"
+  },
+  "footer-008": {
+    "html": "How It Connects",
+    "text": "How It Connects"
+  },
+  "portfolio-330": {
+    "html": "people reached",
+    "text": "people reached"
+  },
+  "portfolio-307": {
+    "html": "$2B",
+    "text": "$2B"
+  },
+  "case-overstory-001": {
+    "html": "The Overstory Co.: Fractional Brand &amp; Communications",
+    "text": "The Overstory Co.: Fractional Brand & Communications"
+  },
+  "portfolio-316": {
+    "html": "high schools",
+    "text": "high schools"
+  },
+  "portfolio-309": {
+    "html": "20%",
+    "text": "20%"
+  },
+  "footer-011": {
+    "html": "Elsewhere",
+    "text": "Elsewhere"
+  },
+  "case-ffc-011": {
+    "html": "Active donors up 16%",
+    "text": "Active donors up 16%"
+  },
+  "portfolio-336": {
+    "html": "Notion, Slack, Airtable, Asana, Google Workspace, Zapier, Dubsado, HoneyBook",
+    "text": "Notion, Slack, Airtable, Asana, Google Workspace, Zapier, Dubsado, HoneyBook"
+  },
+  "case-overstory-005": {
+    "html": "What I Led",
+    "text": "What I Led"
+  },
+  "case-ffc-007": {
+    "html": "<strong>Systems:</strong> CRM implementation and AI adoption across operations, built in direct partnership with the CEO.",
+    "text": "Systems: CRM implementation and AI adoption across operations, built in direct partnership with the CEO."
+  },
+  "portfolio-313": {
+    "html": "834",
+    "text": "834"
+  },
+  "case-overstory-002": {
+    "html": "Nov 2025 – May 2026 · Founding Partner, Fractional Marketing Lead",
+    "text": "Nov 2025 – May 2026 · Founding Partner, Fractional Marketing Lead"
+  },
+  "portfolio-334": {
+    "html": "HTML, CSS, CMS, Webflow",
+    "text": "HTML, CSS, CMS, Webflow"
+  },
+  "footer-005": {
+    "html": "Changelog",
+    "text": "Changelog"
+  },
+  "case-ffc-012": {
+    "html": "Consistently engaged users up 82%",
+    "text": "Consistently engaged users up 82%"
+  },
+  "portfolio-337": {
+    "html": "SEO, Yoast, Newsletters, Copywriting",
+    "text": "SEO, Yoast, Newsletters, Copywriting"
+  },
+  "portfolio-338": {
+    "html": "Digital Marketing, Customer Interaction, Promotional Content, Analytics",
+    "text": "Digital Marketing, Customer Interaction, Promotional Content, Analytics"
+  },
+  "footer-018": {
+    "html": "© 2026 Adjoa Kittoe",
+    "text": "© 2026 Adjoa Kittoe"
+  },
+  "footer-002": {
+    "html": "AI use",
+    "text": "AI use"
+  },
+  "case-ffc-010": {
+    "html": "App adoption up 20%",
+    "text": "App adoption up 20%"
+  },
+  "footer-009": {
+    "html": "Legal notice",
+    "text": "Legal notice"
+  },
+  "portfolio-326": {
+    "html": "client projects",
+    "text": "client projects"
+  },
+  "footer-013": {
+    "html": "<a href=\"https://bsky.app/profile/adjoakittoe.com\">Bluesky ↗</a>",
+    "text": "Bluesky ↗"
+  },
+  "case-ffc-004": {
+    "html": "Fresh Food Connect links home gardeners with hunger relief organizations so surplus produce reaches people who need it. Marketing supports 53+ partners across 17 states, each with its own community and audience.",
+    "text": "Fresh Food Connect links home gardeners with hunger relief organizations so surplus produce reaches people who need it. Marketing supports 53+ partners across 17 states, each with its own community and audience."
+  },
+  "portfolio-318": {
+    "html": "employer partners",
+    "text": "employer partners"
+  },
+  "footer-017": {
+    "html": "<a href=\"https://listography.com/thing\">Listography ↗</a>",
+    "text": "Listography ↗"
+  },
+  "footer-010": {
+    "html": "Sitemap",
+    "text": "Sitemap"
+  },
+  "case-overstory-004": {
+    "html": "The Overstory Co. was a fractional brand and communications practice for CPG, hospitality, and mission-driven organizations.",
+    "text": "The Overstory Co. was a fractional brand and communications practice for CPG, hospitality, and mission-driven organizations."
+  },
+  "case-ffc-005": {
+    "html": "What I Lead",
+    "text": "What I Lead"
+  },
+  "portfolio-335": {
+    "html": "Adobe Illustrator, Photoshop, InDesign, Figma",
+    "text": "Adobe Illustrator, Photoshop, InDesign, Figma"
+  },
+  "case-ffc-013": {
+    "html": "Seasonal campaigns up 32%",
+    "text": "Seasonal campaigns up 32%"
+  },
+  "case-overstory-007": {
+    "html": "Client Work",
+    "text": "Client Work"
+  },
+  "footer-006": {
+    "html": "Colophon",
+    "text": "Colophon"
+  },
+  "portfolio-319": {
+    "html": "40%",
+    "text": "40%"
+  },
+  "case-ffc-006": {
+    "html": "<strong>Marketing operations:</strong> contractor management, web, graphic design, CRM, campaigns, and storytelling.",
+    "text": "Marketing operations: contractor management, web, graphic design, CRM, campaigns, and storytelling."
+  },
+  "case-ffc-002": {
+    "html": "Jan 2026 – Present · Marketing Manager",
+    "text": "Jan 2026 – Present · Marketing Manager"
+  },
+  "footer-019": {
+    "html": "No cookies. No tracking.",
+    "text": "No cookies. No tracking."
+  },
+  "portfolio-308": {
+    "html": "portfolio analyzed",
+    "text": "portfolio analyzed"
+  },
+  "portfolio-329": {
+    "html": "100K+",
+    "text": "100K+"
+  },
+  "case-ffc-008": {
+    "html": "<strong>Growth:</strong> seasonal campaigns, PR placements, and expansion into a new market.",
+    "text": "Growth: seasonal campaigns, PR placements, and expansion into a new market."
+  },
+  "portfolio-320": {
+    "html": "ROI on $250K budget",
+    "text": "ROI on $250K budget"
+  },
+  "portfolio-323": {
+    "html": "+31%",
+    "text": "+31%"
+  },
+  "footer-015": {
+    "html": "<a href=\"https://github.com/AKittoe\">GitHub ↗</a>",
+    "text": "GitHub ↗"
+  },
+  "portfolio-324": {
+    "html": "community participation",
+    "text": "community participation"
+  },
+  "portfolio-327": {
+    "html": "+40%",
+    "text": "+40%"
+  },
+  "footer-012": {
+    "html": "<a href=\"https://www.are.na/adjoa\">Are.na ↗</a>",
+    "text": "Are.na ↗"
+  },
+  "portfolio-322": {
+    "html": "qualified leads",
+    "text": "qualified leads"
+  },
+  "case-ffc-003": {
+    "html": "Context",
+    "text": "Context"
+  },
+  "footer-016": {
+    "html": "<a href=\"https://www.linkedin.com/in/adjoakittoe\">LinkedIn ↗</a>",
+    "text": "LinkedIn ↗"
+  },
+  "portfolio-333": {
+    "html": "Food Costs, Food Quality, Food Safety, Allergy Awareness, Sustainable Systems, Holistic Alternatives",
+    "text": "Food Costs, Food Quality, Food Safety, Allergy Awareness, Sustainable Systems, Holistic Alternatives"
+  },
+  "footer-014": {
+    "html": "Email",
+    "text": "Email"
+  },
+  "footer-020": {
+    "html": "Each seed goes in the bed after I read it.",
+    "text": "Each seed goes in the bed after I read it."
+  },
+  "portfolio-312": {
+    "html": "Climate Corps Fellow",
+    "text": "Climate Corps Fellow"
+  },
+  "portfolio-271": {
+    "html": "33%",
+    "text": "33%"
+  },
+  "archive-002": {
+    "html": "Earlier work that still matters to me.",
+    "text": "Earlier work that still matters to me."
+  },
+  "sidebar-001": {
+    "html": "Adjoa Kittoe",
+    "text": "Adjoa Kittoe"
+  },
+  "portfolio-287": {
+    "html": "40%",
+    "text": "40%"
+  },
+  "portfolio-282": {
+    "html": "boost in social engagement",
+    "text": "boost in social engagement"
+  },
+  "portfolio-266": {
+    "html": "slide value-prop market research deck",
+    "text": "slide value-prop market research deck"
+  },
+  "sidebar-009": {
+    "html": "Work",
+    "text": "Work"
+  },
+  "sidebar-017": {
+    "html": "Resources",
+    "text": "Resources"
+  },
+  "sidebar-015": {
+    "html": "Projects",
+    "text": "Projects"
+  },
+  "portfolio-268": {
+    "html": "stakeholder interviews and advisor sessions",
+    "text": "stakeholder interviews and advisor sessions"
+  },
+  "archive-001": {
+    "html": "Archive",
+    "text": "Archive"
+  },
+  "portfolio-297": {
+    "html": "+32%",
+    "text": "+32%"
+  },
+  "portfolio-265": {
+    "html": "15+",
+    "text": "15+"
+  },
+  "portfolio-294": {
+    "html": "annual revenue",
+    "text": "annual revenue"
+  },
+  "portfolio-263": {
+    "html": "165M+",
+    "text": "165M+"
+  },
+  "portfolio-273": {
+    "html": "12+",
+    "text": "12+"
+  },
+  "portfolio-260": {
+    "html": "average engagements per post",
+    "text": "average engagements per post"
+  },
+  "portfolio-283": {
+    "html": "Top 3",
+    "text": "Top 3"
+  },
+  "archive-022": {
+    "html": "Seulful Pantry",
+    "text": "Seulful Pantry"
+  },
+  "archive-003": {
+    "html": "Food",
+    "text": "Food"
+  },
+  "portfolio-262": {
+    "html": "daily posting cadence during global events",
+    "text": "daily posting cadence during global events"
+  },
+  "portfolio-267": {
+    "html": "25+",
+    "text": "25+"
+  },
+  "portfolio-275": {
+    "html": "83%",
+    "text": "83%"
+  },
+  "portfolio-292": {
+    "html": "experiential events for 20 to 300 guests",
+    "text": "experiential events for 20 to 300 guests"
+  },
+  "sidebar-010": {
+    "html": "Essays",
+    "text": "Essays"
+  },
+  "sidebar-006": {
+    "html": "About",
+    "text": "About"
+  },
+  "portfolio-304": {
+    "html": "Culinary Institute of America project",
+    "text": "Culinary Institute of America project"
+  },
+  "sidebar-016": {
+    "html": "Bookmarks",
+    "text": "Bookmarks"
+  },
+  "portfolio-280": {
+    "html": "pilot programs launched",
+    "text": "pilot programs launched"
+  },
+  "sidebar-004": {
+    "html": "Main",
+    "text": "Main"
+  },
+  "portfolio-286": {
+    "html": "less staff training time",
+    "text": "less staff training time"
+  },
+  "archive-011": {
+    "html": "Institute of Culinary Education · June 2021",
+    "text": "Institute of Culinary Education · June 2021"
+  },
+  "archive-009": {
+    "html": "EatingWell",
+    "text": "EatingWell"
+  },
+  "sidebar-013": {
+    "html": "Academia",
+    "text": "Academia"
+  },
+  "portfolio-279": {
+    "html": "3",
+    "text": "3"
+  },
+  "portfolio-278": {
+    "html": "students completed workforce training",
+    "text": "students completed workforce training"
+  },
+  "portfolio-250": {
+    "html": "+82%",
+    "text": "+82%"
+  },
+  "portfolio-290": {
+    "html": "customer engagement",
+    "text": "customer engagement"
+  },
+  "portfolio-300": {
+    "html": "app adoption",
+    "text": "app adoption"
+  },
+  "portfolio-259": {
+    "html": "67+",
+    "text": "67+"
+  },
+  "portfolio-276": {
+    "html": "of interns completed their internship",
+    "text": "of interns completed their internship"
+  },
+  "archive-008": {
+    "html": "<a href=\"https://www.eatingwell.com/discover-a-tasty-anti-inflammatory-wrap-recipe-11925395\">Anti-Inflammatory Wrap ↗</a>",
+    "text": "Anti-Inflammatory Wrap ↗"
+  },
+  "portfolio-296": {
+    "html": "engaged users",
+    "text": "engaged users"
+  },
+  "sidebar-019": {
+    "html": "Events",
+    "text": "Events"
+  },
+  "portfolio-306": {
+    "html": "StoryWorks project",
+    "text": "StoryWorks project"
+  },
+  "portfolio-293": {
+    "html": "+22%",
+    "text": "+22%"
+  },
+  "portfolio-284": {
+    "html": "competitor on LinkedIn",
+    "text": "competitor on LinkedIn"
+  },
+  "about-038": {
+    "html": "Values",
+    "text": "Values"
+  },
+  "archive-015": {
+    "html": "In kitchens",
+    "text": "In kitchens"
+  },
+  "portfolio-272": {
+    "html": "increase in post engagement consistency",
+    "text": "increase in post engagement consistency"
+  },
+  "sidebar-007": {
+    "html": "Now",
+    "text": "Now"
+  },
+  "archive-016": {
+    "html": "About the food",
+    "text": "About the food"
+  },
+  "sidebar-011": {
+    "html": "Notes",
+    "text": "Notes"
+  },
+  "archive-014": {
+    "html": "Recipes I develop and write myself live in my <a href=\"https://adjoakittoe.com/#essays\">essays</a>, under Provisions &amp; Practice: <a href=\"https://adjoakittoe.com/#essays\">Essays →</a>",
+    "text": "Recipes I develop and write myself live in my essays, under Provisions & Practice: Essays →"
+  },
+  "archive-019": {
+    "html": "<a href=\"https://femalechefencyclopedia.com/adjoa-kittoe/\">Chef Interview ↗</a>",
+    "text": "Chef Interview ↗"
+  },
+  "about-039": {
+    "html": "Goes straight to my inbox. Nothing else is stored.",
+    "text": "Goes straight to my inbox. Nothing else is stored."
+  },
+  "portfolio-264": {
+    "html": "potential global readers via <a href=\"http://bbc.com/\">BBC.com</a>",
+    "text": "potential global readers via BBC.com"
+  },
+  "archive-012": {
+    "html": "<a href=\"https://www.ice.edu/blog/okra-stew-ghanian-food\">Ghanaian Okra Stew ↗</a>",
+    "text": "Ghanaian Okra Stew ↗"
+  },
+  "sidebar-014": {
+    "html": "Collections",
+    "text": "Collections"
+  },
+  "portfolio-291": {
+    "html": "100+",
+    "text": "100+"
+  },
+  "portfolio-277": {
+    "html": "102",
+    "text": "102"
+  },
+  "portfolio-256": {
+    "html": "Adapted from my EDF Climate Corps project page.",
+    "text": "Adapted from my EDF Climate Corps project page."
+  },
+  "portfolio-252": {
+    "html": "+32%",
+    "text": "+32%"
+  },
+  "archive-005": {
+    "html": "Recipes, published elsewhere",
+    "text": "Recipes, published elsewhere"
+  },
+  "portfolio-257": {
+    "html": "33%",
+    "text": "33%"
+  },
+  "portfolio-302": {
+    "html": "countries",
+    "text": "countries"
+  },
+  "sidebar-012": {
+    "html": "Published",
+    "text": "Published"
+  },
+  "portfolio-258": {
+    "html": "average newsletter open rate across clients",
+    "text": "average newsletter open rate across clients"
+  },
+  "portfolio-274": {
+    "html": "research-driven campaigns launched",
+    "text": "research-driven campaigns launched"
+  },
+  "portfolio-255": {
+    "html": "app adoption",
+    "text": "app adoption"
+  },
+  "archive-004": {
+    "html": "2016 – 2024 · Meal prep, private dining, catering, and farm-to-table education. New West African cooking, inspired by but not bound to Ghanaian and West African traditions, and plant-focused without being restricted to it.",
+    "text": "2016 – 2024 · Meal prep, private dining, catering, and farm-to-table education. New West African cooking, inspired by but not bound to Ghanaian and West African traditions, and plant-focused without being restricted to it."
+  },
+  "portfolio-285": {
+    "html": "25%",
+    "text": "25%"
+  },
+  "portfolio-288": {
+    "html": "more client inquiries within 6 months",
+    "text": "more client inquiries within 6 months"
+  },
+  "portfolio-270": {
+    "html": "impressions from equity and climate campaigns",
+    "text": "impressions from equity and climate campaigns"
+  },
+  "sidebar-002": {
+    "html": "I&#39;m here",
+    "text": "I'm here"
+  },
+  "portfolio-261": {
+    "html": "10x",
+    "text": "10x"
+  },
+  "archive-017": {
+    "html": "<a href=\"https://stories.withada.co/chef-adjoa-kittoe-ghanaian-cuisine/\">Meet Chef Adjoa Kittoe ↗</a>",
+    "text": "Meet Chef Adjoa Kittoe ↗"
+  },
+  "portfolio-303": {
+    "html": "CIA",
+    "text": "CIA"
+  },
+  "sidebar-003": {
+    "html": "Georgia, US",
+    "text": "Georgia, US"
+  },
+  "portfolio-295": {
+    "html": "+82%",
+    "text": "+82%"
+  },
+  "portfolio-254": {
+    "html": "+20%",
+    "text": "+20%"
+  },
+  "portfolio-298": {
+    "html": "seasonal campaign growth",
+    "text": "seasonal campaign growth"
+  },
+  "portfolio-289": {
+    "html": "+31%",
+    "text": "+31%"
+  },
+  "portfolio-251": {
+    "html": "engaged users",
+    "text": "engaged users"
+  },
+  "archive-013": {
+    "html": "Institute of Culinary Education",
+    "text": "Institute of Culinary Education"
+  },
+  "portfolio-253": {
+    "html": "seasonal campaign growth",
+    "text": "seasonal campaign growth"
+  },
+  "archive-007": {
+    "html": "TODAY · Alongside my piece on Winneba jollof",
+    "text": "TODAY · Alongside my piece on Winneba jollof"
+  },
+  "portfolio-299": {
+    "html": "+20%",
+    "text": "+20%"
+  },
+  "portfolio-305": {
+    "html": "BBC",
+    "text": "BBC"
+  },
+  "sidebar-008": {
+    "html": "Work &amp; Writing",
+    "text": "Work & Writing"
+  },
+  "archive-010": {
+    "html": "<a href=\"https://www.ice.edu/blog/juneteenth-food-plum-cobbler\">Cured Sumac Plum Cobbler ↗</a>",
+    "text": "Cured Sumac Plum Cobbler ↗"
+  },
+  "portfolio-301": {
+    "html": "10+",
+    "text": "10+"
+  },
+  "sidebar-018": {
+    "html": "Photography",
+    "text": "Photography"
+  },
+  "portfolio-269": {
+    "html": "17K+",
+    "text": "17K+"
+  },
+  "archive-006": {
+    "html": "<a href=\"https://www.today.com/food/jollof-rice-winneba-ghana-rcna140287\">Ghanaian Jollof Rice ↗</a>",
+    "text": "Ghanaian Jollof Rice ↗"
+  },
+  "archive-018": {
+    "html": "Ada · West African plant-based cooking",
+    "text": "Ada · West African plant-based cooking"
+  },
+  "portfolio-281": {
+    "html": "140%+",
+    "text": "140%+"
+  },
+  "sidebar-005": {
+    "html": "Home",
+    "text": "Home"
+  },
+  "archive-020": {
+    "html": "Female Chef Encyclopedia · With Sara Konkoly",
+    "text": "Female Chef Encyclopedia · With Sara Konkoly"
+  },
+  "archive-021": {
+    "html": "Pieces taken down from the main site. They&#39;re kept here as drafts and studies.",
+    "text": "Pieces taken down from the main site. They're kept here as drafts and studies."
+  },
   "projects-001": {
     "html": "Projects",
     "text": "Projects"
@@ -79,21 +783,9 @@
     "html": "Nothing here yet.",
     "text": "Nothing here yet."
   },
-  "portfolio-217": {
-    "html": "2022",
-    "text": "2022"
-  },
   "notes-004": {
     "html": "Reminder not to be bland. Stay firm.",
     "text": "Reminder not to be bland. Stay firm."
-  },
-  "portfolio-236": {
-    "html": "2020",
-    "text": "2020"
-  },
-  "portfolio-237": {
-    "html": "2020",
-    "text": "2020"
   },
   "portfolio-226": {
     "html": "Institute of Culinary Education",
@@ -163,21 +855,9 @@
     "html": "My own writing, organized into six zones.",
     "text": "My own writing, organized into six zones."
   },
-  "portfolio-218": {
-    "html": "2022",
-    "text": "2022"
-  },
-  "portfolio-216": {
-    "html": "Jul 2022",
-    "text": "Jul 2022"
-  },
   "published-001": {
     "html": "Published",
     "text": "Published"
-  },
-  "portfolio-232": {
-    "html": "2021",
-    "text": "2021"
   },
   "notes-002": {
     "html": "Fragments, one-liners, observations. The musings of me.",
@@ -283,29 +963,13 @@
     "html": "1 tbsp olive oil",
     "text": "1 tbsp olive oil"
   },
-  "portfolio-234": {
-    "html": "2020",
-    "text": "2020"
-  },
-  "portfolio-235": {
-    "html": "2020",
-    "text": "2020"
-  },
   "vibe-projects-025": {
     "html": "Finish with herbs and a squeeze of lime.",
     "text": "Finish with herbs and a squeeze of lime."
   },
-  "portfolio-219": {
-    "html": "2021",
-    "text": "2021"
-  },
   "resources-005": {
     "html": "Join the Movement",
     "text": "Join the Movement"
-  },
-  "portfolio-231": {
-    "html": "2021",
-    "text": "2021"
   },
   "vibe-projects-020": {
     "html": "MethodNo. 01",
@@ -375,10 +1039,6 @@
     "html": "SUNY College at Old Westbury",
     "text": "SUNY College at Old Westbury"
   },
-  "portfolio-233": {
-    "html": "2021",
-    "text": "2021"
-  },
   "vibe-projects-008": {
     "html": "Provisions &amp; PracticeNo. 01",
     "text": "Provisions & PracticeNo. 01"
@@ -386,10 +1046,6 @@
   "resources-006": {
     "html": "Whether you farm, fund, organize, or cook, there&#39;s a place for you in this work.",
     "text": "Whether you farm, fund, organize, or cook, there's a place for you in this work."
-  },
-  "portfolio-194": {
-    "html": "2023",
-    "text": "2023"
   },
   "portfolio-158": {
     "html": "Nov 2021 – Jan 2023",
@@ -415,25 +1071,9 @@
     "html": "Directed operations and communications for 100+ experiential events serving 20 to 300 guests.",
     "text": "Directed operations and communications for 100+ experiential events serving 20 to 300 guests."
   },
-  "portfolio-201": {
-    "html": "2022",
-    "text": "2022"
-  },
   "portfolio-120": {
     "html": "The Lexicon · Contract",
     "text": "The Lexicon · Contract"
-  },
-  "portfolio-191": {
-    "html": "2024 – 2026",
-    "text": "2024 – 2026"
-  },
-  "portfolio-199": {
-    "html": "2022",
-    "text": "2022"
-  },
-  "portfolio-198": {
-    "html": "2022",
-    "text": "2022"
   },
   "portfolio-157": {
     "html": "Chef-driven events rooted in food culture",
@@ -442,10 +1082,6 @@
   "portfolio-140": {
     "html": "Marketing Consultant",
     "text": "Marketing Consultant"
-  },
-  "portfolio-211": {
-    "html": "2019 – 2020",
-    "text": "2019 – 2020"
   },
   "portfolio-163": {
     "html": "Ran targeted campaigns and PR to grow qualified leads and audience.",
@@ -483,10 +1119,6 @@
     "html": "Jan 2025 – Jan 2026",
     "text": "Jan 2025 – Jan 2026"
   },
-  "portfolio-185": {
-    "html": "2011 – 2014",
-    "text": "2011 – 2014"
-  },
   "portfolio-122": {
     "html": "Developed audience research and user profiles to inform content strategy.",
     "text": "Developed audience research and user profiles to inform content strategy."
@@ -503,10 +1135,6 @@
     "html": "The Overstory Co. · Freelance",
     "text": "The Overstory Co. · Freelance"
   },
-  "portfolio-192": {
-    "html": "2025",
-    "text": "2025"
-  },
   "portfolio-119": {
     "html": "Communications Consultant",
     "text": "Communications Consultant"
@@ -514,10 +1142,6 @@
   "portfolio-130": {
     "html": "Secured grants, managed graduate student cohorts, and led research programs with the University of Nebraska Medical Center.",
     "text": "Secured grants, managed graduate student cohorts, and led research programs with the University of Nebraska Medical Center."
-  },
-  "portfolio-188": {
-    "html": "2024 – 2026",
-    "text": "2024 – 2026"
   },
   "portfolio-143": {
     "html": "Oct 2023 – Oct 2024",
@@ -527,14 +1151,6 @@
     "html": "Career Development Manager",
     "text": "Career Development Manager"
   },
-  "portfolio-182": {
-    "html": "2018 – 2019",
-    "text": "2018 – 2019"
-  },
-  "portfolio-208": {
-    "html": "2020",
-    "text": "2020"
-  },
   "portfolio-190": {
     "html": "03 Perhaps in the Past",
     "text": "03 Perhaps in the Past"
@@ -542,10 +1158,6 @@
   "portfolio-153": {
     "html": "A community-centered culinary venture focused on food culture, storytelling, and experiential programming.",
     "text": "A community-centered culinary venture focused on food culture, storytelling, and experiential programming."
-  },
-  "portfolio-203": {
-    "html": "2021",
-    "text": "2021"
   },
   "portfolio-136": {
     "html": "Synthesized insights for R&amp;D, procurement, and sustainability teams.",
@@ -555,17 +1167,9 @@
     "html": "Led qualitative research on nature-positive solutions and global food systems.",
     "text": "Led qualitative research on nature-positive solutions and global food systems."
   },
-  "portfolio-206": {
-    "html": "2020 – 2022",
-    "text": "2020 – 2022"
-  },
   "portfolio-135": {
     "html": "Analyzed SKU-level and regional data across the snacks portfolio to surface climate and performance trends.",
     "text": "Analyzed SKU-level and regional data across the snacks portfolio to surface climate and performance trends."
-  },
-  "portfolio-187": {
-    "html": "2026 – Present",
-    "text": "2026 – Present"
   },
   "portfolio-126": {
     "html": "Head of Communications &amp; Programs",
@@ -574,10 +1178,6 @@
   "portfolio-149": {
     "html": "Highlights",
     "text": "Highlights"
-  },
-  "portfolio-213": {
-    "html": "Sept 2023",
-    "text": "Sept 2023"
   },
   "portfolio-167": {
     "html": "Communications Strategist (Project-Based)",
@@ -595,29 +1195,9 @@
     "html": "PepsiCo · Contract",
     "text": "PepsiCo · Contract"
   },
-  "portfolio-177": {
-    "html": "2021",
-    "text": "2021"
-  },
-  "portfolio-205": {
-    "html": "2021",
-    "text": "2021"
-  },
   "portfolio-164": {
     "html": "Built and managed the Circle community across CX, design, sales, and engineering.",
     "text": "Built and managed the Circle community across CX, design, sales, and engineering."
-  },
-  "portfolio-215": {
-    "html": "2023",
-    "text": "2023"
-  },
-  "portfolio-178": {
-    "html": "2020 – 2021",
-    "text": "2020 – 2021"
-  },
-  "portfolio-196": {
-    "html": "2023",
-    "text": "2023"
   },
   "portfolio-169": {
     "html": "Led communications and content strategy for mission-driven food and culture brands.",
@@ -627,41 +1207,13 @@
     "html": "Mar 2024 – Feb 2025",
     "text": "Mar 2024 – Feb 2025"
   },
-  "portfolio-175": {
-    "html": "2020 – 2022",
-    "text": "2020 – 2022"
-  },
-  "portfolio-197": {
-    "html": "2023",
-    "text": "2023"
-  },
-  "portfolio-204": {
-    "html": "2021",
-    "text": "2021"
-  },
   "portfolio-186": {
     "html": "02 Outside the 9 to 5",
     "text": "02 Outside the 9 to 5"
   },
-  "portfolio-209": {
-    "html": "2020",
-    "text": "2020"
-  },
-  "portfolio-176": {
-    "html": "2021",
-    "text": "2021"
-  },
   "portfolio-133": {
     "html": "Sustainability Strategy Fellow (EDF Climate Corps)",
     "text": "Sustainability Strategy Fellow (EDF Climate Corps)"
-  },
-  "portfolio-202": {
-    "html": "2021",
-    "text": "2021"
-  },
-  "portfolio-189": {
-    "html": "2020 – 2026",
-    "text": "2020 – 2026"
   },
   "portfolio-159": {
     "html": "Marketing Manager",
@@ -671,14 +1223,6 @@
     "html": "Delivered newsletters, campaigns, and SEO-informed storytelling.",
     "text": "Delivered newsletters, campaigns, and SEO-informed storytelling."
   },
-  "portfolio-195": {
-    "html": "2023",
-    "text": "2023"
-  },
-  "portfolio-200": {
-    "html": "2022",
-    "text": "2022"
-  },
   "portfolio-146": {
     "html": "Managed career programming and workforce development across high schools.",
     "text": "Managed career programming and workforce development across high schools."
@@ -687,21 +1231,9 @@
     "html": "Founder, Director of Community &amp; Communications",
     "text": "Founder, Director of Community & Communications"
   },
-  "portfolio-184": {
-    "html": "2011 – 2014",
-    "text": "2011 – 2014"
-  },
   "portfolio-150": {
     "html": "Apr 2016 – Sep 2024",
     "text": "Apr 2016 – Sep 2024"
-  },
-  "portfolio-183": {
-    "html": "2015 – 2018",
-    "text": "2015 – 2018"
-  },
-  "portfolio-179": {
-    "html": "2020",
-    "text": "2020"
   },
   "portfolio-212": {
     "html": "04 Recognition",
@@ -711,10 +1243,6 @@
     "html": "Food Education Fund",
     "text": "Food Education Fund"
   },
-  "portfolio-181": {
-    "html": "2019 – 2020",
-    "text": "2019 – 2020"
-  },
   "portfolio-154": {
     "html": "Built a mission-driven culinary brand through storytelling, partnerships, and chef-driven events.",
     "text": "Built a mission-driven culinary brand through storytelling, partnerships, and chef-driven events."
@@ -723,21 +1251,9 @@
     "html": "Kitchen roles and food work live in the <a href=\"https://adjoakittoe.com/#archive\">Archive →</a>",
     "text": "Kitchen roles and food work live in the Archive →"
   },
-  "portfolio-193": {
-    "html": "2025",
-    "text": "2025"
-  },
-  "portfolio-180": {
-    "html": "2020",
-    "text": "2020"
-  },
   "portfolio-117": {
     "html": "Fractional brand and communications partner for CPG, hospitality, and mission-driven organizations navigating growth, launch, and identity.",
     "text": "Fractional brand and communications partner for CPG, hospitality, and mission-driven organizations navigating growth, launch, and identity."
-  },
-  "portfolio-214": {
-    "html": "Mar 2023",
-    "text": "Mar 2023"
   },
   "portfolio-165": {
     "html": "Highlights",
@@ -759,10 +1275,6 @@
     "html": "Led PR, marketing, and communications for an international book tour across 20+ cities that sold 11,000+ units and lifted visibility 116%.",
     "text": "Led PR, marketing, and communications for an international book tour across 20+ cities that sold 11,000+ units and lifted visibility 116%."
   },
-  "portfolio-210": {
-    "html": "2020",
-    "text": "2020"
-  },
   "portfolio-160": {
     "html": "Opus Training",
     "text": "Opus Training"
@@ -778,10 +1290,6 @@
   "portfolio-128": {
     "html": "Primary liaison across two restaurants, a nonprofit, and partner organizations for operations, hiring, grants, and events.",
     "text": "Primary liaison across two restaurants, a nonprofit, and partner organizations for operations, hiring, grants, and events."
-  },
-  "portfolio-207": {
-    "html": "2020 – 2021",
-    "text": "2020 – 2021"
   },
   "portfolio-118": {
     "html": "Sep 2024 – Feb 2026",
@@ -827,10 +1335,6 @@
     "html": "Marketing Manager",
     "text": "Marketing Manager"
   },
-  "portfolio-091": {
-    "html": "2025",
-    "text": "2025"
-  },
   "portfolio-079": {
     "html": "Solution",
     "text": "Solution"
@@ -855,14 +1359,6 @@
     "html": "Clients included climate justice, equity, and leadership development organizations.",
     "text": "Clients included climate justice, equity, and leadership development organizations."
   },
-  "portfolio-088": {
-    "html": "Creative direction",
-    "text": "Creative direction"
-  },
-  "portfolio-084": {
-    "html": "Recipe development",
-    "text": "Recipe development"
-  },
   "portfolio-072": {
     "html": "Solution",
     "text": "Solution"
@@ -874,10 +1370,6 @@
   "portfolio-090": {
     "html": "Styling, photography &amp; creative direction",
     "text": "Styling, photography & creative direction"
-  },
-  "portfolio-086": {
-    "html": "Photography",
-    "text": "Photography"
   },
   "portfolio-019": {
     "html": "Solution",
@@ -926,10 +1418,6 @@
   "portfolio-032": {
     "html": "Acting Manager · Global Climate &amp; Energy Clients",
     "text": "Acting Manager · Global Climate & Energy Clients"
-  },
-  "portfolio-087": {
-    "html": "Creative direction",
-    "text": "Creative direction"
   },
   "portfolio-103": {
     "html": "Run seasonal campaigns, secure PR placements, and support expansion into new markets.",
@@ -1087,10 +1575,6 @@
     "html": "Community Connector",
     "text": "Community Connector"
   },
-  "portfolio-089": {
-    "html": "Photography",
-    "text": "Photography"
-  },
   "portfolio-071": {
     "html": "Chef K Will needed a comprehensive website and marketing plan to reach new clients and promote exclusive dining experiences.",
     "text": "Chef K Will needed a comprehensive website and marketing plan to reach new clients and promote exclusive dining experiences."
@@ -1115,10 +1599,6 @@
     "html": "Results",
     "text": "Results"
   },
-  "portfolio-093": {
-    "html": "2022",
-    "text": "2022"
-  },
   "portfolio-021": {
     "html": "Impact",
     "text": "Impact"
@@ -1142,10 +1622,6 @@
   "portfolio-074": {
     "html": "Results",
     "text": "Results"
-  },
-  "portfolio-092": {
-    "html": "2023",
-    "text": "2023"
   },
   "portfolio-097": {
     "html": "01 Selected Work Experience",
@@ -1178,10 +1654,6 @@
   "portfolio-108": {
     "html": "Tractor Beverage Co. · Contract",
     "text": "Tractor Beverage Co. · Contract"
-  },
-  "portfolio-085": {
-    "html": "Social media",
-    "text": "Social media"
   },
   "portfolio-043": {
     "html": "Support global storytelling on regenerative agriculture, food equity, and nature-based solutions while aligning diverse partners. Maintain visibility during leadership transitions and translate technical work into campaigns for global audiences.",
