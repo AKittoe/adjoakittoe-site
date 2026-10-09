@@ -1,0 +1,288 @@
+[
+  {
+    "title": "Cherry Bombe",
+    "tab": "Blogroll",
+    "link": "https://cherrybombe.com",
+    "tags": [],
+    "date": "",
+    "note": "Women in food, the magazine and podcasts that started a lot of careers, mine included",
+    "color": "Gold",
+    "order": 1
+  },
+  {
+    "title": "Binders of Black Culinary Legacy",
+    "tab": "Saved",
+    "link": "https://www.mofad.org/calendar/binders-of-black-culinary-legacy",
+    "tags": [
+      "events",
+      "food-history"
+    ],
+    "date": "Mar 2025",
+    "note": "",
+    "color": "",
+    "order": 1
+  },
+  {
+    "title": "History That Binds: The Legacy of Okra",
+    "tab": "Saved",
+    "link": "https://accelerator.eatokra.com/culture/black-history-month/history-that-binds-the-legacy-of-okra",
+    "tags": [
+      "food-history",
+      "okra"
+    ],
+    "date": "Feb 2025",
+    "note": "",
+    "color": "",
+    "order": 2
+  },
+  {
+    "title": "Civil Eats",
+    "tab": "Blogroll",
+    "link": "https://civileats.com",
+    "tags": [],
+    "date": "",
+    "note": "Reporting on food systems that takes farmers and workers seriously",
+    "color": "Periwinkle",
+    "order": 2
+  },
+  {
+    "title": "Dine Diaspora",
+    "tab": "Blogroll",
+    "link": "https://www.dinediaspora.com",
+    "tags": [],
+    "date": "",
+    "note": "African food culture, events, and the Black Women in Food list",
+    "color": "Peach",
+    "order": 3
+  },
+  {
+    "title": "For the Culture is a joyful celebration of Black women and femmes in food",
+    "tab": "Saved",
+    "link": "https://staging16.civileats.com/?p=53570",
+    "tags": [
+      "book",
+      "culture"
+    ],
+    "date": "2023",
+    "note": "",
+    "color": "",
+    "order": 3
+  },
+  {
+    "title": "Updated Food Access Research Atlas maps changes in 2019",
+    "tab": "Saved",
+    "link": "https://www.ers.usda.gov/amber-waves/2021/june/updated-food-access-research-atlas-now-maps-changes-in-low-income-and-low-supermarket-access-areas-in-2019",
+    "tags": [
+      "food-systems",
+      "data"
+    ],
+    "date": "Jun 2021",
+    "note": "",
+    "color": "",
+    "order": 4
+  },
+  {
+    "title": "EatOkra",
+    "tab": "Blogroll",
+    "link": "https://www.eatokra.com",
+    "tags": [],
+    "date": "",
+    "note": "Find Black-owned restaurants, plus their History That Binds series",
+    "color": "Butter",
+    "order": 4
+  },
+  {
+    "title": "MOFAD",
+    "tab": "Blogroll",
+    "link": "https://www.mofad.org",
+    "tags": [],
+    "date": "",
+    "note": "Museum of Food and Drink, where good food conversations happen",
+    "color": "Leaf",
+    "order": 5
+  },
+  {
+    "title": "Regenerative Organic Certified: our story",
+    "tab": "Saved",
+    "link": "https://regenorganic.org/our-story/",
+    "tags": [
+      "regenerative",
+      "standards"
+    ],
+    "date": "2017",
+    "note": "",
+    "color": "",
+    "order": 5
+  },
+  {
+    "title": "Local food is still a niche. Can it grow beyond that?",
+    "tab": "Saved",
+    "link": "https://www.npr.org/sections/thesalt/2015/06/22/415554585/local-food-is-still-a-niche-can-it-grow-beyond-that",
+    "tags": [
+      "food-systems",
+      "local-food"
+    ],
+    "date": "Jun 2015",
+    "note": "",
+    "color": "",
+    "order": 6
+  },
+  {
+    "title": "The Libi Project",
+    "tab": "Blogroll",
+    "link": "https://www.libinyc.com",
+    "tags": [],
+    "date": "",
+    "note": "Community, events, and interviews for culinary folks",
+    "color": "Clay",
+    "order": 6
+  },
+  {
+    "title": "Coming in to the Foodshed",
+    "tab": "Saved",
+    "link": "https://doi.org/10.1007/bf01538225",
+    "tags": [
+      "food-systems",
+      "research"
+    ],
+    "date": "1996",
+    "note": "",
+    "color": "",
+    "order": 7
+  },
+  {
+    "title": "Other notes",
+    "tab": "Interesting links",
+    "link": "https://seulful.notion.site/Other-Notes-56a274c9a9b74053b8274194c805986c",
+    "tags": [
+      "by-me"
+    ],
+    "date": "",
+    "note": "Visual notes, by me",
+    "color": "",
+    "order": 8
+  },
+  {
+    "title": "Life updates",
+    "tab": "Interesting links",
+    "link": "https://seulful.notion.site/Life-Updates-26dd49de9f54485cb53030e052369c8a",
+    "tags": [
+      "by-me"
+    ],
+    "date": "",
+    "note": "Things I've been up to",
+    "color": "",
+    "order": 9
+  },
+  {
+    "title": "African Photography Network",
+    "tab": "Interesting links",
+    "link": "https://www.africanphotographynetwork.org/",
+    "tags": [
+      "photography"
+    ],
+    "date": "",
+    "note": "Photography",
+    "color": "",
+    "order": 10
+  },
+  {
+    "title": "Organ",
+    "tab": "Interesting links",
+    "link": "https://mworks.customermedia.de/react.html",
+    "tags": [
+      "music",
+      "play"
+    ],
+    "date": "",
+    "note": "Virtual organ",
+    "color": "",
+    "order": 11
+  },
+  {
+    "title": "Nobody Here, Just Me",
+    "tab": "Interesting links",
+    "link": "https://www.nobodyhere.com/justme/",
+    "tags": [
+      "art"
+    ],
+    "date": "",
+    "note": "Art, in words",
+    "color": "",
+    "order": 12
+  },
+  {
+    "title": "Just Math Materials",
+    "tab": "Interesting links",
+    "link": "http://patrickjmt.com/",
+    "tags": [
+      "learning"
+    ],
+    "date": "",
+    "note": "Math tutorials",
+    "color": "",
+    "order": 13
+  },
+  {
+    "title": "This Person Does Not Exist",
+    "tab": "Interesting links",
+    "link": "https://www.thispersondoesnotexist.com/",
+    "tags": [
+      "ai",
+      "play"
+    ],
+    "date": "",
+    "note": "Computer-generated faces",
+    "color": "",
+    "order": 14
+  },
+  {
+    "title": "MIT OpenCourseWare",
+    "tab": "Interesting links",
+    "link": "https://ocw.mit.edu/courses/",
+    "tags": [
+      "learning"
+    ],
+    "date": "",
+    "note": "Full, downloadable free courses",
+    "color": "",
+    "order": 15
+  },
+  {
+    "title": "Stanford Encyclopedia of Philosophy",
+    "tab": "Interesting links",
+    "link": "https://plato.stanford.edu/index.html",
+    "tags": [
+      "learning"
+    ],
+    "date": "",
+    "note": "Hopefully, self-explanatory",
+    "color": "",
+    "order": 16
+  },
+  {
+    "title": "Overview",
+    "tab": "Interesting links",
+    "link": "https://www.over-view.com/",
+    "tags": [
+      "photography",
+      "earth"
+    ],
+    "date": "",
+    "note": "How we change Earth",
+    "color": "",
+    "order": 17
+  },
+  {
+    "title": "Old Fashioned",
+    "tab": "Interesting links",
+    "link": "https://oldfashioned.tech/",
+    "tags": [
+      "cocktails"
+    ],
+    "date": "",
+    "note": "Cocktail recipes",
+    "color": "",
+    "order": 18
+  }
+]

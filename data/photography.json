@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Hands & Soil",
+    "subtitle": "Documentation of Food Work",
+    "years": "2025 – 2026",
+    "medium": "Film + Digital",
+    "cats": [
+      "Food",
+      "Portrait"
+    ],
+    "description": "The work behind food. Prep tables, kitchens, and the people doing it.",
+    "photos": [
+      {
+        "src": "/assets/photos/3f200886f6718166973ede1aeda38a2b-0.jpg",
+        "cap": ""
+      }
+    ],
+    "order": null
+  }
+]

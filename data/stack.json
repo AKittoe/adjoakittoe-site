@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Affinity",
+    "description": "Photo editing, layout, and vector design",
+    "cost": "Free + paid",
+    "color": "#1f1f2e",
+    "link": "",
+    "order": 1
+  },
+  {
+    "name": "Alfred",
+    "description": "Launcher for everything on my Mac",
+    "cost": "Free + paid",
+    "color": "#5b4636",
+    "link": "",
+    "order": 2
+  },
+  {
+    "name": "Arc",
+    "description": "Browser with spaces for each part of my work",
+    "cost": "Free",
+    "color": "#e8556b",
+    "link": "",
+    "order": 3
+  },
+  {
+    "name": "Bartender",
+    "description": "Keeps the menu bar quiet",
+    "cost": "Paid",
+    "color": "#2f2f2f",
+    "link": "",
+    "order": 4
+  },
+  {
+    "name": "CleanShot X",
+    "description": "Screenshots, recordings, and annotations",
+    "cost": "Paid",
+    "color": "#2d6cdf",
+    "link": "",
+    "order": 5
+  },
+  {
+    "name": "Dropover",
+    "description": "A shelf for dragging files between apps",
+    "cost": "Free + paid",
+    "color": "#3b82f6",
+    "link": "",
+    "order": 6
+  },
+  {
+    "name": "Fantastical",
+    "description": "Calendar I actually like opening",
+    "cost": "Free + paid",
+    "color": "#d0463c",
+    "link": "",
+    "order": 7
+  },
+  {
+    "name": "Figma",
+    "description": "Mockups, layouts, and design tests",
+    "cost": "Free + paid",
+    "color": "#a259ff",
+    "link": "",
+    "order": 8
+  },
+  {
+    "name": "Framer",
+    "description": "Interactive prototypes and site experiments",
+    "cost": "Free + paid",
+    "color": "#0055ff",
+    "link": "",
+    "order": 9
+  },
+  {
+    "name": "Krisp",
+    "description": "Noise cancelling for calls",
+    "cost": "Free + paid",
+    "color": "#4b6bff",
+    "link": "",
+    "order": 10
+  },
+  {
+    "name": "LookAway",
+    "description": "Reminders to rest my eyes and take breaks",
+    "cost": "Paid",
+    "color": "#5b8def",
+    "link": "",
+    "order": 11
+  },
+  {
+    "name": "Miro",
+    "description": "Whiteboards for mapping ideas and workshops",
+    "cost": "Free + paid",
+    "color": "#f2c94c",
+    "link": "",
+    "order": 12
+  },
+  {
+    "name": "Notion",
+    "description": "Workspace for projects and shared docs",
+    "cost": "Free + paid",
+    "color": "#2b2b2b",
+    "link": "",
+    "order": 13
+  },
+  {
+    "name": "Obsidian",
+    "description": "Where my notes, research, and drafts live, sorted with PARA",
+    "cost": "Free + paid",
+    "color": "#7c5cd6",
+    "link": "",
+    "order": 14
+  },
+  {
+    "name": "Rocket",
+    "description": "Emoji anywhere with a quick shortcut",
+    "cost": "Free + paid",
+    "color": "#ff7a45",
+    "link": "",
+    "order": 15
+  },
+  {
+    "name": "SideNotes",
+    "description": "Quick notes tucked at the edge of the screen",
+    "cost": "Paid",
+    "color": "#f5a623",
+    "link": "",
+    "order": 16
+  },
+  {
+    "name": "Superhuman",
+    "description": "Email that moves as fast as I think",
+    "cost": "Paid",
+    "color": "#3b3b52",
+    "link": "",
+    "order": 17
+  },
+  {
+    "name": "Timing",
+    "description": "Tracks where my time actually goes",
+    "cost": "Paid",
+    "color": "#22a06b",
+    "link": "",
+    "order": 18
+  }
+]
