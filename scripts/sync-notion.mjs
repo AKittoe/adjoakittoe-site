@@ -1,6 +1,6 @@
 // Pulls site content from Notion and saves it as JSON (and images) for the site.
 // Runs in GitHub Actions with the NOTION_TOKEN secret. Node 20+, no packages needed.
-import { writeFile, mkdir } from 'node:fs/promises';
+import { writeFile, mkdir, rm, readFile } from 'node:fs/promises';
 
 const TOKEN = process.env.NOTION_TOKEN;
 if (!TOKEN) { console.error('Missing NOTION_TOKEN'); process.exit(1); }
@@ -23,8 +23,19 @@ const DB = {
   resources: '66b0bda8a1ab432186ac44caf727c4f8',  // Resources
   photography: '6d53b91ce5e24ff5bae6858768caea7b',// Photography
   academia: 'b34ae81e18ea4ed2b7a093baf55bfbff',   // Academia
+  resume: '271893e36dac4c8fbcc6da355af4d98c',     // Resume Lists (Work page lists, In kitchens)
+  aboutLists: '46f20b4644bc496588567cb26be69015', // About Lists
+  kitchen: '3c58ed346e0b423986f73ddac19aa2e5',    // Kitchen Photos (Archive)
 };
 const LETTERBOXD = 'eauxjai';
+
+// Films saved by earlier runs (Letterboxd's feed only holds recent diary entries)
+let savedFilms = [];
+try { savedFilms = JSON.parse(await readFile('data/shelf.json', 'utf8')).films || []; } catch {}
+await rm('assets', { recursive: true, force: true });
+// Photos are resized so they load fast and stay under Cloudflare's 25 MB file limit
+let sharp = null;
+try { sharp = (await import('sharp')).default; } catch { console.log('Note: photo resizing is off (sharp is not installed).'); }
 
 const headers = { Authorization: `Bearer ${TOKEN}`, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -55,15 +66,26 @@ const check = p => !!p?.checkbox;
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const slugify = s => String(s || '').toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-async function saveFile(url, folder, name) {
+async function saveFile(url, folder, name, max = 2000) {
   if (!url) return '';
   try {
     const res = await fetch(url); if (!res.ok) return '';
     const type = res.headers.get('content-type') || '';
-    const ext = type.includes('png') ? 'png' : type.includes('webp') ? 'webp' : type.includes('gif') ? 'gif' : type.includes('pdf') ? 'pdf' : type.includes('svg') ? 'svg' : 'jpg';
+    let ext = type.includes('png') ? 'png' : type.includes('webp') ? 'webp' : type.includes('gif') ? 'gif' : type.includes('pdf') ? 'pdf' : type.includes('svg') ? 'svg' : type.includes('mp4') ? 'mp4' : type.includes('audio') || type.includes('mpeg') ? 'mp3' : 'jpg';
+    let buf = Buffer.from(await res.arrayBuffer());
+    if (sharp && /^image\/(jpeg|jpg|png|webp|heic|heif|tiff|avif)/.test(type)) {
+      try {
+        const img = sharp(buf, { failOn: 'none' }).rotate();
+        const meta = await img.metadata();
+        const fit = img.resize({ width: max, height: max, fit: 'inside', withoutEnlargement: true });
+        if (meta.hasAlpha) { buf = await fit.png({ compressionLevel: 9, palette: true }).toBuffer(); ext = 'png'; }
+        else { buf = await fit.jpeg({ quality: 80, mozjpeg: true }).toBuffer(); ext = 'jpg'; }
+      } catch (e) { console.warn(`Could not resize ${name}: ${e.message}`); }
+    }
+    if (buf.length > 24 * 1024 * 1024) { console.warn(`Skipped ${folder}/${name}: over 24 MB even after resizing. Upload a smaller file.`); return ''; }
     await mkdir(`assets/${folder}`, { recursive: true });
     const path = `assets/${folder}/${name}.${ext}`;
-    await writeFile(path, Buffer.from(await res.arrayBuffer()));
+    await writeFile(path, buf);
     return '/' + path;
   } catch { return ''; }
 }
@@ -118,10 +140,26 @@ const ARROW_DL = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" st
 const SEC_COLORS = { ingredients: '#d0644a', method: '#4a7fb5', notes: '#b8922e' };
 const idOf = s => String(s || '').replace(/-/g, '');
 
-function hoverSpan(inner, word) {
-  const h = hover[word.trim().toLowerCase()];
-  if (!h || !h.image) return inner;
-  return `<span class="ab-photo"${h.wide ? ' data-wide' : ''} tabindex="0">${inner}<template class="ab-photo-art"><figure class="ab-photo-card"><img src="${esc(h.image)}" alt="${esc(h.caption || word)}">${h.caption ? `<figcaption>${esc(h.caption)}</figcaption>` : ''}</figure></template></span>`;
+// Photo on hover: purple word + an image right under it with the caption "Hover: word".
+// Each image belongs only to its own page, so the same word can show different photos.
+function hoverSpan(inner, word, ctx) {
+  const q = ctx?.hovers?.[word.trim().toLowerCase()];
+  const h = q && q.length ? q.shift() : null;
+  if (!h || !h.src) return inner;
+  return `<span class="ab-photo" data-own tabindex="0">${inner}<template class="ab-photo-art"><figure class="ab-photo-card"><img src="${esc(h.src)}" alt="${esc(h.cap || word)}">${h.cap ? `<figcaption>${esc(h.cap)}</figcaption>` : ''}</figure></template></span>`;
+}
+async function collectHovers(blocks, ctx, pageId) {
+  ctx.hovers = {}; let k = 0;
+  const walk = async list => {
+    for (const b of list || []) {
+      if (b.type === 'image') {
+        const cap = txt(b.image.caption).trim(); const m = cap.match(/^hover\s*:\s*([^|]+?)\s*(?:\|\s*(.*))?$/i);
+        if (m) { b._hover = true; const src = await saveFile(fileUrl(b.image), 'hover', `${pageId}-${k++}`, 900); (ctx.hovers[m[1].toLowerCase()] ||= []).push({ src, cap: (m[2] || '').trim() }); }
+      }
+      if (b.children) await walk(b.children);
+    }
+  };
+  await walk(blocks);
 }
 
 function rich(rt = [], ctx = {}) {
@@ -137,7 +175,7 @@ function rich(rt = [], ctx = {}) {
     if (a.color === 'yellow_background') s = `<mark>${s}</mark>`;
     else if (a.color === 'gray') s = `<span class="muted">${s}</span>`;
     else if (a.color === 'gray_background') s = `<span class="lf-tag">${s}</span>`;
-    else if (a.color === 'purple') s = hoverSpan(s, raw);
+    else if (a.color === 'purple') s = hoverSpan(s, raw, ctx);
     // links
     const mention = t.type === 'mention' && t.mention?.type === 'page' ? idOf(t.mention.page.id) : null;
     if (mention) {
@@ -332,6 +370,7 @@ async function units(blocks, ctx) {
       case 'divider': push('<div class="lf-divider"></div>'); break;
       case 'code': push(`<pre class="sg-code"><code>${esc(txt(v.rich_text))}</code></pre><button type="button" class="sg-copy site-link">Copy code <span>⧉</span></button>`); break;
       case 'image': {
+        if (b._hover) break;
         // images in a guide card collect into the card's example strip
         if (ctx.inCard) { const src = await saveImg(v, b.id); if (src) ctx.card.photos.push({ src, cap: txt(v.caption) }); break; }
         push(await figure(b, ctx), { wide: true }); break;
@@ -460,7 +499,7 @@ for (const p of pieceRows) {
   const template = pr.Template?.select?.name || ((pr.Tags?.multi_select || []).some(t => t.name === 'recipe') ? 'Recipe' : 'Essay');
   const ctx = { slug, template, title: plain(pr.Title), images: [], serves: pr.Serves?.number || 0, srcN: 0, step: 0, stepBadge: 0, letter: 0 };
   let body = { html: '', nav: [] };
-  try { body = await layout(await children(p.id), ctx); } catch (e) { console.warn(`Skipped body of ${slug}: ${e.message}`); }
+  try { const bl = await children(p.id); await collectHovers(bl, ctx, id); body = await layout(bl, ctx); } catch (e) { console.warn(`Skipped body of ${slug}: ${e.message}`); }
   const words = body.html.replace(/<template[\s\S]*?<\/template>/g, '').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
   const items = guideRows.filter(g => g.pageIds.includes(id)).sort((a, b) => a.order - b.order).map(({ pageIds, ...g }) => g);
   pieces.push({
@@ -528,29 +567,65 @@ await part('bookmarks', async () => (await queryAll(DB.bookmarks)).filter(p => c
 await part('shelf', async () => {
   const items = [];
   for (const p of (await queryAll(DB.shelf)).filter(p => check(p.properties.Publish))) {
-    const pr = p.properties; const it = { title: plain(pr.Title), type: sel(pr.Type), status: sel(pr.Status), creator: plain(pr.Creator), link: url(pr.Link), rating: num(pr.Rating), order: num(pr.Order), cover: await saveProp(p, pr.Cover, 'shelf') };
-    // Music: fill the title, line, and cover from the link's preview card (refreshed every sync)
-    if (it.type === 'Music' && it.link) {
-      const h = await getText(it.link);
-      if (h) {
-        if (!it.title) it.title = meta(h, 'og:title');
-        if (!it.creator) it.creator = meta(h, 'og:description').replace(/\s+/g, ' ').slice(0, 110);
-        if (!it.cover) it.cover = await saveFile(meta(h, 'og:image'), 'shelf', 'og-' + p.id.replace(/-/g, ''));
+    const pr = p.properties;
+    const it = { title: plain(pr.Title), type: sel(pr.Type), status: sel(pr.Status), creator: plain(pr.Creator), link: url(pr.Link), rating: num(pr.Rating), order: num(pr.Order), cover: '' };
+    // Only the monthly playlist uses a real picture. Everything else gets the coded cover.
+    if (it.type === 'Music' && it.status === 'Playlist') {
+      it.cover = await saveProp(p, pr.Cover, 'shelf');
+      if (it.link) {
+        const h = await getText(it.link);
+        if (h) {
+          if (!it.title) it.title = meta(h, 'og:title');
+          if (!it.creator) it.creator = meta(h, 'og:description').replace(/\s+/g, ' ').slice(0, 110);
+          if (!it.cover) it.cover = await saveFile(meta(h, 'og:image'), 'shelf', 'og-' + p.id.replace(/-/g, ''), 900);
+        }
       }
+    } else if (it.type === 'Music' && it.link && !it.title) {
+      const h = await getText(it.link); if (h) { it.title = meta(h, 'og:title'); if (!it.creator) it.creator = meta(h, 'og:description').replace(/\s+/g, ' ').slice(0, 110); }
     }
     if (it.title) items.push(it);
   }
   items.sort(ord);
-  // Films: straight from the Letterboxd diary feed
-  const films = []; const rss = await getText(`https://letterboxd.com/${LETTERBOXD}/rss/`);
+  // Films logged in the Letterboxd diary. The feed only lists diary entries, so films you rate without logging a date will not appear.
+  const films = [...savedFilms];
+  const res = await fetch(`https://letterboxd.com/${LETTERBOXD}/rss/`, { headers: UA }).catch(e => ({ ok: false, status: e.message }));
+  const rss = res.ok ? await res.text() : '';
+  if (!res.ok) console.warn(`Letterboxd feed did not load (${res.status}). Keeping the films saved before.`);
+  let fresh = 0;
   for (const m of rss.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
     const x = m[1]; const tag = t => ((x.match(new RegExp(`<${t}>([\\s\\S]*?)</${t}>`)) || [])[1] || '').replace(/<!\[CDATA\[|\]\]>/g, '').trim();
-    const title = tag('letterboxd:filmTitle'); if (!title || films.some(f => f.title === title)) continue;
-    const img = (tag('description').match(/<img[^>]+src="([^"]+)"/) || [])[1] || '';
-    films.push({ title, year: tag('letterboxd:filmYear'), rating: parseFloat(tag('letterboxd:memberRating')) || null, link: tag('link'), watched: tag('letterboxd:watchedDate'), cover: await saveFile(img, 'shelf', 'lb-' + slugify(title + '-' + tag('letterboxd:filmYear'))) });
-    if (films.length >= 12) break;
+    const title = tag('letterboxd:filmTitle'); if (!title) continue; fresh++;
+    const f = { title, year: tag('letterboxd:filmYear'), rating: parseFloat(tag('letterboxd:memberRating')) || null, link: tag('link'), watched: tag('letterboxd:watchedDate') };
+    const i = films.findIndex(g => g.title === f.title && g.year === f.year); if (i >= 0) films[i] = f; else films.push(f);
   }
-  return { items, films };
+  films.forEach(f => delete f.cover);
+  films.sort((a, b) => (b.watched || '').localeCompare(a.watched || ''));
+  console.log(`Letterboxd: ${fresh} diary entries in the feed, ${films.length} films kept.`);
+  return { items, films: films.slice(0, 40) };
+});
+
+await part('resume', async () => (await queryAll(DB.resume)).filter(p => check(p.properties.Publish)).map(p => p).reduce(async (accP, p) => {
+  const acc = await accP; const pr = p.properties;
+  acc.push({ title: plain(pr.Title), section: sel(pr.Section), date: plain(pr.Date), org: plain(pr.Org), link: url(pr.Link), photo: await saveProp(p, pr['Hover photo'], 'resume'), order: num(pr.Order) });
+  return acc;
+}, Promise.resolve([])).then(l => l.sort(ord)));
+
+await part('about-lists', async () => {
+  const out = [];
+  for (const p of (await queryAll(DB.aboutLists)).filter(p => check(p.properties.Publish))) {
+    const pr = p.properties;
+    out.push({ item: plain(pr.Item), list: sel(pr.List), link: url(pr.Link), words: plain(pr['Link words']), photo: await saveProp(p, pr['Hover photo'], 'about'), dove: check(pr.Dove), note: plain(pr.Note),
+      done: num(pr.Done), goal: num(pr.Goal), unit: plain(pr.Unit), text: plain(pr['Progress text']), states: check(pr['Use State Tracker']), order: num(pr.Order) });
+  }
+  return out.sort(ord);
+});
+
+await part('kitchen', async () => {
+  const out = [];
+  for (const p of (await queryAll(DB.kitchen)).filter(p => check(p.properties.Publish))) {
+    const src = await saveProp(p, p.properties.Photo, 'kitchen'); if (src) out.push({ dish: plain(p.properties.Dish), src, order: num(p.properties.Order) });
+  }
+  return out.sort(ord);
 });
 
 await part('events', async () => (await queryAll(DB.events)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
