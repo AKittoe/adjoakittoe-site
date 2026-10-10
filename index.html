@@ -1592,27 +1592,90 @@
     .mn .mn-label { font-size: 13px; letter-spacing: 0.1px; }
     .mn-hub .mn-label { font-weight: 500; }
     .mn .mn-sub { font-size: 10px; letter-spacing: 0.4px; text-transform: none; font-style: italic; }
-    /* How It Connects: constellation look (soft colored zones, gray pages, no rings) */
-    #map .map-stage { background: #f8f6f2; }
-    #map .mr circle { fill: #d9d3cc; stroke: none; opacity: 0.7; }
-    #map .me { stroke: #cfc8c0; stroke-opacity: 0.55; stroke-width: 0.8; }
-    #map .me-solid { stroke-opacity: 0.18; }
-    #map.map-focused .me-leaf { stroke-opacity: 0.6; }
-    #map .mc-root { fill: #8d857d; }
-    #map .mc-core { fill: var(--ink); opacity: 0.62; transition: opacity 0.25s; }
-    #map .mc-halo { fill: var(--ink); transform-box: fill-box; transform-origin: center; }
-    #map .mc-halo1 { opacity: 0.09; }
-    #map .mc-halo2 { opacity: 0.05; animation: mc-breathe 6s ease-in-out infinite; }
-    #map .mn-hub:nth-child(2n) .mc-halo2 { animation-delay: -2s; } #map .mn-hub:nth-child(3n) .mc-halo2 { animation-delay: -4s; }
-    @keyframes mc-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
-    #map .mn-hover .mc-core, #map .mn-selected .mc-core { opacity: 0.9; }
-    #map .mc-dot { fill: #b9b1aa; transition: fill 0.2s; }
-    #map .mn-hover .mc-dot, #map .mn-selected .mc-dot, #map.map-focused .mc-dot { fill: var(--ink); }
-    #map .mn .mn-label { fill: #4a4440; stroke: #f8f6f2; }
-    #map .mn-hub .mn-label { font-weight: 500; }
-    #map:not(.map-focused) .mn .mn-label, #map:not(.map-focused) .mn .mn-label-sub { opacity: 0; transition: opacity 0.2s; }
-    #map:not(.map-focused) .mn-hover .mn-label, #map:not(.map-focused) .mn-hover .mn-label-sub, #map:not(.map-focused) .mn-selected .mn-label { opacity: 1; }
-    @media (prefers-reduced-motion: reduce) { #map .mc-halo2 { animation: none; } }
+    /* How It Connects: "the table". Eggplant ground, scalloped place settings, stitched threads, an index docked at the left */
+    #map .map-stage { background: radial-gradient(ellipse 80% 70% at 58% 46%, #4a2443 0%, #3b1d36 52%, #2a1327 100%); color: #f4efe3; }
+    #map-svg { left: 320px; right: 0; width: calc(100% - 320px); }
+    #map.mx-collapsed #map-svg { left: 0; width: 100%; }
+    #map .map-kicker { left: auto; right: 84px; color: #cdbfc7; }
+    #map .map-url { left: auto; right: 24px; bottom: 70px; max-width: 46%; background: rgba(34,16,33,0.82); color: #e9dfe3; border-color: rgba(244,239,227,0.2); font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; }
+    #map .map-foot { background: rgba(34,16,33,0.88); border-color: rgba(244,239,227,0.18); left: calc(50% + 160px); }
+    #map .map-foot a { color: #e9dfe3; } #map .map-foot a:hover { color: #c9d23f; }
+    #map .map-credit { right: 28px; top: 22px; }
+    #map .map-credit-btn, #map .map-credit-btn:hover { background: rgba(244,239,227,0.16); }
+    #map .mx-cloth { fill: #54294d; opacity: 0.4; transition: opacity 0.4s; }
+    #map .mx-cloth2 { fill: none; stroke: #f4efe3; stroke-opacity: 0.16; stroke-width: 1.4; stroke-dasharray: 1 7; stroke-linecap: round; transition: opacity 0.4s; }
+    #map.map-focused .mx-cloth, #map.map-focused .mx-cloth2 { opacity: 0; }
+    #map .mx-rootg { transform-box: fill-box; transform-origin: center; transition: transform 0.5s; }
+    #map.map-focused .mx-rootg { transform: scale(0.42); }
+    #map .mx-table { fill: #f4efe3; }
+    #map .mx-table-in { fill: none; stroke: #3b1d36; stroke-width: 1.2; stroke-dasharray: 1 5; stroke-linecap: round; }
+    #map .mx-root-t { fill: #3b1d36; font: 500 12px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 3px; text-anchor: middle; transition: opacity 0.3s; }
+    #map.map-focused .mx-root-t { opacity: 0; }
+    #map .me { fill: none; stroke: #f4efe3; stroke-opacity: 0.3; stroke-width: 1; }
+    #map .me-solid { stroke-dasharray: 1.5 7; stroke-linecap: round; stroke-width: 2; stroke-opacity: 0.45; }
+    #map .me-leaf { stroke: var(--ink); stroke-opacity: 0.4; }
+    #map.map-focused .me-leaf { stroke-opacity: 0.85; stroke-dasharray: 3 5; animation: mx-flow 1.8s linear infinite; }
+    #map .me-dot { stroke: #f4efe3; stroke-opacity: 0.4; stroke-dasharray: 1 6; stroke-linecap: round; }
+    @keyframes mx-flow { to { stroke-dashoffset: -16; } }
+    #map .mx-badge { fill: var(--ink); transform-box: fill-box; transform-origin: center; transition: transform 0.5s; }
+    #map .mn-hub:hover .mx-badge, #map .mn-hub.mn-hover .mx-badge, #map .mn-hub.mn-selected .mx-badge { transform: rotate(16deg) scale(1.1); }
+    #map .mx-plate { fill: #3b1d36; }
+    #map .mx-plate-ring { fill: none; stroke: #f4efe3; stroke-opacity: 0.55; stroke-width: 1; stroke-dasharray: 2 3; }
+    #map .mx-seed { fill: var(--ink); transform-box: fill-box; transform-origin: center; transition: transform 0.2s; }
+    #map .mx-sc { fill: var(--ink); fill-opacity: 0.3; stroke: var(--ink); stroke-width: 1.4; transition: fill-opacity 0.2s; }
+    #map .mx-ring { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-dasharray: 2 2.4; }
+    #map .mn-hover .mx-seed, #map .mn-selected .mx-seed { transform: scale(1.5); }
+    #map .mn-hover .mx-sc, #map .mn-selected .mx-sc { fill-opacity: 0.9; }
+    #map .mn .mn-label { fill: #f4efe3; stroke: #2a1327; stroke-width: 5px; paint-order: stroke; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.2px; }
+    #map .mn-hub .mn-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1.3px; font-weight: 500; }
+    #map .mn .mn-sub { fill: #cdbfc7; stroke: none; font-style: normal; font-size: 10px; }
+    #map .mn-lab { transition: transform 0.4s; }
+    #map:not(.map-focused) .mn-lab[data-up] { transform: translateY(var(--up)); }
+    #map:not(.map-focused) .mn .mn-label-sub, #map:not(.map-focused) .mn-leaf-x { opacity: 0; }
+    #map:not(.map-focused) .mn-essay .mn-label, #map:not(.map-focused) .mn-initiative .mn-label, #map:not(.map-focused) .mn-artifact .mn-label { opacity: 0; transition: opacity 0.2s; }
+    #map:not(.map-focused) .mn-hover .mn-label, #map:not(.map-focused) .mn-selected .mn-label { opacity: 1; }
+    @media (max-width: 768px) {
+      #map .mn .mn-label { font-size: 21px; stroke-width: 7px; } #map .mn-hub .mn-label { font-size: 22px; } #map .mn .mn-sub { font-size: 15px; }
+      #map-svg, #map.mx-collapsed #map-svg { left: 0; width: 100%; }
+      #map .map-foot { left: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) { #map.map-focused .me-leaf { animation: none; } }
+    /* the index */
+    #map .map-panel { top: 0; left: 0; right: auto; bottom: 0; width: 320px; gap: 0; padding: 62px 18px 18px 22px; background: #221021; border-radius: 0 22px 22px 0; border-right: 1px solid rgba(244,239,227,0.1); pointer-events: auto; color: #f4efe3; }
+    #map .map-panel.collapsed { bottom: auto; width: auto; min-width: 250px; padding-bottom: 14px; border-radius: 0 0 22px 0; }
+    #map .mx-head { display: flex; align-items: center; gap: 12px; padding: 0 2px 14px; border-bottom: 1px solid rgba(244,239,227,0.18); }
+    #map .map-panel.collapsed .mx-head { border-bottom: none; padding-bottom: 0; }
+    #map .mx-ic { width: 16px; height: 16px; fill: #c9d23f; flex: none; }
+    #map .mp-h { color: #f4efe3; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 1.6px; }
+    #map .mp-ctl, #map .mp-ctl:hover { color: #f4efe3; font-size: 18px; }
+    #map .mx-body { overflow-y: auto; min-height: 0; flex: 1 1 auto; padding-top: 12px; scrollbar-width: thin; scrollbar-color: rgba(244,239,227,0.25) transparent; }
+    #map .mp-intro { font: 12px/1.65 'IBM Plex Mono', ui-monospace, monospace; color: #d8cbd2; text-indent: 0; margin: 0 2px 12px; }
+    #map .mx-tree { list-style: none; margin: 0; padding: 0; }
+    #map .mx-zb, #map .mx-zb:hover { display: flex; align-items: center; gap: 12px; width: 100%; background: none; border: none; border-radius: 0; color: #e9dfe3; font: 500 13px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.3px; padding: 11px 2px; margin: 0; text-align: left; cursor: pointer; }
+    #map .mx-zb:hover, #map .mx-zb.hover { color: #fff; }
+    #map .mx-z.open > .mx-zb { color: #c9d23f; }
+    #map .mx-b { width: 16px; height: 16px; flex: none; fill: var(--c); transition: transform 0.4s; }
+    #map .mx-zb:hover .mx-b, #map .mx-z.open .mx-b { transform: rotate(22deg); }
+    #map .mx-zt { flex: 1; min-width: 0; }
+    #map .mp-count { color: #a99aa3; font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+    #map .mx-kids { margin: 0 0 10px 9px; padding-left: 20px; border-left: 1px solid rgba(244,239,227,0.28); display: flex; flex-direction: column; }
+    #map .mp-desc { font: 11.5px/1.6 'IBM Plex Mono', ui-monospace, monospace; color: #cdbfc7; text-indent: 0; margin: 2px 0 8px; }
+    #map .mp-item, #map .mp-item:hover { padding: 7px 0; gap: 10px; background: none; color: #d8cbd2; }
+    #map .mp-item:hover .mp-t, #map .mp-item.hover .mp-t { color: #fff; text-decoration-color: #c9d23f; }
+    #map .mp-t { font: 12.5px/1.4 'IBM Plex Mono', ui-monospace, monospace; }
+    #map .mp-s { font-family: 'IBM Plex Mono', ui-monospace, monospace; color: #a99aa3; font-size: 9.5px; letter-spacing: 1px; }
+    #map .mp-bullet { width: 6px; height: 6px; margin-top: 7px; background: #f4efe3; opacity: 0.55; }
+    #map .mp-item.sel .mp-bullet { background: #c9d23f; opacity: 1; }
+    #map .mp-item.faded .mp-t { color: #a99aa3; }
+    #map .mp-open { margin: 0 0 8px 16px; background: rgba(244,239,227,0.08); border-radius: 0 10px 10px 10px; }
+    #map .mp-open p { color: #d8cbd2; font-size: 12.5px; }
+    #map .mp-open a { color: #c9d23f; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; }
+    @media (max-width: 768px) {
+      #map .map-panel { top: auto; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: auto; max-height: 46%; padding: 14px 16px 12px; border-radius: 18px; border: 1px solid rgba(244,239,227,0.14); background: rgba(34,16,33,0.96); }
+      #map .map-panel.collapsed { min-width: 0; width: auto; border-radius: 18px; }
+      #map .mx-zb, #map .mx-zb:hover { padding: 13px 2px; }
+    }
+    html[data-theme="dark"] #map .map-stage { filter: invert(1) hue-rotate(180deg); }
 
     #map-svg text { text-rendering: geometricPrecision; }
     @media (max-width: 768px) { .mn .mn-label { font-size: 24px; stroke-width: 7px; } .mn .mn-sub { font-size: 16px; font-style: normal; letter-spacing: 0.3px; } .mn-hub .mn-num { font-size: 15px; } }
@@ -2846,8 +2909,8 @@
     body:is([data-page="states"],[data-page="notfound"]) .sg-form input::placeholder { color: #c9a99f; }
     body:is([data-page="states"],[data-page="notfound"]) .dd-btn, body:is([data-page="states"],[data-page="notfound"]) .sg-play { color: #f4efe3; border-color: rgba(244,239,227,0.3); background: transparent; }
     body:is([data-page="states"],[data-page="notfound"]) ::selection { background: #d6dd5c; color: #4a1c14; }
-    body:is([data-page="states"],[data-page="notfound"]) .hamburger { color: #f4efe3; }
-    body:is([data-page="states"],[data-page="notfound"]) .hamburger span { background: #f4efe3 !important; }
+    body:is([data-page="states"],[data-page="notfound"],[data-page="map"]) .hamburger { color: #f4efe3; }
+    body:is([data-page="states"],[data-page="notfound"],[data-page="map"]) .hamburger span { background: #f4efe3 !important; }
     body:not([data-page="about"]) :is([class*="neeto" i], [id*="neeto" i]):not(script), body:not([data-page="about"]) #nc-mock, body:not([data-page="about"]) #nc-modal { display: none !important; }
     /* 404 */
     .nf-wrap { min-height: 70vh; display: flex; align-items: center; gap: 56px; flex-wrap: wrap; padding: 40px 0; }
@@ -3080,11 +3143,6 @@
       <fieldset class="tint-switch" aria-label="Page color">
         <legend data-t="sidebar-024" class="nav-group-label">Color</legend>
         <label title="Default"><input type="radio" name="tint" value="none"><span class="tint-dot tint-none"></span></label><label title="Sage"><input type="radio" name="tint" value="sage"><span class="tint-dot" style="background:#b7c9b9"></span></label><label title="Dusty blue"><input type="radio" name="tint" value="blue"><span class="tint-dot" style="background:#b8c8d6"></span></label><label title="Ochre"><input type="radio" name="tint" value="ochre"><span class="tint-dot" style="background:#ddcf9e"></span></label><label title="Plum"><input type="radio" name="tint" value="plum"><span class="tint-dot" style="background:#d4bfce"></span></label><label title="Clay rose"><input type="radio" name="tint" value="rose"><span class="tint-dot" style="background:#d9bcbc"></span></label><label title="Olive"><input type="radio" name="tint" value="olive"><span class="tint-dot" style="background:#c7cba4"></span></label>
-      </fieldset>
-      <fieldset class="theme-switch font-switch" id="font-switch" aria-label="Typeface" hidden>
-        <legend class="nav-group-label">Typeface</legend>
-        <label><input type="radio" name="typeface" value="default"><span>Default</span></label>
-        <label><input type="radio" name="typeface" value="alt"><span>Apercu + Big Bird</span></label>
       </fieldset>
     </aside>
     <div class="menu-overlay" onclick="closeMenu()"></div>
@@ -3494,7 +3552,7 @@
         <section class="ab-sec ab-grid">
           <div>
             <h2 data-t="about-031">A few favorite things</h2>
-            <ul class="ab-list" data-alist="A few favorite things"><li>Notion</li><li><span class="ab-photo" tabindex="0">Forager Project<template class="ab-photo-art"><figure class="ab-photo-card"></figure></template></span></li><li><span class="ab-photo" tabindex="0">Eadem skincare<template class="ab-photo-art"><figure class="ab-photo-card"></figure></template></span></li><li><span class="ab-photo" tabindex="0">My Black cat, Setkhem<template class="ab-photo-art"><figure class="ab-photo-card"></figure></template></span> <svg class="ab-dove" viewBox="0 0 24 24" aria-label="dove" role="img"><path fill="currentColor" d="M21.5 6.2 19.4 5.8 18.6 4.4c-.4-.7-1.2-1.1-2-1.1-1.6 0-2.9 1.3-2.9 2.9v.7c-1.6-2.4-4.4-4.1-7.6-4.4.7 2.6 2.4 4.8 4.6 6.1C7.8 8.9 5.2 8 2.5 8.2c1.4 3.2 4.4 5.5 8 5.9-1.5 1.5-3.6 2.4-5.9 2.4 1.6 1.9 4 3 6.5 3 4.6 0 8.4-3.8 8.4-8.4V8.4l2-2.2Z"/><circle cx="16.8" cy="5.6" r=".6" fill="#f8ece5"/></svg></li><li>My indoor plant collection</li></ul>
+            <ul class="ab-list" data-alist="A few favorite things"><li>Notion</li><li><span class="ab-photo" tabindex="0">Forager Project<template class="ab-photo-art"><figure class="ab-photo-card"><img src="photos/about/forager-project.jpg" alt="Forager Project"></figure></template></span></li><li><span class="ab-photo" tabindex="0">Eadem skincare<template class="ab-photo-art"><figure class="ab-photo-card"><img src="photos/about/eadem-skincare.jpg" alt="Eadem skincare"></figure></template></span></li><li><span class="ab-photo" tabindex="0">My Black cat, Setkhem<template class="ab-photo-art"><figure class="ab-photo-card"><img src="photos/about/setkhem.jpg" alt="My Black cat, Setkhem"></figure></template></span> <svg class="ab-dove" viewBox="0 0 24 24" aria-label="dove" role="img"><path fill="currentColor" d="M21.5 6.2 19.4 5.8 18.6 4.4c-.4-.7-1.2-1.1-2-1.1-1.6 0-2.9 1.3-2.9 2.9v.7c-1.6-2.4-4.4-4.1-7.6-4.4.7 2.6 2.4 4.8 4.6 6.1C7.8 8.9 5.2 8 2.5 8.2c1.4 3.2 4.4 5.5 8 5.9-1.5 1.5-3.6 2.4-5.9 2.4 1.6 1.9 4 3 6.5 3 4.6 0 8.4-3.8 8.4-8.4V8.4l2-2.2Z"/><circle cx="16.8" cy="5.6" r=".6" fill="#f8ece5"/></svg></li><li>My indoor plant collection</li></ul>
           </div>
           <div>
             <h2 data-t="about-032">In my free time</h2>
@@ -6203,15 +6261,15 @@ function cook(g) {
       let state = { hub: null, leaf: null };
       // Constellation layout: zones sit in a loose cluster, their pages float around them
       const jit = (i, k) => { const x = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return x - Math.floor(x); };
+      // The table: zones sit like place settings around the center, their pages fan out beyond them
       function layoutOverview() {
-        const t = {}; t.root = { x: 0, y: 0, o: 1 };
+        const t = {}; t.root = { x: 0, y: 0, o: 1 }; const N = Math.max(hubs.length, 1), RX = 400, RY = 300;
         hubs.forEach((h, i) => {
-          const r = 120 + 95 * Math.sqrt(i + 0.4) + (jit(i, 1) - 0.5) * 40, a = i * 2.39996 + (jit(i, 2) - 0.5) * 0.5;
-          const hx = r * Math.cos(a), hy = r * Math.sin(a) * 0.82;
+          const a = -Math.PI / 2 + i * 2 * Math.PI / N, hx = RX * Math.cos(a), hy = RY * Math.sin(a);
           t[h.id] = { x: hx, y: hy, o: 1 };
-          const k = h.children.length;
+          const k = h.children.length, spread = Math.min(Math.PI * 0.95, 0.4 * k + 0.5);
           h.children.forEach((c, j) => {
-            const aa = (j / Math.max(k, 1)) * Math.PI * 2 + jit(i, j + 3) * 1.2, rr = 54 + jit(j, i + 7) * 30;
+            const aa = a + (k === 1 ? 0 : (j / (k - 1) - 0.5) * spread), rr = 82 + (j % 3) * 24 + jit(j, i + 7) * 10;
             t[c] = { x: hx + rr * Math.cos(aa), y: hy + rr * Math.sin(aa), o: 1 };
           });
         });
@@ -6221,7 +6279,7 @@ function cook(g) {
         const t = {}; const hub = nodes[hubId];
         Object.keys(nodes).forEach(id => t[id] = { x: 0, y: 0, o: 0 });
         t[hubId] = { x: 0, y: 0, o: 1 };
-        t.root = { x: 250, y: -10, o: 1 };
+        t.root = { x: 340, y: -10, o: 1 };
         const rel = []; hub.children.forEach(c => nodes[c].related.forEach(r => { if (nodes[r].hub !== hubId && !rel.includes(r)) rel.push(r); }));
         const direct = hub.children, all = direct.length + rel.length;
         // spread around the circle, skipping the slot where the root sits (angle ~0)
@@ -6236,24 +6294,39 @@ function cook(g) {
       const gLines = document.createElementNS(NS, 'g'), gNodes = document.createElementNS(NS, 'g');
       svg.appendChild(gLines); svg.appendChild(gNodes);
       const els = {};
-      const ZONE_INK = ['#4f6f55', '#4f6f8a', '#8f6d1c', '#82566f', '#9a5555', '#66692f', '#a85a3a', '#5d7d63', '#6a5a8a'];
+      const ZONE_INK = ['#c9d23f', '#e8b5a6', '#d79bc9', '#e0a35a', '#9fc06a', '#e08a66', '#a9b4e0', '#efd9c4', '#f3eeb0'];
       const inkOf = n => n.kind === 'hub' ? ZONE_INK[(n.n - 1) % ZONE_INK.length] : n.kind === 'leaf' ? ZONE_INK[(nodes[n.hub].n - 1) % ZONE_INK.length] : '#2b2b2b';
+      // scalloped circle: k round bumps around radius R
+      const SC = (R, k, rot = 0) => {
+        const pts = []; for (let i = 0; i < k; i++) { const a = rot + i * 2 * Math.PI / k; pts.push([R * Math.cos(a), R * Math.sin(a)]); }
+        const rr = (R * Math.sin(Math.PI / k)).toFixed(2); let d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1);
+        for (let i = 0; i < k; i++) { const q = pts[(i + 1) % k]; d += `A${rr} ${rr} 0 0 1 ${q[0].toFixed(1)} ${q[1].toFixed(1)}`; }
+        return d + 'Z';
+      };
       function shape(n) {
         const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'mn mn-' + (n.kind === 'leaf' ? n.type : n.kind)); g.dataset.id = n.id;
-        let s = '';
-        const hit = '<circle r="24" class="mn-hit"/>';
-        const ink = inkOf(n);
-        g.style.setProperty('--ink', ink);
-        if (n.kind === 'root') s = '<circle r="4" class="mc-root"/>';
-        else if (n.kind === 'hub') s = '<circle r="40" class="mc-halo mc-halo2"/><circle r="27" class="mc-halo mc-halo1"/><circle r="15" class="mc-core"/>';
-        else s = `<circle r="${n.type === 'essay' ? 5.5 : n.type === 'initiative' ? 6.5 : 4.5}" class="mc-dot"/>`;
-        const words = n.title.split(' '); const lines = []; let cur = '';
-        words.forEach(w => { if ((cur + ' ' + w).trim().length > 22 && cur) { lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); });
-        if (cur) lines.push(cur);
-        const lab = lines.slice(0, 3).map((l, i) => `<tspan x="0" dy="${i ? 1.15 : 0}em">${l.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</tspan>`).join('');
-        const off = n.kind === 'root' ? 30 : n.kind === 'hub' ? 36 : 22;
-        s += `<text class="mn-label" y="${off}">${lab}</text>`;
-        if (n.kind !== 'leaf') s += `<text class="mn-label mn-label-sub" y="${off}"><tspan x="0" dy="${(Math.min(lines.length, 3) - 1) * 1.15 + 1.25}em" class="mn-sub">${n.sub.toLowerCase()}</tspan></text>`;
+        const ink = inkOf(n); g.style.setProperty('--ink', ink);
+        let s = '', off = 24;
+        const hit = `<circle r="${n.kind === 'hub' ? 38 : 24}" class="mn-hit"/>`;
+        if (n.kind === 'root') {
+          s = `<g class="mx-rootg"><path class="mx-table" d="${SC(82, 18)}"/><path class="mx-table-in" d="${SC(66, 14, 0.2)}"/></g><text class="mx-root-t" y="-3">ADJOA</text><text class="mx-root-t" y="13">KITTOE</text>`;
+        } else if (n.kind === 'hub') {
+          s = `<path class="mx-badge" d="${SC(34, 11, n.n * 0.35)}"/><circle r="20" class="mx-plate"/><circle r="14.5" class="mx-plate-ring"/>`; off = 54;
+        } else if (n.type === 'essay') {
+          s = `<path class="mx-seed" transform="rotate(${Math.round(jit(n.id.length, 5) * 70 - 35)})" d="M0 -8 C6.5 -2 6.5 5 0 9 C-6.5 5 -6.5 -2 0 -8Z"/>`;
+        } else if (n.type === 'initiative') {
+          s = `<path class="mx-sc" d="${SC(7.5, 8)}"/>`;
+        } else s = '<circle r="5.5" class="mx-ring"/>';
+        if (n.kind !== 'root') {
+          const words = n.title.split(' '); const lines = []; let cur = '';
+          words.forEach(w => { if ((cur + ' ' + w).trim().length > 22 && cur) { lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); });
+          if (cur) lines.push(cur);
+          const L = Math.min(lines.length, 3);
+          const lab = lines.slice(0, 3).map((l, i) => `<tspan x="0" dy="${i ? 1.15 : 0}em">${l.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</tspan>`).join('');
+          const up = n.kind === 'hub' && Math.sin(-Math.PI / 2 + (n.n - 1) * 2 * Math.PI / hubs.length) > 0.15;
+          const sub = n.kind !== 'leaf' ? `<text class="mn-label mn-label-sub" y="${off}"><tspan x="0" dy="${(L - 1) * 1.15 + 1.25}em" class="mn-sub">${n.sub.toLowerCase()}</tspan></text>` : '';
+          s += `<g class="mn-lab"${up ? ` data-up style="--up:-${90 + (L - 1) * 15}px"` : ''}><text class="mn-label" y="${off}">${lab}</text>${sub}</g>`;
+        }
         g.innerHTML = hit + s;
         g.addEventListener('click', e => { e.stopPropagation(); onNodeClick(n.id); });
         g.addEventListener('mouseenter', () => highlight(n.id, true));
@@ -6265,8 +6338,8 @@ function cook(g) {
       const edges = [];
       function edge(a, b, cls) { const l = document.createElementNS(NS, 'path'); l.setAttribute('class', 'me ' + cls); l.style.setProperty('--ink', inkOf(nodes[b].kind === 'leaf' ? nodes[b] : nodes[b])); gLines.appendChild(l); const e = { a, b, el: l, cls }; edges.push(e); return e; }
       const gRings = document.createElementNS(NS, 'g'); gRings.setAttribute('class', 'mr');
-      // a light dust of tiny dots behind the clusters
-      for (let i = 0; i < 70; i++) { const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', ((jit(i, 11) - 0.5) * 1100).toFixed(1)); c.setAttribute('cy', ((jit(i, 13) - 0.5) * 900).toFixed(1)); c.setAttribute('r', (0.8 + jit(i, 17) * 1.6).toFixed(1)); gRings.appendChild(c); }
+      // the tablecloth: a wide scalloped shape behind the ring of zones
+      [['mx-cloth', 600], ['mx-cloth2', 566]].forEach(([c, r]) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('class', c); p.setAttribute('d', SC(r, 36)); p.setAttribute('transform', 'scale(1.12 0.84)'); gRings.appendChild(p); });
       svg.insertBefore(gRings, gLines);
       hubs.forEach(h => { edge('root', h.id, 'me-solid'); h.children.forEach(c => edge(h.id, c, 'me-leaf')); });
       leaves.forEach(l => l.related.forEach(r => { if (l.id < r) edge(l.id, r, 'me-rel'); }));
@@ -6356,10 +6429,9 @@ function cook(g) {
         if (document.getElementById('map').classList.contains('active')) safeHistory("replaceState", null, '', '#' + path);
       }
 
-      // ---------- panel ----------
-      const icon = { hub: '<span class="mi mi-zone"></span>', essay: '<span class="mi mi-dotk"></span>', initiative: '<span class="mi mi-ringk"></span>', artifact: '<span class="mi mi-dashk"></span>', root: '<span class="mi mi-seedk"></span>' };
+      // ---------- panel: an index docked at the left, the open zone unfolds ----------
       const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-      let openGroups = {}; let collapsed = false;
+      let collapsed = false;
       function item(id, faded) {
         const n = nodes[id];
         return `<button type="button" class="mp-item${state.leaf === id ? ' sel' : ''}${faded ? ' faded' : ''}" data-node="${id}">
@@ -6367,39 +6439,31 @@ function cook(g) {
           (state.leaf === id ? `<div class="mp-open"><p>${esc(n.desc).slice(0, 220)}${n.desc.length > 220 ? '…' : ''}</p><a href="#" data-page="${id}">Open ${esc(n.sub.toLowerCase())} →</a></div>` : '');
       }
       function render() {
-        let h = `<div class="mp-card mp-head"><span class="mi mi-seedk"></span><span class="mp-h">What's on the table</span>
-          ${state.hub ? '<button type="button" class="mp-ctl" data-act="back" aria-label="Back to the full map">←</button>' : `<button type="button" class="mp-ctl" data-act="collapse" aria-label="Collapse">${collapsed ? '+' : '−'}</button>`}</div>`;
-        if (!state.hub) {
-          if (!collapsed) {
-            h += `<div class="mp-card"><p class="mp-intro">Everything here comes out of the same kitchen. Pick a zone to see what it serves.</p>`;
-            const groups = [['hub', 'Zones', hubs.map(x => x.id)], ['essay', 'Writing', leaves.filter(l => l.type === 'essay').map(l => l.id)],
-                            ['initiative', 'Work', leaves.filter(l => l.type === 'initiative').map(l => l.id)], ['artifact', 'Keepsakes', leaves.filter(l => l.type === 'artifact').map(l => l.id)]];
-            groups.forEach(([k, label, ids]) => {
-              const open = !!openGroups[k];
-              h += `<div class="mp-group"><button type="button" class="mp-gh" data-group="${k}">${icon[k]}<span>${label}</span><span class="mp-count">${ids.length}</span><span class="mp-pm">${open ? '−' : '+'}</span></button>`;
-              if (open) h += `<div class="mp-list">${ids.map(id => `<button type="button" class="mp-item" data-node="${id}"><span class="mp-bullet"></span><span><span class="mp-t">${esc(nodes[id].title)}</span><span class="mp-s">${esc(nodes[id].sub)}</span></span></button>`).join('')}</div>`;
-              h += `</div>`;
-            });
-            h += `</div>`;
-          }
-        } else {
-          const hub = nodes[state.hub];
-          const rel = Object.keys(target).filter(id => target[id].rel);
-          h += `<div class="mp-card mp-scroll"><div class="mp-row"><span class="mi mi-zone" style="background:${inkOf(hub)}"></span><span class="mp-h">Zone ${String(hub.n).padStart(2, '0')}</span><button type="button" class="mp-ctl" data-act="back" aria-label="Close path">×</button></div>
-            <div class="mp-title">${esc(hub.title)}</div><div class="mp-sub">${esc(hub.sub)}</div><p class="mp-desc">${esc(hub.desc)}</p>
-            <div class="mp-row mp-conn"><span class="mi mi-dotk"></span><span class="mp-h">On this plate</span><span class="mp-count">${hub.children.length + rel.length}</span></div>
-            <div class="mp-list">${hub.children.map(id => item(id)).join('')}${rel.map(id => item(id, true)).join('')}</div></div>`;
+        let h = `<div class="mx-head"><svg class="mx-ic" viewBox="-10 -10 20 20" aria-hidden="true"><path d="${SC(9, 8)}"/></svg><span class="mp-h">What's on the table</span><button type="button" class="mp-ctl" data-act="collapse" aria-expanded="${!collapsed}" aria-label="${collapsed ? 'Open' : 'Close'} the index">${collapsed ? '+' : '−'}</button></div>`;
+        if (!collapsed) {
+          h += '<div class="mx-body">';
+          if (!state.hub) h += '<p class="mp-intro">Everything here comes out of the same kitchen. Pick a zone to see what it serves.</p>';
+          h += '<ul class="mx-tree">';
+          hubs.forEach(hub => {
+            const open = state.hub === hub.id; let kids = '';
+            if (open) {
+              const rel = Object.keys(target).filter(id => target[id].rel);
+              kids = `<div class="mx-kids"><p class="mp-desc">${esc(hub.desc)}</p>${hub.children.map(id => item(id)).join('')}${rel.map(id => item(id, true)).join('')}</div>`;
+            }
+            h += `<li class="mx-z${open ? ' open' : ''}"><button type="button" class="mx-zb" data-node="${hub.id}" aria-expanded="${open}"><svg class="mx-b" viewBox="-10 -10 20 20" style="--c:${inkOf(hub)}" aria-hidden="true"><path d="${SC(9, 9)}"/></svg><span class="mx-zt">${esc(hub.title)}</span><span class="mp-count">${hub.children.length}</span></button>${kids}</li>`;
+          });
+          h += '</ul></div>';
         }
         panel.innerHTML = h;
-        panel.classList.toggle('collapsed', collapsed && !state.hub);
+        panel.classList.toggle('collapsed', collapsed);
+        root.classList.toggle('mx-collapsed', collapsed);
       }
       panel.addEventListener('click', e => {
-        const act = e.target.closest('[data-act]'); if (act) { if (act.dataset.act === 'back') go(null, null); else { collapsed = !collapsed; render(); } return; }
-        const g = e.target.closest('[data-group]'); if (g) { openGroups[g.dataset.group] = !openGroups[g.dataset.group]; render(); return; }
-        const it = e.target.closest('.mp-item'); if (it) { onNodeClick(it.dataset.node); return; }
+        if (e.target.closest('[data-act]')) { collapsed = !collapsed; render(); return; }
+        const it = e.target.closest('[data-node]'); if (it) onNodeClick(it.dataset.node);
       });
-      panel.addEventListener('mouseover', e => { const it = e.target.closest('.mp-item'); if (it) highlight(it.dataset.node, true); });
-      panel.addEventListener('mouseout', e => { const it = e.target.closest('.mp-item'); if (it) highlight(it.dataset.node, false); });
+      panel.addEventListener('mouseover', e => { const it = e.target.closest('[data-node]'); if (it) highlight(it.dataset.node, true); });
+      panel.addEventListener('mouseout', e => { const it = e.target.closest('[data-node]'); if (it) highlight(it.dataset.node, false); });
 
       render(); fit(); chip.textContent = 'adjoakittoe.com/map';
       return {
@@ -7089,8 +7153,8 @@ function cook(g) {
       if (!touch) return;
       document.documentElement.classList.add('is-touch');
       // About self-assessments: the name becomes a button, the arrow stays the link
-      document.querySelectorAll('.ab-tip').forEach(tip => {
-        const a = tip.querySelector('a'); if (!a) return;
+      window.__touchTips = root => (root || document).querySelectorAll('.ab-tip').forEach(tip => {
+        const a = tip.querySelector('a'); if (!a || tip.querySelector('.ab-tip-name')) return;
         const name = [...a.childNodes].filter(n => !(n.nodeType === 1 && n.tagName === 'SPAN')).map(n => n.textContent).join('').trim();
         const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'ab-tip-name'; btn.textContent = name; btn.setAttribute('aria-expanded', 'false');
         a.textContent = '↗'; a.classList.add('ab-tip-go'); a.setAttribute('aria-label', 'Open ' + name);
@@ -7101,6 +7165,7 @@ function cook(g) {
           if (!was) { tip.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
         });
       });
+      window.__touchTips();
       document.addEventListener('click', e => { if (!e.target.closest('.ab-tip')) document.querySelectorAll('.ab-tip.open').forEach(t => t.classList.remove('open')); });
       // Shelf: titles become buttons that show the cover; the card's Open button is the link
       const hc = document.getElementById('hover-card');
@@ -7872,6 +7937,9 @@ function cook(g) {
         const h = decodeURIComponent(location.hash.slice(1)); if (h.startsWith('series-') && document.getElementById(h)) showPage(h);
       });
       // Hover photo markup shared by the lists below
+      // Photos that ship with the site: used when the Notion row has no Hover photo yet
+      const AB_PHOTOS = [['forager', 'photos/about/forager-project.jpg'], ['eadem', 'photos/about/eadem-skincare.jpg'], ['setkhem', 'photos/about/setkhem.jpg']];
+      const abPhoto = name => { const k = String(name || '').toLowerCase(), f = AB_PHOTOS.find(a => k.includes(a[0])); return f ? f[1] : ''; };
       const hoverWord = (word, photo, extra = '') => photo ? `<span class="ab-photo" data-own tabindex="0">${esc(word)}<template class="ab-photo-art"><figure class="ab-photo-card"><img src="${esc(photo)}" alt="${esc(word)}"></figure></template></span>${extra}` : esc(word) + extra;
       const bindNew = root => root.querySelectorAll('.ab-photo').forEach(x => window.__bindAbPhoto && window.__bindAbPhoto(x));
 
@@ -7905,11 +7973,13 @@ function cook(g) {
               return `<li class="ab-progress"${x.states ? ' data-states' : ''}>${esc(x.item)} <span class="ab-pct">${pct}%</span><span class="ab-bar" title="${esc(x.states ? `${done} of ${goal} (50 states plus D.C.)` : of)}"><span style="width:${pct}%"></span></span><span class="ab-of">${esc(of)}</span></li>`;
             }
             if (x.list === 'Self assessment') return `<li><span class="ab-tip">${x.link ? `<a class="lf-ext" href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.item)} <span>↗</span></a>` : `<span>${esc(x.item)}</span>`}${x.note ? `<span class="ab-tip-card" role="tooltip">${esc(x.note)}</span>` : ''}</span></li>`;
-            let h = x.photo ? hoverWord(x.item, x.photo) : esc(x.item);
-            if (x.link && !x.photo) { const a = mkA(x.link, esc(x.words || x.item)).outerHTML; h = x.words && h.includes(esc(x.words)) ? h.replace(esc(x.words), a) : x.words ? h : a; }
+            const ph = x.photo || abPhoto(x.item);
+            let h = ph ? hoverWord(x.item, ph) : esc(x.item);
+            if (x.link && !ph) { const a = mkA(x.link, esc(x.words || x.item)).outerHTML; h = x.words && h.includes(esc(x.words)) ? h.replace(esc(x.words), a) : x.words ? h : a; }
             return `<li>${h}${x.dove ? ' ' + DOVE : ''}</li>`;
           }).join('');
           bindNew(ul);
+          window.__touchTips && window.__touchTips(ul);
         });
         // the State Tracker keeps the "every state" bar current
         get('/data/states.json').then(st => {
@@ -8131,91 +8201,5 @@ function cook(g) {
       });
     });
   </script>
-
-<script>
-/* FONT TEST START
-   Optional typeface switch. Needs the "fonts" folder next to index.html.
-   To remove: delete the fonts folder (the switch hides itself), or delete this whole block and the
-   Typeface fieldset in the sidebar. Nothing else on the site depends on it. */
-(function () {
-  var SANS = "'Apercu Test', 'Inter', -apple-system, 'Segoe UI', sans-serif";
-  var MONO = "'Big Bird Test', 'IBM Plex Mono', ui-monospace, monospace";
-  var FILES = [
-    ['Apercu Test', 'apercu-regular', '400', 'normal'], ['Apercu Test', 'apercu-regular-italic', '400', 'italic'],
-    ['Apercu Test', 'apercu-medium', '500', 'normal'], ['Apercu Test', 'apercu-medium-italic', '500', 'italic'],
-    ['Apercu Test', 'apercu-bold', '700', 'normal'], ['Apercu Test', 'apercu-bold-italic', '700', 'italic'],
-    ['Big Bird Test', 'big-bird', '100 900', 'normal']
-  ];
-  var box = document.getElementById('font-switch');
-  if (!box || !window.FontFace || !document.fonts) return;
-  var faces = [], built = false, loadedAll = false;
-
-  function mk(f) {
-    var ff = new FontFace(f[0], "url('fonts/" + f[1] + ".woff2') format('woff2')", { weight: f[2], style: f[3], display: 'swap' });
-    document.fonts.add(ff);
-    return ff;
-  }
-  /* split a selector list on top-level commas only */
-  function parts(sel) {
-    var out = [], d = 0, cur = '';
-    for (var i = 0; i < sel.length; i++) {
-      var c = sel[i];
-      if (c === '(' || c === '[') d++; else if (c === ')' || c === ']') d--;
-      if (c === ',' && d === 0) { out.push(cur.trim()); cur = ''; } else cur += c;
-    }
-    if (cur.trim()) out.push(cur.trim());
-    return out;
-  }
-  function prefix(sel) {
-    return parts(sel).map(function (p) {
-      if (/^(html|:root)\b/.test(p)) return p.replace(/^(html|:root)/, '$1[data-font="alt"]');
-      return 'html[data-font="alt"] ' + p;
-    }).join(', ');
-  }
-  /* copy every rule that sets Inter or IBM Plex Mono into an alt version that uses the new faces */
-  function build() {
-    if (built) return; built = true;
-    function walk(list, host) {
-      for (var i = 0, n = list.length; i < n; i++) {
-        var r = list[i];
-        if (r.type === 1 && r.style && r.style.fontFamily) {
-          var ff = r.style.fontFamily, fam = /IBM Plex Mono/i.test(ff) ? MONO : (/Inter/i.test(ff) ? SANS : null);
-          if (!fam) continue;
-          var imp = r.style.getPropertyPriority('font-family') ? ' !important' : '';
-          try { host.insertRule(prefix(r.selectorText) + ' { font-family: ' + fam + imp + '; }', host.cssRules.length); } catch (e) {}
-        } else if (r.cssRules && (r.type === 4 || r.type === 12)) {
-          walk(r.cssRules, r);
-        }
-      }
-    }
-    Array.prototype.forEach.call(document.styleSheets, function (sh) {
-      var rules; try { rules = sh.cssRules; } catch (e) { return; }
-      if (rules) walk(rules, sh);
-    });
-  }
-  function apply(v) {
-    if (v === 'alt') { build(); document.documentElement.dataset.font = 'alt'; }
-    else delete document.documentElement.dataset.font;
-    try { localStorage.setItem('typeface', v); } catch (e) {}
-    box.querySelectorAll('input').forEach(function (i) { i.checked = i.value === v; });
-  }
-  function loadRest() {
-    if (loadedAll) return; loadedAll = true;
-    faces.slice(1).forEach(function (f) { f.load().catch(function () {}); });
-  }
-  /* show the switch only when the font files are really there */
-  var first = [mk(FILES[0]), mk(FILES[6])];
-  faces = [first[0]].concat(FILES.slice(1, 6).map(mk), [first[1]]);
-  Promise.all([first[0].load(), first[1].load()]).then(function () {
-    box.hidden = false;
-    var saved = 'default'; try { saved = localStorage.getItem('typeface') || 'default'; } catch (e) {}
-    if (saved === 'alt') { loadRest(); apply('alt'); } else apply('default');
-    box.addEventListener('change', function (e) {
-      if (e.target && e.target.name === 'typeface') { if (e.target.value === 'alt') loadRest(); apply(e.target.value); }
-    });
-  }).catch(function () { box.hidden = true; });
-})();
-/* FONT TEST END */
-</script>
 </body>
 </html>
