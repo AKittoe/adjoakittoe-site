@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Marketing Manager",
+    "label": "Work",
+    "org": "Fresh Food Connect",
+    "link": "",
+    "page": "case-ffc",
+    "order": 1
+  },
+  {
+    "title": "Community Connector",
+    "label": "Field",
+    "org": "Tractor Beverage Co.",
+    "link": "https://drinktractor.com/",
+    "page": "",
+    "order": 2
+  },
+  {
+    "title": "Policy Working Group",
+    "label": "Policy",
+    "org": "Food for the Spirit",
+    "link": "https://foodforthespirit.org/2026/07/14/building-power-together-our-2026-policy-working-group-is-underway/",
+    "page": "",
+    "order": 3
+  },
+  {
+    "title": "Rapid Response Committee",
+    "label": "Community",
+    "org": "Black Farmer Fund",
+    "link": "https://blackfarmerfund.org/",
+    "page": "",
+    "order": 4
+  }
+]
