@@ -711,5 +711,434 @@
       "cover": ""
     }
   ],
-  "films": []
+  "films": [],
+  "books": [
+    {
+      "title": "Farming While Black",
+      "creator": "Leah Penniman",
+      "link": "https://literal.club/book/leah-penniman-farming-while-black-4crop",
+      "rating": null,
+      "status": "Reading"
+    },
+    {
+      "title": "Sky Full of Elephants",
+      "creator": "Cebo Campbell",
+      "link": "https://literal.club/book/cebo-campbell-sky-full-of-elephants-z4km9",
+      "rating": null,
+      "status": "Reading"
+    },
+    {
+      "title": "Heal Thyself for Health and Longevity",
+      "creator": "Queen Afua",
+      "link": "https://literal.club/book/queen-afua-heal-thyself-for-health-and-longevity-g99fp",
+      "rating": 4,
+      "status": "Finished"
+    },
+    {
+      "title": "The United Independent Compensatory Code System Concept a textbook/workbook for Thought, Speech and/or Action for Victims of Racism",
+      "creator": "Neely Fuller Jr.",
+      "link": "https://literal.club/book/neely-fuller-jr-the-united-independent-compensatory-code-system-concept-a-textbookworkbook-for-thought-speech-andor-action-for-victims-of-racism-9z1fl",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The 7 Habits of Highly Effective People",
+      "creator": "Stephen R. Covey",
+      "link": "https://literal.club/book/the-7-habits-of-highly-effective-people-7uy2c",
+      "rating": 3,
+      "status": "Finished"
+    },
+    {
+      "title": "Atomic Habits",
+      "creator": "James Clear",
+      "link": "https://literal.club/book/james-clearjames-clearatomic-habits-3er28",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "As a Man Thinketh",
+      "creator": "James Allen",
+      "link": "https://literal.club/book/as-a-man-thinketh-u5qea",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Attached",
+      "creator": "Amir Levine, Hel Levine",
+      "link": "https://literal.club/book/amir-levine-hel-levine-attached-m5oc0",
+      "rating": 5,
+      "status": "Finished"
+    },
+    {
+      "title": "Adult Children of Emotionally Immature Parents",
+      "creator": "Lindsay C. Gibson",
+      "link": "https://literal.club/book/lindsay-c-gibson-adult-children-of-emotionally-immature-parents-zc7c1",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The Destruction of Black Civilization",
+      "creator": "Chancellor Williams",
+      "link": "https://literal.club/book/chancellor-williams-the-destruction-of-black-civilization-7a68c",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Romeo and Juliet",
+      "creator": "William Shakespeare",
+      "link": "https://literal.club/book/romeo-and-juliet-ynnmb",
+      "rating": 1,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/harry-potter-and-the-sorcerers-stone-l9d9l",
+      "rating": 5,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Prisoner of Azkaban",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/j-k-rowlingharry-potter-and-the-prisoner-of-azkaban-book-3-c25kh",
+      "rating": 4,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Deathly Hallows",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/harry-potter-and-the-deathly-hallows-v8jzp",
+      "rating": 3,
+      "status": "Finished"
+    },
+    {
+      "title": "The Outsiders",
+      "creator": "Lynda Edwards",
+      "link": "https://literal.club/book/the-outsiders-lorne",
+      "rating": 3,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Half-Blood Prince",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/harry-potter-and-the-half-blood-prince-rfvgm",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Goblet of Fire",
+      "creator": "Mary GrandPré, J. K. Rowling",
+      "link": "https://literal.club/book/harry-potter-and-the-goblet-of-fire-n36xp",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Order of the Phoenix",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/harry-potter-and-the-order-of-the-phoenix-cm6gf",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The Skin I'm In",
+      "creator": "Sharon Flake",
+      "link": "https://literal.club/book/the-skin-im-in-93ypq",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "A hire love",
+      "creator": "Candice Dow",
+      "link": "https://literal.club/book/candice-dow-a-hire-love-n2p6u",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Chamber of Secrets",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/harry-potter-and-the-chamber-of-secrets-0fdrp",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Lord of the Flies",
+      "creator": "William Golding",
+      "link": "https://literal.club/book/lord-of-the-flies-g2a96",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Sula",
+      "creator": "Toni Morrison",
+      "link": "https://literal.club/book/sula-rg0kc",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The Bluest Eye",
+      "creator": "Toni Morrison",
+      "link": "https://literal.club/book/the-bluest-eye-gb12h",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The Color of Water",
+      "creator": "James McBride",
+      "link": "https://literal.club/book/james-mcbridethe-color-of-water-36xjf",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Sacrifice",
+      "creator": "S. J. Bolton",
+      "link": "https://literal.club/book/s-j-bolton-sacrifice-142e9",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Breaking faith",
+      "creator": "Anna Blundy",
+      "link": "https://literal.club/book/anna-blundy-breaking-faith-z70ib",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Malcolm X",
+      "creator": "Walter Dean Myers",
+      "link": "https://literal.club/book/walter-dean-myers-malcolm-x-nf9in",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Girls for Breakfast",
+      "creator": "David Yoo",
+      "link": "https://literal.club/book/david-yoo-girls-for-breakfast-by5qz",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Hazard",
+      "creator": "Gardiner Harris",
+      "link": "https://literal.club/book/gardiner-harris-hazard-i8fav",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Macbeth",
+      "creator": "William Shakespeare",
+      "link": "https://literal.club/book/macbeth-57id3",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The Alchemist",
+      "creator": "Paulo Coelho",
+      "link": "https://literal.club/book/the-alchemist-ju5wz",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The Crucible",
+      "creator": "Arthur Miller",
+      "link": "https://literal.club/book/arthur-millerthe-crucible-62hai",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The hidden man",
+      "creator": "David Ellis",
+      "link": "https://literal.club/book/david-ellis-the-hidden-man-615au",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The End of Blackness",
+      "creator": "Debra Dickerson",
+      "link": "https://literal.club/book/debra-dickerson-the-end-of-blackness-8e72q",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Waterloo sunset",
+      "creator": "Martin Edwards",
+      "link": "https://literal.club/book/martin-edwards-waterloo-sunset-vov2z",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Smash Cut",
+      "creator": "Sandra Brown",
+      "link": "https://literal.club/book/sandra-brown-smash-cut-7aph7",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Rainwater",
+      "creator": "Sandra Brown",
+      "link": "https://literal.club/book/sandra-brown-rainwater-vkuin",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "A Separate Peace",
+      "creator": "John Knowles",
+      "link": "https://literal.club/book/a-separate-peace-ded5l",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Lucifer's Tears",
+      "creator": "James Thompson",
+      "link": "https://literal.club/book/james-thompson-lucifers-tears-gm6o8",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Not in the Flesh",
+      "creator": "Ruth Rendell",
+      "link": "https://literal.club/book/ruth-rendell-not-in-the-flesh-hdcq7",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Cultural Misorientation",
+      "creator": "Kobi K. K. Kambon",
+      "link": "https://literal.club/book/kobi-k-k-kambon-cultural-misorientation-ynll3",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The Autobiography of Malcolm X",
+      "creator": "Malcolm X",
+      "link": "https://literal.club/book/the-autobiography-of-malcolm-x-yplv6",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Post Traumatic Slave Syndrome",
+      "creator": "Joy DeGruy, Joy DeGruy Leary",
+      "link": "https://literal.club/book/post-traumatic-slave-syndrome-cglxr",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Christopher Columbus and the Afrikan Holocaust",
+      "creator": "John Henrik Clarke",
+      "link": "https://literal.club/book/john-henrik-clarke-christopher-columbus-and-the-afrikan-holocaust-dhp3f",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "From the Earth",
+      "creator": "Brett Stevens, Peter Gilmore",
+      "link": "https://literal.club/book/brett-stevens-peter-gilmore-from-the-earth-1zo6y",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Reality Revolution",
+      "creator": "Erriel D. Roberson",
+      "link": "https://literal.club/book/erriel-d-roberson-reality-revolution-q3753",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The Africa Cookbook",
+      "creator": "Jessica B. Harris",
+      "link": "https://literal.club/book/jessica-b-harris-the-africa-cookbook-k8wpp",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Soul",
+      "creator": "Richards, Todd (Chef)",
+      "link": "https://literal.club/book/richards-todd-chef-soul-g291n",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "The White Image in the Black Mind",
+      "creator": "Mia Bay",
+      "link": "https://literal.club/book/mia-bay-the-white-image-in-the-black-mind-9ldhc",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Half-blood Prince",
+      "creator": "Mary Grandpre, J. K. Rowling",
+      "link": "https://literal.club/book/harry-potter-and-the-half-blood-prince-0x45y",
+      "rating": 3,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Deathly Hallows",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/j-k-rowlingharry-potter-and-the-deathly-hallows-8mxup",
+      "rating": 3,
+      "status": "Finished"
+    },
+    {
+      "title": "The Outsiders",
+      "creator": "",
+      "link": "https://literal.club/book/the-outsiders-z0eqj",
+      "rating": 3,
+      "status": "Finished"
+    },
+    {
+      "title": "The Bluest Eye",
+      "creator": "Toni Morrison",
+      "link": "https://literal.club/book/toni-morrison-the-bluest-eye-5zuai",
+      "rating": 4,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Chamber of Secrets",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/j-k-rowlingharry-potter-and-the-chamber-of-secrets-j93ll",
+      "rating": 4,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Order of the Phoenix",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/j-k-rowlingharry-potter-and-the-order-of-the-phoenix-1cona",
+      "rating": 4,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Goblet of Fire",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/harry-potter-and-the-goblet-of-fire-uf264",
+      "rating": 4,
+      "status": "Finished"
+    },
+    {
+      "title": "Romeo and Juliet",
+      "creator": "William Shakespeare",
+      "link": "https://literal.club/book/romeo-and-juliet-73681",
+      "rating": 1,
+      "status": "Finished"
+    },
+    {
+      "title": "The Autobiography of Malcolm X",
+      "creator": "Malcolm X, M. S. Handler",
+      "link": "https://literal.club/book/malcolm-x-m-s-handler-the-autobiography-of-malcolm-x-ezw05",
+      "rating": 5,
+      "status": "Finished"
+    },
+    {
+      "title": "A Separate Peace",
+      "creator": "John Knowles",
+      "link": "https://literal.club/book/a-separate-peace-c04m1",
+      "rating": null,
+      "status": "Finished"
+    },
+    {
+      "title": "Harry Potter and the Sorcerers Stone",
+      "creator": "J. K. Rowling",
+      "link": "https://literal.club/book/harry-potter-and-the-sorcerers-stone-lahzb",
+      "rating": 5,
+      "status": "Finished"
+    }
+  ]
 }
