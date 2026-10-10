@@ -1,1 +1,77 @@
-[]
+[
+  {
+    "dish": "Cocoa Butter Panna Cotta, Caramel, Fonio Crumbles",
+    "src": "/assets/kitchen/3f400886f671819d8696e9ab919777e8.png",
+    "order": 1
+  },
+  {
+    "dish": "Suya Tartare, Fonio Tortilla, Dawadawa Aioli",
+    "src": "/assets/kitchen/3f400886f6718149a8a0e96645707fb9.jpg",
+    "order": 2
+  },
+  {
+    "dish": "Charred Avocado, Confit Tomatoes, Basil Oil",
+    "src": "/assets/kitchen/3f400886f67181b3bb7bfa2064e229f6.jpg",
+    "order": 3
+  },
+  {
+    "dish": "Grapefruit Poundcake, Tequila Passionfruit Gel, Candied Ginger",
+    "src": "/assets/kitchen/3f400886f6718134b564e2bab81c9843.jpg",
+    "order": 4
+  },
+  {
+    "dish": "Roasted Brussels, Grilled Cod, Garlic Beurre Blanc",
+    "src": "/assets/kitchen/3f400886f67181c58b7eec065e1bae84.jpg",
+    "order": 5
+  },
+  {
+    "dish": "Oyster Mushroom, Pancetta, Oyster Broth, Fennel, Peas",
+    "src": "/assets/kitchen/3f400886f67181c685a3c43d4196e2be.jpg",
+    "order": 6
+  },
+  {
+    "dish": "Gnocchi, Alliums, Buttered Chanterelle",
+    "src": "/assets/kitchen/3f400886f67181249bafcff017d78f56.jpg",
+    "order": 7
+  },
+  {
+    "dish": "Celeriac Puree, Cabbage, Glazed Mushroom",
+    "src": "/assets/kitchen/3f400886f67181ce97c0fe5d7f2a6f93.jpg",
+    "order": 8
+  },
+  {
+    "dish": "English Peas, Ramps, Almond Gnocchi",
+    "src": "/assets/kitchen/3f400886f671814b841cc7366da98085.jpg",
+    "order": 9
+  },
+  {
+    "dish": "Palm Nut Soup, Fonio, Palm Nut Oil, Okra",
+    "src": "/assets/kitchen/3f400886f67181799f7be128e4403003.jpg",
+    "order": 10
+  },
+  {
+    "dish": "Agege Bread Pudding, Hibiscus Coulis",
+    "src": "/assets/kitchen/3f400886f671811a9abecad951182a30.jpg",
+    "order": 11
+  },
+  {
+    "dish": "Suya Mushroom, Yassa Emulsion, Ash",
+    "src": "/assets/kitchen/3f400886f671818d840cfd70d32d6f96.jpg",
+    "order": 12
+  },
+  {
+    "dish": "Sweet Corn Epsuma, Coconut Condensed Milk",
+    "src": "/assets/kitchen/3f400886f671813fa166d1e1bf96f47b.jpg",
+    "order": 13
+  },
+  {
+    "dish": "Heirloom Tomatoes, Mixed Berries, Rose Vinaigrette",
+    "src": "/assets/kitchen/3f400886f671819cb8f8c5c4223a2a9a.jpg",
+    "order": 14
+  },
+  {
+    "dish": "Field Green Salad, Mushrooms, Herbs",
+    "src": "/assets/kitchen/3f400886f67181348a04ff348d916568.jpg",
+    "order": 15
+  }
+]

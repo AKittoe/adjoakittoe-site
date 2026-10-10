@@ -55,6 +55,12 @@
     "also": "cosmogram"
   },
   {
+    "term": "Love",
+    "definition": "The only thing that matters",
+    "also": "",
+    "auto": true
+  },
+  {
     "term": "Nkyinkyim",
     "definition": "An Adinkra symbol of a twisting path. It stands for initiative, versatility, and staying with the journey.",
     "also": ""
