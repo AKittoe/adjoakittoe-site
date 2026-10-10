@@ -27,10 +27,12 @@ const DB = {
   aboutLists: '46f20b4644bc496588567cb26be69015', // About Lists
   kitchen: '3c58ed346e0b423986f73ddac19aa2e5',    // Kitchen Photos (Archive)
   glossary: '19b1f26619394353a5fc42541805a41b',                     // Glossary (Appendix)
+  cases: '59d300da5ba94a55a8f6c54f2ebe88a5',      // Case Studies (Work page + case study pages)
+  sitePages: 'bfc0fc750c634184858700889ae7b79e',  // Site Pages & Links (Changelog, Colophon, Legal, AI use, new pages, menu and footer links)
 };
 // A link or @mention to one of these databases in a Notion page goes to that page of the site
 const DB_PAGE = { notes: 'notes', states: 'states', projects: 'projects', life: 'now', published: 'published', stack: 'bookmarks', bookmarks: 'bookmarks', shelf: 'bookmarks',
-  events: 'events', resources: 'resources', photography: 'photography', academia: 'academia', resume: 'portfolio', aboutLists: 'about', kitchen: 'archive', glossary: 'appendix' };
+  events: 'events', resources: 'resources', photography: 'photography', academia: 'academia', resume: 'portfolio', aboutLists: 'about', kitchen: 'archive', glossary: 'appendix', cases: 'portfolio' };
 const PAGE_BY_DB = Object.fromEntries(Object.entries(DB_PAGE).map(([k, v]) => [DB[k], v]));
 const LITERAL = 'ChefAK';
 const LETTERBOXD = 'eauxjai';
@@ -70,6 +72,7 @@ async function children(id) {
 const plain = p => (p?.title || p?.rich_text || []).map(t => t.plain_text).join('').trim();
 const check = p => !!p?.checkbox;
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const idOf = s => String(s || '').replace(/-/g, '');
 const slugify = s => String(s || '').toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 async function saveFile(url, folder, name, max = 2000) {
@@ -135,6 +138,13 @@ const slugById = {};
 for (const p of allPieceRows) if (plain(p.properties.Slug)) slugById[p.id.replace(/-/g, '')] = plain(p.properties.Slug);
 for (const p of pieceRows) slugById[p.id.replace(/-/g, '')] = plain(p.properties.Slug) || slugify(plain(p.properties.Title));
 
+// Case studies and site pages: their rows link to their own pages
+const caseRows = await queryAll(DB.cases).catch(e => { console.warn(`Skipped cases: ${e.message}`); return []; });
+const sitePageRows = await queryAll(DB.sitePages).catch(e => { console.warn(`Skipped site pages: ${e.message}`); return []; });
+const caseSlug = p => 'case-' + (plain(p.properties.Slug).replace(/^case-/, '') || slugify(plain(p.properties.Org)));
+for (const p of caseRows) slugById[idOf(p.id)] = caseSlug(p);
+for (const p of sitePageRows) { const sl = plain(p.properties.Slug).replace(/^#/, '') || slugify(plain(p.properties.Title)); if (sl) slugById[idOf(p.id)] = sl; }
+
 const guideRows = [];
 for (const p of await queryAll(DB.guideItems)) {
   const pr = p.properties; if (!check(pr.Publish)) continue;
@@ -147,7 +157,6 @@ for (const p of await queryAll(DB.guideItems)) {
 const txt = rt => (rt || []).map(t => t.plain_text).join('');
 const ARROW_DL = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>';
 const SEC_COLORS = { ingredients: '#d0644a', method: '#4a7fb5', notes: '#b8922e' };
-const idOf = s => String(s || '').replace(/-/g, '');
 
 // Photo on hover: purple word + an image right under it with the caption "Hover: word".
 // Each image belongs only to its own page, so the same word can show different photos.
@@ -185,7 +194,8 @@ function rich(rt = [], ctx = {}) {
     const raw = t.plain_text;
     let s = esc(raw).replace(/\n/g, '<br>');
     const a = t.annotations || {};
-    if (a.code) s = /^#[\w-]+$/.test(raw.trim()) ? `<span class="es-tag">${s}</span>` : raw.trim().length <= 3 ? `<kbd>${s}</kbd>` : `<code>${s}</code>`;
+    if (a.code && /^ai drafted$/i.test(raw.trim())) s = `<span class="ai-pill" title="Drafted with AI. See the AI use page.">${s}</span>`;
+    else if (a.code) s = /^#[\w-]+$/.test(raw.trim()) ? `<span class="es-tag">${s}</span>` : raw.trim().length <= 3 ? `<kbd>${s}</kbd>` : `<code>${s}</code>`;
     if (a.bold) s = `<strong>${s}</strong>`;
     if (a.italic) s = `<em>${s}</em>`;
     if (a.strikethrough) s = `<s>${s}</s>`;
@@ -194,7 +204,7 @@ function rich(rt = [], ctx = {}) {
     else if (a.color === 'gray') s = `<span class="muted">${s}</span>`;
     else if (a.color === 'gray_background') s = `<span class="lf-tag">${s}</span>`;
     else if (a.color === 'purple') s = hoverSpan(s, raw, ctx);
-    else if (a.color === 'blue') { const m = raw.match(/^([\s\S]*?)\s*\(([^()]+)\)\s*$/); if (m && m[1].trim()) s = `<span class="np-hint" tabindex="0">${esc(m[1].trim())}<span class="np-hint-box" role="tooltip">${esc(m[2].trim())}</span></span>${/\s$/.test(raw) ? ' ' : ''}`; }
+    else if (a.color === 'blue') { const m = raw.match(/^([\s\S]*?)\s*\(([^()]+)\)\s*$/); if (m && m[1].trim()) { if (!ctx.preview) HINTS.push({ term: m[1].trim(), definition: m[2].trim(), page: ctx.slug || '' }); } if (m && m[1].trim()) s = `<span class="np-hint" tabindex="0">${esc(m[1].trim())}<span class="np-hint-box" role="tooltip">${esc(m[2].trim())}</span></span>${/\s$/.test(raw) ? ' ' : ''}`; }
     // links
     // @mention of a page or database: green link with an arrow
     const mType = t.type === 'mention' ? t.mention?.type : '';
@@ -264,6 +274,7 @@ function formUrl(url) {
   const ta = u.match(/tally\.so\/(?:r|embed)\/(\w+)/); if (ta) return `https://tally.so/embed/${ta[1]}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
   return '';
 }
+const HINTS = []; // blue hover words, also added to the Appendix glossary
 const SKIPPED = new Set(); // block types the site cannot show yet (listed in the sync log)
 async function saveImg(v, id) { return saveFile(fileUrl(v), 'pieces', idOf(id)); }
 
@@ -278,6 +289,8 @@ async function figure(b, ctx) {
   const img = `<img class="sg-img${shape} sg-pop" src="${esc(src)}" alt="${esc(text || '')}" loading="lazy">`;
   const fc = text || credit ? `<figcaption><span>${esc(text || '')}</span>${credit ? `<span class="lf-credit">${esc(credit)}</span>` : ''}</figcaption>` : '';
   if (flags.tilt) return `<figure class="lf-figure"><div class="wh-tilt">${img}</div>${fc}</figure>`;
+  // (wide) = full width, edge to edge across the page, like the hue chart on Visual Research
+  if (flags.wide) return `<figure class="lf-bleed np-bleed"><div class="lf-bleed-inner">${img.replace(' rect', '')}</div>${fc}</figure>`;
   return `<figure class="lf-figure${flags.wide ? ' np-wide' : ''}">${img}${fc}</figure>`;
 }
 
@@ -471,6 +484,8 @@ async function units(blocks, ctx) {
         }
         // a gray line in a guide card that starts with Base: or Recipe by
         const plainTxt = txt(rt).trim();
+        // [Colors and type] (or [coded part]) marks where a page's coded part goes
+        if (ctx.plain && /^\[(colors and type|coded part)\]$/i.test(plainTxt)) { push('<div data-keep-slot></div>'); break; }
         // a line that starts with h5: or h6: becomes that small heading
         const hx = plainTxt.match(/^h([56])\s*:\s*/i);
         if (hx) { const r2 = rt.map(r => ({ ...r })); let cut = hx[0].length; for (const r of r2) { const k = Math.min(cut, r.plain_text.length); r.plain_text = r.plain_text.slice(k); cut -= k; if (!cut) break; } push(`<h${hx[1]} class="sg-h">${rich(r2.filter(r => r.plain_text), ctx)}</h${hx[1]}>`); break; }
@@ -480,10 +495,12 @@ async function units(blocks, ctx) {
         const pcls = ctx.template === 'Guide' && !ctx.inCard ? (rt.every(r => r.annotations?.color === 'gray') ? ' class="pt-tip"' : ' class="ws-lead"') : '';
         out.push({ html: (rt.length ? `<p${pcls}>${para(rt, ctx)}</p>` : '') + (kids.length ? await html(kids, ctx) : ''), notes }); break;
       }
-      case 'heading_2': case 'heading_3': case 'heading_4': {
+      case 'heading_1': case 'heading_2': case 'heading_3': case 'heading_4': {
         // Notion Heading 2, 3, 4 = site Heading 2, 3, 4 (Heading 1 starts a section). h5: and h6: lines add 5 and 6.
-        const lvl = { heading_2: 2, heading_3: 3, heading_4: 4 }[t];
-        push(`<h${lvl} class="sg-h" id="${ctx.anchors[idOf(b.id)] || ''}">${rich(v.rich_text, ctx)}</h${lvl}>`);
+        // On plain pages (case studies, Changelog, Colophon...) Heading 1 and 2 are both the page's section headings.
+        const lvl = { heading_1: 2, heading_2: 2, heading_3: 3, heading_4: 4 }[t];
+        const hid = (ctx.anchors || {})[idOf(b.id)] || (ctx.plain ? slugify(txt(v.rich_text)) : '');
+        push(`<h${lvl}${ctx.plain ? '' : ' class="sg-h"'}${hid ? ` id="${hid}"` : ''}>${rich(v.rich_text, ctx)}</h${lvl}>`);
         if (b.children) push(await html(b.children, ctx)); break;
       }
       case 'quote': {
@@ -632,7 +649,7 @@ for (const p of pieceRows) {
   const pr = p.properties; const id = idOf(p.id);
   const slug = slugById[id];
   const template = pr.Template?.select?.name || ((pr.Tags?.multi_select || []).some(t => t.name === 'recipe') ? 'Recipe' : 'Essay');
-  const ctx = { slug, template, title: plain(pr.Title), images: [], serves: pr.Serves?.number || 0, srcN: 0, step: 0, stepBadge: 0, letter: 0 };
+  const ctx = { slug, template, preview: !check(pr.Publish), title: plain(pr.Title), images: [], serves: pr.Serves?.number || 0, srcN: 0, step: 0, stepBadge: 0, letter: 0 };
   let body = { html: '', nav: [] };
   try { const bl = await children(p.id); await collectHovers(bl, ctx, id); body = await layout(bl, ctx); } catch (e) { console.warn(`Skipped body of ${slug}: ${e.message}`); }
   const words = body.html.replace(/<template[\s\S]*?<\/template>/g, '').replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
@@ -838,8 +855,55 @@ await part('academia', async () => {
   return out.sort((a, b) => ord(a, b) || String(b.year).localeCompare(String(a.year)));
 });
 
-await part('glossary', async () => (await queryAll(DB.glossary)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
-  term: plain(pr.Term), definition: inl(rtOf(pr.Definition)), also: plain(pr['Also matches']) }; }).filter(x => x.term).sort((a, b) => a.term.localeCompare(b.term)));
+// Plain pages (case studies and Site Pages & Links): Notion body -> the same markup as the hand-built pages
+async function plainPage(pageId, slug) {
+  const bl = await children(pageId); if (!bl.length) return '';
+  const ctx = { slug, template: 'Page', plain: true, title: '', images: [], srcN: 0, step: 0, stepBadge: 0, letter: 0, anchors: {} };
+  await collectHovers(bl, ctx, idOf(pageId));
+  return (await html(bl, ctx)).replace(/ class="np-in"/g, ' class="ab-link"').replace(/<(ul|ol) class="lf-list">/g, '<$1>');
+}
+const stat = l => { const s = l.trim(); if (!s) return null; const i = s.indexOf('|'); return i >= 0 ? [s.slice(0, i).trim(), s.slice(i + 1).trim()] : [s.split(/\s+/)[0], s.split(/\s+/).slice(1).join(' ')]; };
+
+await part('cases', async () => {
+  const out = [];
+  for (const p of caseRows.filter(p => check(p.properties.Publish))) {
+    const pr = p.properties, slug = caseSlug(p);
+    let body = ''; try { body = await plainPage(p.id, slug); } catch (e) { console.warn(`Skipped body of ${slug}: ${e.message}`); }
+    const link = url(pr.Link), inPage = siteHref(link);
+    out.push({ slug, org: plain(pr.Org), sub: plain(pr.Subtitle), ctx: plain(pr.Context), date: plain(pr.Dates),
+      challenge: inl(rtOf(pr.Challenge)), solution: inl(rtOf(pr.Solution)), impact: inl(rtOf(pr.Impact)),
+      statsLabel: sel(pr['Stats label']) || 'Results', stats: plain(pr.Stats).split('\n').map(stat).filter(Boolean),
+      link: inPage ? '' : link, linkPage: inPage, linkWords: plain(pr['Link words']), note: plain(pr.Note),
+      photo: await saveProp(p, pr['Hover photo'], 'hover'), button: plain(pr['Button words']) || 'View case study',
+      title: plain(pr['Page title']) || [plain(pr.Org), plain(pr.Subtitle)].filter(Boolean).join(': '), subline: plain(pr['Page subline']),
+      body, order: num(pr.Order) });
+  }
+  return out.sort(ord);
+});
+
+await part('site-pages', async () => {
+  const out = [];
+  for (const p of sitePageRows.filter(p => check(p.properties.Publish))) {
+    const pr = p.properties, slug = slugById[idOf(p.id)]; if (!slug) continue;
+    let body = ''; try { body = await plainPage(p.id, slug); } catch (e) { console.warn(`Skipped body of ${slug}: ${e.message}`); }
+    // Changelog style: each heading is a date, with its list under it
+    if (sel(pr.Style) === 'Changelog' && body) body = body.split(/(?=<h2[ >])/).map(part => /^<h2/.test(part) ? `<section class="cl-entry">${part.replace(/^<h2[^>]*>/, '<h2 class="cl-date">')}</section>` : part).join('');
+    const link = url(pr.Link), inPage = siteHref(link);
+    out.push({ slug, title: plain(pr.Title), sub: plain(pr.Subtitle), style: sel(pr.Style) || 'Page', replace: check(pr['Replace built page']),
+      menu: sel(pr.Menu), footer: sel(pr.Footer), link: inPage ? '' : link, linkPage: inPage, words: plain(pr['Link words']), hide: check(pr['Hide link']),
+      body, order: num(pr.Order) });
+  }
+  return out.sort(ord);
+});
+
+await part('glossary', async () => {
+  const list = (await queryAll(DB.glossary)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
+    term: plain(pr.Term), definition: inl(rtOf(pr.Definition)), also: plain(pr['Also matches']) }; }).filter(x => x.term);
+  // Blue hover words from any published page join the glossary too (a Glossary row with the same term wins)
+  const have = new Set(list.flatMap(x => [x.term, ...String(x.also || '').split(',')].map(k => k.trim().toLowerCase()).filter(Boolean)));
+  for (const h of HINTS) { const k = h.term.toLowerCase(); if (have.has(k)) continue; have.add(k); list.push({ term: h.term.charAt(0).toUpperCase() + h.term.slice(1), definition: esc(h.definition), also: '', auto: true }); }
+  return list.sort((a, b) => a.term.localeCompare(b.term));
+});
 
 await mkdir('data', { recursive: true });
 const save = (f, d) => writeFile(`data/${f}`, JSON.stringify(d, null, 2) + '\n');

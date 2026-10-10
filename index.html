@@ -1492,6 +1492,8 @@
     .sh-ai { position: absolute; top: 8px; right: 8px; font-size: 8px; text-transform: uppercase; letter-spacing: 0.8px; background: rgba(255,255,255,0.7); color: #6a5a8a; border-radius: 999px; padding: 1px 6px; }
     .sh-cover { position: relative; }
     .col-credits { margin-top: 48px; scroll-margin-top: 24px; }
+    #colophon h2#credits, .np-case h2, .np-sitepage h2 { scroll-margin-top: 24px; }
+    #colophon h2#credits { margin-top: 48px; }
     .sf-sub { padding-left: 12px; color: #777 !important; font-size: 12px; }
 
     .sb-divider { border: none; border-top: 1px solid rgba(43,43,43,0.07); margin: 28px 0 22px; }
@@ -2920,6 +2922,8 @@
     .lf-toolbar.lf-auto { margin-bottom: 18px; }
     .ws-step h3 { margin: 14px 0 6px !important; }
     .ws-card-link { color: inherit; text-decoration: none; display: block; }
+    .np-bleed .lf-bleed-inner { padding: 0; background: transparent; }
+    .np-bleed .lf-bleed-inner img { display: block; width: 100%; height: auto; max-height: 80vh; object-fit: cover; border-radius: 0 !important; }
     .np-page :is(.ws-steps, .ws-cards, .ws-tools, .ws-shop, .pt-groups, .pt-favs, .lb-rules, .lb-grid, .lf-cards, .bm-gallery, .bm-swatches) { margin-bottom: 22px; }
     .vs-open { display: inline-block; margin-top: 8px; font-size: 12px; color: inherit; opacity: 0.75; }
     .lf-figure .sg-img.circle, .np-page .lf-figure img.sg-img.circle { border-radius: 50%; }
@@ -3285,7 +3289,7 @@
         </div>
 
 
-        <section class="cp-ref" id="colophon-palette">
+        <section class="cp-ref" id="colophon-palette" data-keep>
           <h2 class="cp-h">Colors</h2>
           <p class="cp-p">A few core colors stay the same everywhere. Some sections get their own paper, so you can tell you've gone somewhere. Accents show up in specific places, not across the whole site.</p>
           <h3 class="cp-h3">Core</h3>
@@ -4710,9 +4714,9 @@ function cook(g) {
           <h2 data-t="resources-005">Join the Movement</h2>
           <p data-t="resources-006">Whether you farm, fund, organize, or cook, there's a place for you in this work.</p>
           <div class="kf-cards">
-            <button type="button" class="kf-card" data-rf-open=""><span class="kf-cn">01</span><b>Suggest a resource</b><span>An organization, tool, or guide that helped you.</span><span class="kf-go">Open the form →</span></button>
-            <button type="button" class="kf-card" data-rf-open=""><span class="kf-cn">02</span><b>Share a funding deadline</b><span>Grants and funds with dates, so nobody misses one.</span><span class="kf-go">Open the form →</span></button>
-            <a class="kf-card" href="#" data-page="about" data-anchor="contact"><span class="kf-cn">03</span><b>Join the database</b><span>Help build a shared directory across food systems groups.</span><span class="kf-go">Reach out →</span></a>
+            <button type="button" class="kf-card" data-rf-open=""><span class="kf-cn">01</span><b data-t="resources-007">Suggest a resource</b><span data-t="resources-008">An organization, tool, or guide that helped you.</span><span data-t="resources-009" class="kf-go">Open the form →</span></button>
+            <button type="button" class="kf-card" data-rf-open=""><span class="kf-cn">02</span><b data-t="resources-010">Share a funding deadline</b><span data-t="resources-011">Grants and funds with dates, so nobody misses one.</span><span data-t="resources-012" class="kf-go">Open the form →</span></button>
+            <a class="kf-card" href="#" data-page="about" data-anchor="contact"><span class="kf-cn">03</span><b data-t="resources-013">Join the database</b><span data-t="resources-014">Help build a shared directory across food systems groups.</span><span data-t="resources-015" class="kf-go">Reach out →</span></a>
           </div>
         </section>
       </div>
@@ -5849,10 +5853,37 @@ function cook(g) {
       }
       if (!ev.past && ev.cal) {
         const enc = encodeURIComponent, where = ev.where || '', about = ev.desc || '';
-        const g = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${enc(ev.title)}&dates=${ev.cal.start}/${ev.cal.end}&details=${enc(about)}&location=${enc(where)}`;
-        const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//adjoakittoe.com//events//EN','BEGIN:VEVENT',`UID:${key}-${ev.cal.start}@adjoakittoe.com`,`DTSTAMP:20261008T000000Z`,`DTSTART;VALUE=DATE:${ev.cal.start}`,`DTEND;VALUE=DATE:${ev.cal.end}`,`SUMMARY:${ev.title}`,`LOCATION:${where}`,`DESCRIPTION:${about.replace(/[,;]/g, m => '\\' + m)}`,'END:VEVENT','END:VCALENDAR'].join('\r\n');
+        // Time like "6:30 PM", "6:30–9 PM", "7pm to 10pm", "18:00 - 21:00". Blank means all day.
+        const tm = String(ev.time || '').toLowerCase().match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?(?:\s*(?:-|–|—|to)\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?)?/);
+        const h24 = (h, ap, fb) => { h = +h; ap = (ap || fb || '').replace(/\./g, ''); if (ap === 'pm' && h < 12) h += 12; if (ap === 'am' && h === 12) h = 0; return h; };
+        const pad = n => String(n).padStart(2, '0'), d0 = ev.cal.start;
+        let gDates, icsS, icsE, oS, oE, allday = true;
+        if (tm) {
+          allday = false;
+          const sh = h24(tm[1], tm[3], tm[6]), sm = +(tm[2] || 0);
+          let eh = tm[4] ? h24(tm[4], tm[6], tm[3]) : sh + 2, em = tm[4] ? +(tm[5] || 0) : sm;
+          const lastDay = ev.calLast || d0;
+          const S = `${d0}T${pad(sh)}${pad(sm)}00`, Ee = `${lastDay}T${pad(Math.min(eh, 23))}${pad(eh > 23 ? 59 : em)}00`;
+          gDates = `${S}/${Ee}`; icsS = `DTSTART;TZID=America/New_York:${S}`; icsE = `DTEND;TZID=America/New_York:${Ee}`;
+          const iso = x => `${x.slice(0, 4)}-${x.slice(4, 6)}-${x.slice(6, 8)}T${x.slice(9, 11)}:${x.slice(11, 13)}:00`;
+          oS = iso(S); oE = iso(Ee);
+        } else {
+          gDates = `${d0}/${ev.cal.end}`; icsS = `DTSTART;VALUE=DATE:${d0}`; icsE = `DTEND;VALUE=DATE:${ev.cal.end}`;
+          const iso = x => `${x.slice(0, 4)}-${x.slice(4, 6)}-${x.slice(6, 8)}`; oS = iso(d0); oE = iso(ev.cal.end);
+        }
+        const g = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${enc(ev.title)}&dates=${gDates}${allday ? '' : '&ctz=America/New_York'}&details=${enc(about)}&location=${enc(where)}`;
+        const o = `https://outlook.live.com/calendar/0/action/compose?subject=${enc(ev.title)}&startdt=${oS}&enddt=${oE}&allday=${allday}&body=${enc(about)}&location=${enc(where)}`;
+        const icsEsc = t => String(t).replace(/\\/g, '\\\\').replace(/[,;]/g, m => '\\' + m).replace(/\n/g, '\\n');
+        const now = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+        const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//adjoakittoe.com//events//EN', 'BEGIN:VEVENT', `UID:${key}-${d0}@adjoakittoe.com`, `DTSTAMP:${now}`, icsS, icsE, `SUMMARY:${icsEsc(ev.title)}`, `LOCATION:${icsEsc(where)}`, `DESCRIPTION:${icsEsc(about)}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
         const slug = ev.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-        action.insertAdjacentHTML('beforeend', `<div class="ev-addcal"><span class="ev-addcal-k">Add to calendar</span><a class="ev-addcal-b" href="${g}" target="_blank" rel="noopener">Google ↗</a><a class="ev-addcal-b" href="data:text/calendar;charset=utf-8,${enc(ics)}" download="${slug}.ics">Apple or Outlook</a></div>`);
+        action.insertAdjacentHTML('beforeend', `<div class="ev-addcal"><span class="ev-addcal-k">Add to calendar</span><a class="ev-addcal-b" href="${g}" target="_blank" rel="noopener">Google ↗</a><a class="ev-addcal-b" href="${o}" target="_blank" rel="noopener">Outlook ↗</a><a class="ev-addcal-b ev-ics" href="#" download="${slug}.ics">Apple (.ics)</a></div>`);
+        action.querySelector('.ev-ics').addEventListener('click', e => {
+          e.preventDefault();
+          const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+          const a = document.createElement('a'); a.href = url; a.download = slug + '.ics'; document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(() => URL.revokeObjectURL(url), 4000);
+        });
       }
       const modal = document.getElementById('event-modal');
       modal.classList.add('open');
@@ -7431,6 +7462,7 @@ function cook(g) {
       });
       const piecesReady = get('/data/pieces.json').then(list => {
         if (!Array.isArray(list)) return;
+        window.__pieceInfo = Object.fromEntries(list.filter(p => p && p.slug).map(p => [p.slug, { section: p.section, preview: !!p.preview }]));
         [...list].reverse().forEach(p => { if (!p || !p.slug) return; const old = document.getElementById(p.slug); if (old && p.replace) { old.remove(); document.querySelectorAll(`.es-row a[data-page="${p.slug}"]`).forEach(a => a.closest('.es-row').remove()); } if (!document.getElementById(p.slug)) build(p); });
         const id = decodeURIComponent(location.hash.slice(1)); if (id && document.getElementById(id) && document.getElementById(id).classList.contains('np-page')) showPage(id);
       });
@@ -7593,6 +7625,108 @@ function cook(g) {
         shelf.querySelector('.sh-filters .bk-chip[data-kind="all"]')?.click();
       });
 
+
+      // Pages made in Notion go after the last page on the site
+      const placePage = el => { const old = document.getElementById(el.id); if (old) { old.replaceWith(el); return; } const all = document.querySelectorAll('main > .page'); all[all.length - 1].after(el); };
+      const openHash = () => { const id = decodeURIComponent(location.hash.slice(1)).split('/')[0]; const pg = id && document.getElementById(id); if (pg && pg.dataset.notion && !pg.classList.contains('active')) showPage(id); };
+
+      // Case Studies (Notion): the list on Work, and a page for each one with writing in its body
+      Promise.all([get('/data/cases.json'), get('/data/hover.json')]).then(([list, hov]) => {
+        const head = document.getElementById('wk-cases'); if (!head || !Array.isArray(list) || !list.length) return;
+        hov = hov || {};
+        head.parentNode.querySelectorAll('article.cs').forEach(a => a.remove());
+        const name = c => {
+          const h = hov[c.org.toLowerCase()], src = c.photo || (h && h.image) || '';
+          if (!src && !h) return esc(c.org);
+          return `<span class="ab-photo"${h && h.wide ? ' data-wide' : ''} data-own tabindex="0">${esc(c.org)}<template class="ab-photo-art"><figure class="ab-photo-card">${src ? `<img src="${esc(src)}" alt="${esc(c.org)}">` : ''}${h && h.caption && !c.photo ? `<figcaption>${esc(h.caption)}</figcaption>` : ''}</figure></template></span>`;
+        };
+        const row = (k, v) => v ? `<div class="cs-row"><div class="cs-k">${esc(k)}</div><p>${v}</p></div>` : '';
+        head.insertAdjacentHTML('afterend', list.map(c => {
+          const links = [c.body ? `<a href="#" data-page="${esc(c.slug)}" class="case-link site-link">${esc(c.button)} <span>→</span></a>` : '',
+            c.linkPage ? `<a href="#" data-page="${esc(c.linkPage)}" class="case-link site-link">${esc(c.linkWords || 'Read more')} <span>→</span></a>` : '',
+            c.link ? `<a href="${esc(c.link)}" target="_blank" rel="noopener" class="case-link site-link">${esc(c.linkWords || 'Read more')} <span>↗</span></a>` : ''].join('');
+          return `<article class="cs" data-case="${esc(c.slug)}">
+          <header class="cs-head"><div><h3 class="cs-org">${name(c)}</h3>${c.sub ? `<div class="cs-sub">${esc(c.sub)}</div>` : ''}${c.ctx ? `<div class="cs-ctx">${esc(c.ctx)}</div>` : ''}</div>${c.date ? `<div class="cs-date">${esc(c.date)}</div>` : ''}</header>
+          ${row('Challenge', c.challenge)}${row('Solution', c.solution)}${row('Impact', c.impact)}
+          ${c.stats.length ? `<div class="cs-row"><div class="cs-k">${esc(c.statsLabel)}</div><div class="cs-stats">${c.stats.map(([n, l]) => `<div><span class="cs-num">${esc(n)}</span><span class="cs-lab">${esc(l)}</span></div>`).join('')}</div></div>` : ''}
+          ${links || c.note ? `<div class="cs-links">${links}${c.note ? `<span class="cs-adapt">${esc(c.note)}</span>` : ''}</div>` : ''}
+        </article>`;
+        }).join(''));
+        list.filter(c => c.body).forEach(c => {
+          const el = document.createElement('div'); el.id = c.slug; el.className = 'page np-case'; el.dataset.notion = '1';
+          el.innerHTML = `<h1>${esc(c.title)}</h1>${c.subline ? `<div class="muted" style="margin-bottom: 32px;">${esc(c.subline)}</div>` : ''}${c.body}`;
+          placePage(el);
+        });
+        window.__markPhotos && window.__markPhotos(); openHash();
+      });
+
+      // Site Pages & Links (Notion): Changelog, Colophon, Legal notice, AI use, new pages, and menu and footer links
+      get('/data/site-pages.json').then(list => {
+        if (!Array.isArray(list) || !list.length) return;
+        window.__pageGroup = {};
+        const lc = s => String(s || '').trim().toLowerCase();
+        const target = p => p.link ? { href: p.link, ext: true } : { page: p.linkPage || p.slug };
+        list.forEach(p => {
+          // the page itself
+          if (p.body) {
+            let el = document.getElementById(p.slug);
+            const inner = `<h1>${esc(p.title)}</h1>${p.sub ? `<p class="muted page-sub">${esc(p.sub)}</p>` : ''}${p.body}`;
+            if (el && !el.dataset.notion) {
+              if (p.replace) {
+                const keep = [...el.querySelectorAll('[data-keep]')], tb = el.querySelector(':scope > .lf-toolbar');
+                el.innerHTML = ''; if (tb) el.append(tb); el.insertAdjacentHTML('beforeend', inner);
+                const slot = el.querySelector('[data-keep-slot]'); keep.forEach(k => slot ? slot.before(k) : el.append(k)); slot && slot.remove();
+              }
+            } else {
+              el = document.createElement('div'); el.id = p.slug; el.className = 'page np-sitepage'; el.dataset.notion = '1'; el.innerHTML = inner; placePage(el);
+            }
+          }
+          if (p.menu) window.__pageGroup[p.slug] = p.menu;
+          const t = target(p), words = p.words || p.title;
+          // Hide link: take away the menu and footer links to this page or web address
+          if (p.hide) { document.querySelectorAll('nav a, #site-footer .sf-cols a').forEach(a => { if ((t.page && a.dataset.page === t.page && !a.dataset.anchor) || (t.href && a.getAttribute('href') === t.href)) a.remove(); }); return; }
+          if (p.menu) {
+            const nav = document.querySelector('nav'); if (!nav) return;
+            let g = [...nav.querySelectorAll('.nav-group')].find(x => lc(x.querySelector('.nav-group-label')?.textContent) === lc(p.menu));
+            if (!g) { g = document.createElement('div'); g.className = 'nav-group'; g.innerHTML = `<div class="nav-group-label">${esc(p.menu)}</div>`; nav.append(g); }
+            const a = document.createElement('a'); a.className = 'nav-link np-menu'; a.textContent = words;
+            if (t.ext) { a.href = t.href; a.target = '_blank'; a.rel = 'noopener'; }
+            else { a.href = '#'; a.dataset.page = t.page; a.addEventListener('click', e => { e.preventDefault(); showPage(t.page); window.scrollTo(0, 0); typeof closeMenu === 'function' && closeMenu(); }); }
+            g.append(a);
+          }
+          if (p.footer) {
+            const col = [...document.querySelectorAll('#site-footer .sf-cols > div')].find(d => lc(d.querySelector('.sf-label')?.textContent) === lc(p.footer)); if (!col) return;
+            const a = document.createElement('a'); a.textContent = words;
+            if (t.ext) { a.href = t.href; a.target = '_blank'; a.rel = 'noopener'; } else { a.href = '#'; a.dataset.page = t.page; }
+            col.append(a);
+          }
+        });
+        openHash();
+      });
+      // menu links added from Notion: highlight the one for the page you are on
+      { const _sp = showPage; showPage = function (id) { const r = _sp(id); document.querySelectorAll('nav .np-menu').forEach(a => a.classList.toggle('active', a.dataset.page === id)); return r; }; }
+
+      // Sitemap: adds every page the site has, including new ones from Notion, each time it opens
+      const fillSitemap = () => {
+        const box = document.querySelector('#sitemap .smap'); if (!box) return;
+        box.querySelectorAll('li.np-auto').forEach(li => li.remove());
+        box.querySelectorAll('a[data-page]').forEach(a => { if (!document.getElementById(a.dataset.page)) a.closest('li')?.remove(); });
+        const listed = new Set([...box.querySelectorAll('a[data-page]')].map(a => a.dataset.page));
+        const group = n => { let g = [...box.querySelectorAll('.smap-g')].find(x => x.querySelector('.smap-h')?.textContent.trim() === n); if (!g) { g = document.createElement('section'); g.className = 'smap-g'; g.innerHTML = `<h2 class="smap-h">${esc(n)}</h2><ul></ul>`; box.append(g); } return g.querySelector('ul'); };
+        const info = window.__pieceInfo || {}, menuG = { 'main': 'Main', 'work & writing': 'Writing', 'collections': 'Collections' };
+        document.querySelectorAll('main > .page[id]').forEach(pg => {
+          const id = pg.id; if (listed.has(id) || /^(search-results|sitemap|notfound|map)$|^test-/.test(id) || (info[id] && info[id].preview)) return;
+          const name = (pg.querySelector('h1')?.textContent || pg.querySelector('[data-toc]')?.dataset.toc || '').trim(); if (!name) return;
+          const pgG = (window.__pageGroup || {})[id];
+          const g = /^case-/.test(id) ? 'Work' : /^series-/.test(id) ? 'Collections' : info[id] ? (info[id].section === 'Essays' ? 'Writing' : 'Vibe Projects')
+            : pgG ? (menuG[pgG.toLowerCase()] || pgG) : /^(essay-|altar-|recipe-)/.test(id) && !pg.querySelector('[data-page="archive"]') ? 'Vibe Projects' : 'Site';
+          const li = document.createElement('li'); li.className = 'np-auto'; li.innerHTML = `<a href="#" data-page="${esc(id)}">${esc(/^series-/.test(id) ? 'Photography: ' + name : name)}</a>`;
+          group(g).append(li); listed.add(id);
+        });
+      };
+      { const _sp = showPage; showPage = function (id) { const r = _sp(id); if (id === 'sitemap') fillSitemap(); return r; }; }
+      window.addEventListener('load', () => setTimeout(() => { if (document.querySelector('#sitemap.active')) fillSitemap(); }, 1500));
+
       // Events: both tables, the pop-up details, and the Upcoming spot on Home
       get('/data/events.json').then(list => {
         const pg = document.getElementById('events'), tbs = pg ? pg.querySelectorAll('table.calendar tbody') : []; if (tbs.length < 2 || !Array.isArray(list) || !list.length) return;
@@ -7605,7 +7739,7 @@ function cook(g) {
         const up = [], past = [];
         list.forEach(e => {
           const endD = D(e.end || e.start), isPast = endD < today, nx = new Date(endD); nx.setDate(nx.getDate() + 1);
-          EVENTS[e.key] = { title: e.title, date: long(e), time: e.time, format: e.format, where: e.where || e.city, host: e.host, cost: e.cost, desc: e.desc, past: isPast, cal: { start: ymd(D(e.start)), end: ymd(nx) } };
+          EVENTS[e.key] = { title: e.title, date: long(e), time: e.time, format: e.format, where: e.where || e.city, host: e.host, cost: e.cost, desc: e.desc, past: isPast, cal: { start: ymd(D(e.start)), end: ymd(nx) }, calLast: ymd(endD) };
           if (e.rsvp) EVENTS[e.key].rsvp = { type: 'external', url: e.rsvp, label: e.rsvpSite || 'the event site' };
           if (e.link) EVENTS[e.key].link = { url: e.link, label: e.linkWords || 'Learn more' };
           (isPast ? past : up).push(e);
@@ -7757,6 +7891,7 @@ function cook(g) {
         const cur = document.querySelector('.page.active');
         if (!goingBack && cur && cur.id !== id) { trail.push(cur.id); if (trail.length > 50) trail.shift(); }
         if (id && !document.getElementById(id) && document.getElementById('notfound')) id = 'notfound';
+        if (document.getElementById(id)) document.querySelectorAll('.page.active').forEach(x => { if (x.id !== id) x.classList.remove('active'); });
         const r = _sb(id); add(document.getElementById(id)); sync(); return r;
       };
       document.addEventListener('click', e => {

@@ -1,0 +1,48 @@
+# Old WordPress addresses -> the matching page on the new site.
+# Format: old-address  new-address  301   (301 = moved for good, so Google updates its links too)
+# To change where one goes, edit the middle part. Lines that start with # are notes.
+
+/resume              /#portfolio/cv   301
+/resume/             /#portfolio/cv   301
+/portfolio           /#portfolio      301
+/portfolio/          /#portfolio      301
+/marketing           /#portfolio      301
+/marketing/          /#portfolio      301
+/services            /#portfolio      301
+/services/           /#portfolio      301
+/about               /#about          301
+/about/              /#about          301
+/contact             /#about          301
+/contact/            /#about          301
+/chat                /#about          301
+/chat/               /#about          301
+/calendly            /#about          301
+/calendly/           /#about          301
+/links               /#about          301
+/links/              /#about          301
+/culinary            /#archive        301
+/culinary/           /#archive        301
+/publications        /#published      301
+/publications/       /#published      301
+/other               /#projects       301
+/other/              /#projects       301
+/privacy-policy      /#legal          301
+/privacy-policy/     /#legal          301
+/privacy-policy-terms-conditions    /#legal   301
+/privacy-policy-terms-conditions/   /#legal   301
+/shop                /                302
+/shop/               /                302
+/project             /#portfolio      301
+/project/            /#portfolio      301
+
+# Whole groups of old addresses
+/shop/*              /                302
+/product/*           /                302
+/product-category/*  /                302
+/project/*           /#portfolio      301
+/project_category/*  /#portfolio      301
+/wp-content/*        /                302
+/wp-admin/*          /                302
+/wp-login.php        /                302
+/feed/*              /                302
+/feed                /                302
