@@ -711,7 +711,512 @@
       "cover": ""
     }
   ],
-  "films": [],
+  "films": [
+    {
+      "title": "Get Out",
+      "year": "2017",
+      "rating": 5,
+      "link": "https://letterboxd.com/film/get-out-2017/",
+      "watched": ""
+    },
+    {
+      "title": "Finding Dory",
+      "year": "2016",
+      "rating": null,
+      "link": "https://letterboxd.com/film/finding-dory/",
+      "watched": ""
+    },
+    {
+      "title": "X-Men: Apocalypse",
+      "year": "2016",
+      "rating": null,
+      "link": "https://letterboxd.com/film/x-men-apocalypse/",
+      "watched": ""
+    },
+    {
+      "title": "Captain America: Civil War",
+      "year": "2016",
+      "rating": null,
+      "link": "https://letterboxd.com/film/captain-america-civil-war/",
+      "watched": ""
+    },
+    {
+      "title": "The Jungle Book",
+      "year": "2016",
+      "rating": 3,
+      "link": "https://letterboxd.com/film/the-jungle-book-2016/",
+      "watched": ""
+    },
+    {
+      "title": "Hush",
+      "year": "2016",
+      "rating": null,
+      "link": "https://letterboxd.com/film/hush-2016/",
+      "watched": ""
+    },
+    {
+      "title": "Riphagen the Untouchable",
+      "year": "2016",
+      "rating": 4,
+      "link": "https://letterboxd.com/film/riphagen-the-untouchable/",
+      "watched": ""
+    },
+    {
+      "title": "Star Wars: The Force Awakens",
+      "year": "2015",
+      "rating": null,
+      "link": "https://letterboxd.com/film/star-wars-the-force-awakens/",
+      "watched": ""
+    },
+    {
+      "title": "The Martian",
+      "year": "2015",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-martian/",
+      "watched": ""
+    },
+    {
+      "title": "Beasts of No Nation",
+      "year": "2015",
+      "rating": null,
+      "link": "https://letterboxd.com/film/beasts-of-no-nation/",
+      "watched": ""
+    },
+    {
+      "title": "Goosebumps",
+      "year": "2015",
+      "rating": null,
+      "link": "https://letterboxd.com/film/goosebumps/",
+      "watched": ""
+    },
+    {
+      "title": "Fantastic Four",
+      "year": "2015",
+      "rating": null,
+      "link": "https://letterboxd.com/film/fantastic-four/",
+      "watched": ""
+    },
+    {
+      "title": "Macbeth",
+      "year": "2015",
+      "rating": null,
+      "link": "https://letterboxd.com/film/macbeth-2015/",
+      "watched": ""
+    },
+    {
+      "title": "The Invitation",
+      "year": "2015",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-invitation-2015/",
+      "watched": ""
+    },
+    {
+      "title": "Interstellar",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/interstellar/",
+      "watched": ""
+    },
+    {
+      "title": "The Equalizer",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-equalizer/",
+      "watched": ""
+    },
+    {
+      "title": "Nightcrawler",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/nightcrawler/",
+      "watched": ""
+    },
+    {
+      "title": "Teenage Mutant Ninja Turtles",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/teenage-mutant-ninja-turtles-2014/",
+      "watched": ""
+    },
+    {
+      "title": "Lucy",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/lucy-2014/",
+      "watched": ""
+    },
+    {
+      "title": "Guardians of the Galaxy",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/guardians-of-the-galaxy/",
+      "watched": ""
+    },
+    {
+      "title": "The Purge: Anarchy",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-purge-anarchy/",
+      "watched": ""
+    },
+    {
+      "title": "Transformers: Age of Extinction",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/transformers-age-of-extinction/",
+      "watched": ""
+    },
+    {
+      "title": "Maleficent",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/maleficent/",
+      "watched": ""
+    },
+    {
+      "title": "X-Men: Days of Future Past",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/x-men-days-of-future-past/",
+      "watched": ""
+    },
+    {
+      "title": "The Amazing Spider-Man 2",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-amazing-spider-man-2/",
+      "watched": ""
+    },
+    {
+      "title": "Captain America: The Winter Soldier",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/captain-america-the-winter-soldier/",
+      "watched": ""
+    },
+    {
+      "title": "Creep",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/creep-2014/",
+      "watched": ""
+    },
+    {
+      "title": "Noah",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/noah/",
+      "watched": ""
+    },
+    {
+      "title": "The Guest",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-guest-2014/",
+      "watched": ""
+    },
+    {
+      "title": "The Babadook",
+      "year": "2014",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-babadook/",
+      "watched": ""
+    },
+    {
+      "title": "Nymphomaniac: Vol. II",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/nymphomaniac-volume-ii/",
+      "watched": ""
+    },
+    {
+      "title": "Nymphomaniac: Vol. I",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/nymphomaniac-volume-i/",
+      "watched": ""
+    },
+    {
+      "title": "Anchorman 2: The Legend Continues",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/anchorman-2-the-legend-continues/",
+      "watched": ""
+    },
+    {
+      "title": "The Wolf of Wall Street",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-wolf-of-wall-street/",
+      "watched": ""
+    },
+    {
+      "title": "American Hustle",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/american-hustle/",
+      "watched": ""
+    },
+    {
+      "title": "Ender's Game",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/enders-game/",
+      "watched": ""
+    },
+    {
+      "title": "Captain Phillips",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/captain-phillips/",
+      "watched": ""
+    },
+    {
+      "title": "Filth",
+      "year": "2013",
+      "rating": 3,
+      "link": "https://letterboxd.com/film/filth/",
+      "watched": ""
+    },
+    {
+      "title": "Oculus",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/oculus/",
+      "watched": ""
+    },
+    {
+      "title": "Gravity",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/gravity-2013/",
+      "watched": ""
+    },
+    {
+      "title": "Snowpiercer",
+      "year": "2013",
+      "rating": 5,
+      "link": "https://letterboxd.com/film/snowpiercer/",
+      "watched": ""
+    },
+    {
+      "title": "The Wolverine",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-wolverine/",
+      "watched": ""
+    },
+    {
+      "title": "White House Down",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/white-house-down/",
+      "watched": ""
+    },
+    {
+      "title": "World War Z",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/world-war-z/",
+      "watched": ""
+    },
+    {
+      "title": "The Conjuring",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-conjuring/",
+      "watched": ""
+    },
+    {
+      "title": "This Is the End",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/this-is-the-end/",
+      "watched": ""
+    },
+    {
+      "title": "The Purge",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-purge/",
+      "watched": ""
+    },
+    {
+      "title": "Now You See Me",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/now-you-see-me/",
+      "watched": ""
+    },
+    {
+      "title": "The Hangover Part III",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-hangover-part-iii/",
+      "watched": ""
+    },
+    {
+      "title": "The Great Gatsby",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-great-gatsby-2013/",
+      "watched": ""
+    },
+    {
+      "title": "Olympus Has Fallen",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/olympus-has-fallen/",
+      "watched": ""
+    },
+    {
+      "title": "Evil Dead",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/evil-dead/",
+      "watched": ""
+    },
+    {
+      "title": "Oz the Great and Powerful",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/oz-the-great-and-powerful/",
+      "watched": ""
+    },
+    {
+      "title": "Side Effects",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/side-effects-2013/",
+      "watched": ""
+    },
+    {
+      "title": "Upstream Color",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/upstream-color/",
+      "watched": ""
+    },
+    {
+      "title": "Fruitvale Station",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/fruitvale-station/",
+      "watched": ""
+    },
+    {
+      "title": "We Are What We Are",
+      "year": "2013",
+      "rating": null,
+      "link": "https://letterboxd.com/film/we-are-what-we-are-2013/",
+      "watched": ""
+    },
+    {
+      "title": "Django Unchained",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/django-unchained/",
+      "watched": ""
+    },
+    {
+      "title": "Pitch Perfect",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/pitch-perfect/",
+      "watched": ""
+    },
+    {
+      "title": "Life of Pi",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/life-of-pi/",
+      "watched": ""
+    },
+    {
+      "title": "Taken 2",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/taken-2/",
+      "watched": ""
+    },
+    {
+      "title": "End of Watch",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/end-of-watch/",
+      "watched": ""
+    },
+    {
+      "title": "Total Recall",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/total-recall-2012/",
+      "watched": ""
+    },
+    {
+      "title": "The Dark Knight Rises",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-dark-knight-rises/",
+      "watched": ""
+    },
+    {
+      "title": "The Amazing Spider-Man",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-amazing-spider-man/",
+      "watched": ""
+    },
+    {
+      "title": "Brave",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/brave-2012/",
+      "watched": ""
+    },
+    {
+      "title": "Men in Black 3",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/men-in-black-3/",
+      "watched": ""
+    },
+    {
+      "title": "Prometheus",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/prometheus/",
+      "watched": ""
+    },
+    {
+      "title": "The Avengers",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-avengers-2012/",
+      "watched": ""
+    },
+    {
+      "title": "Sinister",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/sinister/",
+      "watched": ""
+    },
+    {
+      "title": "The Woman in Black",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/the-woman-in-black-2012/",
+      "watched": ""
+    },
+    {
+      "title": "Room 237",
+      "year": "2012",
+      "rating": null,
+      "link": "https://letterboxd.com/film/room-237/",
+      "watched": ""
+    }
+  ],
   "books": [
     {
       "title": "Farming While Black",
