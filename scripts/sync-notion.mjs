@@ -284,6 +284,72 @@ async function figure(b, ctx) {
 // Pull nested callouts out of a block's children: they become side notes
 function splitKids(kids = []) { return { kids: kids.filter(k => k.type !== 'callout'), notes: kids.filter(k => k.type === 'callout') }; }
 
+// ---------- named toggles that rebuild the hand-built page pieces ----------
+const TOOL_COLORS = ['#3b1d36', '#5d7d63', '#a4532f', '#4f6f8a', '#82566f', '#66692f'];
+const itemText = x => x[x.type]?.rich_text || [];
+// first bold words of a line = name; the rest = note
+function splitBold(rt) { let i = 0; while (i < rt.length && (rt[i].annotations?.bold || !rt[i].plain_text.trim())) i++; return { name: rt.slice(0, i), rest: rt.slice(i) }; }
+const firstHref = rt => (rt.find(r => r.href) || {}).href || '';
+const linkAttrs = href => { const pg = siteHref(href); return pg ? `href="#" data-page="${esc(pg)}"` : `href="${esc(href)}" target="_blank" rel="noopener"`; };
+const smallGray = (rt, ctx) => rt.map(r => r.annotations?.color === 'gray' ? `<small>${esc(r.plain_text)}</small>` : rich([r], ctx)).join('');
+async function namedToggle(label, kids, ctx) {
+  const L = label.toLowerCase();
+  const items = kids.filter(k => /list_item|to_do/.test(k.type));
+  if (L === 'photo cards') {
+    let h = ''; for (const k of kids) {
+      if (k.type === 'image') { const src = await saveImg(k.image, k.id); const [cap, link] = txt(k.image.caption).split(/\s*\|\s*/); const fig = `<figure class="ws-card">${src ? `<img src="${esc(src)}" alt="${esc(cap || '')}" loading="lazy">` : ''}<figcaption><span>${esc(cap || '')}</span>${link ? '<span class="ws-arr">↗</span>' : ''}</figcaption></figure>`; h += link ? `<a ${linkAttrs(link)} class="ws-card-link">${fig}</a>` : fig; }
+      else if (/list_item/.test(k.type)) h += `<figure class="ws-card"><div class="ws-ph" style="aspect-ratio:4 / 5"><span>${esc(txt(itemText(k)))}</span></div><figcaption><span>${esc(txt(itemText(k)))}</span></figcaption></figure>`;
+    }
+    return `<div class="ws-cards">${h}</div>`;
+  }
+  if (L === 'steps') return `<div class="ws-steps">${items.map((k, n) => { const { name, rest } = splitBold(itemText(k)); return `<div class="ws-step"><span class="ws-n">${String(n + 1).padStart(2, '0')}</span><h3>${esc(txt(name).trim())}</h3><p>${rich(rest, ctx).trim()}</p></div>`; }).join('')}</div>`;
+  if (L === 'tools' || L === 'plain tools') {
+    const plain = L === 'plain tools';
+    const tools = items.map((k, n) => { const rt = itemText(k), { name, rest } = splitBold(rt), href = firstHref(rt), nm = txt(name).trim() || txt(rt).trim();
+      const inner = `${plain ? '' : `<span class="ws-ic" style="background:${TOOL_COLORS[n % TOOL_COLORS.length]}">${esc(nm[0] || '?')}</span>`}<span class="ws-tn">${esc(nm)}</span><span class="ws-tr">${esc(txt(rest).trim())}</span>`;
+      return href ? `<a class="ws-tool ws-tool-link" ${linkAttrs(href)}>${inner}</a>` : `<div class="ws-tool">${inner}</div>`; }).join('');
+    const notes = kids.filter(k => k.type === 'paragraph' && txt(k.paragraph.rich_text).trim()).map(k => `<p class="ws-note">${rich(k.paragraph.rich_text, ctx)}</p>`).join('');
+    return `<div class="ws-tools${plain ? ' pt-hover' : ''}">${tools}</div>${notes}`;
+  }
+  if (L === 'shop') {
+    let h = ''; for (const k of items) { const rt = itemText(k), { name, rest } = splitBold(rt), href = firstHref(rt); const im = (k.children || []).find(c => c.type === 'image'); const src = im ? await saveImg(im.image, im.id) : '';
+      h += `<a class="ws-prod" ${href ? linkAttrs(href) : 'href="#"'}><div class="ws-pimg">${src ? `<img src="${esc(src)}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover">` : ''}</div><span class="ws-pn">${esc(txt(name).trim())}</span><span class="ws-pc">${esc(txt(rest).trim())}${href ? ' ↗' : ''}</span></a>`; }
+    const notes = kids.filter(k => k.type === 'paragraph' && txt(k.paragraph.rich_text).trim()).map(k => `<p class="ws-note">${rich(k.paragraph.rich_text, ctx)}</p>`).join('');
+    return `<div class="ws-shop">${h}</div>${notes}`;
+  }
+  if (L === 'groups') {
+    const groups = []; for (const k of kids) { if (k.type === 'paragraph' && txt(k.paragraph.rich_text).trim()) groups.push({ title: txt(k.paragraph.rich_text).trim(), li: [] }); else if (/list_item/.test(k.type) && groups.length) groups[groups.length - 1].li.push(smallGray(itemText(k), ctx)); }
+    return `<div class="pt-groups">${groups.map(g => `<div class="pt-group"><h3>${esc(g.title)}</h3><ul>${g.li.map(l => `<li>${l}</li>`).join('')}</ul></div>`).join('')}</div>`;
+  }
+  if (L === 'favorites') {
+    const favs = []; for (const k of kids) { if (k.type !== 'paragraph') continue; const rt = k.paragraph.rich_text; if (!txt(rt).trim()) continue;
+      if (boldOnly(k)) favs.push({ title: txt(rt).trim(), ps: [] }); else if (favs.length) { const use = rt[0]?.annotations?.bold && /^use it for/i.test(rt[0].plain_text.trim()); favs[favs.length - 1].ps.push(use ? `<p class="pt-use"><b>${esc(rt[0].plain_text.trim())}</b> ${rich(rt.slice(1), ctx).trim()}</p>` : `<p>${rich(rt, ctx)}</p>`); } }
+    return `<div class="pt-favs">${favs.map(f => `<div class="pt-fav"><h3>${esc(f.title)}</h3>${f.ps.join('')}</div>`).join('')}</div>`;
+  }
+  if (L === 'cards') {
+    let h = ''; for (const k of items) { const ls = lines(itemText(k)); const tl = ls[0] || []; const href = firstHref(tl); const im = (k.children || []).find(c => c.type === 'image'); const src = im ? await saveImg(im.image, im.id) : '';
+      const meta = ls[1] ? txt(ls[1]).trim() : '', desc = ls[2] ? rich(ls[2], ctx) : '', title = esc(txt(tl).trim()), pg = siteHref(href);
+      const yt = String(href).match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/);
+      if (yt) { h += `<div class="lf-card lf-video np-lfvideo" data-yt="${yt[1]}"><button type="button" class="lf-thumb lf-thumb-btn"><img src="${esc(src || `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg`)}" alt=""><span class="lf-play">▶</span></button><div class="lf-player"></div><div class="lf-video-text"><div class="lf-card-meta">${esc(meta || 'Video · YouTube')}</div><a class="lf-card-title lf-ext" href="${esc(href)}" target="_blank" rel="noopener">${title} <span>↗</span></a><div class="lf-card-desc">${desc}</div><div class="lf-video-links"><button class="lf-close" type="button">Close</button></div></div></div>`; continue; }
+      h += `<a class="lf-card" ${href ? linkAttrs(href) : 'href="#"'}><div class="lf-thumb">${src ? `<img src="${esc(src)}" alt="" loading="lazy">` : ''}</div><div><div class="lf-card-meta">${esc(meta)}</div><div class="lf-card-title">${title} <span>${pg ? '→' : '↗'}</span></div><div class="lf-card-desc">${desc}</div></div></a>`; }
+    return `<div class="lf-cards">${h}</div>`;
+  }
+  if (L === 'rules') return `<div class="lb-rules">${items.map(k => { const { name, rest } = splitBold(itemText(k)); return `<div><span>${esc(txt(name).trim())}</span>${esc(txt(rest).trim())}</div>`; }).join('')}</div>`;
+  if (L === 'objects') {
+    let h = '', n = 0; for (const k of kids.filter(k => k.type === 'toggle')) { const lab = txt(k.toggle.rich_text).trim(); const m = lab.match(/^([^:]+):\s*(.+)$/); const cat = m ? m[1] : '', title = m ? m[2] : lab; const ch = k.children || [];
+      const im = ch.find(c => c.type === 'image'); const src = im ? await saveImg(im.image, im.id) : '';
+      const ps = ch.filter(c => c.type === 'paragraph' && txt(c.paragraph.rich_text).trim()).map(c => { const t = txt(c.paragraph.rich_text).trim(); return /^tended\b/i.test(t) ? `<p class="lb-tend"><span>Tended</span> ${esc(t.replace(/^tended\s*:?\s*/i, ''))}</p>` : `<p>${rich(c.paragraph.rich_text, ctx)}</p>`; }).join('');
+      h += `<article class="lb-item"><div class="mo-black lb-art">${src ? `<img src="${esc(src)}" alt="${esc(title)}" loading="lazy" class="sg-pop" style="width:100%;height:100%;object-fit:cover">` : ''}</div><div class="lb-meta"><span class="lb-n">${String(++n).padStart(2, '0')}</span><span class="lb-cat">${esc(cat)}</span></div><h3>${esc(title)}</h3>${ps}</article>`; }
+    return `<div class="lb-grid">${h}</div>`;
+  }
+  if (L === 'captioned gallery') {
+    let h = ''; for (const k of kids) if (k.type === 'image') { const src = await saveImg(k.image, k.id); if (src) h += `<figure><img class="sg-pop" src="${esc(src)}" alt="${esc(txt(k.image.caption))}" loading="lazy"><figcaption>${esc(txt(k.image.caption))}</figcaption></figure>`; }
+    return `<div class="bm-gallery">${h}</div>`;
+  }
+  return null;
+}
+const NAMED_WIDE = /class="(ws-cards|ws-steps|ws-tools|ws-shop|pt-groups|pt-favs|lf-cards|lb-rules|lb-grid|bm-gallery)/;
+
 async function toggle(b, ctx) {
   const label = txt(b.toggle.rich_text).trim(); const kids = b.children || [];
   if (/^slideshow$/i.test(label)) {
@@ -299,6 +365,7 @@ async function toggle(b, ctx) {
     const data = (tbl?.table?.has_column_header ? rows.slice(1) : rows).filter(r => r.length >= 2);
     return `<div class="ic-wrap"><div class="ic-ctrl"><button type="button" class="ic-prev" aria-label="Earlier">←</button><button type="button" class="ic-next" aria-label="Later">→</button></div><div class="ic-time">${data.map((r, k) => `<button type="button" class="ic-tick${k ? '' : ' on'}" data-i="${k}"><span class="ic-y">${esc(txt(r[0]))}</span><span class="ic-t">${esc(txt(r[1]))}</span></button>`).join('')}</div><div class="ic-detail">${data.map((r, k) => `<p class="ic-d${k ? '' : ' on'}" data-i="${k}"><strong>${esc(txt(r[0]))}.</strong> ${para(r[2] || r[1], ctx)}</p>`).join('')}</div></div>`;
   }
+  const named = await namedToggle(label, kids, ctx); if (named !== null) return named;
   if (/^tabs$/i.test(label)) {
     const tabs = kids.filter(k => k.type === 'toggle');
     const panes = []; for (const t of tabs) panes.push(await html(t.children || [], ctx));
@@ -328,6 +395,11 @@ async function callout(b, ctx) {
   const ls = lines(v.rich_text);
   if (icon === '📊') return `<div class="cs-stats">${ls.map(([n, ...rest]) => `<div><span class="cs-num">${esc(n.plain_text.trim())}</span><span class="cs-lab">${rich(rest, ctx)}</span></div>`).join('')}</div>`;
   if (icon === '📈') return ls.map(l => { const s = txt(l); const m = s.match(/^(.*?)(\d{1,3})\s*%\s*$/); if (!m) return ''; const p = Math.min(100, +m[2]); return `<div class="sg-row np-progress"><span>${esc(m[1].trim())}</span><span class="ab-bar"><span style="width:${p}%"></span></span><span class="ab-pct">${p}%</span></div>`; }).join('');
+  if (icon === '🔤') { const ls = lines(v.rich_text); return `<div class="bm-specimen"><p class="bm-serif">${rich(ls[0] || [], ctx)}</p>${ls[1] ? `<p class="bm-label">${rich(ls[1], ctx)}</p>` : ''}</div>`; }
+  if (icon === '🎨' && lines(v.rich_text).length > 1) {
+    // one swatch per line: a name and a hex, like Canopy #2a5934
+    return `<div class="bm-swatches">${lines(v.rich_text).map(l => { const t = txt(l).trim(); const m = t.match(/^(.*?)\s*(#[0-9a-f]{3,6})\b/i); if (!m) return ''; return `<div class="bm-swatch"><div style="background:${m[2]}"></div><span>${esc(m[1])}</span><span class="bm-hex">${m[2]}</span></div>`; }).join('')}</div>`;
+  }
   if (icon === '🎨') { const hexes = txt(v.rich_text).match(/#[0-9a-f]{6}\b|#[0-9a-f]{3}\b/gi) || []; return `<div class="sg-swatches">${hexes.map(h => `<span style="background:${h}" title="${h}"></span>`).join('')}</div>`; }
   if (icon === '🧵') return `<div class="af-weave"></div>`;
   const inner = rich(v.rich_text, ctx) + (b.children ? await html(b.children, ctx) : '');
@@ -339,7 +411,8 @@ async function table(b, ctx, title) {
   const head = title ? `<div class="lf-box-title">${title}</div>` : '';
   if (v.has_column_header) return `<div class="lf-box">${head}<div class="lf-table-wrap"><table class="lf-table"><thead><tr>${rows[0].map(c => `<th>${rich(c, ctx)}</th>`).join('')}</tr></thead><tbody>${rows.slice(1).map(r => `<tr>${r.map(c => `<td>${para(c, ctx)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`;
   const cls = v.has_row_header ? 'lf-box lf-hover' : 'lf-box lf-plain';
-  return `<div class="${cls}">${head}<table>${rows.map(r => `<tr><th>${rich(r[0], ctx)}</th>${r.slice(1).map(c => `<td>${para(c, ctx)}</td>`).join('')}</tr>`).join('')}</table></div>`;
+  const chip = r => { const m = txt(r[1] || []).trim().match(/^(#[0-9a-f]{6}|#[0-9a-f]{3})\b/i); return m ? `<span class="bm-chip" style="background:${m[1]}"></span>` : ''; };
+  return `<div class="${cls}">${head}<table>${rows.map(r => `<tr><th${r[0].length && r[0].every(x => x.annotations?.color === 'gray') ? ' class="lf-muted-th"' : ''}>${chip(r)}${rich(r[0], ctx)}</th>${r.slice(1).map(c => `<td>${para(c, ctx)}</td>`).join('')}</tr>`).join('')}</table></div>`;
 }
 
 const boldOnly = b => b.type === 'paragraph' && b.paragraph.rich_text.length && b.paragraph.rich_text.every(r => r.annotations?.bold) && !b.paragraph.rich_text.some(r => r.href);
@@ -403,11 +476,13 @@ async function units(blocks, ctx) {
         if (hx) { const r2 = rt.map(r => ({ ...r })); let cut = hx[0].length; for (const r of r2) { const k = Math.min(cut, r.plain_text.length); r.plain_text = r.plain_text.slice(k); cut -= k; if (!cut) break; } push(`<h${hx[1]} class="sg-h">${rich(r2.filter(r => r.plain_text), ctx)}</h${hx[1]}>`); break; }
         if (ctx.inCard && /^base\s*:/i.test(plainTxt)) { ctx.card.base = plainTxt.replace(/^base\s*:\s*/i, ''); break; }
         if (ctx.inCard && /^(recipe by|source:|via)\b/i.test(plainTxt)) { out.push({ html: `<p class="fj-src">${rich(rt, ctx)}</p>`, notes }); break; }
-        out.push({ html: (rt.length ? `<p>${para(rt, ctx)}</p>` : '') + (kids.length ? await html(kids, ctx) : ''), notes }); break;
+        // Guide pages: a plain line is the large lead text; a gray line is the small tip under a section
+        const pcls = ctx.template === 'Guide' && !ctx.inCard ? (rt.every(r => r.annotations?.color === 'gray') ? ' class="pt-tip"' : ' class="ws-lead"') : '';
+        out.push({ html: (rt.length ? `<p${pcls}>${para(rt, ctx)}</p>` : '') + (kids.length ? await html(kids, ctx) : ''), notes }); break;
       }
       case 'heading_2': case 'heading_3': case 'heading_4': {
-        // Notion Heading 2 = site heading 4, Heading 3 = heading 5, Heading 4 = heading 6
-        const lvl = { heading_2: 4, heading_3: 5, heading_4: 6 }[t];
+        // Notion Heading 2, 3, 4 = site Heading 2, 3, 4 (Heading 1 starts a section). h5: and h6: lines add 5 and 6.
+        const lvl = { heading_2: 2, heading_3: 3, heading_4: 4 }[t];
         push(`<h${lvl} class="sg-h" id="${ctx.anchors[idOf(b.id)] || ''}">${rich(v.rich_text, ctx)}</h${lvl}>`);
         if (b.children) push(await html(b.children, ctx)); break;
       }
@@ -436,7 +511,7 @@ async function units(blocks, ctx) {
           const run = [b]; while (blocks[i + 1]?.type === 'toggle' && /^specimen\b/i.test(txt(blocks[i + 1].toggle.rich_text).trim())) run.push(blocks[++i]);
           let h = ''; for (const x of run) h += await toggle(x, ctx); push(`<div class="ed-page np-ed"><div class="ed-cards">${h}</div></div>`, { wide: true }); break;
         }
-        const h = await toggle(b, ctx); push(h, { wide: /class="(mo-car|sg-gal|ic-wrap|mo-tabs)/.test(h) }); break;
+        const h = await toggle(b, ctx); push(h, { wide: /class="(mo-car|sg-gal|ic-wrap|mo-tabs)/.test(h) || NAMED_WIDE.test(h) }); break;
       }
       case 'table': {
         if (ctx.inCard && !v.has_column_header) { const rows = (b.children || []).map(r => r.table_row.cells); ctx.card.settings = `<div class="lf-box lf-plain fj-set"><table>${rows.map(r => `<tr><th>${rich(r[0], ctx)}</th>${r.slice(1).map(c => `<td>${rich(c, ctx)}</td>`).join('')}</tr>`).join('')}</table></div>`; break; }
@@ -661,14 +736,28 @@ await part('shelf', async () => {
     const f = { title, year: tag('letterboxd:filmYear'), rating: parseFloat(tag('letterboxd:memberRating')) || null, link: tag('link'), watched: tag('letterboxd:watchedDate') };
     const i = films.findIndex(g => g.title === f.title && g.year === f.year); if (i >= 0) films[i] = f; else films.push(f);
   }
+  // Every film marked watched on Letterboxd (first page of the Films tab, newest first), with its stars
+  const page = await fetch(`https://letterboxd.com/${LETTERBOXD}/films/`, { headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36', Accept: 'text/html' } }).then(r => r.ok ? r.text() : '').catch(() => '');
+  let listed = 0;
+  for (const m of page.matchAll(/<li class="griditem">([\s\S]*?)<\/li>/g)) {
+    const x = m[1]; const nm = (x.match(/data-item-name="([^"]+)"/) || [])[1]; if (!nm) continue;
+    const name = nm.replace(/&amp;/g, '&').replace(/&#039;|&#39;/g, "'").replace(/&quot;/g, '"');
+    const ty = name.match(/^(.*) \((\d{4})\)$/); const title = ty ? ty[1] : name, year = ty ? ty[2] : '';
+    const r = (x.match(/rated-(\d+)/) || [])[1]; const link = 'https://letterboxd.com' + ((x.match(/data-item-link="([^"]+)"/) || [])[1] || '');
+    listed++;
+    const f = { title, year, rating: r ? +r / 2 : null, link, watched: '' };
+    const i = films.findIndex(g => g.title === f.title && g.year === f.year); if (i >= 0) { if (f.rating != null) films[i].rating = f.rating; } else films.push(f);
+  }
+  if (!page) console.warn('Letterboxd films page did not load. Keeping the films saved before.');
+  else console.log(`Letterboxd films page: ${listed} films.`);
   films.forEach(f => delete f.cover);
   // Books from Literal: reading now, finished, and your star ratings (public profile, no login needed)
   let books = savedBooks;
   try { books = await literalBooks(); console.log(`Literal: ${books.filter(b => b.status === 'Reading').length} reading, ${books.filter(b => b.status === 'Finished').length} finished.`); }
   catch (e) { console.warn(`Literal did not load (${e.message}). Keeping the books saved before.`); }
-  films.sort((a, b) => (b.watched || '').localeCompare(a.watched || ''));
+  films.sort((a, b) => (b.watched || '').localeCompare(a.watched || '')); // diary entries first, then the Films page order
   console.log(`Letterboxd: ${fresh} diary entries in the feed, ${films.length} films kept.`);
-  return { items, films: films.slice(0, 40), books };
+  return { items, films: films.slice(0, 72), books };
 });
 
 async function literalBooks() {

@@ -2597,15 +2597,15 @@
     .pt-tip { font-size: 14px; color: #666; margin: 14px 0 0; max-width: 62ch; }
     @media (max-width: 960px) { .pt-favs { grid-template-columns: minmax(0, 1fr); } }
 
-    .pt-group, .pt-fav, #essay-pantry .ws-tool { transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s; }
-    .pt-group:hover, .pt-fav:hover, #essay-pantry .ws-tool:hover { transform: translateY(-2px); }
-    .pt-group:nth-child(6n+1):hover, #essay-pantry .ws-tool:nth-child(6n+1):hover { background: #d6dd5c; border-color: #d6dd5c; color: #2a2a12; }
-    .pt-group:nth-child(6n+2):hover, #essay-pantry .ws-tool:nth-child(6n+2):hover { background: #54294d; border-color: #54294d; color: #f4efe3; }
-    .pt-group:nth-child(6n+3):hover, #essay-pantry .ws-tool:nth-child(6n+3):hover { background: #5d7d63; border-color: #5d7d63; color: #f4efe3; }
-    .pt-group:nth-child(6n+4):hover, #essay-pantry .ws-tool:nth-child(6n+4):hover { background: #a4532f; border-color: #a4532f; color: #fdf6ee; }
-    .pt-group:nth-child(6n+5):hover, #essay-pantry .ws-tool:nth-child(6n+5):hover { background: #e6dcf0; border-color: #e6dcf0; color: #3b1d36; }
-    .pt-group:nth-child(6n+6):hover, #essay-pantry .ws-tool:nth-child(6n+6):hover { background: #4a1c14; border-color: #4a1c14; color: #f4efe3; }
-    .pt-group:hover small, #essay-pantry .ws-tool:hover .ws-tr, .pt-group:hover .ab-link { color: inherit; opacity: 0.8; }
+    .pt-group, .pt-fav, #essay-pantry .ws-tool, .pt-hover .ws-tool { transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s; }
+    .pt-group:hover, .pt-fav:hover, #essay-pantry .ws-tool:hover, .pt-hover .ws-tool:hover { transform: translateY(-2px); }
+    .pt-group:nth-child(6n+1):hover, #essay-pantry .ws-tool:nth-child(6n+1):hover, .pt-hover .ws-tool:nth-child(6n+1):hover { background: #d6dd5c; border-color: #d6dd5c; color: #2a2a12; }
+    .pt-group:nth-child(6n+2):hover, #essay-pantry .ws-tool:nth-child(6n+2):hover, .pt-hover .ws-tool:nth-child(6n+2):hover { background: #54294d; border-color: #54294d; color: #f4efe3; }
+    .pt-group:nth-child(6n+3):hover, #essay-pantry .ws-tool:nth-child(6n+3):hover, .pt-hover .ws-tool:nth-child(6n+3):hover { background: #5d7d63; border-color: #5d7d63; color: #f4efe3; }
+    .pt-group:nth-child(6n+4):hover, #essay-pantry .ws-tool:nth-child(6n+4):hover, .pt-hover .ws-tool:nth-child(6n+4):hover { background: #a4532f; border-color: #a4532f; color: #fdf6ee; }
+    .pt-group:nth-child(6n+5):hover, #essay-pantry .ws-tool:nth-child(6n+5):hover, .pt-hover .ws-tool:nth-child(6n+5):hover { background: #e6dcf0; border-color: #e6dcf0; color: #3b1d36; }
+    .pt-group:nth-child(6n+6):hover, #essay-pantry .ws-tool:nth-child(6n+6):hover, .pt-hover .ws-tool:nth-child(6n+6):hover { background: #4a1c14; border-color: #4a1c14; color: #f4efe3; }
+    .pt-group:hover small, #essay-pantry .ws-tool:hover, .pt-hover .ws-tool:hover .ws-tr, .pt-group:hover .ab-link { color: inherit; opacity: 0.8; }
     .pt-fav:nth-child(1):hover { background: #d6dd5c; color: #2a2a12; }
     .pt-fav:nth-child(2):hover { background: #54294d; color: #f4efe3; }
     .pt-fav:nth-child(3):hover { background: #a4532f; color: #fdf6ee; }
@@ -2918,6 +2918,10 @@
     .np-form iframe { display: block; width: 100%; height: 640px; border: 0; }
     .np-vfile video { display: block; width: 100%; border-radius: 10px; background: #000; }
     .lf-toolbar.lf-auto { margin-bottom: 18px; }
+    .ws-step h3 { margin: 14px 0 6px !important; }
+    .ws-card-link { color: inherit; text-decoration: none; display: block; }
+    .np-page :is(.ws-steps, .ws-cards, .ws-tools, .ws-shop, .pt-groups, .pt-favs, .lb-rules, .lb-grid, .lf-cards, .bm-gallery, .bm-swatches) { margin-bottom: 22px; }
+    .vs-open { display: inline-block; margin-top: 8px; font-size: 12px; color: inherit; opacity: 0.75; }
     .lf-figure .sg-img.circle, .np-page .lf-figure img.sg-img.circle { border-radius: 50%; }
     .lf-figure .sg-img.sq, .np-page .lf-figure img.sg-img.sq { border-radius: 0; }
     .np-hint { position: relative; border-bottom: 1px dotted currentColor; cursor: help; }
@@ -6043,7 +6047,7 @@ function cook(g) {
       const player = card.querySelector('.lf-player');
       card.querySelector('.lf-thumb-btn').addEventListener('click', () => {
         document.querySelectorAll('.lf-video.playing').forEach(c => { c.classList.remove('playing'); c.querySelector('.lf-player').innerHTML = ''; });
-        player.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${card.dataset.yt}?autoplay=1&rel=0&playsinline=1" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+        player.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${card.dataset.yt}?autoplay=1&rel=0&playsinline=1" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
         card.classList.add('playing');
         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
@@ -7419,7 +7423,11 @@ function cook(g) {
           const nice = x => { const w = Math.floor(x), f = x - w, fr = [[0, ''], [.125, '⅛'], [.25, '¼'], [1 / 3, '⅓'], [.5, '½'], [2 / 3, '⅔'], [.75, '¾'], [1, '']]; let best = fr[0]; fr.forEach(c => { if (Math.abs(c[0] - f) < Math.abs(best[0] - f)) best = c; }); const ww = best[0] === 1 ? w + 1 : w; return (ww ? ww + (best[1] ? ' ' : '') : '') + best[1] || '0'; };
           body.querySelectorAll('.np-amt').forEach(a => { a.textContent = nice(+a.dataset.amt * n / base); }); return;
         }
-        const vd = e.target.closest('.np-video'); if (vd) { const m = document.getElementById('vs-modal'); if (!m) return; const st = m.querySelector('.vs-stage'); st.innerHTML = ''; const f = document.createElement('iframe'); f.src = vd.dataset.embed; f.allow = 'autoplay; fullscreen; picture-in-picture'; f.allowFullscreen = true; st.appendChild(f); m.querySelector('.vs-cap b').textContent = vd.dataset.title || ''; m.querySelector('.vs-cap span').textContent = ''; m.classList.add('on'); m.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+        const lv = e.target.closest('.np-lfvideo'); if (lv) {
+          if (e.target.closest('.lf-thumb-btn')) { document.querySelectorAll('.lf-video.playing').forEach(c => { c.classList.remove('playing'); c.querySelector('.lf-player').innerHTML = ''; }); lv.querySelector('.lf-player').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${lv.dataset.yt}?autoplay=1&rel=0&playsinline=1" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`; lv.classList.add('playing'); return; }
+          if (e.target.closest('.lf-close')) { lv.classList.remove('playing'); lv.querySelector('.lf-player').innerHTML = ''; return; }
+        }
+        const vd = e.target.closest('.np-video'); if (vd) { const m = document.getElementById('vs-modal'); if (!m) return; const st = m.querySelector('.vs-stage'); st.innerHTML = ''; const f = document.createElement('iframe'); f.src = vd.dataset.embed; f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture'; f.referrerPolicy = 'strict-origin-when-cross-origin'; f.allowFullscreen = true; st.appendChild(f); m.querySelector('.vs-cap b').textContent = vd.dataset.title || ''; const yid = (vd.dataset.embed.match(/embed\/([\w-]{11})/) || [])[1], vid = (vd.dataset.embed.match(/video\/(\d+)/) || [])[1]; const out = yid ? 'https://www.youtube.com/watch?v=' + yid : vid ? 'https://vimeo.com/' + vid : ''; m.querySelector('.vs-cap span').innerHTML = out ? `<a class="vs-open" href="${out}" target="_blank" rel="noopener">Not playing? Watch it on ${yid ? 'YouTube' : 'Vimeo'} ↗</a>` : ''; m.classList.add('on'); m.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
       });
       const piecesReady = get('/data/pieces.json').then(list => {
         if (!Array.isArray(list)) return;
@@ -7553,8 +7561,9 @@ function cook(g) {
         KIND.Film = 'film';
         const it = x => row(KIND[x.type] || 'book', x.title, x.type === 'Show' ? '' : x.creator, x.link, x.rating, x.status, x.type === 'Music' && x.status === 'Playlist' ? x.cover : '', x.type === 'Show' ? 'Show' : x.type === 'Film' ? `${x.creator ? x.creator + ' · ' : ''}Film` : x.creator, ['Finished', 'Watched'].includes(x.status));
         const fill = (name, html, count) => { const g = byName(name); if (!g) return; const ul = g.querySelector('.sh-log'); const feed = [...ul.querySelectorAll('.sh-feed')].map(x => x.outerHTML).join(''); ul.innerHTML = html + feed; if (count) g.querySelector('.sh-count').textContent = count; g.style.display = ul.children.length ? '' : 'none'; };
-        const books = Array.isArray(d.books) ? d.books : [], tk = x => norm(x.title).toLowerCase();
-        const I = d.items.concat(books.filter(b => !d.items.some(x => x.type === 'Book' && tk(x) === tk(b))).map(b => ({ ...b, type: 'Book' })));
+        // Books come from Literal when it loaded; Notion Book rows are only the backup
+        const books = Array.isArray(d.books) ? d.books : [];
+        const I = books.length ? d.items.filter(x => x.type !== 'Book').concat(books.map(b => ({ ...b, type: 'Book' }))) : d.items;
         if (I.length) {
           const now = I.filter(x => ['Reading', 'Watching', 'Listening'].includes(x.status) && x.type !== 'Music');
           const shows = I.filter(x => x.type === 'Show' && x.status === 'Watched'), music = I.filter(x => x.type === 'Music'), done = I.filter(x => x.status === 'Finished' && x.type !== 'Film');
