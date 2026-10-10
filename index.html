@@ -7657,6 +7657,7 @@ function cook(g) {
           el.innerHTML = `<h1>${esc(c.title)}</h1>${c.subline ? `<div class="muted" style="margin-bottom: 32px;">${esc(c.subline)}</div>` : ''}${c.body}`;
           placePage(el);
         });
+        document.querySelectorAll('#portfolio article.cs .ab-photo, .np-case .ab-photo').forEach(x => window.__bindAbPhoto && window.__bindAbPhoto(x));
         window.__markPhotos && window.__markPhotos(); openHash();
       });
 
@@ -7701,6 +7702,7 @@ function cook(g) {
             col.append(a);
           }
         });
+        document.querySelectorAll('.np-sitepage .ab-photo, #changelog .ab-photo, #colophon .ab-photo, #legal .ab-photo, #ai-use .ab-photo').forEach(x => window.__bindAbPhoto && window.__bindAbPhoto(x)); window.__markPhotos && window.__markPhotos();
         openHash();
       });
       // menu links added from Notion: highlight the one for the page you are on
@@ -7745,7 +7747,7 @@ function cook(g) {
           (isPast ? past : up).push(e);
         });
         up.sort((a, b) => a.start.localeCompare(b.start)); past.sort((a, b) => b.start.localeCompare(a.start));
-        const tr = e => `<tr class="event-row" data-event="${esc(e.key)}" tabindex="0" role="button" aria-label="View details: ${esc(e.title)}"><td><div class="calendar-date">${esc(e.label || short(e))}</div></td><td><div class="calendar-event">${esc(e.title)}</div>${e.detail ? `<div class="calendar-location">${esc(e.detail)}</div>` : ''}</td><td class="calendar-location">${esc(e.city)}</td></tr>`;
+        const tr = e => `<tr class="event-row" data-event="${esc(e.key)}" tabindex="0" role="button" aria-label="View details: ${esc(e.title)}"><td><div class="calendar-date">${esc(e.label || short(e))}</div>${e.time ? `<div class="calendar-location">${esc(e.time)}</div>` : ''}</td><td><div class="calendar-event">${esc(e.title)}</div>${e.detail ? `<div class="calendar-location">${esc(e.detail)}</div>` : ''}</td><td class="calendar-location">${esc(e.city)}</td></tr>`;
         tbs[0].innerHTML = up.map(tr).join(''); tbs[1].innerHTML = past.map(tr).join('');
         [0, 1].forEach(i => { const t = tbs[i].closest('table'), h = t.previousElementSibling; const on = !!tbs[i].children.length; t.style.display = on ? '' : 'none'; if (h && h.tagName === 'H2') h.style.display = on ? '' : 'none'; });
         pg.querySelectorAll('.event-row').forEach(r => { r.addEventListener('click', () => openEvent(r.dataset.event, r)); r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEvent(r.dataset.event, r); } }); });
@@ -7757,7 +7759,7 @@ function cook(g) {
             const a = fi.querySelector('.feed-item-title a'), m = fi.querySelector('.feed-item-meta');
             [fi.querySelector('.feed-item-title'), m].forEach(x => x && x.removeAttribute('data-t'));
             if (a) { a.textContent = nx.title + ' →'; a.onclick = () => setTimeout(() => { const r = pg.querySelector(`.event-row[data-event="${nx.key}"]`); if (r) openEvent(nx.key, r); }, 80); }
-            if (m) m.textContent = [D(nx.start).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }), nx.city].filter(Boolean).join(' · ');
+            if (m) m.textContent = [D(nx.start).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }), nx.time, nx.city].filter(Boolean).join(' · ');
           }
         }
       });
@@ -7812,8 +7814,10 @@ function cook(g) {
       const bindNew = root => root.querySelectorAll('.ab-photo').forEach(x => window.__bindAbPhoto && window.__bindAbPhoto(x));
 
       // Resume Lists: the short lists on Work and In kitchens on the Archive
-      get('/data/resume.json').then(list => {
+      Promise.all([get('/data/resume.json'), get('/data/hover.json')]).then(([list, hov]) => {
         if (!Array.isArray(list) || !list.length) return;
+        // Hover photo: the Resume Lists photo, or else the Hover Images row with the same name
+        hov = hov || {}; list.forEach(x => { if (!x.photo) { const h = hov[String(x.title || '').trim().toLowerCase()]; if (h && h.image) x.photo = h.image; } });
         document.querySelectorAll('[data-resume]').forEach(box => {
           const rows = list.filter(x => x.section === box.dataset.resume); if (!rows.length) { if (list.some(x => x.section)) box.innerHTML = ''; return; }
           if (box.dataset.rstyle === 'pb') { box.innerHTML = rows.map(x => `<div class="pb-line"><span class="pb-date">${esc(x.date)}${x.date ? '.' : ''}</span> <span class="pb-nolink">${esc([x.title, x.org].filter(Boolean).join(', '))}</span></div>`).join(''); return; }

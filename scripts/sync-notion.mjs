@@ -455,6 +455,7 @@ async function units(blocks, ctx) {
         out.push({ html: h, notes }); continue;
       }
       if (t === 'bulleted_list_item' && run.every(x => boldStart(x) && (/:\s*$/.test(x[t].rich_text[0].plain_text) || x[t].rich_text[1]?.plain_text?.startsWith(':')))) {
+        if (!ctx.preview) run.forEach(x => { const [first, ...rest] = x[t].rich_text; const term = first.plain_text.replace(/:\s*$/, '').trim(), def = txt(rest).replace(/^:\s*/, '').trim(); if (term && def) HINTS.push({ term, definition: def, page: ctx.slug || '' }); });
         out.push({ html: `<dl class="sg-dl">${run.map(x => { const [first, ...rest] = x[t].rich_text; return `<dt>${esc(first.plain_text.replace(/:\s*$/, ''))}</dt><dd>${para(rest, ctx).replace(/^:\s*/, '')}</dd>`; }).join('')}</dl>`, notes }); continue;
       }
       if (ctx.sec === 'notes' && t === 'bulleted_list_item') { out.push({ html: `<ul class="rc-notes">${(await Promise.all(run.map(async x => `<li>${await item(x)}</li>`))).join('')}</ul>`, notes }); continue; }
@@ -814,9 +815,15 @@ await part('kitchen', async () => {
   return out.sort(ord);
 });
 
+// A Date with a time (Notion date picker, Include time) fills Time when Time is empty. Times show in New York time.
+const NY = 'America/New_York';
+const nyDay = d => new Intl.DateTimeFormat('en-CA', { timeZone: NY, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(d));
+const nyTime = d => new Intl.DateTimeFormat('en-US', { timeZone: NY, hour: 'numeric', minute: '2-digit' }).format(new Date(d)).replace(':00', '').replace(/\u202f/g, ' ');
+const evDay = s => !s ? '' : s.length > 10 ? nyDay(s) : s;
+const evTime = (dt, typed) => { if (typed) return typed; const s = dt?.start || '', e = dt?.end || ''; if (s.length <= 10) return ''; const a = nyTime(s); if (e.length > 10) { const b = nyTime(e); return a.slice(-2) === b.slice(-2) ? `${a.slice(0, -3)}–${b}` : `${a} – ${b}`; } return a; };
 await part('events', async () => (await queryAll(DB.events)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
-  key: 'ev-' + slugify(plain(pr.Event)) + '-' + (pr.Date?.date?.start || '').slice(0, 10), title: plain(pr.Event), start: (pr.Date?.date?.start || '').slice(0, 10), end: (pr.Date?.date?.end || '').slice(0, 10),
-  label: plain(pr['Date label']), time: plain(pr.Time), detail: plain(pr.Detail), city: plain(pr.City), where: plain(pr.Where), host: plain(pr.Host), cost: plain(pr.Cost),
+  key: 'ev-' + slugify(plain(pr.Event)) + '-' + evDay(pr.Date?.date?.start), title: plain(pr.Event), start: evDay(pr.Date?.date?.start), end: evDay(pr.Date?.date?.end) === evDay(pr.Date?.date?.start) ? '' : evDay(pr.Date?.date?.end),
+  label: plain(pr['Date label']), time: evTime(pr.Date?.date, plain(pr.Time)), detail: plain(pr.Detail), city: plain(pr.City), where: plain(pr.Where), host: plain(pr.Host), cost: plain(pr.Cost),
   format: sel(pr.Format), desc: plain(pr.Description), rsvp: url(pr['RSVP link']), rsvpSite: plain(pr['RSVP site']), link: url(pr.Link), linkWords: plain(pr['Link words']) }; }).filter(e => e.title && e.start));
 
 await part('resources', async () => {
