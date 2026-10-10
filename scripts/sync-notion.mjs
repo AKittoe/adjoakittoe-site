@@ -26,12 +26,18 @@ const DB = {
   resume: '271893e36dac4c8fbcc6da355af4d98c',     // Resume Lists (Work page lists, In kitchens)
   aboutLists: '46f20b4644bc496588567cb26be69015', // About Lists
   kitchen: '3c58ed346e0b423986f73ddac19aa2e5',    // Kitchen Photos (Archive)
+  glossary: '19b1f26619394353a5fc42541805a41b',                     // Glossary (Appendix)
 };
+// A link or @mention to one of these databases in a Notion page goes to that page of the site
+const DB_PAGE = { notes: 'notes', states: 'states', projects: 'projects', life: 'now', published: 'published', stack: 'bookmarks', bookmarks: 'bookmarks', shelf: 'bookmarks',
+  events: 'events', resources: 'resources', photography: 'photography', academia: 'academia', resume: 'portfolio', aboutLists: 'about', kitchen: 'archive', glossary: 'appendix' };
+const PAGE_BY_DB = Object.fromEntries(Object.entries(DB_PAGE).map(([k, v]) => [DB[k], v]));
+const LITERAL = 'ChefAK';
 const LETTERBOXD = 'eauxjai';
 
 // Films saved by earlier runs (Letterboxd's feed only holds recent diary entries)
-let savedFilms = [];
-try { savedFilms = JSON.parse(await readFile('data/shelf.json', 'utf8')).films || []; } catch {}
+let savedFilms = [], savedBooks = [];
+try { const old = JSON.parse(await readFile('data/shelf.json', 'utf8')); savedFilms = old.films || []; savedBooks = old.books || []; } catch {}
 await rm('assets', { recursive: true, force: true });
 // Photos are resized so they load fast and stay under Cloudflare's 25 MB file limit
 let sharp = null;
@@ -71,7 +77,7 @@ async function saveFile(url, folder, name, max = 2000) {
   try {
     const res = await fetch(url); if (!res.ok) return '';
     const type = res.headers.get('content-type') || '';
-    let ext = type.includes('png') ? 'png' : type.includes('webp') ? 'webp' : type.includes('gif') ? 'gif' : type.includes('pdf') ? 'pdf' : type.includes('svg') ? 'svg' : type.includes('mp4') ? 'mp4' : type.includes('audio') || type.includes('mpeg') ? 'mp3' : 'jpg';
+    let ext = type.includes('png') ? 'png' : type.includes('webp') ? 'webp' : type.includes('gif') ? 'gif' : type.includes('pdf') ? 'pdf' : type.includes('svg') ? 'svg' : type.includes('mp4') ? 'mp4' : type.includes('quicktime') ? 'mov' : type.includes('webm') ? 'webm' : type.includes('audio') || type.includes('mpeg') ? 'mp3' : 'jpg';
     let buf = Buffer.from(await res.arrayBuffer());
     if (sharp && /^image\/(jpeg|jpg|png|webp|heic|heif|tiff|avif)/.test(type)) {
       try {
@@ -122,8 +128,11 @@ for (const p of await queryAll(DB.hover)) {
 
 // ---------- long pages ----------
 // Publish = live and listed. Preview = built at its link only (adjoakittoe.com/#slug), never listed.
-const pieceRows = (await queryAll(DB.pieces)).filter(p => check(p.properties.Publish) || check(p.properties.Preview));
+const allPieceRows = await queryAll(DB.pieces);
+const pieceRows = allPieceRows.filter(p => check(p.properties.Publish) || check(p.properties.Preview));
 const slugById = {};
+// unpublished rows with a Slug are the hand-built pages (Fonio, Pantry...): links to them still work
+for (const p of allPieceRows) if (plain(p.properties.Slug)) slugById[p.id.replace(/-/g, '')] = plain(p.properties.Slug);
 for (const p of pieceRows) slugById[p.id.replace(/-/g, '')] = plain(p.properties.Slug) || slugify(plain(p.properties.Title));
 
 const guideRows = [];
@@ -162,12 +171,21 @@ async function collectHovers(blocks, ctx, pageId) {
   await walk(blocks);
 }
 
+// Which site page a Notion page/database id, a Notion link, or an adjoakittoe.com link points to ('' = not on the site)
+const sitePage = id => slugById[id] || PAGE_BY_DB[id] || '';
+function siteHref(href) {
+  const h = String(href || '');
+  const own = h.match(/^(?:https?:\/\/)?(?:www\.)?(?:adjoakittoe\.com|adjoakittoe\.pages\.dev)\/?(?:index\.html)?#?\/?([\w-]*)/i);
+  if (own) return own[1] || 'home';
+  if (/^(?:https?:\/\/[^/]*notion\.(?:so|site|com)\/|\/)/.test(h)) { const m = h.replace(/#.*$/, '').match(/([0-9a-f]{32})(?:[?]|$)/); if (m) return sitePage(m[1]); }
+  return '';
+}
 function rich(rt = [], ctx = {}) {
   return rt.map(t => {
     const raw = t.plain_text;
     let s = esc(raw).replace(/\n/g, '<br>');
     const a = t.annotations || {};
-    if (a.code) s = raw.trim().length <= 3 ? `<kbd>${s}</kbd>` : `<code>${s}</code>`;
+    if (a.code) s = /^#[\w-]+$/.test(raw.trim()) ? `<span class="es-tag">${s}</span>` : raw.trim().length <= 3 ? `<kbd>${s}</kbd>` : `<code>${s}</code>`;
     if (a.bold) s = `<strong>${s}</strong>`;
     if (a.italic) s = `<em>${s}</em>`;
     if (a.strikethrough) s = `<s>${s}</s>`;
@@ -176,17 +194,19 @@ function rich(rt = [], ctx = {}) {
     else if (a.color === 'gray') s = `<span class="muted">${s}</span>`;
     else if (a.color === 'gray_background') s = `<span class="lf-tag">${s}</span>`;
     else if (a.color === 'purple') s = hoverSpan(s, raw, ctx);
+    else if (a.color === 'blue') { const m = raw.match(/^([\s\S]*?)\s*\(([^()]+)\)\s*$/); if (m && m[1].trim()) s = `<span class="np-hint" tabindex="0">${esc(m[1].trim())}<span class="np-hint-box" role="tooltip">${esc(m[2].trim())}</span></span>${/\s$/.test(raw) ? ' ' : ''}`; }
     // links
-    const mention = t.type === 'mention' && t.mention?.type === 'page' ? idOf(t.mention.page.id) : null;
-    if (mention) {
-      const slug = slugById[mention];
-      if (slug) s = `<a href="#" data-page="${esc(slug)}" class="site-link">${s} <span>→</span></a>`;
-    } else if (t.href) {
+    // @mention of a page or database: green link with an arrow
+    const mType = t.type === 'mention' ? t.mention?.type : '';
+    const mention = mType === 'page' || mType === 'database' ? idOf(t.mention[mType].id) : null;
+    const mSlug = mention && sitePage(mention);
+    if (mSlug) s = `<a href="#" data-page="${esc(mSlug)}" class="site-link">${s} <span>→</span></a>`;
+    else if (t.href && !mention) {
       const block = t.href.match(/#([0-9a-f]{32})$/);
-      const pageM = t.href.match(/([0-9a-f]{32})(?:[?#]|$)/);
+      const page = siteHref(t.href);
       if (block && ctx.anchors && ctx.anchors[block[1]]) s = `<a href="#${ctx.anchors[block[1]]}" class="site-link sg-jump" data-jump="${ctx.anchors[block[1]]}">${s} <span>↓</span></a>`;
-      else if (pageM && slugById[pageM[1]]) s = `<a href="#" data-page="${esc(slugById[pageM[1]])}">${s}</a>`;
-      else if (/^https?:/.test(t.href)) s = `<a class="ab-link" href="${esc(t.href)}" target="_blank" rel="noopener">${s}<span class="ab-ext">↗</span></a>`;
+      else if (page) s = `<a href="#" data-page="${esc(page)}" class="np-in">${s}</a>`;
+      else if (/^https?:|^mailto:/.test(t.href)) s = `<a class="ab-link" href="${esc(t.href)}" target="_blank" rel="noopener">${s}<span class="ab-ext">↗</span></a>`;
     }
     return s;
   }).join('');
@@ -228,6 +248,23 @@ function ingredient(x) {
   return `<li><span class="rc-q" data-q="${+n.toFixed(4)}">${esc(m[1].trim())}</span> <span class="rc-u">${esc(m[2] || '')}</span> ${esc(m[3])}</li>`;
 }
 
+// YouTube (watch, youtu.be, shorts, live) and Vimeo links become a video card that plays on the page
+function videoCard(url, cap, push) {
+  const yt = String(url).match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/|embed\/)|youtu\.be\/)([\w-]{11})/), vm = String(url).match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (!yt && !vm) return false;
+  const embed = yt ? `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1` : `https://player.vimeo.com/video/${vm[1]}?autoplay=1`;
+  const thumb = yt ? `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg` : '';
+  push(`<button type="button" class="np-video" data-embed="${esc(embed)}" data-title="${esc(cap)}">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy">` : ''}<span class="rc-play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>${cap ? `<span class="np-video-cap">${esc(cap)}</span>` : ''}</button>`, { wide: true });
+  return true;
+}
+// Google Forms and Tally forms show inside the page
+function formUrl(url) {
+  const u = String(url);
+  if (/docs\.google\.com\/forms\//.test(u)) return u.replace(/\/(viewform|edit)?(\?.*)?$/, '/viewform') + '?embedded=true';
+  const ta = u.match(/tally\.so\/(?:r|embed)\/(\w+)/); if (ta) return `https://tally.so/embed/${ta[1]}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`;
+  return '';
+}
+const SKIPPED = new Set(); // block types the site cannot show yet (listed in the sync log)
 async function saveImg(v, id) { return saveFile(fileUrl(v), 'pieces', idOf(id)); }
 
 // An image block: caption keywords pick the shape. (wide) (square) (round) (circle) (tilt). "caption | credit" adds a credit.
@@ -327,7 +364,8 @@ async function units(blocks, ctx) {
       const item = async x => { const { kids } = splitKids(x.children); return para(x[t].rich_text, ctx) + (kids.length ? await html(kids, ctx) : ''); };
       if (t === 'numbered_list_item' && run.every(boldStart)) {
         if (ctx.sec === 'method') { const start = ctx.step + 1; ctx.step += run.length; out.push({ html: `<ol class="rc-steps"${start > 1 ? ` start="${start}"` : ''}>${(await Promise.all(run.map(async x => `<li>${await item(x)}</li>`))).join('')}</ol>`, notes }); continue; }
-        let h = ''; for (const x of run) { const [first, ...rest] = x[t].rich_text; const { kids } = splitKids(x.children); h += `<div class="lf-step"><span class="lf-step-n">${++ctx.stepBadge}</span><h4>${esc(first.plain_text.trim())}</h4></div>${rest.length ? `<p>${para(rest, ctx).replace(/^\s+/, '')}</p>` : ''}${kids.length ? await html(kids, ctx) : ''}`; }
+        // badge, then the bold words and the plain words on the same line
+        let h = ''; for (const x of run) { const { kids } = splitKids(x.children); h += `<div class="lf-step np-step"><span class="lf-step-n">${++ctx.stepBadge}</span><p>${para(x[t].rich_text, ctx).replace(/<\/strong>(\S)/, '</strong> $1')}</p></div>${kids.length ? await html(kids, ctx) : ''}`; }
         out.push({ html: h, notes }); continue;
       }
       if (t === 'bulleted_list_item' && run.every(x => boldStart(x) && (/:\s*$/.test(x[t].rich_text[0].plain_text) || x[t].rich_text[1]?.plain_text?.startsWith(':')))) {
@@ -341,24 +379,37 @@ async function units(blocks, ctx) {
     switch (t) {
       case 'paragraph': {
         const { kids, notes } = splitKids(b.children);
-        const rt = v.rich_text;
+        // a whole line colored gray (block color) = muted line, same as gray words
+        const rt = v.color === 'gray' ? v.rich_text.map(r => ({ ...r, annotations: { ...(r.annotations || {}), color: 'gray' } })) : v.rich_text;
         if (!rt.length && !kids.length) { if (notes.length) out.push({ html: '', notes }); break; }
         // a bold-only line right above a table is that table's title
         if (boldOnly(b) && blocks[i + 1]?.type === 'table') { out.push({ html: await table(blocks[++i], ctx, esc(txt(rt))), notes, wide: false }); break; }
         // a line that is only a bold link is a button
-        if (rt.length && rt.every(r => r.href && r.annotations?.bold)) {
-          const href = rt[0].href, pm = href.match(/([0-9a-f]{32})(?:[?#]|$)/), slug = pm && slugById[pm[1]];
-          out.push({ html: slug ? `<p><a href="#" data-page="${esc(slug)}" class="sg-btn">${esc(txt(rt))}</a></p>` : `<p><a class="sg-btn" href="${esc(href)}" target="_blank" rel="noopener">${esc(txt(rt))}</a></p>`, notes }); break;
+        // a line that is only bold links = buttons (bold + italic = the outlined second button)
+        const filled = rt.filter(r => r.plain_text.trim());
+        if (filled.length && filled.every(r => (r.href || r.type === 'mention') && r.annotations?.bold)) {
+          const groups = []; for (const r of filled) { const k = r.href || r.plain_text; const g = groups[groups.length - 1]; if (g && g.k === k && r.href) g.runs.push(r); else groups.push({ k, runs: [r] }); }
+          const btn = g => {
+            const f0 = g.runs[0], href = f0.href || '', mid = f0.type === 'mention' && ['page', 'database'].includes(f0.mention?.type) ? idOf(f0.mention[f0.mention.type].id) : '';
+            const slug = mid ? sitePage(mid) : siteHref(href), label = esc(txt(g.runs).trim()), cls = `sg-btn${f0.annotations?.italic ? ' ghost' : ''}`;
+            return slug ? `<a href="#" data-page="${esc(slug)}" class="${cls}">${label}</a>` : `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener">${label}</a>`;
+          };
+          out.push({ html: groups.length > 1 ? `<div class="sg-row np-btns">${groups.map(btn).join('')}</div>` : `<p>${btn(groups[0])}</p>`, notes }); break;
         }
         // a gray line in a guide card that starts with Base: or Recipe by
         const plainTxt = txt(rt).trim();
+        // a line that starts with h5: or h6: becomes that small heading
+        const hx = plainTxt.match(/^h([56])\s*:\s*/i);
+        if (hx) { const r2 = rt.map(r => ({ ...r })); let cut = hx[0].length; for (const r of r2) { const k = Math.min(cut, r.plain_text.length); r.plain_text = r.plain_text.slice(k); cut -= k; if (!cut) break; } push(`<h${hx[1]} class="sg-h">${rich(r2.filter(r => r.plain_text), ctx)}</h${hx[1]}>`); break; }
         if (ctx.inCard && /^base\s*:/i.test(plainTxt)) { ctx.card.base = plainTxt.replace(/^base\s*:\s*/i, ''); break; }
         if (ctx.inCard && /^(recipe by|source:|via)\b/i.test(plainTxt)) { out.push({ html: `<p class="fj-src">${rich(rt, ctx)}</p>`, notes }); break; }
         out.push({ html: (rt.length ? `<p>${para(rt, ctx)}</p>` : '') + (kids.length ? await html(kids, ctx) : ''), notes }); break;
       }
-      case 'heading_2': case 'heading_3': {
-        const lvl = t === 'heading_2' ? 4 : 5;
-        push(`<h${lvl} class="sg-h" id="${ctx.anchors[idOf(b.id)] || ''}">${rich(v.rich_text, ctx)}</h${lvl}>`); break;
+      case 'heading_2': case 'heading_3': case 'heading_4': {
+        // Notion Heading 2 = site heading 4, Heading 3 = heading 5, Heading 4 = heading 6
+        const lvl = { heading_2: 4, heading_3: 5, heading_4: 6 }[t];
+        push(`<h${lvl} class="sg-h" id="${ctx.anchors[idOf(b.id)] || ''}">${rich(v.rich_text, ctx)}</h${lvl}>`);
+        if (b.children) push(await html(b.children, ctx)); break;
       }
       case 'quote': {
         const ls = lines(v.rich_text); let cite = '';
@@ -392,13 +443,11 @@ async function units(blocks, ctx) {
         push(await table(b, ctx), { wide: true }); break;
       }
       case 'video': {
-        const url = fileUrl(v); let embed = '';
-        const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([\w-]{6,})/); const vm = url.match(/vimeo\.com\/(\d+)/);
-        if (yt) embed = `https://www.youtube-nocookie.com/embed/${yt[1]}?autoplay=1`; else if (vm) embed = `https://player.vimeo.com/video/${vm[1]}?autoplay=1`;
-        const thumb = yt ? `https://i.ytimg.com/vi/${yt[1]}/hqdefault.jpg` : '';
-        const cap = txt(v.caption);
-        if (embed) push(`<button type="button" class="np-video" data-embed="${esc(embed)}" data-title="${esc(cap)}">${thumb ? `<img src="${esc(thumb)}" alt="" loading="lazy">` : ''}<span class="rc-play" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>${cap ? `<span class="np-video-cap">${esc(cap)}</span>` : ''}</button>`, { wide: true });
-        else if (url) push(`<a class="np-linkcard" href="${esc(url)}" target="_blank" rel="noopener"><b>${esc(cap || url)}</b><span>${esc(url.replace(/^https?:\/\//, '').split('/')[0])} ↗</span></a>`);
+        const url = fileUrl(v), cap = txt(v.caption);
+        if (videoCard(url, cap, push)) break;
+        // a video file uploaded to Notion: saved with the site and played right on the page
+        if (v.type === 'file' || v.type === 'file_upload') { const src = await saveFile(url, 'files', idOf(b.id)); if (src) push(`<figure class="lf-figure np-vfile"><video src="${esc(src)}" controls playsinline preload="metadata"></video>${cap ? `<figcaption><span>${esc(cap)}</span></figcaption>` : ''}</figure>`, { wide: true }); break; }
+        if (url) push(`<a class="np-linkcard" href="${esc(url)}" target="_blank" rel="noopener"><b>${esc(cap || url)}</b><span>${esc(url.replace(/^https?:\/\//, '').split('/')[0])} ↗</span></a>`);
         break;
       }
       case 'audio': {
@@ -408,14 +457,24 @@ async function units(blocks, ctx) {
       }
       case 'bookmark': case 'embed': case 'link_preview': {
         const url = v.url || ''; const cap = txt(v.caption);
+        if (videoCard(url, cap, push)) break;
+        const form = formUrl(url);
+        if (form) { push(`<div class="np-form"><iframe src="${esc(form)}" title="${esc(cap || 'Form')}" loading="lazy"></iframe></div>`, { wide: true }); break; }
         if (url) push(`<a class="np-linkcard" href="${esc(url)}" target="_blank" rel="noopener"><b>${esc(cap || url.replace(/^https?:\/\//, ''))}</b><span>${esc(url.replace(/^https?:\/\//, '').split('/')[0])} ↗</span></a>`); break;
+      }
+      case 'synced_block': if (b.children) push(await html(b.children, ctx)); break;
+      case 'tab': {
+        // Notion's own /tabs block: each item is a tab, what is under it is the panel
+        const items = (b.children || []).filter(k => k.type === 'paragraph' || k.type === 'heading_3' || k.type === 'toggle');
+        const panes = []; for (const k of items) panes.push(await html(k.children || [], ctx));
+        push(`<div class="mo-tabs" data-tabs><div class="mo-tabbar">${items.map((k, j) => `<button${j ? '' : ' class="active"'} data-t="${j}">${esc(txt(k[k.type].rich_text))}</button>`).join('')}</div>${panes.map((h, j) => `<div class="mo-tab${j ? '' : ' active'}">${h}</div>`).join('')}</div>`, { wide: true }); break;
       }
       case 'file': case 'pdf': {
         const name = v.name || txt(v.caption) || 'Download';
         const src = await saveFile(fileUrl(v), 'files', slugify(name) || idOf(b.id));
         if (src) push(`<p><a href="${esc(src)}" class="cv-download site-link" download>${esc(txt(v.caption) || name)} <span>${ARROW_DL}</span></a></p>`); break;
       }
-      default: break;
+      default: SKIPPED.add(t); break;
     }
   }
   return out;
@@ -430,6 +489,7 @@ function rows(list, ctx) {
   const flush = () => { if (text || side) out += `<div class="mo-row"><div class="mo-text">${text}</div><div class="mo-side">${side}</div></div>`; text = side = ''; };
   for (const u of list) {
     if (u.wide) { flush(); out += u.html; continue; }
+    if (u.notes.length && text) flush();
     text += u.html;
     side += u.notes.map(n => `<p class="mo-sn"><span>${String.fromCharCode(97 + (ctx.letter++ % 26))}</span> ${cites(rich(n.callout.rich_text, ctx), ctx)}</p>`).join('');
   }
@@ -445,7 +505,7 @@ async function layout(blocks, ctx) {
   const sections = [{ title: '', id: `${ctx.slug}-top`, blocks: [] }];
   for (const b of blocks) {
     if (b.type === 'heading_1') { const title = txt(b.heading_1.rich_text).trim(); const id = mk(title); ctx.anchors[idOf(b.id)] = id; sections.push({ title, id, blocks: [] }); }
-    else { if (/^heading_[23]$/.test(b.type)) ctx.anchors[idOf(b.id)] = mk(txt(b[b.type].rich_text)); sections[sections.length - 1].blocks.push(b); }
+    else { if (/^heading_[234]$/.test(b.type)) ctx.anchors[idOf(b.id)] = mk(txt(b[b.type].rich_text)); sections[sections.length - 1].blocks.push(b); }
   }
   const T = ctx.template; let out = ''; const nav = [];
   for (const s of sections) {
@@ -547,7 +607,10 @@ const vimeoId = u => (String(u).match(/vimeo\.com\/(?:video\/)?(\d+)/) || [])[1]
 
 await part('text', async () => {
   const out = {};
-  for (const p of await queryAll(DB.siteText)) { const key = plain(p.properties.Key); if (!key) continue; out[key] = { html: inl(rtOf(p.properties.Text)), text: plain(p.properties.Text) }; }
+  for (const p of await queryAll(DB.siteText)) {
+    const key = plain(p.properties.Key); if (!key) continue; out[key] = { html: inl(rtOf(p.properties.Text)), text: plain(p.properties.Text) };
+    if (p.properties.Photo?.files?.length) out[key].photo = await saveProp(p, p.properties.Photo, 'text');
+  }
   return out;
 });
 
@@ -599,10 +662,27 @@ await part('shelf', async () => {
     const i = films.findIndex(g => g.title === f.title && g.year === f.year); if (i >= 0) films[i] = f; else films.push(f);
   }
   films.forEach(f => delete f.cover);
+  // Books from Literal: reading now, finished, and your star ratings (public profile, no login needed)
+  let books = savedBooks;
+  try { books = await literalBooks(); console.log(`Literal: ${books.filter(b => b.status === 'Reading').length} reading, ${books.filter(b => b.status === 'Finished').length} finished.`); }
+  catch (e) { console.warn(`Literal did not load (${e.message}). Keeping the books saved before.`); }
   films.sort((a, b) => (b.watched || '').localeCompare(a.watched || ''));
   console.log(`Letterboxd: ${fresh} diary entries in the feed, ${films.length} films kept.`);
-  return { items, films: films.slice(0, 40) };
+  return { items, films: films.slice(0, 40), books };
 });
+
+async function literalBooks() {
+  const gql = async (query, variables) => {
+    const r = await fetch('https://literal.club/graphql/', { method: 'POST', headers: { 'Content-Type': 'application/json', ...UA }, body: JSON.stringify({ query, variables }) });
+    if (!r.ok) throw new Error('status ' + r.status); const j = await r.json(); if (j.errors) throw new Error(j.errors[0].message); return j.data;
+  };
+  const pid = (await gql('query($h:String!){profile(where:{handle:$h}){id}}', { h: LITERAL })).profile?.id; if (!pid) throw new Error('profile not found');
+  const list = async st => { const out = []; for (let off = 0; off < 2000; off += 100) { const b = (await gql('query($p:String!,$s:ReadingStatus!,$o:Int!){booksByReadingStateAndProfile(limit:100,offset:$o,readingStatus:$s,profileId:$p){id slug title authors{name}}}', { p: pid, s: st, o: off })).booksByReadingStateAndProfile || []; out.push(...b); if (b.length < 100) break; } return out; };
+  const rating = {};
+  for (let off = 0; off < 5000; off += 100) { const l = (await gql('query($p:String!,$o:Int!){getUserReviews(profileId:$p,limit:100,offset:$o){... on BookReviewActivity{ data { rating bookId } }}}', { p: pid, o: off })).getUserReviews || []; l.forEach(x => { if (x?.data?.bookId && x.data.rating != null) rating[x.data.bookId] = x.data.rating; }); if (l.length < 100) break; }
+  const shape = (b, status) => ({ title: b.title, creator: (b.authors || []).map(a => a.name).join(', '), link: `https://literal.club/book/${b.slug}`, rating: rating[b.id] ?? null, status });
+  return [...(await list('IS_READING')).map(b => shape(b, 'Reading')), ...(await list('FINISHED')).map(b => shape(b, 'Finished'))];
+}
 
 await part('resume', async () => (await queryAll(DB.resume)).filter(p => check(p.properties.Publish)).map(p => p).reduce(async (accP, p) => {
   const acc = await accP; const pr = p.properties;
@@ -669,8 +749,12 @@ await part('academia', async () => {
   return out.sort((a, b) => ord(a, b) || String(b.year).localeCompare(String(a.year)));
 });
 
+await part('glossary', async () => (await queryAll(DB.glossary)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
+  term: plain(pr.Term), definition: inl(rtOf(pr.Definition)), also: plain(pr['Also matches']) }; }).filter(x => x.term).sort((a, b) => a.term.localeCompare(b.term)));
+
 await mkdir('data', { recursive: true });
 const save = (f, d) => writeFile(`data/${f}`, JSON.stringify(d, null, 2) + '\n');
 await Promise.all([save('notes.json', notes), save('states.json', states), save('pieces.json', pieces), save('projects.json', projects), save('seeds.json', seeds), save('hover.json', hover), ...Object.entries(extra).map(([k, v]) => save(`${k}.json`, v))]);
 console.log(`Also saved: ${Object.keys(extra).join(', ')}.`);
+if (SKIPPED.size) console.log(`Notion blocks the site skipped: ${[...SKIPPED].join(', ')}.`);
 console.log(`Saved ${notes.length} notes, ${states.length} states, ${pieces.length} pages, ${projects.length} projects, ${seeds.length} seeds.`);

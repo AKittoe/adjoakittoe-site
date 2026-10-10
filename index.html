@@ -2908,6 +2908,26 @@
     .search-snippet mark { background: rgba(201,210,63,0.55); }
     .ab-photo.ab-nophoto { border-bottom: 0; cursor: inherit; }
     #photo-empty:empty { display: none; }
+    /* Update 10: Notion-built pieces */
+    .np-page a.np-in, .lf-page a.np-in { color: inherit; text-decoration: none; background-image: linear-gradient(rgba(93,125,99,0.22), rgba(93,125,99,0.22)); background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 1px; box-shadow: inset 0 -1px 0 #b7c9b9; transition: background-size 0.5s ease; }
+    .np-page a.np-in:hover, .lf-page a.np-in:hover { background-size: 100% 100%; }
+    .lf-step.np-step { align-items: flex-start; margin: 22px 0 12px; }
+    .lf-step.np-step .lf-step-n { margin-top: -3px; }
+    .lf-step.np-step p { margin: 0; }
+    .np-form { margin: 0 0 26px; border: 1px solid #ebe6dc; border-radius: 10px; overflow: hidden; background: #fff; }
+    .np-form iframe { display: block; width: 100%; height: 640px; border: 0; }
+    .np-vfile video { display: block; width: 100%; border-radius: 10px; background: #000; }
+    .lf-toolbar.lf-auto { margin-bottom: 18px; }
+    .lf-figure .sg-img.circle, .np-page .lf-figure img.sg-img.circle { border-radius: 50%; }
+    .lf-figure .sg-img.sq, .np-page .lf-figure img.sg-img.sq { border-radius: 0; }
+    .np-hint { position: relative; border-bottom: 1px dotted currentColor; cursor: help; }
+    .np-hint-box { position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); width: max-content; max-width: 240px; background: #2b2b2b; color: #fefdfb; font-size: 12px; line-height: 1.45; padding: 7px 10px; border-radius: 6px; opacity: 0; pointer-events: none; transition: opacity 0.15s; z-index: 50; font-weight: 400; font-style: normal; text-transform: none; letter-spacing: 0; }
+    .np-hint:hover .np-hint-box, .np-hint:focus .np-hint-box, .np-hint.on .np-hint-box { opacity: 1; }
+    .mo-sn .np-hint { color: inherit; font-size: inherit; } .mo-sn .np-hint-box { color: #fefdfb; font-size: 12px; }
+    .preview-img:not(:has(img)) { display: none; }
+    .np-page a.sg-btn, .np-page a.sg-btn:hover { text-decoration: none; background-image: none; box-shadow: none; }
+    .np-btns { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; }
+    .lf-toolbar .lf-back-off { visibility: hidden; }
     /* Dark theme (first pass): invert the palette, then flip real colors back so photos,
        swatches, covers, charts, and embeds keep their true colors */
     html[data-theme="dark"] { background: #fefdfb; filter: invert(0.92) hue-rotate(180deg); }
@@ -6775,7 +6795,12 @@ function cook(g) {
       document.addEventListener('click', e => { const o = e.target.closest('[data-rf-open]'); if (o) { e.preventDefault(); document.getElementById('piece-info')?.classList.remove('open'); open(o.dataset.rfOpen); } if (e.target.closest('[data-rf-close]')) close(); });
       document.addEventListener('keydown', e => { if (e.key === 'Escape' && m.classList.contains('open')) close(); });
       f.type.addEventListener('change', syncDl);
-      const send = () => { if (!checkForm(f)) return; f.hidden = true; done.hidden = false; };
+      const send = () => {
+        if (!checkForm(f)) return;
+        // live site: lands in the Resource Suggestions database in Notion
+        if (location.protocol.startsWith('http')) fetch('/api/resource', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: f.elements['name'].value, url: f.url.value, type: f.type.value, deadline: f.deadline.value, why: f.why.value, from: f.from.value }) }).catch(() => {});
+        f.hidden = true; done.hidden = false;
+      };
       document.getElementById('rf-send').addEventListener('click', send);
       f.addEventListener('submit', e => { e.preventDefault(); send(); });
     })();
@@ -7034,16 +7059,18 @@ function cook(g) {
         ap.querySelectorAll('[data-ap]').forEach(x => x.classList.toggle('active', x === b));
         ap.querySelectorAll('[data-appanel]').forEach(p => p.classList.toggle('active', p.dataset.appanel === b.dataset.ap));
       }));
-      ap.querySelectorAll('.gl-jump').forEach(a => a.addEventListener('click', e => { e.preventDefault(); document.getElementById('gl-' + a.dataset.l)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
+      ap.addEventListener('click', e => { const a = e.target.closest('.gl-jump'); if (!a) return; e.preventDefault(); document.getElementById('gl-' + a.dataset.l)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
       const titleOf = pg => { const n = document.querySelector(`aside nav a[data-page="${pg.id}"]`); if (n) return n.textContent.trim(); const h = pg.querySelector('h1'); return (h ? h.textContent : pg.id).trim(); };
       const skip = new Set(['appendix', 'styleguide', 'colophon', 'sitemap', 'map', 'changelog', 'legal', 'ai-use', 'search-results']);
-      const pages = [...document.querySelectorAll('main .page')].filter(p => !skip.has(p.id));
+      // runs at load, and again once the Notion pages and glossary arrive
+      window.__buildAppendix = function () {
+      const pages = [...document.querySelectorAll('main .page')].filter(p => !skip.has(p.id) && p.id !== 'notfound');
       const words = el => { const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); const out = []; while (w.nextNode()) out.push(w.currentNode.nodeValue); return out.join(' ').toLowerCase(); };
       const text = new Map(pages.map(p => [p, words(p)]));
       ap.querySelectorAll('.gl-item').forEach(it => {
         const keys = it.dataset.keys.split('|');
         const hits = pages.filter(p => keys.some(k => new RegExp('\\b' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i').test(text.get(p)))).slice(0, 5);
-        if (hits.length) it.querySelector('.gl-used').innerHTML = 'Appears in: ' + hits.map(p => `<a class="ab-link" href="#" data-page="${p.id}">${titleOf(p)}</a>`).join(', ');
+        it.querySelector('.gl-used').innerHTML = !hits.length ? '' : 'Appears in: ' + hits.map(p => `<a class="ab-link" href="#" data-page="${p.id}">${titleOf(p)}</a>`).join(', ');
       });
       const seen = new Map();
       document.querySelectorAll('main .page .lf-src').forEach(li => {
@@ -7053,25 +7080,30 @@ function cook(g) {
         if (!seen.has(key)) seen.set(key, { a, title: (a ? a.textContent : [...li.querySelector('.lf-src-title').childNodes].filter(n => !(n.nodeType === 1 && n.classList.contains('lf-tag'))).map(n => n.textContent).join('')).replace('↗', '').trim(), tag: tag ? tag.textContent : '', pages: [] });
         const rec = seen.get(key); if (!rec.pages.includes(pg)) rec.pages.push(pg);
       });
-      const list = document.getElementById('ap-src');
+      const list = document.getElementById('ap-src'); list.innerHTML = '';
       [...seen.values()].sort((x, y) => x.title.localeCompare(y.title)).forEach(r => {
         const li = document.createElement('li');
         const t = r.a ? `<a href="${r.a.href}" target="_blank" rel="noopener">${r.title} ↗</a>` : r.title;
         li.innerHTML = `<div><div class="ap-t">${t}${r.tag ? ` <span class="lf-tag">${r.tag}</span>` : ''}</div><div class="ap-in">Cited in: ${r.pages.map(p => `<a class="ab-link" href="#" data-page="${p.id}">${titleOf(p)}</a>`).join(', ')}</div></div>`;
         list.appendChild(li);
       });
+    };
+      window.__buildAppendix();
     })();
 
     // Glossary terms inside pieces: first mention gets a dotted underline and the definition from Appendix > Glossary
     (function () {
       const ap = document.getElementById('appendix'); if (!ap) return;
+      let defs = [];
+      window.__glossTerms = function () {
+      document.querySelectorAll('.gl-term').forEach(sp => { const p = sp.parentNode; sp.replaceWith(document.createTextNode(sp.textContent)); p.normalize(); });
       const items = [...ap.querySelectorAll('.gl-item')];
       const esc = t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const defs = items.map((it, n) => { if (!it.id) it.id = 'gli-' + n; const dd = it.querySelector('dd p') || it.querySelector('dd'); return { id: it.id, term: it.querySelector('dt').textContent.trim(), keys: (it.dataset.keys || it.querySelector('dt').textContent).split('|').map(k => k.trim()).filter(Boolean), def: dd ? dd.textContent.trim() : '' }; });
-      const pieces = [...document.querySelectorAll('main .page')].filter(pg => /^(essay-|recipe-|case-)/.test(pg.id) && pg.id !== 'essay-calendar');
+      defs = items.map((it, n) => { if (!it.id) it.id = 'gli-' + n; const dd = it.querySelector('dd p') || it.querySelector('dd'); return { id: it.id, term: it.querySelector('dt').textContent.trim(), keys: (it.dataset.keys || it.querySelector('dt').textContent).split('|').map(k => k.trim()).filter(Boolean), def: dd ? dd.textContent.trim() : '' }; });
+      const pieces = [...document.querySelectorAll('main .page')].filter(pg => (/^(essay-|recipe-|case-)/.test(pg.id) || pg.classList.contains('np-page')) && pg.id !== 'essay-calendar');
       pieces.forEach(pg => {
         const used = new Set();
-        const walker = document.createTreeWalker(pg, NodeFilter.SHOW_TEXT, { acceptNode: n => (n.parentElement.closest('a, button, h1, h2, h3, .lf-sources, .mo-sources, .lf-toolbar, .lf-pill-wrap, .bc-trail, script, style, figcaption, .gl-term, .lf-box-title, template') || !n.textContent.trim()) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+        const walker = document.createTreeWalker(pg, NodeFilter.SHOW_TEXT, { acceptNode: n => (n.parentElement.closest('a, button, h1, h2, h3, .lf-sources, .mo-sources, .lf-toolbar, .lf-pill-wrap, .bc-trail, script, style, figcaption, .gl-term, .np-hint, .lf-box-title, template') || !n.textContent.trim()) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
         const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
         nodes.forEach(node => {
           for (const d of defs) {
@@ -7084,6 +7116,8 @@ function cook(g) {
           }
         });
       });
+      };
+      window.__glossTerms();
       let pop = null, popFor = null;
       const close = () => { if (pop) { pop.remove(); pop = null; popFor = null; } };
       const open = el => {
@@ -7387,11 +7421,21 @@ function cook(g) {
         }
         const vd = e.target.closest('.np-video'); if (vd) { const m = document.getElementById('vs-modal'); if (!m) return; const st = m.querySelector('.vs-stage'); st.innerHTML = ''; const f = document.createElement('iframe'); f.src = vd.dataset.embed; f.allow = 'autoplay; fullscreen; picture-in-picture'; f.allowFullscreen = true; st.appendChild(f); m.querySelector('.vs-cap b').textContent = vd.dataset.title || ''; m.querySelector('.vs-cap span').textContent = ''; m.classList.add('on'); m.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
       });
-      get('/data/pieces.json').then(list => {
+      const piecesReady = get('/data/pieces.json').then(list => {
         if (!Array.isArray(list)) return;
         [...list].reverse().forEach(p => { if (!p || !p.slug) return; const old = document.getElementById(p.slug); if (old && p.replace) { old.remove(); document.querySelectorAll(`.es-row a[data-page="${p.slug}"]`).forEach(a => a.closest('.es-row').remove()); } if (!document.getElementById(p.slug)) build(p); });
         const id = decodeURIComponent(location.hash.slice(1)); if (id && document.getElementById(id) && document.getElementById(id).classList.contains('np-page')) showPage(id);
       });
+      // Glossary (Appendix): terms from Notion, then refresh "Appears in", Sources, and the underlined terms
+      const glossReady = get('/data/glossary.json').then(list => {
+        const ap = document.getElementById('appendix'); if (!ap || !Array.isArray(list) || !list.length) return;
+        const keyOf = x => [x.term.replace(/\s*\(.*?\)\s*/g, ' ').trim(), ...String(x.also || '').split(',')].map(k => k.trim().toLowerCase()).filter(Boolean);
+        const L = x => { const c = x.term.trim()[0].toUpperCase(); return /[A-Z]/.test(c) ? c : '#'; };
+        const letters = [...new Set(list.map(L))];
+        ap.querySelector('.gl-nav').innerHTML = letters.map(l => `<a href="#" class="gl-jump" data-l="${l}">${l}</a>`).join('');
+        ap.querySelector('.gl-list').innerHTML = letters.map(l => `<h3 class="gl-letter" id="gl-${l}">${l}</h3>` + list.filter(x => L(x) === l).map(x => `<div class="gl-item" data-keys="${esc(keyOf(x).join('|'))}"><dt>${esc(x.term)}</dt><dd><p>${x.definition}</p><p class="gl-used"></p></dd></div>`).join('')).join('');
+      });
+      Promise.all([piecesReady, glossReady]).then(() => { window.__buildAppendix && window.__buildAppendix(); window.__glossTerms && window.__glossTerms(); });
       get('/data/projects.json').then(list => {
         const grid = document.querySelector('#projects .pj-grid'); if (!grid || !Array.isArray(list) || !list.length) return;
         const C = { Chartreuse: 1, Eggplant: 2, Sage: 3, Rust: 4, Maroon: 5, Lilac: 6, Olive: 7, Slate: 8 };
@@ -7418,6 +7462,8 @@ function cook(g) {
         if (!map || typeof map !== 'object') return;
         document.querySelectorAll('[data-t*="-"]').forEach(el => {
           const v = map[el.dataset.t]; if (!v) return;
+          // Work page hover boxes: the photo uploaded to that caption's row in Site Text
+          if (v.photo && el.classList.contains('preview-cap') && !el.parentNode.querySelector('img')) el.insertAdjacentHTML('beforebegin', `<img src="${esc(v.photo)}" alt="${esc(v.text)}" loading="lazy">`);
           if (el.dataset.tl) { const items = v.text.split(',').map(x => x.trim()).filter(Boolean); if (items.join(', ') !== [...el.children].map(x => norm(x.textContent)).join(', ')) el.innerHTML = items.map(x => `<span class="${el.dataset.tl}">${esc(x)}</span>`).join(''); return; }
           if (el.tagName === 'A') { const t = document.createElement('div'); t.innerHTML = v.html; const only = t.children.length === 1 && t.firstElementChild.tagName === 'A' && norm(t.textContent) === norm(t.firstElementChild.textContent) ? t.firstElementChild : null; if (only && /^(https?:|mailto:)/.test(only.getAttribute('href') || '')) el.setAttribute('href', only.getAttribute('href')); el.innerHTML = only ? only.innerHTML : v.html; return; }
           const c = el.cloneNode(true); c.querySelectorAll('.ab-ext').forEach(x => x.remove());
@@ -7507,8 +7553,10 @@ function cook(g) {
         KIND.Film = 'film';
         const it = x => row(KIND[x.type] || 'book', x.title, x.type === 'Show' ? '' : x.creator, x.link, x.rating, x.status, x.type === 'Music' && x.status === 'Playlist' ? x.cover : '', x.type === 'Show' ? 'Show' : x.type === 'Film' ? `${x.creator ? x.creator + ' · ' : ''}Film` : x.creator, ['Finished', 'Watched'].includes(x.status));
         const fill = (name, html, count) => { const g = byName(name); if (!g) return; const ul = g.querySelector('.sh-log'); const feed = [...ul.querySelectorAll('.sh-feed')].map(x => x.outerHTML).join(''); ul.innerHTML = html + feed; if (count) g.querySelector('.sh-count').textContent = count; g.style.display = ul.children.length ? '' : 'none'; };
-        if (d.items.length) {
-          const I = d.items, now = I.filter(x => ['Reading', 'Watching', 'Listening'].includes(x.status) && x.type !== 'Music');
+        const books = Array.isArray(d.books) ? d.books : [], tk = x => norm(x.title).toLowerCase();
+        const I = d.items.concat(books.filter(b => !d.items.some(x => x.type === 'Book' && tk(x) === tk(b))).map(b => ({ ...b, type: 'Book' })));
+        if (I.length) {
+          const now = I.filter(x => ['Reading', 'Watching', 'Listening'].includes(x.status) && x.type !== 'Music');
           const shows = I.filter(x => x.type === 'Show' && x.status === 'Watched'), music = I.filter(x => x.type === 'Music'), done = I.filter(x => x.status === 'Finished' && x.type !== 'Film');
           fill('Now', now.map(it).join(''), `${now.length} entr${now.length === 1 ? 'y' : 'ies'}`);
           fill('Shows', shows.map(it).join(''), `${shows.filter(x => x.rating != null).length} rated`);
@@ -7682,6 +7730,34 @@ function cook(g) {
       // On the live site, any unknown address (like /oops) shows the 404 page
       const path = location.pathname.replace(/\/index\.html$/, '/');
       if (location.protocol.startsWith('http') && path !== '/' && path !== '') showPage('notfound');
+    })();
+    // Back and copy-link buttons on every page. Back goes to the page you came from (Home if none).
+    (function () {
+      const tpl = document.querySelector('#archive .lf-toolbar'); if (!tpl) return;
+      const trail = []; let goingBack = false;
+      const add = pg => {
+        if (!pg || !pg.classList.contains('page') || pg.id === 'map' || pg.querySelector('.lf-toolbar')) return;
+        const bar = tpl.cloneNode(true); bar.classList.add('lf-auto');
+        const back = bar.querySelector('a.lf-round'); back.removeAttribute('data-page'); back.dataset.back = ''; back.setAttribute('aria-label', 'Back'); back.title = 'Back';
+        bar.querySelector('[data-copy-page]').dataset.copyPage = pg.id;
+        pg.prepend(bar);
+      };
+      const sync = () => document.querySelectorAll('.lf-auto [data-back]').forEach(b => b.classList.toggle('lf-back-off', !trail.length && b.closest('.page')?.id === 'home'));
+      const _sb = showPage;
+      showPage = function (id) {
+        const cur = document.querySelector('.page.active');
+        if (!goingBack && cur && cur.id !== id) { trail.push(cur.id); if (trail.length > 50) trail.shift(); }
+        if (id && !document.getElementById(id) && document.getElementById('notfound')) id = 'notfound';
+        const r = _sb(id); add(document.getElementById(id)); sync(); return r;
+      };
+      document.addEventListener('click', e => {
+        const tip = e.target.closest('.np-hint'); document.querySelectorAll('.np-hint.on').forEach(t => { if (t !== tip) t.classList.remove('on'); }); if (tip) tip.classList.toggle('on');
+        const b = e.target.closest('[data-back]'); if (!b) return; e.preventDefault();
+        let to = trail.pop(); while (to && !document.getElementById(to)) to = trail.pop();
+        goingBack = true; showPage(to || 'home'); goingBack = false;
+        window.scrollTo(0, 0);
+      });
+      add(document.querySelector('.page.active') || document.getElementById('home')); sync();
     })();
     document.getElementById('nf-wander')?.addEventListener('click', () => document.getElementById('wander')?.click());
 
