@@ -28,7 +28,8 @@ const DB = {
   kitchen: '3c58ed346e0b423986f73ddac19aa2e5',    // Kitchen Photos (Archive)
   glossary: '19b1f26619394353a5fc42541805a41b',                     // Glossary (Appendix)
   cases: '59d300da5ba94a55a8f6c54f2ebe88a5',      // Case Studies (Work page + case study pages)
-  sitePages: 'bfc0fc750c634184858700889ae7b79e',  // Site Pages & Links (Changelog, Colophon, Legal, AI use, new pages, menu and footer links)
+  sitePages: 'bfc0fc750c634184858700889ae7b79e',
+  nowCards: '8ea611bb36e64dd5995a77f800668a12',   // Now: Right Now Cards  // Site Pages & Links (Changelog, Colophon, Legal, AI use, new pages, menu and footer links)
 };
 // A link or @mention to one of these databases in a Notion page goes to that page of the site
 const DB_PAGE = { notes: 'notes', states: 'states', projects: 'projects', life: 'now', published: 'published', stack: 'bookmarks', bookmarks: 'bookmarks', shelf: 'bookmarks',
@@ -295,7 +296,7 @@ async function figure(b, ctx) {
 }
 
 // Pull nested callouts out of a block's children: they become side notes
-function splitKids(kids = []) { return { kids: kids.filter(k => k.type !== 'callout'), notes: kids.filter(k => k.type === 'callout') }; }
+function splitKids(kids = []) { return { kids: kids.filter(k => k.type !== 'callout'), notes: kids.filter(k => k.type === 'callout' && k.callout?.icon?.emoji !== '👀') }; }
 
 // ---------- named toggles that rebuild the hand-built page pieces ----------
 const TOOL_COLORS = ['#3b1d36', '#5d7d63', '#a4532f', '#4f6f8a', '#82566f', '#66692f'];
@@ -405,6 +406,8 @@ async function toggle(b, ctx) {
 
 async function callout(b, ctx) {
   const v = b.callout, icon = v.icon?.emoji || '';
+  // 👀 callout = a private note to yourself: never shown on the site (templates use it for their how-to box)
+  if (icon === '👀') return '';
   const ls = lines(v.rich_text);
   if (icon === '📊') return `<div class="cs-stats">${ls.map(([n, ...rest]) => `<div><span class="cs-num">${esc(n.plain_text.trim())}</span><span class="cs-lab">${rich(rest, ctx)}</span></div>`).join('')}</div>`;
   if (icon === '📈') return ls.map(l => { const s = txt(l); const m = s.match(/^(.*?)(\d{1,3})\s*%\s*$/); if (!m) return ''; const p = Math.min(100, +m[2]); return `<div class="sg-row np-progress"><span>${esc(m[1].trim())}</span><span class="ab-bar"><span style="width:${p}%"></span></span><span class="ab-pct">${p}%</span></div>`; }).join('');
@@ -869,6 +872,9 @@ async function plainPage(pageId, slug) {
   return (await html(bl, ctx)).replace(/ class="np-in"/g, ' class="ab-link"').replace(/<(ul|ol) class="lf-list">/g, '<$1>');
 }
 const stat = l => { const s = l.trim(); if (!s) return null; const i = s.indexOf('|'); return i >= 0 ? [s.slice(0, i).trim(), s.slice(i + 1).trim()] : [s.split(/\s+/)[0], s.split(/\s+/).slice(1).join(' ')]; };
+
+await part('now-cards', async () => (await queryAll(DB.nowCards)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; const link = url(pr.Link), pg = siteHref(link); return {
+  title: plain(pr.Title), label: plain(pr.Label), org: plain(pr.Org), link: pg ? '' : link, page: pg, order: num(pr.Order) }; }).filter(x => x.title).sort(ord));
 
 await part('cases', async () => {
   const out = [];
