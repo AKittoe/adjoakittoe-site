@@ -314,5 +314,36 @@
     "subline": "",
     "body": "",
     "order": 10
+  },
+  {
+    "slug": "case-testcase",
+    "org": "Test Org",
+    "sub": "Subtitle or role?",
+    "ctx": "Test Context",
+    "date": "Oct 2025 — Nov 2026",
+    "challenge": "Test chalange",
+    "solution": "Test Solution",
+    "impact": "Test Impact",
+    "statsLabel": "Impact",
+    "stats": [
+      [
+        "100%",
+        "of something"
+      ],
+      [
+        "100%",
+        "of another"
+      ]
+    ],
+    "link": "",
+    "linkPage": "",
+    "linkWords": "Test link words",
+    "note": "Test note",
+    "photo": "/assets/hover/3f500886f671808cae1ed8d583b3573b.jpg",
+    "button": "Test Button",
+    "title": "Page Title",
+    "subline": "Oct 2026 · Page sublie",
+    "body": "",
+    "order": 11
   }
 ]
