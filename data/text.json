@@ -1,4 +1,40 @@
 {
+  "resources-010": {
+    "html": "Share a funding deadline",
+    "text": "Share a funding deadline"
+  },
+  "resources-007": {
+    "html": "Suggest a resource",
+    "text": "Suggest a resource"
+  },
+  "resources-009": {
+    "html": "Open the form →",
+    "text": "Open the form →"
+  },
+  "resources-008": {
+    "html": "An organization, tool, or guide that helped you.",
+    "text": "An organization, tool, or guide that helped you."
+  },
+  "resources-011": {
+    "html": "Grants and funds with dates, so nobody misses one.",
+    "text": "Grants and funds with dates, so nobody misses one."
+  },
+  "resources-015": {
+    "html": "Reach out →",
+    "text": "Reach out →"
+  },
+  "resources-014": {
+    "html": "Help build a shared directory across food systems groups.",
+    "text": "Help build a shared directory across food systems groups."
+  },
+  "resources-012": {
+    "html": "Open the form →",
+    "text": "Open the form →"
+  },
+  "resources-013": {
+    "html": "Join the database",
+    "text": "Join the database"
+  },
   "portfolio-321": {
     "html": "+42%",
     "text": "+42%"

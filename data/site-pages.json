@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "changelog",
+    "title": "Changelog",
+    "sub": "What's changed on this site, newest first.",
+    "style": "Changelog",
+    "replace": true,
+    "menu": "",
+    "footer": "",
+    "link": "",
+    "linkPage": "",
+    "words": "",
+    "hide": false,
+    "body": "<section class=\"cl-entry\"><h2 class=\"cl-date\">Oct 8, 2026</h2><ul><li>New vibe project: <a href=\"#\" data-page=\"essay-bag\" class=\"ab-link\">What’s in My Bag</a>.</li><li><a href=\"#\" data-page=\"vibe-projects\" class=\"ab-link\">Vibe Projects</a> has a Finder view and a drag test.</li><li><a href=\"#\" data-page=\"resources\" class=\"ab-link\">Resources</a> has a Videos &amp; Media filter.</li><li>A map under the contact form on <a href=\"#\" data-page=\"about\" class=\"ab-link\">About</a>.</li><li>Reading time on every vibe project.</li><li>A 404 page.</li><li>Resources videos play in a spotlight.</li><li>Examples on Vibe Projects: a recipe card and downloadable guides.</li><li><a href=\"#\" data-page=\"states\" class=\"ab-link\">State Tracker</a> now maps every state I’ve visited.</li></ul></section><section class=\"cl-entry\"><h2 class=\"cl-date\">Oct 7, 2026</h2><ul><li>Essays split in two: <a href=\"#\" data-page=\"vibe-projects\" class=\"ab-link\">Vibe Projects</a> holds everything made with AI, and Essays is for my own writing.</li><li>Home rewritten: a short statement, what I&#39;m doing right now, and Latest, Current, Upcoming.</li><li><a href=\"#\" data-page=\"bookmarks\" class=\"ab-link\">Bookmarks</a> split into four tabs: Bookmarks, Stack, Shelf, and Blogroll.</li><li>Shelf now logs books, films, and shows, with films syncing from Letterboxd.</li><li><a href=\"#\" data-page=\"published\" class=\"ab-link\">Published</a> rebuilt with real interviews, panels, features, and writing.</li><li>Recognition and profiles moved into the <a href=\"#\" data-page=\"portfolio\" class=\"ab-link\">Resume / CV</a>.</li><li>New <a href=\"#\" data-page=\"map\" class=\"ab-link\">Map page</a> that draws the whole site as connected paths.</li><li>Long-form essays with citations, tables, video bookmarks, and a section guide.</li><li>Back to top, copy link, and section pills on long pages.</li><li>This footer, the changelog, the colophon, and the legal notice.</li></ul></section>",
+    "order": 1
+  },
+  {
+    "slug": "legal",
+    "title": "Legal notice",
+    "sub": "",
+    "style": "Page",
+    "replace": true,
+    "menu": "",
+    "footer": "",
+    "link": "",
+    "linkPage": "",
+    "words": "",
+    "hide": false,
+    "body": "<h2 id=\"privacy\">Privacy</h2><p>This site does not use cookies, analytics, ads, or any kind of tracking. I don&#39;t collect information about your visit.</p><p>A few things to know:</p><ul><li>The site is hosted on Cloudflare Pages, which, like any host, may keep standard server logs for security and reliability.</li><li>If you use the <a href=\"#\" data-page=\"about\" class=\"ab-link\">contact form</a> or RSVP to an <a href=\"#\" data-page=\"events\" class=\"ab-link\">event</a>, only what you type is sent to me, and it&#39;s used only to reply.</li><li>Embedded videos load from YouTube&#39;s privacy-enhanced domain, and only after you press play.</li><li>The weather in the sidebar is fetched by this site&#39;s host about once an hour. Your browser never contacts a weather service.</li></ul><h2 id=\"liability-for-links\">Liability for links</h2><p>This site contains links to external websites of third parties, over whose content I have no influence. Therefore, I cannot assume any liability for this external content. The respective provider or operator of the pages is always responsible for the content of the linked pages. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognizable at the time of linking. However, permanent monitoring of the content of the linked pages is not reasonable without concrete evidence of a violation of the law. If I become aware of any infringements, I will remove such links immediately.</p><h2 id=\"copyright\">Copyright</h2><p>Writing and photographs on this site are mine unless noted otherwise. Please ask before reusing them.</p><h2 id=\"contact\">Contact</h2><p>Questions about any of this: <a href=\"#\" data-page=\"about\" class=\"ab-link\">email me</a>.</p>",
+    "order": 2
+  },
+  {
+    "slug": "ai-use",
+    "title": "How I use AI",
+    "sub": "",
+    "style": "Page",
+    "replace": true,
+    "menu": "",
+    "footer": "",
+    "link": "",
+    "linkPage": "",
+    "words": "",
+    "hide": false,
+    "body": "<p>This site was designed and coded with help from Claude, an AI model made by Anthropic. I directed the design, made the decisions, and reviewed every change. From here, I edit the HTML, CSS, JavaScript, and hosting setup myself.</p><h2 id=\"what-ai-helped-with\">What AI helped with</h2><ul><li>Layout and code</li><li>Research, and checking links and sources</li><li>The color analysis and chart in my moodboard essay</li><li>First drafts of some page copy, which I then rewrote or approved</li></ul><h2 id=\"what-ai-didnt-do\">What AI didn&#39;t do</h2><p>My notes and opinions are my own writing. My photographs are mine.</p><h2 id=\"labels\">Labels</h2><p>Anything drafted with AI carries an <span class=\"ai-pill\" title=\"Drafted with AI. See the AI use page.\">AI drafted</span> label, on the piece itself and wherever it&#39;s listed. That includes the example essays and the placeholder images, like the moodboard chart and the <a href=\"#\" data-page=\"bookmarks\" class=\"ab-link\">Shelf</a> covers. When I rewrite a piece myself, the label comes off.</p>",
+    "order": 3
+  },
+  {
+    "slug": "colophon",
+    "title": "Colophon",
+    "sub": "How this site is made.",
+    "style": "Page",
+    "replace": true,
+    "menu": "",
+    "footer": "",
+    "link": "",
+    "linkPage": "",
+    "words": "",
+    "hide": false,
+    "body": "<div class=\"lf-box lf-plain\"><table><tr><th>Built with</th><td>Astro, Tailwind CSS, Base UI, React, and Node.js.</td></tr><tr><th>Design</th><td>Figma and Framer.</td></tr><tr><th>Content</th><td>Notion, synced nightly through GitHub.</td></tr><tr><th>Hosting</th><td>Cloudflare Pages and GitHub.</td></tr><tr><th>Type</th><td>Inter, IBM Plex Mono, Newsreader</td></tr><tr><th>Shelf</th><td><a class=\"ab-link\" href=\"https://literal.club/ChefAK\" target=\"_blank\" rel=\"noopener\">Literal<span class=\"ab-ext\">↗</span></a>, <a class=\"ab-link\" href=\"https://letterboxd.com/eauxjai/\" target=\"_blank\" rel=\"noopener\">Letterboxd<span class=\"ab-ext\">↗</span></a>, and Apple Music.</td></tr><tr><th>Photos</th><td><a href=\"#\" data-page=\"essay-fuji\" class=\"ab-link\">Fujifilm X100VI</a>, <a href=\"#\" data-page=\"essay-fuji\" class=\"ab-link\">film simulation recipes</a></td></tr><tr><th>Forms</th><td>Notion and Cloudflare Turnstile.</td></tr><tr><th>Scheduling</th><td>NeetoCal.</td></tr><tr><th>Weather</th><td>Open-Meteo.</td></tr><tr><th>Tracking</th><td>None. <a href=\"#\" data-page=\"legal\" class=\"ab-link\">Legal notice</a></td></tr><tr><th>Code</th><td>HTML, CSS, JavaScript, Cloudflare functions. Built with help from AI: <a href=\"#\" data-page=\"ai-use\" class=\"ab-link\">how I use AI</a></td></tr></table></div><div data-keep-slot></div><h2 id=\"credits\">Credits</h2><div class=\"lf-box lf-plain\"><table><tr><th>Inspired by</th><td><a class=\"ab-link\" href=\"https://mars.design/\" target=\"_blank\" rel=\"noopener\">mars.design<span class=\"ab-ext\">↗</span></a> for the essays, <a class=\"ab-link\" href=\"https://andrewtrousdale.com/\" target=\"_blank\" rel=\"noopener\">Andrew Trousdale<span class=\"ab-ext\">↗</span></a> for <a href=\"#\" data-page=\"map\" class=\"ab-link\">How It Connects</a>, <a class=\"ab-link\" href=\"https://iamrob.in/\" target=\"_blank\" rel=\"noopener\">Robin Spielmann<span class=\"ab-ext\">↗</span></a> for the bookmark collection, <a class=\"ab-link\" href=\"https://brianlovin.com/\" target=\"_blank\" rel=\"noopener\">Brian Lovin<span class=\"ab-ext\">↗</span></a> for the stack, and <a class=\"ab-link\" href=\"https://www.molly.info/\" target=\"_blank\" rel=\"noopener\">Molly Mielke McCarthy<span class=\"ab-ext\">↗</span></a> for the recipe layout.</td></tr><tr><th>Photography</th><td>Mine, unless a caption says otherwise.</td></tr><tr><th>AI</th><td>Claude by Anthropic. Details on <a href=\"#\" data-page=\"ai-use\" class=\"ab-link\">how I use AI</a>.</td></tr></table></div>",
+    "order": 4
+  }
+]
