@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "term": "Bubaluu",
+    "definition": "Pet name Junior gave me",
+    "also": "",
+    "auto": true
+  },
+  {
+    "term": "Juniper",
+    "definition": "My mans name",
+    "also": "Junbug",
+    "everywhere": false
+  }
+]

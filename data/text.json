@@ -1,4 +1,344 @@
 {
+  "now-021": {
+    "html": "Test Title",
+    "text": "Test Title"
+  },
+  "appendix-002": {
+    "html": "Sometimes you come across a website with terms you may not be familiar of. Here are the definitions I personally use.",
+    "text": "Sometimes you come across a website with terms you may not be familiar of. Here are the definitions I personally use."
+  },
+  "events-007": {
+    "html": "Location",
+    "text": "Location"
+  },
+  "notes-008": {
+    "html": "Clear",
+    "text": "Clear"
+  },
+  "footer-023": {
+    "html": "Plant",
+    "text": "Plant"
+  },
+  "archive-024": {
+    "html": "Writings",
+    "text": "Writings"
+  },
+  "bookmarks-020": {
+    "html": "Now",
+    "text": "Now"
+  },
+  "bookmarks-016": {
+    "html": "Films",
+    "text": "Films"
+  },
+  "published-010": {
+    "html": "Brand writing",
+    "text": "Brand writing"
+  },
+  "portfolio-343": {
+    "html": "Bee",
+    "text": "Bee"
+  },
+  "notfound-003": {
+    "html": "Nothing’s planted here.",
+    "text": "Nothing’s planted here."
+  },
+  "sidebar-022": {
+    "html": "Dark",
+    "text": "Dark"
+  },
+  "events-010": {
+    "html": "Location",
+    "text": "Location"
+  },
+  "appendix-005": {
+    "html": "Every source cited in an essay with where it’s used.",
+    "text": "Every source cited in an essay with where it’s used."
+  },
+  "appendix-004": {
+    "html": "Sources",
+    "text": "Sources"
+  },
+  "bookmarks-021": {
+    "html": "Films",
+    "text": "Films"
+  },
+  "events-005": {
+    "html": "Date",
+    "text": "Date"
+  },
+  "bookmarks-014": {
+    "html": "All",
+    "text": "All"
+  },
+  "appendix-003": {
+    "html": "Glossary",
+    "text": "Glossary"
+  },
+  "bookmarks-015": {
+    "html": "Books",
+    "text": "Books"
+  },
+  "sidebar-020": {
+    "html": "Theme",
+    "text": "Theme"
+  },
+  "notfound-007": {
+    "html": "Wander somewhere",
+    "text": "Wander somewhere"
+  },
+  "bookmarks-022": {
+    "html": "384 films watched, 47 liked, 151 on my watchlist",
+    "text": "384 films watched, 47 liked, 151 on my watchlist"
+  },
+  "about-040": {
+    "html": "Interdependence",
+    "text": "Interdependence"
+  },
+  "photography-006": {
+    "html": "All",
+    "text": "All"
+  },
+  "portfolio-342": {
+    "html": "Portfolio ↗",
+    "text": "Portfolio ↗"
+  },
+  "bookmarks-019": {
+    "html": "Music",
+    "text": "Music"
+  },
+  "states-005": {
+    "html": "Not yet",
+    "text": "Not yet"
+  },
+  "bookmarks-030": {
+    "html": "See them on Literal ↗",
+    "text": "See them on Literal ↗"
+  },
+  "appendix-001": {
+    "html": "Appendix",
+    "text": "Appendix"
+  },
+  "portfolio-341": {
+    "html": "Resume / CV",
+    "text": "Resume / CV"
+  },
+  "bookmarks-009": {
+    "html": "Shelf",
+    "text": "Shelf"
+  },
+  "states-003": {
+    "html": "Hover a state",
+    "text": "Hover a state"
+  },
+  "bookmarks-029": {
+    "html": "100 more on my want-to-read list · 137 in my bookcase",
+    "text": "100 more on my want-to-read list · 137 in my bookcase"
+  },
+  "photography-010": {
+    "html": "Food",
+    "text": "Food"
+  },
+  "sitemap-001": {
+    "html": "Sitemap",
+    "text": "Sitemap"
+  },
+  "bookmarks-013": {
+    "html": "Cost",
+    "text": "Cost"
+  },
+  "map-002": {
+    "html": "How It Connects",
+    "text": "How It Connects"
+  },
+  "sidebar-024": {
+    "html": "Color",
+    "text": "Color"
+  },
+  "archive-025": {
+    "html": "From my kitchen",
+    "text": "From my kitchen"
+  },
+  "about-043": {
+    "html": "Send →",
+    "text": "Send →"
+  },
+  "sidebar-023": {
+    "html": "Auto",
+    "text": "Auto"
+  },
+  "notfound-005": {
+    "html": "Back home →",
+    "text": "Back home →"
+  },
+  "bookmarks-027": {
+    "html": "Finished",
+    "text": "Finished"
+  },
+  "portfolio-340": {
+    "html": "Case studies",
+    "text": "Case studies"
+  },
+  "published-008": {
+    "html": "Recipes, kitchen roles, and food photos are collected in the Archive →",
+    "text": "Recipes, kitchen roles, and food photos are collected in the Archive →"
+  },
+  "bookmarks-025": {
+    "html": "Music",
+    "text": "Music"
+  },
+  "bookmarks-024": {
+    "html": "Shows",
+    "text": "Shows"
+  },
+  "bookmarks-017": {
+    "html": "Shows",
+    "text": "Shows"
+  },
+  "notfound-006": {
+    "html": "See the sitemap →",
+    "text": "See the sitemap →"
+  },
+  "published-009": {
+    "html": "Archive →",
+    "text": "Archive →"
+  },
+  "footer-024": {
+    "html": "Listen while you read",
+    "text": "Listen while you read"
+  },
+  "notfound-004": {
+    "html": "This page moved, or it never sprouted.",
+    "text": "This page moved, or it never sprouted."
+  },
+  "bookmarks-018": {
+    "html": "Podcasts",
+    "text": "Podcasts"
+  },
+  "archive-023": {
+    "html": "Culinary",
+    "text": "Culinary"
+  },
+  "sidebar-021": {
+    "html": "Light",
+    "text": "Light"
+  },
+  "about-042": {
+    "html": "Probity",
+    "text": "Probity"
+  },
+  "events-006": {
+    "html": "Event",
+    "text": "Event"
+  },
+  "notes-007": {
+    "html": "✎ Doodle",
+    "text": "✎ Doodle"
+  },
+  "bookmarks-007": {
+    "html": "Bookmarks",
+    "text": "Bookmarks"
+  },
+  "bookmarks-023": {
+    "html": "See them all ↗",
+    "text": "See them all ↗"
+  },
+  "photography-007": {
+    "html": "Landscape",
+    "text": "Landscape"
+  },
+  "bookmarks-008": {
+    "html": "Stack",
+    "text": "Stack"
+  },
+  "bookmarks-010": {
+    "html": "Blogroll",
+    "text": "Blogroll"
+  },
+  "events-009": {
+    "html": "Event",
+    "text": "Event"
+  },
+  "states-004": {
+    "html": "Visited",
+    "text": "Visited"
+  },
+  "bookmarks-012": {
+    "html": "Description",
+    "text": "Description"
+  },
+  "bookmarks-026": {
+    "html": "Playlist updates monthly",
+    "text": "Playlist updates monthly"
+  },
+  "published-004": {
+    "html": "Panels",
+    "text": "Panels"
+  },
+  "published-003": {
+    "html": "Interviews",
+    "text": "Interviews"
+  },
+  "photography-008": {
+    "html": "Street",
+    "text": "Street"
+  },
+  "bookmarks-028": {
+    "html": "59 books",
+    "text": "59 books"
+  },
+  "sitemap-002": {
+    "html": "Every page on this site, grouped under where it lives.",
+    "text": "Every page on this site, grouped under where it lives."
+  },
+  "photography-009": {
+    "html": "Portrait",
+    "text": "Portrait"
+  },
+  "published-006": {
+    "html": "Mentions",
+    "text": "Mentions"
+  },
+  "events-008": {
+    "html": "Date",
+    "text": "Date"
+  },
+  "about-041": {
+    "html": "Self-sovereignty",
+    "text": "Self-sovereignty"
+  },
+  "published-005": {
+    "html": "Features",
+    "text": "Features"
+  },
+  "portfolio-344": {
+    "html": "Selected work",
+    "text": "Selected work"
+  },
+  "notfound-002": {
+    "html": "Page not found",
+    "text": "Page not found"
+  },
+  "photography-011": {
+    "html": "Architecture",
+    "text": "Architecture"
+  },
+  "map-001": {
+    "html": "Map",
+    "text": "Map"
+  },
+  "notfound-001": {
+    "html": "Error",
+    "text": "Error"
+  },
+  "published-007": {
+    "html": "Writing",
+    "text": "Writing"
+  },
+  "bookmarks-011": {
+    "html": "Name",
+    "text": "Name"
+  },
   "note-020": {
     "html": "Test",
     "text": "Test"
@@ -2024,8 +2364,8 @@
     "text": "Upcoming"
   },
   "home-011": {
-    "html": "Finding ethical AI usage, which may not exist right now",
-    "text": "Finding ethical AI usage, which may not exist right now"
+    "html": "Finding ethical AI usage, which may not exist right now // Learning to drive // Another",
+    "text": "Finding ethical AI usage, which may not exist right now // Learning to drive // Another"
   },
   "about-020": {
     "html": "In 2019, I went to <a href=\"https://ice.edu/\">The Institute of Culinary Education</a> to sharpen what I&#39;d taught myself and stepped into restaurants. I learned my way through the industry with help from the James Beard Foundation and mentors along the way. My cooking is shaped by chefs like Aji Akokomi, Marie Havnø Frank, and Shola Olunloyo.",
