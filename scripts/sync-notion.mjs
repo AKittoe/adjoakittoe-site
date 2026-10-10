@@ -455,7 +455,6 @@ async function units(blocks, ctx) {
         out.push({ html: h, notes }); continue;
       }
       if (t === 'bulleted_list_item' && run.every(x => boldStart(x) && (/:\s*$/.test(x[t].rich_text[0].plain_text) || x[t].rich_text[1]?.plain_text?.startsWith(':')))) {
-        if (!ctx.preview) run.forEach(x => { const [first, ...rest] = x[t].rich_text; const term = first.plain_text.replace(/:\s*$/, '').trim(), def = txt(rest).replace(/^:\s*/, '').trim(); if (term && def) HINTS.push({ term, definition: def, page: ctx.slug || '' }); });
         out.push({ html: `<dl class="sg-dl">${run.map(x => { const [first, ...rest] = x[t].rich_text; return `<dt>${esc(first.plain_text.replace(/:\s*$/, ''))}</dt><dd>${para(rest, ctx).replace(/^:\s*/, '')}</dd>`; }).join('')}</dl>`, notes }); continue;
       }
       if (ctx.sec === 'notes' && t === 'bulleted_list_item') { out.push({ html: `<ul class="rc-notes">${(await Promise.all(run.map(async x => `<li>${await item(x)}</li>`))).join('')}</ul>`, notes }); continue; }
@@ -895,7 +894,7 @@ await part('site-pages', async () => {
     let body = ''; try { body = await plainPage(p.id, slug); } catch (e) { console.warn(`Skipped body of ${slug}: ${e.message}`); }
     // Changelog style: each heading is a date, with its list under it
     if (sel(pr.Style) === 'Changelog' && body) body = body.split(/(?=<h2[ >])/).map(part => /^<h2/.test(part) ? `<section class="cl-entry">${part.replace(/^<h2[^>]*>/, '<h2 class="cl-date">')}</section>` : part).join('');
-    const link = url(pr.Link), inPage = siteHref(link);
+    let link = url(pr.Link); if (link && !/^(https?:|mailto:|tel:)/i.test(link)) link = /@/.test(link) && !/\//.test(link) ? 'mailto:' + link : 'https://' + link.replace(/^\/+/, ''); const inPage = siteHref(link);
     out.push({ slug, title: plain(pr.Title), sub: plain(pr.Subtitle), style: sel(pr.Style) || 'Page', replace: check(pr['Replace built page']),
       menu: sel(pr.Menu), footer: sel(pr.Footer), link: inPage ? '' : link, linkPage: inPage, words: plain(pr['Link words']), hide: check(pr['Hide link']),
       body, order: num(pr.Order) });
@@ -905,7 +904,7 @@ await part('site-pages', async () => {
 
 await part('glossary', async () => {
   const list = (await queryAll(DB.glossary)).filter(p => check(p.properties.Publish)).map(p => { const pr = p.properties; return {
-    term: plain(pr.Term), definition: inl(rtOf(pr.Definition)), also: plain(pr['Also matches']) }; }).filter(x => x.term);
+    term: plain(pr.Term), definition: inl(rtOf(pr.Definition)), also: plain(pr['Also matches']), everywhere: check(pr['Underline everywhere']) }; }).filter(x => x.term);
   // Blue hover words from any published page join the glossary too (a Glossary row with the same term wins)
   const have = new Set(list.flatMap(x => [x.term, ...String(x.also || '').split(',')].map(k => k.trim().toLowerCase()).filter(Boolean)));
   for (const h of HINTS) { const k = h.term.toLowerCase(); if (have.has(k)) continue; have.add(k); list.push({ term: h.term.charAt(0).toUpperCase() + h.term.slice(1), definition: esc(h.definition), also: '', auto: true }); }

@@ -4203,7 +4203,6 @@ function cook(g) {
         <p class="muted page-sub">Sometimes you come across a website with terms you may not be familiar of. Here are the definitions I personally use.</p>
         <div class="ap-tabs" role="tablist"><button type="button" class="bk-chip active" data-ap="glossary">Glossary</button><button type="button" class="bk-chip" data-ap="sources">Sources</button></div>
         <section class="ap-panel active" data-appanel="glossary">
-          <p class="ai-flag"><span class="ai-pill" title="Drafted with AI. See the AI use page.">AI drafted</span> <a href="#" data-page="ai-use">How I use AI</a></p>
           <div class="gl-nav" role="navigation" aria-label="Jump to letter"><a href="#" class="gl-jump" data-l="A">A</a><a href="#" class="gl-jump" data-l="C">C</a><a href="#" class="gl-jump" data-l="D">D</a><a href="#" class="gl-jump" data-l="F">F</a><a href="#" class="gl-jump" data-l="K">K</a><a href="#" class="gl-jump" data-l="N">N</a><a href="#" class="gl-jump" data-l="P">P</a><a href="#" class="gl-jump" data-l="R">R</a><a href="#" class="gl-jump" data-l="S">S</a></div>
           <dl class="gl-list"><h3 class="gl-letter" id="gl-A">A</h3><div class="gl-item" data-keys="adinkra"><dt>Adinkra</dt><dd><p>Visual symbols of the Akan people of Ghana and Côte d’Ivoire. Each one carries a proverb or idea, printed on cloth, carved, and stamped.</p><p class="gl-used"></p></dd></div><h3 class="gl-letter" id="gl-C">C</h3><div class="gl-item" data-keys="csa|community supported agriculture"><dt>Community supported agriculture (CSA)</dt><dd><p>Members buy a share of a farm’s harvest before the season starts, then receive produce as it comes in. The farm gets money up front; members share the risk.</p><p class="gl-used"></p></dd></div><div class="gl-item" data-keys="cover crop"><dt>Cover crop</dt><dd><p>A crop planted mainly to protect and feed the soil between harvests, not to sell. Clover, rye, and vetch are common.</p><p class="gl-used"></p></dd></div><h3 class="gl-letter" id="gl-D">D</h3><div class="gl-item" data-keys="dawadawa"><dt>Dawadawa</dt><dd><p>A fermented seasoning made from African locust beans, used across West Africa for deep, savory flavor.</p><p class="gl-used"></p></dd></div><h3 class="gl-letter" id="gl-F">F</h3><div class="gl-item" data-keys="film simulation"><dt>Film simulation</dt><dd><p>Fujifilm’s built-in color and tone profiles, each modeled on one of its film stocks, like Classic Chrome or Eterna.</p><p class="gl-used"></p><p class="gl-see">See <a class="ab-link" href="#" data-page="essay-fuji">my film simulation recipes</a>.</p></dd></div><div class="gl-item" data-keys="simulation recipes|simulation recipe|film recipes"><dt>Film simulation recipe</dt><dd><p>A set of camera settings layered on a film simulation to get a specific look straight out of the camera.</p><p class="gl-used"></p><p class="gl-see">See <a class="ab-link" href="#" data-page="essay-fuji">my film simulation recipes</a>.</p></dd></div><div class="gl-item" data-keys="fonio"><dt>Fonio</dt><dd><p>A tiny grain from the millet family, grown across West Africa’s Sahel for thousands of years. It cooks in about five minutes and grows in poor, dry soil.</p><p class="gl-used"></p><p class="gl-see">See <a class="ab-link" href="#" data-page="essay-fonio">Fonio: A Small Grain With a Long Memory</a> and the <a class="ab-link" href="#" data-page="recipe-fonio">Curried Fonio Pilaf</a>.</p></dd></div><div class="gl-item" data-keys="food access"><dt>Food access</dt><dd><p>Whether people can reliably reach and afford enough healthy food where they live.</p><p class="gl-used"></p></dd></div><div class="gl-item" data-keys="food sovereignty"><dt>Food sovereignty</dt><dd><p>The right of communities to decide their own food and farming systems, with healthy, culturally fitting food grown in ways that care for the land. The term comes from La Via Campesina, a global farmers’ movement.</p><p class="gl-used"></p></dd></div><div class="gl-item" data-keys="foodshed"><dt>Foodshed</dt><dd><p>The area food travels from to reach a place, like a watershed for food. Mapping one shows how much a region could feed itself.</p><p class="gl-used"></p></dd></div><h3 class="gl-letter" id="gl-K">K</h3><div class="gl-item" data-keys="kongo cosmogram|cosmogram"><dt>Kongo cosmogram</dt><dd><p>A Bakongo symbol of a cross inside a circle. It traces the cycle of life through the four moments of the sun, and the line between the living and the ancestors.</p><p class="gl-used"></p></dd></div><h3 class="gl-letter" id="gl-N">N</h3><div class="gl-item" data-keys="nkyinkyim"><dt>Nkyinkyim</dt><dd><p>An Adinkra symbol of a twisting path. It stands for initiative, versatility, and staying with the journey.</p><p class="gl-used"></p></dd></div><h3 class="gl-letter" id="gl-P">P</h3><div class="gl-item" data-keys="para"><dt>PARA</dt><dd><p>A way to organize notes by Tiago Forte: Projects, Areas, Resources, and Archives.</p><p class="gl-used"></p></dd></div><h3 class="gl-letter" id="gl-R">R</h3><div class="gl-item" data-keys="regenerative"><dt>Regenerative agriculture</dt><dd><p>Farming that aims to rebuild soil health and biodiversity, through practices like cover crops, less tilling, and rotational grazing. There’s no single official definition.</p><p class="gl-used"></p></dd></div><h3 class="gl-letter" id="gl-S">S</h3><div class="gl-item" data-keys="sankofa"><dt>Sankofa</dt><dd><p>An Akan word and Adinkra symbol meaning “go back and get it”: learn from the past to move forward.</p><p class="gl-used"></p></dd></div><div class="gl-item" data-keys="suya"><dt>Suya</dt><dd><p>Spiced grilled meat from Northern Nigeria and Niger, coated in a peanut and pepper spice blend called yaji.</p><p class="gl-used"></p></dd></div></dl>
         </section>
@@ -7099,7 +7098,7 @@ function cook(g) {
       const skip = new Set(['appendix', 'styleguide', 'colophon', 'sitemap', 'map', 'changelog', 'legal', 'ai-use', 'search-results']);
       // runs at load, and again once the Notion pages and glossary arrive
       window.__buildAppendix = function () {
-      const pages = [...document.querySelectorAll('main .page')].filter(p => !skip.has(p.id) && p.id !== 'notfound');
+      const pages = [...document.querySelectorAll('main .page')].filter(p => !skip.has(p.id) && p.id !== 'notfound' && !((window.__pieceInfo || {})[p.id] || {}).preview);
       const words = el => { const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); const out = []; while (w.nextNode()) out.push(w.currentNode.nodeValue); return out.join(' ').toLowerCase(); };
       const text = new Map(pages.map(p => [p, words(p)]));
       ap.querySelectorAll('.gl-item').forEach(it => {
@@ -7132,7 +7131,7 @@ function cook(g) {
       let defs = [];
       window.__glossTerms = function () {
       document.querySelectorAll('.gl-term').forEach(sp => { const p = sp.parentNode; sp.replaceWith(document.createTextNode(sp.textContent)); p.normalize(); });
-      const items = [...ap.querySelectorAll('.gl-item')];
+      const items = [...ap.querySelectorAll('.gl-item[data-everywhere]')];
       const esc = t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       defs = items.map((it, n) => { if (!it.id) it.id = 'gli-' + n; const dd = it.querySelector('dd p') || it.querySelector('dd'); return { id: it.id, term: it.querySelector('dt').textContent.trim(), keys: (it.dataset.keys || it.querySelector('dt').textContent).split('|').map(k => k.trim()).filter(Boolean), def: dd ? dd.textContent.trim() : '' }; });
       const pieces = [...document.querySelectorAll('main .page')].filter(pg => (/^(essay-|recipe-|case-)/.test(pg.id) || pg.classList.contains('np-page')) && pg.id !== 'essay-calendar');
@@ -7468,12 +7467,13 @@ function cook(g) {
       });
       // Glossary (Appendix): terms from Notion, then refresh "Appears in", Sources, and the underlined terms
       const glossReady = get('/data/glossary.json').then(list => {
-        const ap = document.getElementById('appendix'); if (!ap || !Array.isArray(list) || !list.length) return;
+        const ap = document.getElementById('appendix'); if (!ap || !Array.isArray(list)) return;
         const keyOf = x => [x.term.replace(/\s*\(.*?\)\s*/g, ' ').trim(), ...String(x.also || '').split(',')].map(k => k.trim().toLowerCase()).filter(Boolean);
         const L = x => { const c = x.term.trim()[0].toUpperCase(); return /[A-Z]/.test(c) ? c : '#'; };
         const letters = [...new Set(list.map(L))];
         ap.querySelector('.gl-nav').innerHTML = letters.map(l => `<a href="#" class="gl-jump" data-l="${l}">${l}</a>`).join('');
-        ap.querySelector('.gl-list').innerHTML = letters.map(l => `<h3 class="gl-letter" id="gl-${l}">${l}</h3>` + list.filter(x => L(x) === l).map(x => `<div class="gl-item" data-keys="${esc(keyOf(x).join('|'))}"><dt>${esc(x.term)}</dt><dd><p>${x.definition}</p><p class="gl-used"></p></dd></div>`).join('')).join('');
+        if (!list.length) { ap.querySelector('.gl-list').innerHTML = '<p class="muted">No terms yet.</p>'; return; }
+        ap.querySelector('.gl-list').innerHTML = letters.map(l => `<h3 class="gl-letter" id="gl-${l}">${l}</h3>` + list.filter(x => L(x) === l).map(x => `<div class="gl-item" data-keys="${esc(keyOf(x).join('|'))}"${x.everywhere ? ' data-everywhere' : ''}><dt>${esc(x.term)}</dt><dd><p>${x.definition}</p><p class="gl-used"></p></dd></div>`).join('')).join('');
       });
       Promise.all([piecesReady, glossReady]).then(() => { window.__buildAppendix && window.__buildAppendix(); window.__glossTerms && window.__glossTerms(); });
       get('/data/projects.json').then(list => {
@@ -7506,6 +7506,14 @@ function cook(g) {
           if (v.photo && el.classList.contains('preview-cap') && !el.parentNode.querySelector('img')) el.insertAdjacentHTML('beforebegin', `<img src="${esc(v.photo)}" alt="${esc(v.text)}" loading="lazy">`);
           if (el.dataset.tl) { const items = v.text.split(',').map(x => x.trim()).filter(Boolean); if (items.join(', ') !== [...el.children].map(x => norm(x.textContent)).join(', ')) el.innerHTML = items.map(x => `<span class="${el.dataset.tl}">${esc(x)}</span>`).join(''); return; }
           if (el.tagName === 'A') { const t = document.createElement('div'); t.innerHTML = v.html; const only = t.children.length === 1 && t.firstElementChild.tagName === 'A' && norm(t.textContent) === norm(t.firstElementChild.textContent) ? t.firstElementChild : null; if (only && /^(https?:|mailto:)/.test(only.getAttribute('href') || '')) el.setAttribute('href', only.getAttribute('href')); el.innerHTML = only ? only.innerHTML : v.html; return; }
+          // A list item with  //  between parts (space, two slashes, space) becomes that many list items
+          if (el.tagName === 'LI' && /<br\s*\/?>|\s\/\/\s/i.test(v.html)) {
+            const pool = [...el.querySelectorAll('a')], parts = v.html.split(/<br\s*\/?>|\s\/\/\s/i).filter(h => h.replace(/<[^>]+>/g, '').trim());
+            const fill = (li, h) => { const tmp = document.createElement('div'); tmp.innerHTML = h; tmp.querySelectorAll('a').forEach(x => x.replaceWith(mkA(x.getAttribute('href'), x.innerHTML, pool))); li.innerHTML = tmp.innerHTML; };
+            fill(el, parts[0]); let after = el;
+            parts.slice(1).forEach(h => { const li = document.createElement('li'); li.className = el.className; fill(li, h); after.after(li); after = li; });
+            return;
+          }
           const c = el.cloneNode(true); c.querySelectorAll('.ab-ext').forEach(x => x.remove());
           if (norm(c.textContent) === norm(v.text)) return;
           const pool = [...el.querySelectorAll('a')], tmp = document.createElement('div'); tmp.innerHTML = v.html;
@@ -7682,26 +7690,35 @@ function cook(g) {
               el = document.createElement('div'); el.id = p.slug; el.className = 'page np-sitepage'; el.dataset.notion = '1'; el.innerHTML = inner; placePage(el);
             }
           }
-          if (p.menu) window.__pageGroup[p.slug] = p.menu;
-          const t = target(p), words = p.words || p.title;
-          // Hide link: take away the menu and footer links to this page or web address
-          if (p.hide) { document.querySelectorAll('nav a, #site-footer .sf-cols a').forEach(a => { if ((t.page && a.dataset.page === t.page && !a.dataset.anchor) || (t.href && a.getAttribute('href') === t.href)) a.remove(); }); return; }
-          if (p.menu) {
-            const nav = document.querySelector('nav'); if (!nav) return;
-            let g = [...nav.querySelectorAll('.nav-group')].find(x => lc(x.querySelector('.nav-group-label')?.textContent) === lc(p.menu));
-            if (!g) { g = document.createElement('div'); g.className = 'nav-group'; g.innerHTML = `<div class="nav-group-label">${esc(p.menu)}</div>`; nav.append(g); }
-            const a = document.createElement('a'); a.className = 'nav-link np-menu'; a.textContent = words;
-            if (t.ext) { a.href = t.href; a.target = '_blank'; a.rel = 'noopener'; }
-            else { a.href = '#'; a.dataset.page = t.page; a.addEventListener('click', e => { e.preventDefault(); showPage(t.page); window.scrollTo(0, 0); typeof closeMenu === 'function' && closeMenu(); }); }
-            g.append(a);
-          }
-          if (p.footer) {
-            const col = [...document.querySelectorAll('#site-footer .sf-cols > div')].find(d => lc(d.querySelector('.sf-label')?.textContent) === lc(p.footer)); if (!col) return;
-            const a = document.createElement('a'); a.textContent = words;
-            if (t.ext) { a.href = t.href; a.target = '_blank'; a.rel = 'noopener'; } else { a.href = '#'; a.dataset.page = t.page; }
-            col.append(a);
-          }
+          if (p.menu) window.__pageGroup[p.slug.split('#')[0]] = p.menu;
         });
+        // Menu and footer: a group or column with any rows in Notion is built from those rows only, in Order
+        const mk = (p, cls) => {
+          const t = target(p), [pg, anchor] = String(t.page || '').split('#'), a = document.createElement('a'); a.textContent = p.words || p.title; if (cls) a.className = cls;
+          if (t.ext) { a.href = t.href; if (!/^mailto:/i.test(t.href)) { a.target = '_blank'; a.rel = 'noopener'; } }
+          else { a.href = '#'; a.dataset.page = pg; if (anchor) a.dataset.anchor = anchor; }
+          return a;
+        };
+        const links = list.filter(p => !p.hide);
+        const nav = document.querySelector('nav');
+        if (nav) [...new Set(links.filter(p => p.menu).map(p => p.menu))].forEach(name => {
+          let g = [...nav.querySelectorAll('.nav-group')].find(x => lc(x.querySelector('.nav-group-label')?.textContent) === lc(name));
+          if (!g) { g = document.createElement('div'); g.className = 'nav-group'; g.innerHTML = `<div class="nav-group-label">${esc(name)}</div>`; nav.append(g); }
+          g.querySelectorAll('a').forEach(x => x.remove());
+          links.filter(p => p.menu === name).forEach(p => {
+            const a = mk(p, 'nav-link np-menu');
+            if (a.dataset.page) a.addEventListener('click', e => { e.preventDefault(); showPage(a.dataset.page); window.scrollTo(0, 0); typeof closeMenu === 'function' && closeMenu(); });
+            g.append(a);
+          });
+        });
+        [...new Set(links.filter(p => p.footer).map(p => p.footer))].forEach(name => {
+          const col = [...document.querySelectorAll('#site-footer .sf-cols > div')].find(d => lc(d.querySelector('.sf-label')?.textContent) === lc(name)); if (!col) return;
+          col.querySelectorAll('a').forEach(x => x.remove());
+          links.filter(p => p.footer === name).forEach(p => col.append(mk(p, String(p.slug).includes('#') && lc(name) === 'site' ? 'sf-sub' : '')));
+        });
+        // Hide link: take away the menu and footer links to this page or web address
+        list.filter(p => p.hide).forEach(p => { const t = target(p); document.querySelectorAll('nav a, #site-footer .sf-cols a').forEach(a => { if ((t.page && a.dataset.page === t.page && !a.dataset.anchor) || (t.href && a.getAttribute('href') === t.href)) a.remove(); }); });
+        { const cur = document.querySelector('.page.active'); if (cur) document.querySelectorAll('nav .np-menu').forEach(a => a.classList.toggle('active', a.dataset.page === cur.id)); }
         document.querySelectorAll('.np-sitepage .ab-photo, #changelog .ab-photo, #colophon .ab-photo, #legal .ab-photo, #ai-use .ab-photo').forEach(x => window.__bindAbPhoto && window.__bindAbPhoto(x)); window.__markPhotos && window.__markPhotos();
         openHash();
       });
