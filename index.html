@@ -3185,15 +3185,16 @@ body[data-page="how"] .hw kbd { border-color: rgba(43,28,20,0.3); background: rg
 <style id="u24">
 @font-face { font-family: 'MadInk'; src: url(fonts/MadInk.woff2) format('woff2'), url(fonts/MadInk.woff) format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
 /* MadInk: any heading or phrase marked with it. Add class "mi" in HTML, or color the text Brown in Notion. Brown plus italic tilts and offsets it. */
-.mi, h1.mi, .hm-name { font-family: 'MadInk', 'Newsreader', Georgia, serif !important; font-weight: 400 !important; font-style: normal; letter-spacing: 0; color: #3b1d36; }
-.mi em, em .mi, .mi i { font-style: normal; }
-h1.mi { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; margin: 4px 0 16px; }
-em > .mi, .mi-off { display: inline-block; transform: rotate(-3deg) translate(0.06em, 0.08em); }
-.hm-name { font-size: clamp(34px, 5vw, 56px) !important; line-height: 1.02 !important; margin: 4px 0 44px !important; }
-@media (max-width: 768px) { .hm-name { margin-bottom: 30px !important; } }
-body:is([data-page="archive"],[data-page="states"],[data-page="notfound"]) .mi, body:is([data-page="archive"],[data-page="states"],[data-page="notfound"]) .hm-name { color: #d6dd5c; }
-body[data-page="how"] .mi { color: #2b1c14; }
-html[data-theme="dark"] .mi, html[data-theme="dark"] .hm-name { color: #3b1d36; }
+.madink, h1.madink { font-family: 'MadInk', 'Newsreader', Georgia, serif !important; font-weight: 400 !important; font-style: normal; letter-spacing: 0; color: #3b1d36; }
+.madink em, em .madink, .madink i { font-style: normal; }
+h1.madink { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; margin: 4px 0 16px; }
+em > .madink, .madink-off { display: inline-block; transform: rotate(-3deg) translate(0.06em, 0.08em); }
+.hm-name { margin-bottom: 6px !important; }
+.hm-sower { font-size: clamp(52px, 9vw, 92px); line-height: 1; margin: 0 0 64px; }
+@media (max-width: 768px) { .hm-sower { margin-bottom: 40px; } }
+body:is([data-page="archive"],[data-page="states"],[data-page="notfound"]) .madink { color: #d6dd5c; }
+body[data-page="how"] .madink { color: #2b1c14; }
+html[data-theme="dark"] .madink { color: #3b1d36; }
 /* Greeting on Home */
 .hm-greet { cursor: pointer; transition: opacity 0.3s; border-bottom: 1px dotted rgba(59,29,54,0.35); }
 .hm-greet.out { opacity: 0; }
@@ -3215,8 +3216,12 @@ body:is([data-page="archive"],[data-page="states"],[data-page="notfound"]) .ck-d
 .st-note { margin: 16px 0 0; font: 400 26px/1.1 'Reenie Beanie', 'Bradley Hand', cursive; color: #a4532f; }
 .st-note a { color: inherit; border-bottom: 1px dotted currentColor; text-decoration: none; }
 .st-bonus { cursor: grab; touch-action: none; }
+.st-ctl { float: right; display: inline-flex; gap: 12px; } .st-ctl button { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; border-bottom: 1px dotted currentColor; }
+.st-body[hidden] { display: none; }
+.sf-stamps .st-k { max-width: 760px; }
 @media (prefers-reduced-motion: reduce) { .st-tile.fresh { animation: none; } }
 /* Playlist page */
+.pl-embed { margin-bottom: 28px; } .pl-embed .pl-c { margin: 8px 0 0; }
 .pl-list { display: grid; gap: 4px; margin-top: 28px; max-width: 680px; }
 .pl-row { display: grid; grid-template-columns: 56px 1fr auto; gap: 16px; align-items: center; padding: 12px 0; border-top: 1px solid rgba(43,28,20,0.12); color: inherit; text-decoration: none; }
 .pl-cov { width: 56px; height: 56px; border-radius: 10px; background: #e9e0cf; overflow: hidden; }
@@ -3225,6 +3230,9 @@ body:is([data-page="archive"],[data-page="states"],[data-page="notfound"]) .ck-d
 .pl-go { font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: #6f5f50; }
 a.pl-row:hover .pl-t { text-decoration: underline; text-decoration-style: dotted; }
 /* Notes: draw or stamp */
+.dd-col { display: inline-flex; align-items: center; gap: 6px; } .dd-col[hidden] { display: none; }
+.dd-col input[type=color] { width: 32px; height: 32px; padding: 0; border: 1px solid rgba(43,28,20,0.25); border-radius: 50%; background: none; cursor: pointer; }
+.dd-col input[type=text] { width: 84px; font: 500 12px 'IBM Plex Mono', monospace; padding: 7px 10px; border: 1px solid rgba(43,28,20,0.25); border-radius: 999px; background: #fff; color: #2b1c14; }
 #dd-stamp[hidden] { display: none; }
 /* How: footer reads on ochre */
 body[data-page="how"] .sf-label, body[data-page="how"] .sf-base, body[data-page="how"] .sf-base span, body[data-page="how"] .sg-k, body[data-page="how"] .sg-msg, body[data-page="how"] .sg-count, body[data-page="how"] .sf-sub, body[data-page="how"] .sf-stamps .st-k { color: #4a3a0c !important; }
@@ -3255,7 +3263,7 @@ body[data-page="how"] .st-tile.got { color: var(--c); }
         <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input type="search" id="site-search" class="search-box" placeholder="Search" aria-label="Search site" autocomplete="off">
       </div>
-      <button type="button" class="wander" id="wander" title="Open something at random"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v12"/><path d="M12 6l-1.5-3M12 6l1.5-3"/><path d="M12 10C9 4 3 3 3 7.5S7 13 12 11"/><path d="M12 10c3-6 9-7 9-2.5S17 13 12 11"/><path d="M12 12c-4 0-7 2-6.5 4.5S10 19 12 14"/><path d="M12 12c4 0 7 2 6.5 4.5S14 19 12 14"/></svg>Wander</button>
+      <button type="button" class="wander" id="wander" title="Open something at random"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 10C9 4 3 3 3 7.5S7 13 12 11z"/><path d="M12 10c3-6 9-7 9-2.5S17 13 12 11z"/><path d="M12 12c-4 0-7 2-6.5 4.5S10 19 12 14z"/><path d="M12 12c4 0 7 2 6.5 4.5S14 19 12 14z"/><rect x="11.2" y="6" width="1.6" height="13" rx="0.8"/><path d="M12 6.5l-1.6-3.2M12 6.5l1.6-3.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Wander</button>
       <nav>
         <div class="nav-group">
           <div data-t="sidebar-004" class="nav-group-label">Main</div>
@@ -3517,7 +3525,7 @@ body[data-page="how"] .st-tile.got { color: var(--c); }
       </div>
 
       <div id="playlist" class="page">
-        <h1 data-t="playlist-001" class="mi">The playlist</h1>
+        <h1 data-t="playlist-001" class="madink">The playlist</h1>
         <p data-t="playlist-002" class="muted page-sub">You found every stamp. This is what I have on repeat.</p>
         <div class="pl-list" id="pl-list"></div>
       </div>
@@ -3645,6 +3653,7 @@ body[data-page="how"] .st-tile.got { color: var(--c); }
       <!-- HOME PAGE -->
       <div id="home" class="page active">
         <h1 data-t="home-001" class="hm-name">Soil to story</h1>
+        <p data-t="home-sower" class="hm-sower madink">Sower</p>
 
         <p data-t="home-002" class="hm-statement">Hey 👋🏿, I'm Adjoa Kittoe. I'm a food systems marketer and strategist. I help growing spaces, food brands, and nonprofits tell clear stories, build real community, and grow the work that feeds people.</p>
         <p data-t="home-003" class="hm-site">This site is my home on the internet: <a class="ab-link" href="#" data-page="essays">essays</a>, research, <a class="ab-link" href="#" data-page="photography">photos</a>, and <a class="ab-link" href="#" data-page="notes">notes</a> from the work in between.</p>
@@ -5391,7 +5400,7 @@ function cook(g) {
       </div>
 
       <div id="notes" class="page">
-        <div class="dd-head"><h1 data-t="notes-001">Notes</h1><div class="dd-tools"><button data-t="notes-007" type="button" class="dd-btn" id="dd-toggle" aria-pressed="false">✎ Doodle</button><button type="button" class="dd-btn" id="dd-stamp" aria-pressed="false" hidden>Stamp</button><button data-t="notes-008" type="button" class="dd-btn dd-clear" id="dd-clear" hidden>Clear</button></div></div>
+        <div class="dd-head"><h1 data-t="notes-001">Notes</h1><div class="dd-tools"><button data-t="notes-007" type="button" class="dd-btn" id="dd-toggle" aria-pressed="false">✎ Doodle</button><span class="dd-col" id="dd-colbox" hidden><input type="color" id="dd-color" value="#3b1d36" aria-label="Pen color"><input type="text" id="dd-hex" value="#3b1d36" maxlength="7" spellcheck="false" aria-label="Hex color" placeholder="#3b1d36"></span><button type="button" class="dd-btn" id="dd-stamp" aria-pressed="false" hidden>Stamp</button><button data-t="notes-008" type="button" class="dd-btn dd-clear" id="dd-clear" hidden>Clear</button></div></div>
         <p data-t="notes-002" class="muted page-sub">Fragments, one-liners, observations. The musings of me.</p>
 
         
@@ -7211,22 +7220,27 @@ function cook(g) {
       const ctx = cv.getContext('2d'); let on = false, drawing = false, last = null, dirty = false;
       const size = () => { const r = window.devicePixelRatio || 1, w = page.clientWidth, h = page.scrollHeight; const keep = dirty ? cv.toDataURL() : null; cv.width = w * r; cv.height = h * r; cv.style.width = w + 'px'; cv.style.height = h + 'px'; ctx.setTransform(r, 0, 0, r, 0, 0); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#54294d'; ctx.lineWidth = 2.4; if (keep) { const im = new Image(); im.onload = () => ctx.drawImage(im, 0, 0, w, h); im.src = keep; } };
       const pos = e => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
-      const set = v => { on = v; if (on) size(); cv.classList.toggle('on', on); page.classList.toggle('dd-on', on); btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Stop drawing' : '✎ Doodle'; clr.hidden = !on && !dirty; const sb = document.getElementById('dd-stamp'); if (sb) { sb.hidden = !on; if (!on) { sb.setAttribute('aria-pressed', 'false'); sb.textContent = 'Stamp'; window.__ddStampOff && window.__ddStampOff(); } } };
+      const set = v => { on = v; if (on) size(); cv.classList.toggle('on', on); page.classList.toggle('dd-on', on); btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Stop drawing' : '✎ Doodle'; clr.hidden = !on && !dirty; colBox.hidden = !on; const sb = document.getElementById('dd-stamp'); if (sb) { sb.hidden = !on; if (!on) { sb.setAttribute('aria-pressed', 'false'); sb.textContent = 'Stamp'; window.__ddStampOff && window.__ddStampOff(); } } };
       btn.addEventListener('click', () => set(!on));
       clr.addEventListener('click', () => { ctx.clearRect(0, 0, cv.width, cv.height); dirty = false; if (!on) clr.hidden = true; });
-      const stampBtn = document.getElementById('dd-stamp'); let stamping = false;
+      const stampBtn = document.getElementById('dd-stamp'); let stamping = false, pen = '#3b1d36';
+      const colIn = document.getElementById('dd-color'), hexIn = document.getElementById('dd-hex'), colBox = document.getElementById('dd-colbox');
+      const setPen = v => { v = String(v).trim(); if (/^[0-9a-f]{3}$|^[0-9a-f]{6}$/i.test(v)) v = '#' + v; if (!/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v)) return false; pen = v; if (v.length === 7) colIn.value = v; return true; };
+      colIn.addEventListener('input', () => { hexIn.value = colIn.value; setPen(colIn.value); });
+      hexIn.addEventListener('input', () => { if (setPen(hexIn.value)) hexIn.style.outline = ''; else hexIn.style.outline = '2px solid #a4532f'; });
+      hexIn.addEventListener('blur', () => { hexIn.value = pen; hexIn.style.outline = ''; });
       const NUMS = [5, 6, 7, 8, 11, 15, 18, 20, 22, 38, 39, 42, 43, 51, 53, 3], COLS = ['#3b1d36', '#d9b13b', '#a4532f', '#55601c', '#d9998a'], imgs = {};
       const getImg = n => imgs[n] || (imgs[n] = Object.assign(new Image(), { src: 'doodles/d' + String(n).padStart(2, '0') + '.png' }));
       NUMS.forEach(getImg);
       function stampAt(pt) {
-        const n = NUMS[Math.floor(Math.random() * NUMS.length)], im = getImg(n), sz = 46 + Math.random() * 30, col = COLS[Math.floor(Math.random() * COLS.length)];
+        const n = NUMS[Math.floor(Math.random() * NUMS.length)], im = getImg(n), sz = 46 + Math.random() * 30, col = pen;
         const go = () => { const t = document.createElement('canvas'); t.width = t.height = 200; const c = t.getContext('2d'); const k = Math.min(200 / im.naturalWidth, 200 / im.naturalHeight); const w = im.naturalWidth * k, h = im.naturalHeight * k; c.drawImage(im, (200 - w) / 2, (200 - h) / 2, w, h); c.globalCompositeOperation = 'source-in'; c.fillStyle = col; c.fillRect(0, 0, 200, 200);
           ctx.save(); ctx.translate(pt.x, pt.y); ctx.rotate((Math.random() - 0.5) * 0.9); ctx.drawImage(t, -sz / 2, -sz / 2, sz, sz); ctx.restore(); dirty = true; clr.hidden = false; };
         im.complete && im.naturalWidth ? go() : im.addEventListener('load', go, { once: true });
       }
       window.__ddStampOff = () => { stamping = false; };
       if (stampBtn) stampBtn.addEventListener('click', () => { stamping = !stamping; stampBtn.setAttribute('aria-pressed', stamping); stampBtn.textContent = stamping ? 'Draw' : 'Stamp'; });
-      cv.addEventListener('pointerdown', e => { if (!on) return; if (stamping) { stampAt(pos(e)); return; } drawing = true; last = pos(e); cv.setPointerCapture(e.pointerId); });
+      cv.addEventListener('pointerdown', e => { if (!on) return; if (stamping) { stampAt(pos(e)); return; } drawing = true; last = pos(e); ctx.strokeStyle = pen; cv.setPointerCapture(e.pointerId); });
       cv.addEventListener('pointermove', e => { if (!drawing) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p; dirty = true; clr.hidden = false; });
       ['pointerup', 'pointercancel'].forEach(t => cv.addEventListener(t, () => { drawing = false; }));
       document.addEventListener('keydown', e => { if (e.key === 'Escape' && on) set(false); });
@@ -7831,7 +7845,7 @@ function cook(g) {
             return;
           }
           const c = el.cloneNode(true); c.querySelectorAll('.ab-ext').forEach(x => x.remove());
-          if (norm(c.textContent) === norm(v.text) && !(/class="mi/.test(v.html) && !el.querySelector('.mi'))) return;
+          if (norm(c.textContent) === norm(v.text) && !(/class="madink/.test(v.html) && !el.querySelector('.madink'))) return;
           const pool = [...el.querySelectorAll('a')], tmp = document.createElement('div'); tmp.innerHTML = v.html;
           tmp.querySelectorAll('a').forEach(a => a.replaceWith(mkA(a.getAttribute('href'), a.innerHTML, pool)));
           el.innerHTML = tmp.innerHTML;
@@ -8549,8 +8563,12 @@ function cook(g) {
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(got)); } catch (e) {} };
   const foot = document.getElementById('site-footer'); if (!foot) return;
   const box = document.createElement('div'); box.className = 'sf-stamps'; box.id = 'sf-stamps';
-  box.innerHTML = '<div class="st-k">Your stamps <span id="st-count"></span></div><div class="st-shelf" id="st-shelf"></div><p class="st-note" id="st-note" hidden></p>';
+  box.innerHTML = '<div class="st-k">Your stamps <span id="st-count"></span><span class="st-ctl"><button type="button" id="st-hide" aria-expanded="true">Hide</button><button type="button" id="st-reset">Reset</button></span></div><div class="st-body" id="st-body"><div class="st-shelf" id="st-shelf"></div><p class="st-note" id="st-note" hidden></p></div>';
   const garden = foot.querySelector('.sf-garden'); garden ? foot.insertBefore(box, garden) : foot.appendChild(box);
+  const hideB = box.querySelector('#st-hide'), resetB = box.querySelector('#st-reset'), body = box.querySelector('#st-body'), HK = 'ak-stamps-hide';
+  const setHide = h => { body.hidden = h; hideB.textContent = h ? 'Show' : 'Hide'; hideB.setAttribute('aria-expanded', !h); try { localStorage.setItem(HK, h ? '1' : ''); } catch (e) {} };
+  let rt = null; resetB.addEventListener('click', () => { if (resetB.dataset.arm) { clearTimeout(rt); delete resetB.dataset.arm; resetB.textContent = 'Reset'; got = {}; save(); try { localStorage.removeItem(DAY); localStorage.setItem(DAY, new Date().toDateString()); } catch (e) {} if (bonus) { bonus.remove(); bonus = null; } render(); hit(document.querySelector('.page.active')?.id); } else { resetB.dataset.arm = '1'; resetB.textContent = 'Tap again to reset'; rt = setTimeout(() => { delete resetB.dataset.arm; resetB.textContent = 'Reset'; }, 3000); } });
+  hideB.addEventListener('click', () => setHide(!body.hidden));
   const shelf = box.querySelector('#st-shelf'), note = box.querySelector('#st-note'), cnt = box.querySelector('#st-count');
   const tiles = {};
   STAMPS.forEach((st, i) => {
@@ -8567,12 +8585,15 @@ function cook(g) {
       shelf.appendChild(bonus);
     }
     if (n >= STAMPS.length) { note.hidden = false; note.innerHTML = 'You found every stamp. <a href="#" data-page="playlist">Open the playlist</a>.'; }
+    else if (n >= 5) { note.hidden = false; note.textContent = 'Keep going. Something is waiting at the end of the shelf.'; }
     else note.hidden = true;
   }
   window.__stamp = k => { if (!tiles[k] || got[k]) return; got[k] = 1; save(); render(k); };
   render();
+  try { if (localStorage.getItem(HK)) setHide(true); } catch (e) {}
   // visits
-  const hit = id => { const m = { 'portfolio': 'portfolio' }; if (tiles[m[id] || id]) window.__stamp(m[id] || id); };
+  function hit(id) { if (!id) return; const m = { 'portfolio': 'portfolio' }; if (tiles[m[id] || id]) window.__stamp(m[id] || id); }
+  const hit0 = id => { const m = { 'portfolio': 'portfolio' }; if (tiles[m[id] || id]) window.__stamp(m[id] || id); };
   const _sp = showPage; showPage = function (id) { const r = _sp(id); hit(id); return r; };
   { const cur = document.querySelector('.page.active'); if (cur) hit(cur.id); }
   try { const today = new Date().toDateString(), first = localStorage.getItem(DAY); if (!first) localStorage.setItem(DAY, today); else if (first !== today) window.__stamp('return'); } catch (e) {}
@@ -8582,8 +8603,14 @@ function cook(g) {
     const box = document.getElementById('pl-list'); if (!box || !d || !Array.isArray(d.items)) return;
     const esc = t => String(t || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
     const list = d.items.filter(x => /^(music|podcast)$/i.test(x.type)).sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
-    box.innerHTML = list.map(x => { const inner = '<div class="pl-cov">' + (x.cover ? '<img alt="" src="' + esc(x.cover) + '">' : '') + '</div><div><div class="pl-t">' + esc(x.title) + '</div><div class="pl-c">' + esc(x.creator) + '</div></div><span class="pl-go">' + esc(x.type) + (x.link ? ' ↗' : '') + '</span>'; return x.link ? '<a class="pl-row" href="' + esc(x.link) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="pl-row">' + inner + '</div>'; }).join('');
+    const apple = list.find(x => /^https?:\/\/music\.apple\.com\/[^ ]*playlist\//i.test(x.link || ''));
+    let head = '';
+    if (apple) { const src = apple.link.replace('//music.apple.com/', '//embed.music.apple.com/'); head = '<div class="pl-embed"><iframe title="' + esc(apple.title) + ' on Apple Music" allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" loading="lazy" height="450" style="width:100%;max-width:660px;overflow:hidden;border-radius:12px;border:0;background:transparent" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="' + esc(src) + '"></iframe><p class="pl-c">' + esc(apple.creator) + '</p></div>'; }
+    box.innerHTML = head + list.filter(x => x !== apple).map(x => { const inner = '<div class="pl-cov">' + (x.cover ? '<img alt="" src="' + esc(x.cover) + '">' : '') + '</div><div><div class="pl-t">' + esc(x.title) + '</div><div class="pl-c">' + esc(x.creator) + '</div></div><span class="pl-go">' + esc(x.type) + (x.link ? ' ↗' : '') + '</span>'; return x.link ? '<a class="pl-row" href="' + esc(x.link) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="pl-row">' + inner + '</div>'; }).join('');
   });
+  // The playlist is not in the menu, but its link works: adjoakittoe.com/#playlist
+  const goHash = () => { if (location.hash === '#playlist') showPage('playlist'); };
+  goHash(); addEventListener('hashchange', goHash);
 
   // Rotating greeting on Home
   const GREET = ['Hey', 'Akwaaba', 'Hello', 'Come on in', 'Pull up a chair', 'Good to see you'];
@@ -8653,9 +8680,9 @@ function cook(g) {
   const INK = { egg: '#3b1d36', ochre: '#d9b13b', rust: '#a4532f', moss: '#55601c', blush: '#d9998a', lime: '#c9d23f', bone: '#f4efe3' };
   const PLACE = {
     home: [
-      { a: '.hm-name', n: 6, s: 74, c: 'egg', r: -8, dx: 36, dy: -4 },
-      { a: '.hm-name', n: 7, s: 54, c: 'ochre', r: 10, dx: 132, dy: 4 },
-      { a: '.hm-name', n: 42, s: 34, c: 'rust', r: 0, dx: 206, dy: -10 }
+      { a: '.hm-sower', n: 6, s: 74, c: 'egg', r: -8, dx: 36, dy: -4 },
+      { a: '.hm-sower', n: 7, s: 54, c: 'ochre', r: 10, dx: 132, dy: 4 },
+      { a: '.hm-sower', n: 42, s: 34, c: 'rust', r: 0, dx: 206, dy: -10 }
     ],
     about: [{ a: 'h1', n: 11, s: 70, c: 'egg', r: 8, dx: 30, dy: -6 }, { a: 'h1', n: 7, s: 46, c: 'ochre', r: -10, dx: 120, dy: 4 }],
     essays: [{ a: 'h1', n: 5, s: 70, c: 'moss', r: 10, dx: 30, dy: -8 }, { a: 'h1', n: 15, s: 52, c: 'egg', r: -6, dx: 120, dy: 6 }],

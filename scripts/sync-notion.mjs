@@ -204,7 +204,7 @@ function rich(rt = [], ctx = {}) {
     if (a.color === 'yellow_background') s = `<mark>${s}</mark>`;
     else if (a.color === 'gray') s = `<span class="muted">${s}</span>`;
     else if (a.color === 'gray_background') s = `<span class="lf-tag">${s}</span>`;
-    else if (a.color === 'brown') s = `<span class="mi">${s}</span>`;
+    else if (a.color === 'brown') s = `<span class="madink">${s}</span>`;
     else if (a.color === 'purple') s = hoverSpan(s, raw, ctx);
     else if (a.color === 'blue') { const m = raw.match(/^([\s\S]*?)\s*\(([^()]+)\)\s*$/); if (m && m[1].trim()) { if (!ctx.preview) HINTS.push({ term: m[1].trim(), definition: m[2].trim(), page: ctx.slug || '' }); } if (m && m[1].trim()) s = `<span class="np-hint" tabindex="0">${esc(m[1].trim())}<span class="np-hint-box" role="tooltip">${esc(m[2].trim())}</span></span>${/\s$/.test(raw) ? ' ' : ''}`; }
     // links
@@ -687,7 +687,7 @@ function inl(rt) {
     while (i < rt.length && (rt[i].href || rt[i].text?.link?.url || '') === href) {
       const t = rt[i]; const a = t.annotations || {}; let h = esc(t.plain_text).replace(/\n/g, '<br>');
       if (a.code) h = `<code>${h}</code>`; if (a.bold) h = `<strong>${h}</strong>`; if (a.italic) h = `<em>${h}</em>`;
-      if (a.strikethrough) h = `<s>${h}</s>`; if (a.underline) h = `<u>${h}</u>`; if (a.color === 'yellow_background') h = `<mark>${h}</mark>`; if (a.color === 'brown') h = `<span class="mi">${h}</span>`;
+      if (a.strikethrough) h = `<s>${h}</s>`; if (a.underline) h = `<u>${h}</u>`; if (a.color === 'yellow_background') h = `<mark>${h}</mark>`; if (a.color === 'brown') h = `<span class="madink">${h}</span>`;
       chunk += h; i++;
     }
     out += href ? `<a href="${esc(href)}">${chunk}</a>` : chunk;
