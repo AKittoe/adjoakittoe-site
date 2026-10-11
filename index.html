@@ -28,7 +28,7 @@
   <meta name="theme-color" content="#3b1d36">
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Reenie+Beanie&display=swap">
   <style>
     * {
       margin: 0;
@@ -3182,6 +3182,63 @@ body[data-page="how"] .hw kbd { border-color: rgba(43,28,20,0.3); background: rg
 @media print { .hw-demo { display: none; } }
 #dd-layer .dd-thread path.dash { stroke-width: 1.6; opacity: 0.3; }
 </style>
+<style id="u24">
+@font-face { font-family: 'MadInk'; src: url(fonts/MadInk.woff2) format('woff2'), url(fonts/MadInk.woff) format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+/* MadInk: any heading or phrase marked with it. Add class "mi" in HTML, or color the text Brown in Notion. Brown plus italic tilts and offsets it. */
+.mi, h1.mi, .hm-name { font-family: 'MadInk', 'Newsreader', Georgia, serif !important; font-weight: 400 !important; font-style: normal; letter-spacing: 0; color: #3b1d36; }
+.mi em, em .mi, .mi i { font-style: normal; }
+h1.mi { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; margin: 4px 0 16px; }
+em > .mi, .mi-off { display: inline-block; transform: rotate(-3deg) translate(0.06em, 0.08em); }
+.hm-name { font-size: clamp(34px, 5vw, 56px) !important; line-height: 1.02 !important; margin: 4px 0 44px !important; }
+@media (max-width: 768px) { .hm-name { margin-bottom: 30px !important; } }
+body:is([data-page="archive"],[data-page="states"],[data-page="notfound"]) .mi, body:is([data-page="archive"],[data-page="states"],[data-page="notfound"]) .hm-name { color: #d6dd5c; }
+body[data-page="how"] .mi { color: #2b1c14; }
+html[data-theme="dark"] .mi, html[data-theme="dark"] .hm-name { color: #3b1d36; }
+/* Greeting on Home */
+.hm-greet { cursor: pointer; transition: opacity 0.3s; border-bottom: 1px dotted rgba(59,29,54,0.35); }
+.hm-greet.out { opacity: 0; }
+/* Cursor trail */
+.ck-dot { position: fixed; left: 0; top: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: #3b1d36; pointer-events: none; z-index: 9999; opacity: 0.55; animation: ck-fade 0.7s ease-out forwards; }
+body:is([data-page="archive"],[data-page="states"],[data-page="notfound"]) .ck-dot { background: #d6dd5c; }
+@keyframes ck-fade { to { opacity: 0; transform: scale(0.3); } }
+@media (prefers-reduced-motion: reduce), (hover: none) { .ck-dot { display: none; } }
+/* Stamp shelf */
+.sf-stamps { margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.08); }
+.sf-stamps .st-k { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #999; margin-bottom: 12px; }
+.st-shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 10px; max-width: 760px; }
+.st-tile { aspect-ratio: 1; border: 1.5px dashed rgba(43,28,20,0.22); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; font: 500 9.5px 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(43,28,20,0.4); padding: 6px; background: none; }
+.st-tile i { display: block; width: 30px; height: 30px; background: currentColor; -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; opacity: 0.35; }
+.st-tile.got { border: 2px solid var(--c); color: var(--c); background: color-mix(in srgb, var(--c) 10%, transparent); transform: rotate(var(--r)); }
+.st-tile.got i { opacity: 1; }
+.st-tile.fresh { animation: st-pop 0.6s cubic-bezier(.3,1.6,.5,1); }
+@keyframes st-pop { from { transform: scale(0.4) rotate(-30deg); } }
+.st-note { margin: 16px 0 0; font: 400 26px/1.1 'Reenie Beanie', 'Bradley Hand', cursive; color: #a4532f; }
+.st-note a { color: inherit; border-bottom: 1px dotted currentColor; text-decoration: none; }
+.st-bonus { cursor: grab; touch-action: none; }
+@media (prefers-reduced-motion: reduce) { .st-tile.fresh { animation: none; } }
+/* Playlist page */
+.pl-list { display: grid; gap: 4px; margin-top: 28px; max-width: 680px; }
+.pl-row { display: grid; grid-template-columns: 56px 1fr auto; gap: 16px; align-items: center; padding: 12px 0; border-top: 1px solid rgba(43,28,20,0.12); color: inherit; text-decoration: none; }
+.pl-cov { width: 56px; height: 56px; border-radius: 10px; background: #e9e0cf; overflow: hidden; }
+.pl-cov img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pl-t { font-weight: 500; } .pl-c { color: #6f5f50; font-size: 14px; }
+.pl-go { font: 500 11px 'IBM Plex Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: #6f5f50; }
+a.pl-row:hover .pl-t { text-decoration: underline; text-decoration-style: dotted; }
+/* Notes: draw or stamp */
+#dd-stamp[hidden] { display: none; }
+/* How: footer reads on ochre */
+body[data-page="how"] .sf-label, body[data-page="how"] .sf-base, body[data-page="how"] .sf-base span, body[data-page="how"] .sg-k, body[data-page="how"] .sg-msg, body[data-page="how"] .sg-count, body[data-page="how"] .sf-sub, body[data-page="how"] .sf-stamps .st-k { color: #4a3a0c !important; }
+body[data-page="how"] .site-footer a { color: #2b1c14; }
+body[data-page="how"] .site-footer a:hover { color: #3b1d36; }
+body[data-page="how"] .sg-play, body[data-page="how"] .sg-play em { color: #2b1c14; border-color: rgba(43,28,20,0.4); }
+body[data-page="how"] .sg-form input { background: rgba(255,255,255,0.7); color: #2b1c14; }
+body[data-page="how"] .sf-stamps { border-top-color: rgba(43,28,20,0.16); }
+body[data-page="how"] .sf-garden { border-top-color: rgba(43,28,20,0.16); }
+body[data-page="how"] .st-tile { border-color: rgba(43,28,20,0.35); color: rgba(43,28,20,0.55); }
+body[data-page="how"] .st-tile.got { color: var(--c); }
+/* Mobile map: the minimized index sits at the bottom, not over the title */
+@media (max-width: 768px) { #map .map-panel.collapsed { top: auto; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); } }
+</style>
 </head>
 <body>
   <div class="container">
@@ -3445,6 +3502,8 @@ body[data-page="how"] .hw kbd { border-color: rgba(43,28,20,0.3); background: rg
             <p data-t="how-008">Words with a dotted underline show a photo or a definition when you hover or tap them. The Glossary, linked in the footer, collects the definitions in one place.</p>
             <div class="hw-demo"><button type="button" class="hw-ex" aria-expanded="false">Show an example</button><span class="hw-ex-out" hidden>Try it: hover or tap <span class="np-hint" tabindex="0">mulch<span class="np-hint-box">Mulch is a layer of material spread over soil to keep it moist and protected. Every dotted word on this site opens a note like this one.</span></span>.</span></div>
             <p data-t="how-009">There are a few easter eggs. If you read through the Glossary, one word will remind you that it is never too late to go back.</p>
+            <p data-t="how-011">The doodles are loose. Drag them anywhere on the page, tap them to make them spin, or draw and stamp your own on the Notes page.</p>
+            <p data-t="how-012">Each page you visit leaves a stamp on the shelf in the footer. See how many you can collect.</p>
           </section>
           <section class="hw-sec"><h2 data-t="how-010">Keyboard shortcuts</h2>
             <dl class="hw-keys">
@@ -3455,6 +3514,12 @@ body[data-page="how"] .hw kbd { border-color: rgba(43,28,20,0.3); background: rg
             </dl>
           </section>
         </div>
+      </div>
+
+      <div id="playlist" class="page">
+        <h1 data-t="playlist-001" class="mi">The playlist</h1>
+        <p data-t="playlist-002" class="muted page-sub">You found every stamp. This is what I have on repeat.</p>
+        <div class="pl-list" id="pl-list"></div>
       </div>
 
       <!-- CHANGELOG -->
@@ -3532,7 +3597,7 @@ body[data-page="how"] .hw kbd { border-color: rgba(43,28,20,0.3); background: rg
           <div class="cp-tones"><span class="cp-tone" style="background:#eef3ee;color:#4f6f55">#4f6f55</span><span class="cp-tone" style="background:#f8ece5;color:#a85a3a">#a85a3a</span><span class="cp-tone" style="background:#e9eff4;color:#4f6f8a">#4f6f8a</span><span class="cp-tone" style="background:#f6f0dc;color:#8f6d1c">#8f6d1c</span><span class="cp-tone" style="background:#f2eaf0;color:#82566f">#82566f</span><span class="cp-tone" style="background:#eef0e2;color:#66692f">#66692f</span><span class="cp-tone" style="background:#f5e9e9;color:#9a5555">#9a5555</span></div>
 
           <h2 class="cp-h">Typefaces</h2>
-          <div class="cp-faces"><div class="cp-face"><div class="cp-face-head"><b style="font-family:'Inter', sans-serif">Inter</b><code>font-sans</code></div><span class="cp-face-role">Headlines, body, and interface · Rasmus Andersson</span><p style="font-family:'Inter', sans-serif">The quick brown fox jumps over the lazy dog</p></div><div class="cp-face"><div class="cp-face-head"><b style="font-family:'IBM Plex Mono', monospace">IBM Plex Mono</b><code>font-mono</code></div><span class="cp-face-role">Labels, numbers, dates, and tags · IBM</span><p style="font-family:'IBM Plex Mono', monospace">The quick brown fox jumps over the lazy dog</p></div><div class="cp-face"><div class="cp-face-head"><b style="font-family:'Newsreader', serif">Newsreader</b><code>font-serif</code></div><span class="cp-face-role">Archival headings and accents · Production Type</span><p style="font-family:'Newsreader', serif">The quick brown fox jumps over the lazy dog</p></div></div>
+          <div class="cp-faces"><div class="cp-face"><div class="cp-face-head"><b style="font-family:'Inter', sans-serif">Inter</b><code>font-sans</code></div><span class="cp-face-role">Headlines, body, and interface · Rasmus Andersson</span><p style="font-family:'Inter', sans-serif">The quick brown fox jumps over the lazy dog</p></div><div class="cp-face"><div class="cp-face-head"><b style="font-family:'IBM Plex Mono', monospace">IBM Plex Mono</b><code>font-mono</code></div><span class="cp-face-role">Labels, numbers, dates, and tags · IBM</span><p style="font-family:'IBM Plex Mono', monospace">The quick brown fox jumps over the lazy dog</p></div><div class="cp-face"><div class="cp-face-head"><b style="font-family:'Newsreader', serif">Newsreader</b><code>font-serif</code></div><span class="cp-face-role">Archival headings and accents · Production Type</span><p style="font-family:'Newsreader', serif">The quick brown fox jumps over the lazy dog</p></div><div class="cp-face"><div class="cp-face-head"><b style="font-family:'MadInk', serif">MadInk</b><code>font-madink</code></div><span class="cp-face-role">Big titles and decorative words · Gholib Tammami</span><p style="font-family:'MadInk', serif">The quick brown fox jumps over the lazy dog</p></div></div>
 
           <h2 class="cp-h">Type scale</h2>
           <div class="cp-scale"><div class="cp-scale-row"><span class="cp-scale-n">Statement<small>32px · Home and About openers</small></span><span class="cp-scale-ag" style="font-size:32px">Ag</span></div><div class="cp-scale-row"><span class="cp-scale-n">Title<small>30px · Essay titles</small></span><span class="cp-scale-ag" style="font-size:30px">Ag</span></div><div class="cp-scale-row"><span class="cp-scale-n">Page title<small>28px · Every page</small></span><span class="cp-scale-ag" style="font-size:28px">Ag</span></div><div class="cp-scale-row"><span class="cp-scale-n">Body, long form<small>16px · Essays and Vibe Projects</small></span><span class="cp-scale-ag" style="font-size:16px">Ag</span></div><div class="cp-scale-row"><span class="cp-scale-n">Subtitle<small>15px · Under every page title</small></span><span class="cp-scale-ag" style="font-size:15px">Ag</span></div><div class="cp-scale-row"><span class="cp-scale-n">Body<small>14px · Lists, tables, and cards</small></span><span class="cp-scale-ag" style="font-size:14px">Ag</span></div><div class="cp-scale-row"><span class="cp-scale-n">Meta<small>12px · Dates and captions</small></span><span class="cp-scale-ag" style="font-size:12px">Ag</span></div><div class="cp-scale-row"><span class="cp-scale-n">Label<small>11px · Small caps labels</small></span><span class="cp-scale-ag" style="font-size:11px">Ag</span></div></div>
@@ -5326,7 +5391,7 @@ function cook(g) {
       </div>
 
       <div id="notes" class="page">
-        <div class="dd-head"><h1 data-t="notes-001">Notes</h1><div class="dd-tools"><button data-t="notes-007" type="button" class="dd-btn" id="dd-toggle" aria-pressed="false">✎ Doodle</button><button data-t="notes-008" type="button" class="dd-btn dd-clear" id="dd-clear" hidden>Clear</button></div></div>
+        <div class="dd-head"><h1 data-t="notes-001">Notes</h1><div class="dd-tools"><button data-t="notes-007" type="button" class="dd-btn" id="dd-toggle" aria-pressed="false">✎ Doodle</button><button type="button" class="dd-btn" id="dd-stamp" aria-pressed="false" hidden>Stamp</button><button data-t="notes-008" type="button" class="dd-btn dd-clear" id="dd-clear" hidden>Clear</button></div></div>
         <p data-t="notes-002" class="muted page-sub">Fragments, one-liners, observations. The musings of me.</p>
 
         
@@ -7113,6 +7178,7 @@ function cook(g) {
         buf = ''; run();
       });
       function run() {
+        window.__stamp && window.__stamp('sankofa');
         const t = document.createElement('div'); t.className = 'sk-toast'; t.innerHTML = '<b>Sankofa.</b> Go back and get it.'; document.body.appendChild(t); setTimeout(() => t.remove(), 3200);
         if (!SYMS.length) return;
         document.querySelectorAll('.sk-rain').forEach(r => r.remove());
@@ -7145,10 +7211,22 @@ function cook(g) {
       const ctx = cv.getContext('2d'); let on = false, drawing = false, last = null, dirty = false;
       const size = () => { const r = window.devicePixelRatio || 1, w = page.clientWidth, h = page.scrollHeight; const keep = dirty ? cv.toDataURL() : null; cv.width = w * r; cv.height = h * r; cv.style.width = w + 'px'; cv.style.height = h + 'px'; ctx.setTransform(r, 0, 0, r, 0, 0); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#54294d'; ctx.lineWidth = 2.4; if (keep) { const im = new Image(); im.onload = () => ctx.drawImage(im, 0, 0, w, h); im.src = keep; } };
       const pos = e => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
-      const set = v => { on = v; if (on) size(); cv.classList.toggle('on', on); page.classList.toggle('dd-on', on); btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Stop drawing' : '✎ Doodle'; clr.hidden = !on && !dirty; };
+      const set = v => { on = v; if (on) size(); cv.classList.toggle('on', on); page.classList.toggle('dd-on', on); btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Stop drawing' : '✎ Doodle'; clr.hidden = !on && !dirty; const sb = document.getElementById('dd-stamp'); if (sb) { sb.hidden = !on; if (!on) { sb.setAttribute('aria-pressed', 'false'); sb.textContent = 'Stamp'; window.__ddStampOff && window.__ddStampOff(); } } };
       btn.addEventListener('click', () => set(!on));
       clr.addEventListener('click', () => { ctx.clearRect(0, 0, cv.width, cv.height); dirty = false; if (!on) clr.hidden = true; });
-      cv.addEventListener('pointerdown', e => { if (!on) return; drawing = true; last = pos(e); cv.setPointerCapture(e.pointerId); });
+      const stampBtn = document.getElementById('dd-stamp'); let stamping = false;
+      const NUMS = [5, 6, 7, 8, 11, 15, 18, 20, 22, 38, 39, 42, 43, 51, 53, 3], COLS = ['#3b1d36', '#d9b13b', '#a4532f', '#55601c', '#d9998a'], imgs = {};
+      const getImg = n => imgs[n] || (imgs[n] = Object.assign(new Image(), { src: 'doodles/d' + String(n).padStart(2, '0') + '.png' }));
+      NUMS.forEach(getImg);
+      function stampAt(pt) {
+        const n = NUMS[Math.floor(Math.random() * NUMS.length)], im = getImg(n), sz = 46 + Math.random() * 30, col = COLS[Math.floor(Math.random() * COLS.length)];
+        const go = () => { const t = document.createElement('canvas'); t.width = t.height = 200; const c = t.getContext('2d'); const k = Math.min(200 / im.naturalWidth, 200 / im.naturalHeight); const w = im.naturalWidth * k, h = im.naturalHeight * k; c.drawImage(im, (200 - w) / 2, (200 - h) / 2, w, h); c.globalCompositeOperation = 'source-in'; c.fillStyle = col; c.fillRect(0, 0, 200, 200);
+          ctx.save(); ctx.translate(pt.x, pt.y); ctx.rotate((Math.random() - 0.5) * 0.9); ctx.drawImage(t, -sz / 2, -sz / 2, sz, sz); ctx.restore(); dirty = true; clr.hidden = false; };
+        im.complete && im.naturalWidth ? go() : im.addEventListener('load', go, { once: true });
+      }
+      window.__ddStampOff = () => { stamping = false; };
+      if (stampBtn) stampBtn.addEventListener('click', () => { stamping = !stamping; stampBtn.setAttribute('aria-pressed', stamping); stampBtn.textContent = stamping ? 'Draw' : 'Stamp'; });
+      cv.addEventListener('pointerdown', e => { if (!on) return; if (stamping) { stampAt(pos(e)); return; } drawing = true; last = pos(e); cv.setPointerCapture(e.pointerId); });
       cv.addEventListener('pointermove', e => { if (!drawing) return; const p = pos(e); ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p; dirty = true; clr.hidden = false; });
       ['pointerup', 'pointercancel'].forEach(t => cv.addEventListener(t, () => { drawing = false; }));
       document.addEventListener('keydown', e => { if (e.key === 'Escape' && on) set(false); });
@@ -7333,7 +7411,7 @@ function cook(g) {
       }));
       ap.addEventListener('click', e => { const a = e.target.closest('.gl-jump'); if (!a) return; e.preventDefault(); document.getElementById('gl-' + a.dataset.l)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
       const titleOf = pg => { const n = document.querySelector(`aside nav a[data-page="${pg.id}"]`); if (n) return n.textContent.trim(); const h = pg.querySelector('h1'); return (h ? h.textContent : pg.id).trim(); };
-      const skip = new Set(['appendix', 'styleguide', 'colophon', 'sitemap', 'map', 'changelog', 'legal', 'ai-use', 'search-results']);
+      const skip = new Set(['appendix', 'styleguide', 'colophon', 'sitemap', 'map', 'changelog', 'legal', 'ai-use', 'search-results', 'playlist']);
       // runs at load, and again once the Notion pages and glossary arrive
       window.__buildAppendix = function () {
       const pages = [...document.querySelectorAll('main .page')].filter(p => !skip.has(p.id) && p.id !== 'notfound' && !((window.__pieceInfo || {})[p.id] || {}).preview);
@@ -7753,7 +7831,7 @@ function cook(g) {
             return;
           }
           const c = el.cloneNode(true); c.querySelectorAll('.ab-ext').forEach(x => x.remove());
-          if (norm(c.textContent) === norm(v.text)) return;
+          if (norm(c.textContent) === norm(v.text) && !(/class="mi/.test(v.html) && !el.querySelector('.mi'))) return;
           const pool = [...el.querySelectorAll('a')], tmp = document.createElement('div'); tmp.innerHTML = v.html;
           tmp.querySelectorAll('a').forEach(a => a.replaceWith(mkA(a.getAttribute('href'), a.innerHTML, pool)));
           el.innerHTML = tmp.innerHTML;
@@ -7972,7 +8050,7 @@ function cook(g) {
         const group = n => { let g = [...box.querySelectorAll('.smap-g')].find(x => x.querySelector('.smap-h')?.textContent.trim() === n); if (!g) { g = document.createElement('section'); g.className = 'smap-g'; g.innerHTML = `<h2 class="smap-h">${esc(n)}</h2><ul></ul>`; box.append(g); } return g.querySelector('ul'); };
         const info = window.__pieceInfo || {}, menuG = { 'main': 'Main', 'work & writing': 'Writing', 'collections': 'Collections' };
         document.querySelectorAll('main > .page[id]').forEach(pg => {
-          const id = pg.id; if (listed.has(id) || /^(search-results|sitemap|notfound|map)$|^test-/.test(id) || (info[id] && info[id].preview)) return;
+          const id = pg.id; if (listed.has(id) || /^(search-results|sitemap|notfound|map|playlist)$|^test-/.test(id) || (info[id] && info[id].preview)) return;
           const name = (pg.querySelector('h1')?.textContent || pg.querySelector('[data-toc]')?.dataset.toc || '').trim(); if (!name) return;
           const pgG = (window.__pageGroup || {})[id];
           const g = /^case-/.test(id) ? 'Work' : /^series-/.test(id) ? 'Collections' : info[id] ? (info[id].section === 'Essays' ? 'Writing' : 'Vibe Projects')
@@ -8357,7 +8435,7 @@ function cook(g) {
   function build() {
     idx = [];
     document.querySelectorAll('.page').forEach(pg => {
-      if (!pg.id || pg.id === 'search-results' || pg.id === 'notfound') return;
+      if (!pg.id || pg.id === 'search-results' || pg.id === 'notfound' || pg.id === 'playlist') return;
       const info = (window.__pieceInfo || {})[pg.id]; if (info && info.preview) return;
       if (pg.hidden || pg.hasAttribute('data-private') || pg.hasAttribute('data-preview')) return;
       const h = pg.querySelector('h1'); const title = (h ? h.textContent : pg.id).replace(/\s+/g, ' ').trim(); if (!title) return;
@@ -8453,6 +8531,87 @@ function cook(g) {
     active = true; setTimeout(() => { if (active) round(); }, 600);
     if (!reduce) timer = setInterval(() => { if (active && !document.hidden && !box.querySelector('.drag') && document.getElementById('map').classList.contains('active')) round(); }, 5000);
   });
+})();
+</script>
+<script>
+/* Update 24: footer stamps, playlist page, greetings, cursor trail */
+(function () {
+  const INK = ['#3b1d36', '#a4532f', '#55601c', '#8f6d1c', '#d9998a', '#4f6f8a'];
+  const STAMPS = [
+    { k: 'home', t: 'Home', n: 6 }, { k: 'about', t: 'About', n: 11 }, { k: 'now', t: 'Now', n: 7 }, { k: 'how', t: 'How', n: 42 },
+    { k: 'portfolio', t: 'Work', n: 18 }, { k: 'essays', t: 'Essays', n: 5 }, { k: 'notes', t: 'Notes', n: 20 }, { k: 'photography', t: 'Photos', n: 8 },
+    { k: 'bookmarks', t: 'Bookmarks', n: 22 }, { k: 'resources', t: 'Resources', n: 51 }, { k: 'map', t: 'Map', n: 38 }, { k: 'appendix', t: 'Glossary', n: 15 },
+    { k: 'sankofa', t: 'Sankofa', n: 3 }, { k: 'return', t: 'Came back', n: 39 }
+  ];
+  let got = {};
+  const KEY = 'ak-stamps', DAY = 'ak-first-day';
+  try { got = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { got = {}; }
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(got)); } catch (e) {} };
+  const foot = document.getElementById('site-footer'); if (!foot) return;
+  const box = document.createElement('div'); box.className = 'sf-stamps'; box.id = 'sf-stamps';
+  box.innerHTML = '<div class="st-k">Your stamps <span id="st-count"></span></div><div class="st-shelf" id="st-shelf"></div><p class="st-note" id="st-note" hidden></p>';
+  const garden = foot.querySelector('.sf-garden'); garden ? foot.insertBefore(box, garden) : foot.appendChild(box);
+  const shelf = box.querySelector('#st-shelf'), note = box.querySelector('#st-note'), cnt = box.querySelector('#st-count');
+  const tiles = {};
+  STAMPS.forEach((st, i) => {
+    const d = document.createElement('div'); d.className = 'st-tile'; d.style.setProperty('--c', INK[i % INK.length]); d.style.setProperty('--r', ((i * 7) % 9 - 4) + 'deg');
+    d.style.setProperty('--m', 'url(doodles/d' + String(st.n).padStart(2, '0') + '.png)'); d.innerHTML = '<i></i><span>' + st.t + '</span>'; shelf.appendChild(d); tiles[st.k] = d;
+  });
+  let bonus = null;
+  function render(fresh) {
+    let n = 0; STAMPS.forEach(st => { const on = !!got[st.k]; if (on) n++; tiles[st.k].classList.toggle('got', on); if (on && fresh === st.k) { tiles[st.k].classList.remove('fresh'); void tiles[st.k].offsetWidth; tiles[st.k].classList.add('fresh'); } });
+    cnt.textContent = n + ' of ' + STAMPS.length;
+    if (n >= 5 && !bonus) {
+      bonus = document.createElement('div'); bonus.className = 'st-tile got st-bonus'; bonus.style.setProperty('--c', '#d9b13b'); bonus.style.setProperty('--m', 'url(doodles/d53.png)'); bonus.style.setProperty('--r', '3deg'); bonus.title = 'A hidden doodle. Tap it.'; bonus.innerHTML = '<i></i><span>Hidden</span>';
+      bonus.addEventListener('click', () => { bonus.classList.remove('fresh'); void bonus.offsetWidth; bonus.classList.add('fresh'); });
+      shelf.appendChild(bonus);
+    }
+    if (n >= STAMPS.length) { note.hidden = false; note.innerHTML = 'You found every stamp. <a href="#" data-page="playlist">Open the playlist</a>.'; }
+    else note.hidden = true;
+  }
+  window.__stamp = k => { if (!tiles[k] || got[k]) return; got[k] = 1; save(); render(k); };
+  render();
+  // visits
+  const hit = id => { const m = { 'portfolio': 'portfolio' }; if (tiles[m[id] || id]) window.__stamp(m[id] || id); };
+  const _sp = showPage; showPage = function (id) { const r = _sp(id); hit(id); return r; };
+  { const cur = document.querySelector('.page.active'); if (cur) hit(cur.id); }
+  try { const today = new Date().toDateString(), first = localStorage.getItem(DAY); if (!first) localStorage.setItem(DAY, today); else if (first !== today) window.__stamp('return'); } catch (e) {}
+
+  // playlist page from the Shelf (Music and Podcast items)
+  fetch('/data/shelf.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null).then(d => {
+    const box = document.getElementById('pl-list'); if (!box || !d || !Array.isArray(d.items)) return;
+    const esc = t => String(t || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const list = d.items.filter(x => /^(music|podcast)$/i.test(x.type)).sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+    box.innerHTML = list.map(x => { const inner = '<div class="pl-cov">' + (x.cover ? '<img alt="" src="' + esc(x.cover) + '">' : '') + '</div><div><div class="pl-t">' + esc(x.title) + '</div><div class="pl-c">' + esc(x.creator) + '</div></div><span class="pl-go">' + esc(x.type) + (x.link ? ' ↗' : '') + '</span>'; return x.link ? '<a class="pl-row" href="' + esc(x.link) + '" target="_blank" rel="noopener">' + inner + '</a>' : '<div class="pl-row">' + inner + '</div>'; }).join('');
+  });
+
+  // Rotating greeting on Home
+  const GREET = ['Hey', 'Akwaaba', 'Hello', 'Come on in', 'Pull up a chair', 'Good to see you'];
+  let gi = Math.floor(Math.random() * GREET.length);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function wrap() {
+    const st = document.querySelector('#home .hm-statement'); if (!st) return null;
+    let g = st.querySelector('.hm-greet'); if (g) return g;
+    const w = document.createTreeWalker(st, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) { const m = n.nodeValue.match(/^(\s*)(Hey|Akwaaba|Hello|Come on in|Pull up a chair|Good to see you)\b/); if (m) { const after = n.splitText(m[1].length); after.splitText(m[2].length); g = document.createElement('span'); g.className = 'hm-greet'; g.title = 'Tap for another greeting'; g.textContent = GREET[gi]; after.replaceWith(g); g.addEventListener('click', () => next(true)); return g; } }
+    return null;
+  }
+  function next(force) { const g = wrap(); if (!g) return; if (!force && document.hidden) return; gi = (gi + 1) % GREET.length; if (reduce) { g.textContent = GREET[gi]; return; } g.classList.add('out'); setTimeout(() => { g.textContent = GREET[gi]; g.classList.remove('out'); }, 300); }
+  { let tm = null; new MutationObserver(() => { clearTimeout(tm); tm = setTimeout(wrap, 150); }).observe(document.getElementById('home') || document.body, { childList: true, subtree: true, characterData: true }); }
+  setTimeout(wrap, 300); setTimeout(wrap, 1500);
+  setInterval(() => { if (document.getElementById('home')?.classList.contains('active')) next(false); }, 9000);
+  { const _s2 = showPage; showPage = function (id) { const r = _s2(id); if (id === 'home') setTimeout(() => next(true), 80); return r; }; }
+
+  // Dotted cursor trail, same eggplant as the cursor
+  if (!reduce && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    let lx = -99, ly = -99;
+    document.addEventListener('pointermove', e => {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      if (document.querySelector('.dd-on')) return;
+      const dx = e.clientX - lx, dy = e.clientY - ly; if (dx * dx + dy * dy < 400) return; lx = e.clientX; ly = e.clientY;
+      const d = document.createElement('i'); d.className = 'ck-dot'; d.style.left = lx + 'px'; d.style.top = ly + 'px'; document.body.appendChild(d); setTimeout(() => d.remove(), 720);
+    }, { passive: true });
+  }
 })();
 </script>
 <script>
