@@ -3155,6 +3155,33 @@ html[data-theme="dark"] #map-photos { filter: invert(1) hue-rotate(180deg); }
 @media (prefers-reduced-motion: reduce) { #dd-layer .dd-st, #dd-layer .dd-ph { transition: none; } #dd-layer .dd-st.spin { animation: none; } }
 @media print { #dd-layer { display: none; } }
 </style>
+<style id="u23">
+/* Back and copy-link buttons blend into any page color */
+.lf-round, .lf-round:hover { background: rgba(43,28,20,0.065); color: #777; }
+.lf-round:hover { background: rgba(43,28,20,0.12); color: #2b2b2b; }
+body:is([data-page="states"],[data-page="notfound"],[data-page="archive"]) .lf-round, body:is([data-page="states"],[data-page="notfound"],[data-page="archive"]) .lf-round:hover { background: rgba(244,239,227,0.1); color: #ece7da; }
+body:is([data-page="states"],[data-page="notfound"],[data-page="archive"]) .lf-round:hover { background: rgba(244,239,227,0.2); color: #fff; }
+/* Academia example row: deep ochre instead of purple */
+body[data-page="academia"] .pb-sub, body[data-page="academia"] .pb-lead { color: #8a5d0a; }
+/* How page: ochre paper */
+body[data-page="how"], html[data-tint] body[data-page="how"] { background: #d9b13b !important; transition: background 0.3s ease; }
+body[data-page="how"] aside { background: #fefdfb; }
+body[data-page="how"] .site-footer { border-top-color: rgba(43,28,20,0.16); }
+body[data-page="how"] .page p.page-sub { color: #5c4710 !important; }
+body[data-page="how"] .hw-list > div, body[data-page="how"] .hw-keys > div { border-top-color: rgba(43,28,20,0.2); }
+body[data-page="how"] .hw-list dd, body[data-page="how"] .hw-keys dd { color: #3a2c08; }
+body[data-page="how"] .hw-list dt a { border-bottom-color: rgba(43,28,20,0.55); }
+body[data-page="how"] .hw kbd { border-color: rgba(43,28,20,0.3); background: rgba(255,255,255,0.45); }
+.hw-sec p a.ab-link { color: inherit; }
+.hw-demo { margin: 0 0 18px; }
+.hw-ex { font: 500 14px 'Inter', system-ui, sans-serif; background: #3b1d36; color: #f8f4e7; border: 0; border-radius: 999px; padding: 9px 18px; cursor: pointer; transition: transform 0.2s cubic-bezier(.3,1.6,.5,1); }
+.hw-ex:hover { transform: translateY(-1px) scale(1.03); }
+.hw-ex-out { display: block; margin: 18px 0 100px; line-height: 1.7; }
+.hw-ex-out .np-hint-box { bottom: auto; top: calc(100% + 8px); }
+.hw-ex-out[hidden] { display: none; }
+@media print { .hw-demo { display: none; } }
+#dd-layer .dd-thread path.dash { stroke-width: 1.6; opacity: 0.3; }
+</style>
 </head>
 <body>
   <div class="container">
@@ -3416,6 +3443,7 @@ html[data-theme="dark"] #map-photos { filter: invert(1) hue-rotate(180deg); }
           </section>
           <section class="hw-sec"><h2 data-t="how-007">Little things to try</h2>
             <p data-t="how-008">Words with a dotted underline show a photo or a definition when you hover or tap them. The Glossary, linked in the footer, collects the definitions in one place.</p>
+            <div class="hw-demo"><button type="button" class="hw-ex" aria-expanded="false">Show an example</button><span class="hw-ex-out" hidden>Try it: hover or tap <span class="np-hint" tabindex="0">mulch<span class="np-hint-box">Mulch is a layer of material spread over soil to keep it moist and protected. Every dotted word on this site opens a note like this one.</span></span>.</span></div>
             <p data-t="how-009">There are a few easter eggs. If you read through the Glossary, one word will remind you that it is never too late to go back.</p>
           </section>
           <section class="hw-sec"><h2 data-t="how-010">Keyboard shortcuts</h2>
@@ -3496,7 +3524,7 @@ html[data-theme="dark"] #map-photos { filter: invert(1) hue-rotate(180deg); }
           <div class="cp-grid"><div class="cp-sw"><span class="cp-chip" style="background:#2b2b2b"></span><div><b>Ink</b><code>#2b2b2b</code><span>Text and foreground</span></div></div><div class="cp-sw"><span class="cp-chip cp-ring" style="background:#fefdfb"></span><div><b>Paper</b><code>#fefdfb</code><span>Default page background</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#777777"></span><div><b>Muted</b><code>#777777</code><span>Page subtitles</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#999999"></span><div><b>Faint</b><code>#999999</code><span>Labels, dates, and meta</span></div></div><div class="cp-sw"><span class="cp-chip cp-ring" style="background:#f0ede7"></span><div><b>Line</b><code>#f0ede7</code><span>Dividers and card borders</span></div></div></div>
           <h3 class="cp-h3">Paper by section</h3>
           <p class="cp-p">Every other page, including Home, stays on the default paper.</p>
-          <div class="cp-grid"><div class="cp-sw"><span class="cp-chip" style="background:#f8ece5"></span><div><b>About</b><code>#f8ece5</code><span>Clay</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#e9eff4"></span><div><b>Now</b><code>#e9eff4</code><span>Slate</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#eef3ee"></span><div><b>Notes</b><code>#eef3ee</code><span>Sage</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f2eaf0"></span><div><b>Published</b><code>#f2eaf0</code><span>Lilac</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f4efe0"></span><div><b>Colophon and Changelog</b><code>#f4efe0</code><span>Sand</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f7e6df"></span><div><b>Academia</b><code>#f7e6df</code><span>Blush</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#1c1b19"></span><div><b>Archive</b><code>#1c1b19</code><span>Darkroom</span></div></div></div>
+          <div class="cp-grid"><div class="cp-sw"><span class="cp-chip" style="background:#f8ece5"></span><div><b>About</b><code>#f8ece5</code><span>Clay</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#e9eff4"></span><div><b>Now</b><code>#e9eff4</code><span>Slate</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#eef3ee"></span><div><b>Notes</b><code>#eef3ee</code><span>Sage</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f2eaf0"></span><div><b>Published</b><code>#f2eaf0</code><span>Lilac</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f4efe0"></span><div><b>Colophon and Changelog</b><code>#f4efe0</code><span>Sand</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f7e6df"></span><div><b>Academia</b><code>#f7e6df</code><span>Blush</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#d9b13b"></span><div><b>How</b><code>#d9b13b</code><span>Ochre</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#1c1b19"></span><div><b>Archive</b><code>#1c1b19</code><span>Darkroom</span></div></div></div>
           <h3 class="cp-h3">Accents</h3>
           <div class="cp-grid"><div class="cp-sw"><span class="cp-chip" style="background:#3b1d36"></span><div><b>Eggplant</b><code>#3b1d36</code><span>Values band, buttons, the doodle ink</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#c9d23f"></span><div><b>Chartreuse</b><code>#c9d23f</code><span>The highlighter, Join the Movement</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#4a1c14"></span><div><b>Maroon</b><code>#4a1c14</code><span>Groups Doing the Work</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#5d7d63"></span><div><b>Sage</b><code>#5d7d63</code><span>Hover color for links</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#a4532f"></span><div><b>Rust</b><code>#a4532f</code><span>Funding tags, warm accents</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f4efe3"></span><div><b>Bone</b><code>#f4efe3</code><span>Cards, the ? card, the seed bed</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#d9b13b"></span><div><b>Ochre</b><code>#d9b13b</code><span>Color fields, doodles</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#55601c"></span><div><b>Moss</b><code>#55601c</code><span>Doodles, deep green accents</span></div></div><div class="cp-sw"><span class="cp-chip cp-ring" style="background:#f6f0e4"></span><div><b>Linen</b><code>#f6f0e4</code><span>Soft paper for panels and cards</span></div></div></div>
           <h3 class="cp-h3">Zone tones</h3>
@@ -8428,10 +8456,42 @@ function cook(g) {
 })();
 </script>
 <script>
+/* How page helpers: flower icon on the How link, Glossary links, and the example button */
+(function () {
+  const IC = '<svg class="nv-ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><defs><mask id="nv-fm"><rect width="24" height="24" fill="#fff"/><circle cx="12" cy="12" r="2.6" fill="#000"/></mask></defs><g mask="url(#nv-fm)" fill="currentColor"><circle cx="12" cy="6.2" r="4.6"/><circle cx="17.5" cy="10.2" r="4.6"/><circle cx="15.4" cy="16.7" r="4.6"/><circle cx="8.6" cy="16.7" r="4.6"/><circle cx="6.5" cy="10.2" r="4.6"/></g></svg>';
+  let busy = false;
+  function fix() {
+    if (busy) return; busy = true;
+    try {
+      document.querySelectorAll('.nav-link[data-page="how"]').forEach(a => { if (!a.querySelector('.nv-ic')) { a.appendChild(document.createTextNode(' ')); a.insertAdjacentHTML('beforeend', IC); } });
+      document.querySelectorAll('#how [data-t="how-008"], #how [data-t="how-009"]').forEach(p => {
+        if (p.querySelector('a[data-page="appendix"]')) return;
+        const w = document.createTreeWalker(p, NodeFilter.SHOW_TEXT); let n;
+        while ((n = w.nextNode())) {
+          if (n.parentElement.closest('a')) continue;
+          const m = n.textContent.match(/\bGlossary\b/); if (!m) continue;
+          const after = n.splitText(m.index); after.splitText(m[0].length);
+          const a = document.createElement('a'); a.href = '#'; a.className = 'ab-link'; a.dataset.page = 'appendix'; a.textContent = after.textContent; after.replaceWith(a); break;
+        }
+      });
+    } finally { busy = false; }
+  }
+  fix();
+  let tm = null; new MutationObserver(() => { clearTimeout(tm); tm = setTimeout(fix, 120); }).observe(document.body, { childList: true, subtree: true, characterData: true });
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.hw-ex'); if (!b) return;
+    const out = b.parentElement.querySelector('.hw-ex-out'), open = out.hidden;
+    out.hidden = !open; b.setAttribute('aria-expanded', open ? 'true' : 'false'); b.textContent = open ? 'Hide the example' : 'Show an example';
+    const tip = out.querySelector('.np-hint'); tip.classList.remove('on');
+    if (open) setTimeout(() => { tip.classList.add('on'); window.__fitHint && window.__fitHint(tip); }, 30);
+  });
+})();
+</script>
+<script>
 /* Whimsy layer: doodle stickers (cut-paper marks), a dashed thread, and offset photos.
    Edit PLACE to move or change them. n is the doodle number (doodles/d01.png to d54.png), s is size in px, c is a color name, r is tilt. */
 (function () {
-  const INK = { egg: '#3b1d36', ochre: '#d9b13b', rust: '#a4532f', moss: '#55601c', blush: '#d9998a', lime: '#c9d23f' };
+  const INK = { egg: '#3b1d36', ochre: '#d9b13b', rust: '#a4532f', moss: '#55601c', blush: '#d9998a', lime: '#c9d23f', bone: '#f4efe3' };
   const PLACE = {
     home: [
       { a: '.hm-name', n: 6, s: 74, c: 'egg', r: -8, dx: 36, dy: -4 },
@@ -8458,32 +8518,50 @@ function cook(g) {
     const end = () => { if (!on) return; on = false; el.classList.remove('drag'); if (moved < 6 && !reduce) { el.classList.remove('spin'); void el.offsetWidth; el.classList.add('spin'); } };
     el.addEventListener('pointerup', end); el.addEventListener('pointercancel', () => { on = false; el.classList.remove('drag'); });
   }
-  function build() {
-    Object.keys(PLACE).forEach(pg => PLACE[pg].forEach(cfg => {
-      const el = document.createElement('div'); el.className = 'dd-st'; el.setAttribute('aria-hidden', 'true');
-      el.style.setProperty('--m', 'url(' + file(cfg.n) + ')'); el.style.setProperty('--dd', INK[cfg.c] || INK.egg); el.style.setProperty('--r', cfg.r + 'deg');
-      el.style.width = el.style.height = cfg.s + 'px'; el.style.transform = 'rotate(' + cfg.r + 'deg)';
-      layer.appendChild(el); drag(el); items.push({ el, cfg, page: pg });
-    }));
+  const AUTO = {};
+  const SKIP = { map: 1, 'search-results': 1 };
+  const POOL = [5, 6, 7, 8, 11, 15, 18, 20, 22, 38, 39, 42, 43, 51, 53, 3];
+  const LIGHT = ['egg', 'rust', 'moss', 'ochre', 'blush'], DARK = ['lime', 'bone', 'ochre'];
+  function autoCfg(id) {
+    let h = 0; for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) >>> 0;
+    const dark = id === 'archive' || id === 'states' || id === 'notfound', pal = (dark ? DARK : LIGHT).filter(c => !(id === 'how' && c === 'ochre') && !(id === 'academia' && c === 'blush'));
+    const n1 = POOL[h % POOL.length], n2 = POOL[(h * 7 + 3) % POOL.length] === n1 ? POOL[(h + 5) % POOL.length] : POOL[(h * 7 + 3) % POOL.length];
+    const c1 = pal[h % pal.length], c2 = pal[(h >>> 3) % pal.length] === c1 ? pal[(h + 1) % pal.length] : pal[(h >>> 3) % pal.length];
+    const sm = /^(essay-|recipe-|case-|altar-)/.test(id);
+    return [{ a: 'h1', n: n1, s: sm ? 40 : 64, c: c1, r: ((h % 5) - 2) * 5, dx: sm ? 18 : 28, dy: sm ? 8 : -6 }, { a: 'h1', n: n2, s: sm ? 30 : 44, c: c2, r: (((h >>> 2) % 5) - 2) * 6, dx: sm ? 66 : 112, dy: sm ? 16 : 6 }];
   }
-  let thread = null, photos = [], drawn = false;
+  function add(pg, cfg) {
+    const el = document.createElement('div'); el.className = 'dd-st'; el.setAttribute('aria-hidden', 'true');
+    el.style.setProperty('--m', 'url(' + file(cfg.n) + ')'); el.style.setProperty('--dd', INK[cfg.c] || INK.egg); el.style.setProperty('--r', cfg.r + 'deg');
+    el.style.width = el.style.height = cfg.s + 'px'; el.style.transform = 'rotate(' + cfg.r + 'deg)';
+    layer.appendChild(el); drag(el); items.push({ el, cfg, page: pg });
+  }
+  function build() { Object.keys(PLACE).forEach(pg => PLACE[pg].forEach(cfg => add(pg, cfg))); }
+  function ensure() {
+    const cur = document.querySelector('main .page.active'); if (!cur || !cur.id || SKIP[cur.id] || PLACE[cur.id] || AUTO[cur.id]) return;
+    AUTO[cur.id] = autoCfg(cur.id); AUTO[cur.id].forEach(cfg => add(cur.id, cfg));
+  }
+  let thread = null, drawn = false;
   function place() {
+    ensure();
     const W = innerWidth, wide = W >= 1000, sx = scrollX, sy = scrollY;
     items.forEach((it, i) => {
-      const on = pageOn(it.page); it.el.style.display = on && (wide || it.cfg === PLACE[it.page][0]) ? '' : 'none';
+      const on = pageOn(it.page); it.el.style.display = on && (wide || it.cfg === (PLACE[it.page] || AUTO[it.page])[0]) ? '' : 'none';
       if (!on || it.el.dataset.moved) return;
       const anchor = document.querySelector('#' + it.page + ' ' + it.cfg.a); if (!anchor) { it.el.style.display = 'none'; return; }
       const b = textRight(anchor), k = wide ? 1 : 0.72;
-      const left = Math.min(b.right + sx + it.cfg.dx * k, sx + W - it.cfg.s * k - 14), top = b.top + sy + b.height / 2 - it.cfg.s * k / 2 + it.cfg.dy;
+      const sz = it.cfg.s * k, cw = document.documentElement.clientWidth;
+      let left = b.right + sx + it.cfg.dx * k, top = b.top + sy + b.height / 2 - sz / 2 + it.cfg.dy;
+      if (left + sz > sx + cw - 14) { left = sx + cw - sz - 14 - (it.cfg === (PLACE[it.page] || AUTO[it.page])[0] ? 0 : sz + 8); top = b.bottom + sy + 8; }
       it.el.style.left = left + 'px'; it.el.style.top = top + 'px'; it.el.style.width = it.el.style.height = it.cfg.s * k + 'px';
     });
     // dashed thread on Home, in the band above "Right now"
     if (thread) thread.remove(); thread = null;
-    photos.forEach(p => p.remove()); photos = [];
-    if (pageOn('home') && wide) {
+    if (pageOn('home')) {
       const site = document.querySelector('#home .hm-site'), now = document.querySelector('#home .hm-now');
       if (site && now) {
-        const a = site.getBoundingClientRect(), n = now.getBoundingClientRect(), gy = (a.bottom + n.top) / 2 + sy, x0 = a.left + sx, x1 = x0 + Math.min(a.width, 872) - 6, w = x1 - x0;
+        const a = site.getBoundingClientRect(), n = now.getBoundingClientRect(), gy = (a.bottom + n.top) / 2 + sy, asd = document.querySelector('aside'), ar = asd ? asd.getBoundingClientRect() : null;
+        const x0 = (ar && ar.width > 0 && ar.right < W / 2 ? ar.right : 0) + sx, x1 = sx + document.documentElement.clientWidth, w = x1 - x0;
         const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'dd-thread'); svg.setAttribute('width', w); svg.setAttribute('height', 90);
         svg.style.left = x0 + 'px'; svg.style.top = (gy - 45) + 'px';
         const P = (u, v) => (w * u).toFixed(1) + ' ' + (45 + v).toFixed(1);
@@ -8496,19 +8574,10 @@ function cook(g) {
         if (!reduce && !drawn) requestAnimationFrame(() => requestAnimationFrame(() => { mp.style.transition = 'stroke-dashoffset 2.2s ease-in-out'; mp.style.strokeDashoffset = 0; }));
         drawn = true;
       }
-      // two offset photos to the right of the list
-      const ul = document.querySelector('#home .hm-now ul');
-      if (ul && window.__ddPhotos && window.__ddPhotos.length) {
-        const u = ul.getBoundingClientRect(), left = u.left + sx + 640 + 38, room = sx + W - left - 28;
-        if (room > 150) {
-          const cfgs = [{ w: 176, h: 220, dx: 0, dy: 6, rot: 3, sh: '#3b1d36' }, { w: 128, h: 160, dx: Math.max(0, Math.min(60, room - 128)), dy: 236, rot: -4, sh: '#d9b13b' }];
-          cfgs.forEach((c, i) => { const src = window.__ddPhotos[i]; if (!src) return; const f = document.createElement('div'); f.className = 'dd-ph'; f.style.cssText = 'left:' + (left + c.dx) + 'px;top:' + (u.top + sy + c.dy) + 'px;width:' + Math.min(c.w, room) + 'px;height:' + c.h + 'px;transform:rotate(' + c.rot + 'deg);--sh:' + c.sh; f.innerHTML = '<img alt="" src="' + src.src + '">'; f.title = src.dish || ''; f.addEventListener('click', () => { const a = document.createElement('a'); a.href = '#'; a.dataset.page = 'archive'; a.style.display = 'none'; document.body.appendChild(a); a.click(); a.remove(); }); layer.appendChild(f); photos.push(f); });
-        }
-      }
     }
   }
   build();
-  fetch('/data/kitchen.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : []).catch(() => []).then(list => { list = (Array.isArray(list) ? list : []).filter(x => x && x.src); for (let i = list.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [list[i], list[j]] = [list[j], list[i]]; } window.__ddPhotos = list.slice(0, 2); place(); });
+  setTimeout(place, 0);
   let t = null; const sched = () => { clearTimeout(t); t = setTimeout(place, 80); };
   addEventListener('resize', sched);
   if (window.ResizeObserver) new ResizeObserver(sched).observe(document.querySelector('main') || document.body);
