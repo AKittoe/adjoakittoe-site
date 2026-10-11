@@ -3114,6 +3114,8 @@ body[data-page="academia"] .site-footer { border-top-color: rgba(0,0,0,0.08); }
 .kb-r .sn { display: block; font: 400 0.78rem 'Inter', system-ui, sans-serif; opacity: 0.65; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .kb-r .ty { font: 400 0.64rem 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.65; flex: none; }
 .kb-r.act { background: #c9d23f; } .kb-r.act svg { fill: #2b1c14; } .kb-r.act .ty { opacity: 0.85; }
+.kb-sc { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; border-top: 1px solid rgba(43,28,20,0.12); font-size: 0.95rem; }
+.kb-sc:first-of-type { border-top: 0; }
 .kb-empty { padding: 22px 14px; font-size: 0.92rem; color: #6a5c4d; }
 html[data-theme="dark"] .kb-scrim { filter: invert(1) hue-rotate(180deg); }
 /* Photography zone photos on the map */
@@ -3124,6 +3126,34 @@ html[data-theme="dark"] .kb-scrim { filter: invert(1) hue-rotate(180deg); }
 #map-photos .mph.drag { cursor: grabbing; transition: opacity 0.3s; z-index: 5; }
 html[data-theme="dark"] #map-photos { filter: invert(1) hue-rotate(180deg); }
 @media (prefers-reduced-motion: reduce) { #map-photos .mph { transition: none; } }
+</style>
+<style id="u22">
+.nav-link .nv-ic { margin-left: 6px; vertical-align: -2px; }
+.hw { max-width: 680px; }
+.hw-sec { margin: 0 0 40px; }
+.hw-sec h2 { font-size: 20px; font-weight: 500; margin: 0 0 12px; letter-spacing: -0.01em; }
+.hw-sec p { margin: 0 0 14px; line-height: 1.7; }
+.hw-list, .hw-keys { margin: 0; }
+.hw-list > div, .hw-keys > div { display: grid; grid-template-columns: 170px 1fr; gap: 6px 20px; padding: 11px 0; border-top: 1px solid #f0ede7; }
+.hw-list dt, .hw-keys dt { font-weight: 500; margin: 0; }
+.hw-list dd, .hw-keys dd { margin: 0; color: #555; line-height: 1.6; }
+.hw-list dt a { color: inherit; text-decoration: none; border-bottom: 1px dotted #9a9a9a; }
+.hw kbd { font: 500 11px 'IBM Plex Mono', ui-monospace, monospace; border: 1px solid #d9d4c9; border-radius: 6px; padding: 2px 6px; background: #faf8f3; }
+@media (max-width: 600px) { .hw-list > div, .hw-keys > div { grid-template-columns: 1fr; } }
+/* Doodle stickers, thread, offset photos */
+#dd-layer { position: absolute; top: 0; left: 0; width: 100%; height: 0; z-index: 2; pointer-events: none; }
+#dd-layer .dd-st { position: absolute; background: var(--dd, #3b1d36); -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; pointer-events: auto; cursor: grab; touch-action: none; transition: transform 0.35s cubic-bezier(.3,1.6,.5,1); }
+#dd-layer .dd-st:hover { transform: rotate(calc(var(--r, 0deg) + 14deg)) scale(1.12); }
+#dd-layer .dd-st.drag { cursor: grabbing; transition: none; }
+#dd-layer .dd-st.spin { animation: dd-spin 0.7s cubic-bezier(.3,1.4,.5,1); }
+@keyframes dd-spin { to { transform: rotate(calc(var(--r, 0deg) + 360deg)); } }
+#dd-layer .dd-thread { position: absolute; overflow: visible; pointer-events: none; }
+#dd-layer .dd-thread path.dash { fill: none; stroke: #3b1d36; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 1 9; opacity: 0.7; }
+#dd-layer .dd-ph { position: absolute; border-radius: 16px; overflow: hidden; box-shadow: 9px 9px 0 var(--sh, #3b1d36); pointer-events: auto; cursor: pointer; transition: transform 0.3s cubic-bezier(.3,1.5,.5,1); }
+#dd-layer .dd-ph:hover { transform: rotate(0deg) scale(1.04) !important; }
+#dd-layer .dd-ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) { #dd-layer .dd-st, #dd-layer .dd-ph { transition: none; } #dd-layer .dd-st.spin { animation: none; } }
+@media print { #dd-layer { display: none; } }
 </style>
 </head>
 <body>
@@ -3148,6 +3178,7 @@ html[data-theme="dark"] #map-photos { filter: invert(1) hue-rotate(180deg); }
           <a data-t="sidebar-005" href="#" data-page="home" class="nav-link active">Home</a>
           <a data-t="sidebar-006" href="#" data-page="about" class="nav-link">About</a>
           <a data-t="sidebar-007" href="#" data-page="now" class="nav-link">Now</a>
+          <a href="#" data-page="how" class="nav-link">How <svg class="nv-ic" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><defs><mask id="nv-fm"><rect width="24" height="24" fill="#fff"/><circle cx="12" cy="12" r="2.6" fill="#000"/></mask></defs><g mask="url(#nv-fm)" fill="currentColor"><circle cx="12" cy="6.2" r="4.6"/><circle cx="17.5" cy="10.2" r="4.6"/><circle cx="15.4" cy="16.7" r="4.6"/><circle cx="8.6" cy="16.7" r="4.6"/><circle cx="6.5" cy="10.2" r="4.6"/></g></svg></a>
         </div>
         
         <div class="nav-group">
@@ -3353,7 +3384,49 @@ html[data-theme="dark"] #map-photos { filter: invert(1) hue-rotate(180deg); }
         </div>
         <h1 data-t="sitemap-001">Sitemap</h1>
         <p data-t="sitemap-002" class="muted page-sub">Every page on this site, grouped under where it lives.</p>
-        <div class="smap"><section class="smap-g"><h2 class="smap-h">Main</h2><ul><li><a href="#" data-page="home">Home</a></li><li><a href="#" data-page="about">About</a></li><li><a href="#" data-page="now">Now</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Work</h2><ul><li><a href="#" data-page="portfolio">Work: Case studies</a></li><li><a href="#portfolio/cv" data-page="portfolio" data-anchor="resume-cv">Work: Resume / CV</a></li><li><a href="#" data-page="case-ffc">Fresh Food Connect: Marketing Operations</a></li><li><a href="#" data-page="case-overstory">The Overstory Co.: Fractional Brand &amp; Communications</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Writing</h2><ul><li><a href="#" data-page="essays">Essays</a></li><li><a href="#" data-page="notes">Notes</a></li><li><a href="#" data-page="published">Published</a></li><li><a href="#" data-page="academia">Academia</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Projects</h2><ul><li><a href="#" data-page="projects">All Projects</a></li><li><a href="#" data-page="states">State Tracker</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Vibe Projects</h2><ul><li><a href="#" data-page="vibe-projects">All Vibe Projects</a></li><li><a href="#" data-page="essay-bag">What’s in My Bag</a></li><li><a href="#" data-page="essay-workspace">Work[space]flow</a></li><li><a href="#" data-page="essay-pantry">The Pantry</a></li><li><a href="#" data-page="essay-fuji">Film Simulations</a></li><li><a href="#" data-page="styleguide">Style Guide</a></li><li><a href="#" data-page="essay-fonio">Fonio: A Small Grain With a Long Memory</a></li><li><a href="#" data-page="recipe-fonio">Curried Fonio Pilaf</a></li><li><a href="#" data-page="essay-brainmapping">Visual Research: Regenerative Agriculture Branding</a></li><li><a href="#" data-page="altar-right-now">Right now: a collection</a></li><li><a href="#" data-page="essay-systems-beneath">The Systems Beneath: Understanding Foodshed Mapping</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Collections</h2><ul><li><a href="#" data-page="bookmarks">Bookmarks</a></li><li><a href="#bookmarks/shelf" data-page="bookmarks" data-tab="shelf">Bookmarks: Shelf</a></li><li><a href="#" data-page="resources">Resources</a></li><li><a href="#" data-page="photography">Photography</a></li><li><a href="#" data-page="events">Events</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Site</h2><ul><li><a href="#" data-page="appendix">Appendix</a></li><li><a href="#" data-page="archive">Archive</a></li><li><a href="#" data-page="map">How It Connects</a></li><li><a href="#" data-page="changelog">Changelog</a></li><li><a href="#" data-page="colophon">Colophon</a></li><li><a href="#" data-page="colophon" data-anchor="credits">Credits</a></li><li><a href="#" data-page="ai-use">AI use</a></li><li><a href="#" data-page="legal">Legal notice</a></li><li><a href="#" data-page="notfound">404 page</a></li></ul></section></div>
+        <div class="smap"><section class="smap-g"><h2 class="smap-h">Main</h2><ul><li><a href="#" data-page="home">Home</a></li><li><a href="#" data-page="about">About</a></li><li><a href="#" data-page="now">Now</a></li><li><a href="#" data-page="how">How</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Work</h2><ul><li><a href="#" data-page="portfolio">Work: Case studies</a></li><li><a href="#portfolio/cv" data-page="portfolio" data-anchor="resume-cv">Work: Resume / CV</a></li><li><a href="#" data-page="case-ffc">Fresh Food Connect: Marketing Operations</a></li><li><a href="#" data-page="case-overstory">The Overstory Co.: Fractional Brand &amp; Communications</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Writing</h2><ul><li><a href="#" data-page="essays">Essays</a></li><li><a href="#" data-page="notes">Notes</a></li><li><a href="#" data-page="published">Published</a></li><li><a href="#" data-page="academia">Academia</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Projects</h2><ul><li><a href="#" data-page="projects">All Projects</a></li><li><a href="#" data-page="states">State Tracker</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Vibe Projects</h2><ul><li><a href="#" data-page="vibe-projects">All Vibe Projects</a></li><li><a href="#" data-page="essay-bag">What’s in My Bag</a></li><li><a href="#" data-page="essay-workspace">Work[space]flow</a></li><li><a href="#" data-page="essay-pantry">The Pantry</a></li><li><a href="#" data-page="essay-fuji">Film Simulations</a></li><li><a href="#" data-page="styleguide">Style Guide</a></li><li><a href="#" data-page="essay-fonio">Fonio: A Small Grain With a Long Memory</a></li><li><a href="#" data-page="recipe-fonio">Curried Fonio Pilaf</a></li><li><a href="#" data-page="essay-brainmapping">Visual Research: Regenerative Agriculture Branding</a></li><li><a href="#" data-page="altar-right-now">Right now: a collection</a></li><li><a href="#" data-page="essay-systems-beneath">The Systems Beneath: Understanding Foodshed Mapping</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Collections</h2><ul><li><a href="#" data-page="bookmarks">Bookmarks</a></li><li><a href="#bookmarks/shelf" data-page="bookmarks" data-tab="shelf">Bookmarks: Shelf</a></li><li><a href="#" data-page="resources">Resources</a></li><li><a href="#" data-page="photography">Photography</a></li><li><a href="#" data-page="events">Events</a></li></ul></section><section class="smap-g"><h2 class="smap-h">Site</h2><ul><li><a href="#" data-page="appendix">Appendix</a></li><li><a href="#" data-page="archive">Archive</a></li><li><a href="#" data-page="map">How It Connects</a></li><li><a href="#" data-page="changelog">Changelog</a></li><li><a href="#" data-page="colophon">Colophon</a></li><li><a href="#" data-page="colophon" data-anchor="credits">Credits</a></li><li><a href="#" data-page="ai-use">AI use</a></li><li><a href="#" data-page="legal">Legal notice</a></li><li><a href="#" data-page="notfound">404 page</a></li></ul></section></div>
+      </div>
+
+      <!-- HOW -->
+      <div id="how" class="page">
+        <h1 data-t="how-001">How</h1>
+        <p data-t="how-002" class="muted page-sub">How this site works, in a few minutes.</p>
+        <div class="hw">
+          <section class="hw-sec"><h2 data-t="how-003">Find your way</h2>
+            <p data-t="how-004">Press Command K (Control K on Windows), or the slash key, to search every public page. Use the arrow keys to move, Enter to open, and Escape to close. The same box can switch the theme, show the keyboard shortcuts, or send you somewhere at random.</p>
+            <p data-t="how-005">The sidebar has a search box too. The butterfly button, Wander, opens something at random. Theme switches between Light, Dark, and Auto. Color changes the page tint.</p>
+          </section>
+          <section class="hw-sec"><h2 data-t="how-006">What each page does</h2>
+            <dl class="hw-list">
+              <div><dt><a href="#" data-page="home">Home</a></dt><dd>Where to start, and what I am working on right now.</dd></div>
+              <div><dt><a href="#" data-page="about">About</a></dt><dd>Who I am. Hover or tap the underlined words under A few favorite things to see a photo.</dd></div>
+              <div><dt><a href="#" data-page="now">Now</a></dt><dd>What I am focused on at this point in my life.</dd></div>
+              <div><dt><a href="#" data-page="portfolio">Work</a></dt><dd>Case studies, projects, and my resume.</dd></div>
+              <div><dt><a href="#" data-page="essays">Essays</a></dt><dd>Longer writing, sorted into zones. Pick a zone chip to filter.</dd></div>
+              <div><dt><a href="#" data-page="notes">Notes</a></dt><dd>Fragments, one-liners, and observations. The Doodle button lets you draw on the page.</dd></div>
+              <div><dt><a href="#" data-page="published">Published</a></dt><dd>Writing and mentions that live on other sites.</dd></div>
+              <div><dt><a href="#" data-page="academia">Academia</a></dt><dd>Research, papers, and presentations.</dd></div>
+              <div><dt><a href="#" data-page="projects">Projects</a></dt><dd>Things I am building outside my day jobs.</dd></div>
+              <div><dt><a href="#" data-page="bookmarks">Bookmarks</a></dt><dd>What I have saved, the tools I use, and what I am reading and listening to.</dd></div>
+              <div><dt><a href="#" data-page="resources">Resources</a></dt><dd>A curated database of organizations, funding, and tools for food systems work. Use the filters to narrow it.</dd></div>
+              <div><dt><a href="#" data-page="photography">Photography</a></dt><dd>Photo series. Open a series to see all of its photos.</dd></div>
+              <div><dt><a href="#" data-page="events">Events</a></dt><dd>Events I attend, curate, or support. Open one for the details.</dd></div>
+              <div><dt><a href="#" data-page="map">How It Connects</a></dt><dd>A map of how everything here relates. Click a zone to open it, drag to move around, and scroll or pinch to zoom. In the Photography zone, click a photo to open its series.</dd></div>
+            </dl>
+          </section>
+          <section class="hw-sec"><h2 data-t="how-007">Little things to try</h2>
+            <p data-t="how-008">Words with a dotted underline show a photo or a definition when you hover or tap them. The Glossary, linked in the footer, collects the definitions in one place.</p>
+            <p data-t="how-009">There are a few easter eggs. If you read through the Glossary, one word will remind you that it is never too late to go back.</p>
+          </section>
+          <section class="hw-sec"><h2 data-t="how-010">Keyboard shortcuts</h2>
+            <dl class="hw-keys">
+              <div><dt>Open search</dt><dd><kbd>Cmd</kbd> <kbd>K</kbd> or <kbd>Ctrl</kbd> <kbd>K</kbd> or <kbd>/</kbd></dd></div>
+              <div><dt>Move through results</dt><dd><kbd>&uarr;</kbd> <kbd>&darr;</kbd></dd></div>
+              <div><dt>Open the highlighted result</dt><dd><kbd>Enter</kbd></dd></div>
+              <div><dt>Close, or go back</dt><dd><kbd>Esc</kbd></dd></div>
+            </dl>
+          </section>
+        </div>
       </div>
 
       <!-- CHANGELOG -->
@@ -3423,9 +3496,9 @@ html[data-theme="dark"] #map-photos { filter: invert(1) hue-rotate(180deg); }
           <div class="cp-grid"><div class="cp-sw"><span class="cp-chip" style="background:#2b2b2b"></span><div><b>Ink</b><code>#2b2b2b</code><span>Text and foreground</span></div></div><div class="cp-sw"><span class="cp-chip cp-ring" style="background:#fefdfb"></span><div><b>Paper</b><code>#fefdfb</code><span>Default page background</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#777777"></span><div><b>Muted</b><code>#777777</code><span>Page subtitles</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#999999"></span><div><b>Faint</b><code>#999999</code><span>Labels, dates, and meta</span></div></div><div class="cp-sw"><span class="cp-chip cp-ring" style="background:#f0ede7"></span><div><b>Line</b><code>#f0ede7</code><span>Dividers and card borders</span></div></div></div>
           <h3 class="cp-h3">Paper by section</h3>
           <p class="cp-p">Every other page, including Home, stays on the default paper.</p>
-          <div class="cp-grid"><div class="cp-sw"><span class="cp-chip" style="background:#f8ece5"></span><div><b>About</b><code>#f8ece5</code><span>Clay</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#e9eff4"></span><div><b>Now</b><code>#e9eff4</code><span>Slate</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#eef3ee"></span><div><b>Notes</b><code>#eef3ee</code><span>Sage</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f2eaf0"></span><div><b>Published</b><code>#f2eaf0</code><span>Lilac</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f4efe0"></span><div><b>Colophon and Changelog</b><code>#f4efe0</code><span>Sand</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#1c1b19"></span><div><b>Archive</b><code>#1c1b19</code><span>Darkroom</span></div></div></div>
+          <div class="cp-grid"><div class="cp-sw"><span class="cp-chip" style="background:#f8ece5"></span><div><b>About</b><code>#f8ece5</code><span>Clay</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#e9eff4"></span><div><b>Now</b><code>#e9eff4</code><span>Slate</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#eef3ee"></span><div><b>Notes</b><code>#eef3ee</code><span>Sage</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f2eaf0"></span><div><b>Published</b><code>#f2eaf0</code><span>Lilac</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f4efe0"></span><div><b>Colophon and Changelog</b><code>#f4efe0</code><span>Sand</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f7e6df"></span><div><b>Academia</b><code>#f7e6df</code><span>Blush</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#1c1b19"></span><div><b>Archive</b><code>#1c1b19</code><span>Darkroom</span></div></div></div>
           <h3 class="cp-h3">Accents</h3>
-          <div class="cp-grid"><div class="cp-sw"><span class="cp-chip" style="background:#3b1d36"></span><div><b>Eggplant</b><code>#3b1d36</code><span>Values band, buttons, the doodle ink</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#c9d23f"></span><div><b>Chartreuse</b><code>#c9d23f</code><span>The highlighter, Join the Movement</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#4a1c14"></span><div><b>Maroon</b><code>#4a1c14</code><span>Groups Doing the Work</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#5d7d63"></span><div><b>Sage</b><code>#5d7d63</code><span>Hover color for links</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#a4532f"></span><div><b>Rust</b><code>#a4532f</code><span>Funding tags, warm accents</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f4efe3"></span><div><b>Bone</b><code>#f4efe3</code><span>Cards, the ? card, the seed bed</span></div></div></div>
+          <div class="cp-grid"><div class="cp-sw"><span class="cp-chip" style="background:#3b1d36"></span><div><b>Eggplant</b><code>#3b1d36</code><span>Values band, buttons, the doodle ink</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#c9d23f"></span><div><b>Chartreuse</b><code>#c9d23f</code><span>The highlighter, Join the Movement</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#4a1c14"></span><div><b>Maroon</b><code>#4a1c14</code><span>Groups Doing the Work</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#5d7d63"></span><div><b>Sage</b><code>#5d7d63</code><span>Hover color for links</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#a4532f"></span><div><b>Rust</b><code>#a4532f</code><span>Funding tags, warm accents</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#f4efe3"></span><div><b>Bone</b><code>#f4efe3</code><span>Cards, the ? card, the seed bed</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#d9b13b"></span><div><b>Ochre</b><code>#d9b13b</code><span>Color fields, doodles</span></div></div><div class="cp-sw"><span class="cp-chip" style="background:#55601c"></span><div><b>Moss</b><code>#55601c</code><span>Doodles, deep green accents</span></div></div><div class="cp-sw"><span class="cp-chip cp-ring" style="background:#f6f0e4"></span><div><b>Linen</b><code>#f6f0e4</code><span>Soft paper for panels and cards</span></div></div></div>
           <h3 class="cp-h3">Zone tones</h3>
           <p class="cp-p">Seven quiet tints for zone chips, tags, and How It Connects. Each is a pale paper with a darker ink of the same hue.</p>
           <div class="cp-tones"><span class="cp-tone" style="background:#eef3ee;color:#4f6f55">#4f6f55</span><span class="cp-tone" style="background:#f8ece5;color:#a85a3a">#a85a3a</span><span class="cp-tone" style="background:#e9eff4;color:#4f6f8a">#4f6f8a</span><span class="cp-tone" style="background:#f6f0dc;color:#8f6d1c">#8f6d1c</span><span class="cp-tone" style="background:#f2eaf0;color:#82566f">#82566f</span><span class="cp-tone" style="background:#eef0e2;color:#66692f">#66692f</span><span class="cp-tone" style="background:#f5e9e9;color:#9a5555">#9a5555</span></div>
@@ -8250,22 +8323,30 @@ function cook(g) {
   scrim.innerHTML = '<div class="kb"><div class="kb-in"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b1c14" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="text" id="kb-input" placeholder="Type a command or search" autocomplete="off" aria-label="Search the site"><span class="kb-kbd">esc</span></div><div class="kb-list" id="kb-list"></div></div>';
   document.body.appendChild(scrim);
   const inp = scrim.querySelector('#kb-input'), list = scrim.querySelector('#kb-list');
-  let idx = [], vis = [], sel = 0, last = '';
+  let idx = [], vis = [], sel = 0, last = '', mode = '';
+  const MAC = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent), MOD = MAC ? '\u2318' : 'Ctrl';
+  const SHORTCUTS = [['Open search', [MOD, 'K']], ['Open search', ['/']], ['Move through results', ['\u2191', '\u2193']], ['Open the highlighted result', ['Enter']], ['Close, or go back', ['Esc']]];
   function build() {
     idx = [];
     document.querySelectorAll('.page').forEach(pg => {
       if (!pg.id || pg.id === 'search-results' || pg.id === 'notfound') return;
+      const info = (window.__pieceInfo || {})[pg.id]; if (info && info.preview) return;
+      if (pg.hidden || pg.hasAttribute('data-private') || pg.hasAttribute('data-preview')) return;
       const h = pg.querySelector('h1'); const title = (h ? h.textContent : pg.id).replace(/\s+/g, ' ').trim(); if (!title) return;
       idx.push({ kind: 'page', id: pg.id, title, type: typeOf(pg.id), text: ['map', 'sitemap'].includes(pg.id) ? '' : pg.textContent.replace(/\s+/g, ' ').trim(), low: '' });
     });
     idx.forEach(x => { x.low = (x.title + ' ' + x.text).toLowerCase(); x.tl = x.title.toLowerCase(); });
-    const act = (title, run) => idx.push({ kind: 'act', title, type: 'Action', run, text: '', low: title.toLowerCase(), tl: title.toLowerCase() });
-    act('Open How It Connects', () => go('map'));
+    const act = (title, run, type) => idx.push({ kind: 'act', title, type: type || 'Action', run, text: '', low: title.toLowerCase(), tl: title.toLowerCase() });
+    const theme = v => () => { const r = document.querySelector('.theme-switch input[value="' + v + '"]'); if (r) r.click(); };
+    act('Keyboard shortcuts', () => { mode = 'sc'; inp.value = ''; paint(); inp.focus(); }, 'Shortcuts');
+    act('Theme: Light', theme('light'), 'Theme'); act('Theme: Dark', theme('dark'), 'Theme'); act('Theme: Auto', theme('auto'), 'Theme');
+    act('Wander: open something at random', () => { const w = document.getElementById('wander'); if (w) w.click(); });
     act('Copy link to this page', () => { try { navigator.clipboard.writeText(location.href); } catch (e) {} });
   }
   function go(id) { const a = document.createElement('a'); a.href = '#'; a.dataset.page = id; a.style.display = 'none'; document.body.appendChild(a); a.click(); a.remove(); }
   function snip(x, q) { if (!q) return ''; const i = x.low.indexOf(q); if (i < 0 || i < x.title.length + 1) return ''; const t = x.text, j = i - x.title.length - 1; const s = Math.max(0, j - 30); return (s > 0 ? '…' : '') + t.slice(s, j + q.length + 70); }
   function paint() {
+    if (mode === 'sc') { vis = []; list.innerHTML = '<div class="kb-g">Keyboard shortcuts</div>' + SHORTCUTS.map(x => '<div class="kb-sc"><span>' + esc(x[0]) + '</span><span>' + x[1].map(k => '<kbd class="kb-kbd">' + esc(k) + '</kbd>').join(' ') + '</span></div>').join(''); return; }
     const q = inp.value.trim().toLowerCase();
     let r;
     if (!q) r = idx.filter(x => x.kind === 'page' && ['essays', 'work', 'portfolio', 'shelf', 'bookmarks', 'photography', 'academia', 'notes', 'map', 'about'].includes(x.id)).concat(idx.filter(x => x.kind === 'act'));
@@ -8281,20 +8362,20 @@ function cook(g) {
     });
     list.innerHTML = h; const a = list.querySelector('.act'); if (a && a.scrollIntoView) a.scrollIntoView({ block: 'nearest' });
   }
-  function open() { build(); last = document.activeElement; scrim.classList.add('on'); inp.value = ''; sel = 0; paint(); setTimeout(() => inp.focus(), 30); }
+  function open() { mode = ''; build(); last = document.activeElement; scrim.classList.add('on'); inp.value = ''; sel = 0; paint(); setTimeout(() => inp.focus(), 30); }
   function close() { scrim.classList.remove('on'); if (last && last.focus) try { last.focus(); } catch (e) {} }
-  function pick(i) { const x = vis[i]; if (!x) return; close(); if (x.kind === 'act') x.run(); else { go(x.id); window.scrollTo(0, 0); } }
+  function pick(i) { const x = vis[i]; if (!x) return; if (x.type === 'Shortcuts') { x.run(); return; } close(); if (x.kind === 'act') x.run(); else { go(x.id); window.scrollTo(0, 0); } }
   window.__openCmdK = open;
   addEventListener('keydown', e => {
     const on = scrim.classList.contains('on');
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); on ? close() : open(); return; }
     if (!on) { if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName) && !(document.activeElement || {}).isContentEditable) { e.preventDefault(); open(); } return; }
-    if (e.key === 'Escape') close();
+    if (e.key === 'Escape') { if (mode === 'sc') { mode = ''; inp.value = ''; paint(); } else close(); }
     else if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(vis.length - 1, sel + 1); paint(); }
     else if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(0, sel - 1); paint(); }
     else if (e.key === 'Enter') { e.preventDefault(); pick(sel); }
   });
-  inp.addEventListener('input', () => { sel = 0; paint(); });
+  inp.addEventListener('input', () => { mode = ''; sel = 0; paint(); });
   list.addEventListener('mousemove', e => { const r = e.target.closest('.kb-r'); if (r && +r.dataset.i !== sel) { sel = +r.dataset.i; list.querySelectorAll('.kb-r').forEach(x => x.classList.toggle('act', +x.dataset.i === sel)); } });
   list.addEventListener('click', e => { const r = e.target.closest('.kb-r'); if (r) pick(+r.dataset.i); });
   scrim.addEventListener('click', e => { if (e.target === scrim) close(); });
@@ -8307,13 +8388,15 @@ function cook(g) {
   const box = document.createElement('div'); box.id = 'map-photos'; stage.appendChild(box);
   let cur = [], timer = null, active = false, recent = [];
   const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-  const pool = () => { const seen = new Set(), out = []; document.querySelectorAll('.page[id^="series-"] img').forEach(im => { const s = im.getAttribute('src'); if (!s || im.hidden || seen.has(s)) return; seen.add(s); out.push(s); }); return out; };
+  const pool = () => { const seen = new Set(), out = []; document.querySelectorAll('.page[id^="series-"] img').forEach(im => { const s = im.getAttribute('src'); if (!s || im.hidden || seen.has(s)) return; seen.add(s); out.push({ src: s, id: im.closest('.page').id }); }); return out; };
+  const openPage = id => { const a = document.createElement('a'); a.href = '#'; a.dataset.page = id; a.style.display = 'none'; document.body.appendChild(a); a.click(); a.remove(); };
   function drag(el) {
-    let sx, sy, ox, oy, on = false;
-    el.addEventListener('pointerdown', e => { on = true; sx = e.clientX; sy = e.clientY; ox = el.offsetLeft; oy = el.offsetTop; el.classList.add('drag'); el.setPointerCapture(e.pointerId); e.preventDefault(); });
-    el.addEventListener('pointermove', e => { if (!on) return; el.style.left = Math.max(-10, Math.min(box.clientWidth - el.offsetWidth + 10, ox + e.clientX - sx)) + 'px'; el.style.top = Math.max(-10, Math.min(box.clientHeight - el.offsetHeight + 10, oy + e.clientY - sy)) + 'px'; });
+    let sx, sy, ox, oy, on = false, moved = 0;
+    el.addEventListener('pointerdown', e => { on = true; moved = 0; sx = e.clientX; sy = e.clientY; ox = el.offsetLeft; oy = el.offsetTop; el.classList.add('drag'); el.setPointerCapture(e.pointerId); e.preventDefault(); });
+    el.addEventListener('pointermove', e => { if (!on) return; moved = Math.max(moved, Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy)); el.style.left = Math.max(-10, Math.min(box.clientWidth - el.offsetWidth + 10, ox + e.clientX - sx)) + 'px'; el.style.top = Math.max(-10, Math.min(box.clientHeight - el.offsetHeight + 10, oy + e.clientY - sy)) + 'px'; });
     const end = () => { on = false; el.classList.remove('drag'); };
-    el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+    el.addEventListener('pointerup', () => { const wasTap = on && moved < 6; end(); if (wasTap && el.dataset.go) openPage(el.dataset.go); });
+    el.addEventListener('pointercancel', end);
   }
   function slots(n) {
     const W = box.clientWidth, H = box.clientHeight, mob = W < 769, L = mob ? 0 : 320;
@@ -8323,12 +8406,12 @@ function cook(g) {
   function round() {
     const all = pool(); if (!all.length) return;
     const n = Math.min(all.length, 3 + Math.floor(Math.random() * 3));
-    let pick = shuffle(all.filter(s => !recent.includes(s))); if (pick.length < n) pick = shuffle(all); pick = pick.slice(0, n); recent = pick;
+    let pick = shuffle(all.filter(o => !recent.includes(o.src))); if (pick.length < n) pick = shuffle(all); pick = pick.slice(0, n); recent = pick.map(o => o.src);
     const old = cur; cur = [];
     old.forEach(p => { p.classList.add('out'); setTimeout(() => p.remove(), 700); });
     const sl = slots(n);
-    pick.forEach((src, k) => {
-      const p = document.createElement('div'); p.className = 'mph out'; const im = document.createElement('img'); im.src = src; im.alt = ''; p.appendChild(im);
+    pick.forEach((o, k) => {
+      const p = document.createElement('div'); p.className = 'mph out'; p.dataset.go = o.id; p.title = 'Open this series'; const im = document.createElement('img'); im.src = o.src; im.alt = ''; p.appendChild(im);
       p.style.left = sl[k][0] + 'px'; p.style.top = sl[k][1] + 'px'; p.style.transform = 'rotate(' + ((Math.random() - .5) * 10).toFixed(1) + 'deg)';
       box.appendChild(p); cur.push(p); drag(p);
       requestAnimationFrame(() => requestAnimationFrame(() => p.classList.remove('out')));
@@ -8342,6 +8425,97 @@ function cook(g) {
     active = true; setTimeout(() => { if (active) round(); }, 600);
     if (!reduce) timer = setInterval(() => { if (active && !document.hidden && !box.querySelector('.drag') && document.getElementById('map').classList.contains('active')) round(); }, 5000);
   });
+})();
+</script>
+<script>
+/* Whimsy layer: doodle stickers (cut-paper marks), a dashed thread, and offset photos.
+   Edit PLACE to move or change them. n is the doodle number (doodles/d01.png to d54.png), s is size in px, c is a color name, r is tilt. */
+(function () {
+  const INK = { egg: '#3b1d36', ochre: '#d9b13b', rust: '#a4532f', moss: '#55601c', blush: '#d9998a', lime: '#c9d23f' };
+  const PLACE = {
+    home: [
+      { a: '.hm-name', n: 6, s: 74, c: 'egg', r: -8, dx: 36, dy: -4 },
+      { a: '.hm-name', n: 7, s: 54, c: 'ochre', r: 10, dx: 132, dy: 4 },
+      { a: '.hm-name', n: 42, s: 34, c: 'rust', r: 0, dx: 206, dy: -10 }
+    ],
+    about: [{ a: 'h1', n: 11, s: 70, c: 'egg', r: 8, dx: 30, dy: -6 }, { a: 'h1', n: 7, s: 46, c: 'ochre', r: -10, dx: 120, dy: 4 }],
+    essays: [{ a: 'h1', n: 5, s: 70, c: 'moss', r: 10, dx: 30, dy: -8 }, { a: 'h1', n: 15, s: 52, c: 'egg', r: -6, dx: 120, dy: 6 }],
+    notes: [{ a: 'h1', n: 20, s: 62, c: 'rust', r: 0, dx: 28, dy: -4 }, { a: 'h1', n: 43, s: 42, c: 'egg', r: 8, dx: 112, dy: 6 }],
+    photography: [{ a: 'h1', n: 8, s: 70, c: 'moss', r: -6, dx: 30, dy: -8 }, { a: 'h1', n: 42, s: 40, c: 'ochre', r: 12, dx: 120, dy: 4 }],
+    bookmarks: [{ a: 'h1', n: 18, s: 66, c: 'egg', r: 0, dx: 28, dy: -6 }, { a: 'h1', n: 6, s: 48, c: 'ochre', r: 8, dx: 112, dy: 4 }],
+    projects: [{ a: 'h1', n: 22, s: 62, c: 'rust', r: 6, dx: 28, dy: -4 }, { a: 'h1', n: 51, s: 46, c: 'moss', r: -8, dx: 108, dy: 4 }]
+  };
+  const file = n => 'doodles/d' + String(n).padStart(2, '0') + '.png';
+  const layer = document.createElement('div'); layer.id = 'dd-layer'; document.body.appendChild(layer);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const items = [];
+  const pageOn = id => { const p = document.getElementById(id); return !!(p && p.classList.contains('active')); };
+  function textRight(el) { const r = document.createRange(); r.selectNodeContents(el); const b = r.getBoundingClientRect(); return b.width ? b : el.getBoundingClientRect(); }
+  function drag(el) {
+    let sx, sy, ox, oy, on = false, moved = 0;
+    el.addEventListener('pointerdown', e => { on = true; moved = 0; sx = e.clientX; sy = e.clientY; ox = el.offsetLeft; oy = el.offsetTop; el.classList.add('drag'); el.setPointerCapture(e.pointerId); e.preventDefault(); });
+    el.addEventListener('pointermove', e => { if (!on) return; moved = Math.max(moved, Math.abs(e.clientX - sx) + Math.abs(e.clientY - sy)); el.style.left = (ox + e.clientX - sx) + 'px'; el.style.top = (oy + e.clientY - sy) + 'px'; el.dataset.moved = '1'; });
+    const end = () => { if (!on) return; on = false; el.classList.remove('drag'); if (moved < 6 && !reduce) { el.classList.remove('spin'); void el.offsetWidth; el.classList.add('spin'); } };
+    el.addEventListener('pointerup', end); el.addEventListener('pointercancel', () => { on = false; el.classList.remove('drag'); });
+  }
+  function build() {
+    Object.keys(PLACE).forEach(pg => PLACE[pg].forEach(cfg => {
+      const el = document.createElement('div'); el.className = 'dd-st'; el.setAttribute('aria-hidden', 'true');
+      el.style.setProperty('--m', 'url(' + file(cfg.n) + ')'); el.style.setProperty('--dd', INK[cfg.c] || INK.egg); el.style.setProperty('--r', cfg.r + 'deg');
+      el.style.width = el.style.height = cfg.s + 'px'; el.style.transform = 'rotate(' + cfg.r + 'deg)';
+      layer.appendChild(el); drag(el); items.push({ el, cfg, page: pg });
+    }));
+  }
+  let thread = null, photos = [], drawn = false;
+  function place() {
+    const W = innerWidth, wide = W >= 1000, sx = scrollX, sy = scrollY;
+    items.forEach((it, i) => {
+      const on = pageOn(it.page); it.el.style.display = on && (wide || it.cfg === PLACE[it.page][0]) ? '' : 'none';
+      if (!on || it.el.dataset.moved) return;
+      const anchor = document.querySelector('#' + it.page + ' ' + it.cfg.a); if (!anchor) { it.el.style.display = 'none'; return; }
+      const b = textRight(anchor), k = wide ? 1 : 0.72;
+      const left = Math.min(b.right + sx + it.cfg.dx * k, sx + W - it.cfg.s * k - 14), top = b.top + sy + b.height / 2 - it.cfg.s * k / 2 + it.cfg.dy;
+      it.el.style.left = left + 'px'; it.el.style.top = top + 'px'; it.el.style.width = it.el.style.height = it.cfg.s * k + 'px';
+    });
+    // dashed thread on Home, in the band above "Right now"
+    if (thread) thread.remove(); thread = null;
+    photos.forEach(p => p.remove()); photos = [];
+    if (pageOn('home') && wide) {
+      const site = document.querySelector('#home .hm-site'), now = document.querySelector('#home .hm-now');
+      if (site && now) {
+        const a = site.getBoundingClientRect(), n = now.getBoundingClientRect(), gy = (a.bottom + n.top) / 2 + sy, x0 = a.left + sx, x1 = x0 + Math.min(a.width, 872) - 6, w = x1 - x0;
+        const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg'); svg.setAttribute('class', 'dd-thread'); svg.setAttribute('width', w); svg.setAttribute('height', 90);
+        svg.style.left = x0 + 'px'; svg.style.top = (gy - 45) + 'px';
+        const P = (u, v) => (w * u).toFixed(1) + ' ' + (45 + v).toFixed(1);
+        const d = 'M' + P(0, 6) + 'C' + P(0.10, -16) + ',' + P(0.2, 18) + ',' + P(0.30, 2) + 'S' + P(0.42, -14) + ',' + P(0.47, 0) + 'C' + P(0.53, 22) + ',' + P(0.43, 26) + ',' + P(0.43, 8) + 'C' + P(0.43, -10) + ',' + P(0.56, -8) + ',' + P(0.58, 6) + 'S' + P(0.72, 22) + ',' + P(0.8, 4) + 'S' + P(0.93, -12) + ',' + P(1, 8);
+        const path = document.createElementNS(NS, 'path'); path.setAttribute('d', d); path.setAttribute('class', 'dash');
+        const msk = document.createElementNS(NS, 'mask'); msk.setAttribute('id', 'dd-m'); msk.setAttribute('maskUnits', 'userSpaceOnUse'); msk.setAttribute('x', -20); msk.setAttribute('y', -20); msk.setAttribute('width', w + 40); msk.setAttribute('height', 130);
+        const mp = document.createElementNS(NS, 'path'); mp.setAttribute('d', d); mp.setAttribute('fill', 'none'); mp.setAttribute('stroke', '#fff'); mp.setAttribute('stroke-width', 8); msk.appendChild(mp);
+        path.setAttribute('mask', 'url(#dd-m)'); svg.appendChild(msk); svg.appendChild(path); layer.appendChild(svg); thread = svg;
+        const L = mp.getTotalLength(); mp.style.strokeDasharray = L; mp.style.strokeDashoffset = (reduce || drawn) ? 0 : L;
+        if (!reduce && !drawn) requestAnimationFrame(() => requestAnimationFrame(() => { mp.style.transition = 'stroke-dashoffset 2.2s ease-in-out'; mp.style.strokeDashoffset = 0; }));
+        drawn = true;
+      }
+      // two offset photos to the right of the list
+      const ul = document.querySelector('#home .hm-now ul');
+      if (ul && window.__ddPhotos && window.__ddPhotos.length) {
+        const u = ul.getBoundingClientRect(), left = u.left + sx + 640 + 38, room = sx + W - left - 28;
+        if (room > 150) {
+          const cfgs = [{ w: 176, h: 220, dx: 0, dy: 6, rot: 3, sh: '#3b1d36' }, { w: 128, h: 160, dx: Math.max(0, Math.min(60, room - 128)), dy: 236, rot: -4, sh: '#d9b13b' }];
+          cfgs.forEach((c, i) => { const src = window.__ddPhotos[i]; if (!src) return; const f = document.createElement('div'); f.className = 'dd-ph'; f.style.cssText = 'left:' + (left + c.dx) + 'px;top:' + (u.top + sy + c.dy) + 'px;width:' + Math.min(c.w, room) + 'px;height:' + c.h + 'px;transform:rotate(' + c.rot + 'deg);--sh:' + c.sh; f.innerHTML = '<img alt="" src="' + src.src + '">'; f.title = src.dish || ''; f.addEventListener('click', () => { const a = document.createElement('a'); a.href = '#'; a.dataset.page = 'archive'; a.style.display = 'none'; document.body.appendChild(a); a.click(); a.remove(); }); layer.appendChild(f); photos.push(f); });
+        }
+      }
+    }
+  }
+  build();
+  fetch('/data/kitchen.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : []).catch(() => []).then(list => { list = (Array.isArray(list) ? list : []).filter(x => x && x.src); for (let i = list.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [list[i], list[j]] = [list[j], list[i]]; } window.__ddPhotos = list.slice(0, 2); place(); });
+  let t = null; const sched = () => { clearTimeout(t); t = setTimeout(place, 80); };
+  addEventListener('resize', sched);
+  if (window.ResizeObserver) new ResizeObserver(sched).observe(document.querySelector('main') || document.body);
+  const _sp = showPage; showPage = function (id) { _sp(id); if (id === 'home') drawn = false; items.forEach(it => { delete it.el.dataset.moved; }); setTimeout(place, 60); setTimeout(place, 600); };
+  [300, 1200, 3000].forEach(ms => setTimeout(place, ms));
+  document.addEventListener('map-focus', () => {});
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sched);
 })();
 </script>
 </body>
