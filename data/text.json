@@ -1,4 +1,44 @@
 {
+  "how-006": {
+    "html": "What each page does",
+    "text": "What each page does"
+  },
+  "how-010": {
+    "html": "Keyboard shortcuts",
+    "text": "Keyboard shortcuts"
+  },
+  "how-004": {
+    "html": "Press Command K (Control K on Windows), or the slash key, to search every public page. Use the arrow keys to move, Enter to open, and Escape to close. The same box can switch the theme, show the keyboard shortcuts, or send you somewhere at random.",
+    "text": "Press Command K (Control K on Windows), or the slash key, to search every public page. Use the arrow keys to move, Enter to open, and Escape to close. The same box can switch the theme, show the keyboard shortcuts, or send you somewhere at random."
+  },
+  "how-009": {
+    "html": "There are a few easter eggs. If you read through the Glossary, one word will remind you that it is never too late to go back.",
+    "text": "There are a few easter eggs. If you read through the Glossary, one word will remind you that it is never too late to go back."
+  },
+  "how-001": {
+    "html": "How",
+    "text": "How"
+  },
+  "how-005": {
+    "html": "The sidebar has a search box too. The butterfly button, Wander, opens something at random. Theme switches between Light, Dark, and Auto. Color changes the page tint.",
+    "text": "The sidebar has a search box too. The butterfly button, Wander, opens something at random. Theme switches between Light, Dark, and Auto. Color changes the page tint."
+  },
+  "how-007": {
+    "html": "Little things to try",
+    "text": "Little things to try"
+  },
+  "how-002": {
+    "html": "How this site works, in a few minutes.",
+    "text": "How this site works, in a few minutes."
+  },
+  "how-003": {
+    "html": "Find your way",
+    "text": "Find your way"
+  },
+  "how-008": {
+    "html": "Words with a dotted underline show a photo or a definition when you hover or tap them. The Glossary, linked in the footer, collects the definitions in one place.",
+    "text": "Words with a dotted underline show a photo or a definition when you hover or tap them. The Glossary, linked in the footer, collects the definitions in one place."
+  },
   "now-021": {
     "html": "Test Title",
     "text": "Test Title"

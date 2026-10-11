@@ -45,6 +45,21 @@
     "order": 3
   },
   {
+    "slug": "how",
+    "title": "How",
+    "sub": "",
+    "style": "Page",
+    "replace": false,
+    "menu": "Main",
+    "footer": "",
+    "link": "",
+    "linkPage": "",
+    "words": "",
+    "hide": false,
+    "body": "",
+    "order": 4
+  },
+  {
     "slug": "portfolio",
     "title": "Work",
     "sub": "",
