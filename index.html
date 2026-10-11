@@ -22,6 +22,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adjoa Kittoe</title>
+  <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icons/icon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/icons/icon-180.png">
+  <meta name="theme-color" content="#3b1d36">
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">
@@ -2327,7 +2331,7 @@
     table { max-width: 100%; }
 
     /* Color + African layer (in places, not everywhere) */
-    :root { --eggplant: #3b1d36; --eggplant-2: #54294d; --chartreuse: #c9d23f; --maroon: #4a1c14; --bone: #f4efe3; }
+    :root { --ochre: #d9b13b; --clay: #a4532f; --linen: #f6f0e4; --blush: #f7e6df; --moss: #55601c; --eggplant: #3b1d36; --eggplant-2: #54294d; --chartreuse: #c9d23f; --maroon: #4a1c14; --bone: #f4efe3; }
     .af-weave { height: 14px; border-radius: 3px; background:
       repeating-linear-gradient(90deg, var(--eggplant) 0 22px, var(--chartreuse) 22px 30px, var(--maroon) 30px 52px, var(--bone) 52px 56px, var(--eggplant-2) 56px 78px, var(--chartreuse) 78px 82px, var(--maroon) 82px 96px, var(--bone) 96px 100px); }
     .af-weave::after { content: ""; display: block; height: 100%; background: repeating-linear-gradient(0deg, rgba(255,255,255,0.12) 0 2px, transparent 2px 4px); border-radius: inherit; }
@@ -3090,6 +3094,37 @@
       }
     }
   </style>
+<style id="u21">
+body[data-page="academia"] { background: #f7e6df; transition: background 0.3s ease; }
+body[data-page="academia"] aside { background: #fefdfb; }
+body[data-page="academia"] .site-footer { border-top-color: rgba(0,0,0,0.08); }
+/* Command-K */
+.kb-scrim { position: fixed; inset: 0; background: rgba(42,19,39,0.55); z-index: 3000; display: none; align-items: flex-start; justify-content: center; padding: 10vh 16px 16px; }
+.kb-scrim.on { display: flex; }
+.kb { width: min(100%, 640px); max-height: 78vh; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.kb-in { background: #f8f4e7; border-radius: 14px; padding: 16px 18px; display: flex; align-items: center; gap: 12px; color: #2b1c14; }
+.kb-in input { flex: 1; min-width: 0; border: 0; background: transparent; font: 1.15rem 'Inter', system-ui, sans-serif; color: #2b1c14; outline: none; box-shadow: none; }
+.kb-in input::placeholder { color: #8b7d6e; }
+.kb-kbd { font: 500 0.7rem 'IBM Plex Mono', ui-monospace, monospace; border: 1px solid rgba(43,28,20,0.25); border-radius: 6px; padding: 3px 6px; background: #fff; color: #2b1c14; }
+.kb-list { background: #f8f4e7; border-radius: 14px; padding: 8px 8px 12px; overflow-y: auto; color: #2b1c14; }
+.kb-g { font: 500 0.66rem 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: #7a6c5f; padding: 12px 12px 6px; }
+.kb-r { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; border: 0; background: transparent; padding: 11px 12px; border-radius: 10px; cursor: pointer; font: 500 1rem 'Inter', system-ui, sans-serif; color: #2b1c14; }
+.kb-r svg { width: 18px; height: 18px; fill: #3b1d36; flex: none; }
+.kb-r .tt { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kb-r .sn { display: block; font: 400 0.78rem 'Inter', system-ui, sans-serif; opacity: 0.65; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kb-r .ty { font: 400 0.64rem 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.65; flex: none; }
+.kb-r.act { background: #c9d23f; } .kb-r.act svg { fill: #2b1c14; } .kb-r.act .ty { opacity: 0.85; }
+.kb-empty { padding: 22px 14px; font-size: 0.92rem; color: #6a5c4d; }
+html[data-theme="dark"] .kb-scrim { filter: invert(1) hue-rotate(180deg); }
+/* Photography zone photos on the map */
+#map-photos { position: absolute; inset: 0; pointer-events: none; z-index: 6; }
+#map-photos .mph { position: absolute; width: clamp(92px, 15vw, 150px); aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 22px rgba(0,0,0,0.4); cursor: grab; pointer-events: auto; touch-action: none; user-select: none; -webkit-user-select: none; transition: opacity 0.6s, transform 0.6s, left 0.7s, top 0.7s; }
+#map-photos .mph img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
+#map-photos .mph.out { opacity: 0; transform: scale(0.7) !important; }
+#map-photos .mph.drag { cursor: grabbing; transition: opacity 0.3s; z-index: 5; }
+html[data-theme="dark"] #map-photos { filter: invert(1) hue-rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { #map-photos .mph { transition: none; } }
+</style>
 </head>
 <body>
   <div class="container">
@@ -3230,7 +3265,7 @@
           <div data-t="map-002" class="map-kicker">How It Connects</div>
           <svg id="map-svg" role="img" aria-label="Interactive map of the site"></svg>
           <div id="map-url" class="map-url"></div>
-          <div class="map-foot" role="navigation" aria-label="Site"><a href="#" data-page="home">Home</a><a href="#" data-page="sitemap">Sitemap</a><a href="#" data-page="archive">Archive</a><a href="#" data-page="changelog">Changelog</a><a href="#" data-page="colophon">Colophon</a><a href="#" data-page="legal">Legal notice</a></div>
+          <div class="map-foot" role="navigation" aria-label="Site"><a href="#" data-cmdk>Search</a><a href="#" data-page="home">Home</a><a href="#" data-page="sitemap">Sitemap</a><a href="#" data-page="archive">Archive</a><a href="#" data-page="changelog">Changelog</a><a href="#" data-page="colophon">Colophon</a><a href="#" data-page="legal">Legal notice</a></div>
           <div class="map-credit">
             <button type="button" class="map-credit-btn" aria-describedby="map-credit-tip" aria-label="About this map">[?]</button>
             <div class="map-credit-tip" id="map-credit-tip" role="tooltip">I came across Andrew Trousdale's website and fell in love with his map. I've always wanted a spider web of my own, like Anansi the spider spinning stories together. This map is highly inspired by his work.<span class="map-credit-site">andrewtrousdale.com</span></div>
@@ -6424,6 +6459,7 @@ function cook(g) {
         state = { hub: hubId, leaf: leafId };
         if (changedHub) { animateTo(hubId ? layoutFocus(hubId) : layoutOverview()); setTimeout(fit, 0); } else draw();
         render();
+        document.dispatchEvent(new CustomEvent('map-focus', { detail: hubId ? nodes[hubId].slug : null }));
         const path = 'map' + (hubId ? '/' + nodes[hubId].slug : '') + (leafId ? '/' + leafId : '');
         chip.textContent = 'adjoakittoe.com/' + path;
         if (document.getElementById('map').classList.contains('active')) safeHistory("replaceState", null, '', '#' + path);
@@ -8201,5 +8237,112 @@ function cook(g) {
       });
     });
   </script>
+<script>
+/* Command-K search: built from every page on the site when opened */
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const scal = (R, k) => { const pts = []; for (let i = 0; i < k; i++) { const a = i * 2 * Math.PI / k; pts.push([R * Math.cos(a), R * Math.sin(a)]); } const rr = (R * Math.sin(Math.PI / k)).toFixed(2); let d = 'M' + pts[0][0].toFixed(1) + ' ' + pts[0][1].toFixed(1); for (let i = 0; i < k; i++) { const q = pts[(i + 1) % k]; d += 'A' + rr + ' ' + rr + ' 0 0 1 ' + q[0].toFixed(1) + ' ' + q[1].toFixed(1); } return d + 'Z'; };
+  const ICON = '<svg viewBox="-10 -10 20 20" aria-hidden="true"><path d="' + scal(9, 8) + '"/></svg>';
+  const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const TYPES = [['essay-', 'Essay'], ['case-', 'Case study'], ['series-', 'Photo series'], ['project-', 'Project'], ['recipe-', 'Recipe'], ['altar-', 'Collection'], ['recap-', 'Recap'], ['talk-', 'Talk']];
+  const typeOf = id => { const t = TYPES.find(x => id.startsWith(x[0])); return t ? t[1] : 'Page'; };
+  const scrim = document.createElement('div'); scrim.className = 'kb-scrim'; scrim.setAttribute('role', 'dialog'); scrim.setAttribute('aria-modal', 'true'); scrim.setAttribute('aria-label', 'Search the site');
+  scrim.innerHTML = '<div class="kb"><div class="kb-in"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b1c14" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="text" id="kb-input" placeholder="Type a command or search" autocomplete="off" aria-label="Search the site"><span class="kb-kbd">esc</span></div><div class="kb-list" id="kb-list"></div></div>';
+  document.body.appendChild(scrim);
+  const inp = scrim.querySelector('#kb-input'), list = scrim.querySelector('#kb-list');
+  let idx = [], vis = [], sel = 0, last = '';
+  function build() {
+    idx = [];
+    document.querySelectorAll('.page').forEach(pg => {
+      if (!pg.id || pg.id === 'search-results' || pg.id === 'notfound') return;
+      const h = pg.querySelector('h1'); const title = (h ? h.textContent : pg.id).replace(/\s+/g, ' ').trim(); if (!title) return;
+      idx.push({ kind: 'page', id: pg.id, title, type: typeOf(pg.id), text: ['map', 'sitemap'].includes(pg.id) ? '' : pg.textContent.replace(/\s+/g, ' ').trim(), low: '' });
+    });
+    idx.forEach(x => { x.low = (x.title + ' ' + x.text).toLowerCase(); x.tl = x.title.toLowerCase(); });
+    const act = (title, run) => idx.push({ kind: 'act', title, type: 'Action', run, text: '', low: title.toLowerCase(), tl: title.toLowerCase() });
+    act('Open How It Connects', () => go('map'));
+    act('Copy link to this page', () => { try { navigator.clipboard.writeText(location.href); } catch (e) {} });
+  }
+  function go(id) { const a = document.createElement('a'); a.href = '#'; a.dataset.page = id; a.style.display = 'none'; document.body.appendChild(a); a.click(); a.remove(); }
+  function snip(x, q) { if (!q) return ''; const i = x.low.indexOf(q); if (i < 0 || i < x.title.length + 1) return ''; const t = x.text, j = i - x.title.length - 1; const s = Math.max(0, j - 30); return (s > 0 ? '…' : '') + t.slice(s, j + q.length + 70); }
+  function paint() {
+    const q = inp.value.trim().toLowerCase();
+    let r;
+    if (!q) r = idx.filter(x => x.kind === 'page' && ['essays', 'work', 'portfolio', 'shelf', 'bookmarks', 'photography', 'academia', 'notes', 'map', 'about'].includes(x.id)).concat(idx.filter(x => x.kind === 'act'));
+    else r = idx.map(x => ({ x, s: x.tl === q ? 0 : x.tl.startsWith(q) ? 1 : x.tl.includes(q) ? 2 : x.low.includes(q) ? 3 : 9 })).filter(o => o.s < 9).sort((a, b) => a.s - b.s).slice(0, 30).map(o => o.x);
+    vis = r; sel = Math.min(sel, Math.max(0, r.length - 1));
+    if (!r.length) { list.innerHTML = '<div class="kb-empty">Nothing matches. Try a page, essay, note or term.</div>'; return; }
+    let h = '', g = '';
+    r.forEach((x, i) => {
+      const grp = x.kind === 'act' ? 'Actions' : (q ? 'Results' : 'Pages');
+      if (grp !== g) { h += '<div class="kb-g">' + grp + '</div>'; g = grp; }
+      const sn = q && x.kind === 'page' && !x.tl.includes(q) ? snip(x, q) : '';
+      h += '<button type="button" class="kb-r' + (i === sel ? ' act' : '') + '" data-i="' + i + '">' + ICON + '<span class="tt">' + esc(x.title) + (sn ? '<span class="sn">' + esc(sn) + '</span>' : '') + '</span><span class="ty">' + esc(x.type) + '</span></button>';
+    });
+    list.innerHTML = h; const a = list.querySelector('.act'); if (a && a.scrollIntoView) a.scrollIntoView({ block: 'nearest' });
+  }
+  function open() { build(); last = document.activeElement; scrim.classList.add('on'); inp.value = ''; sel = 0; paint(); setTimeout(() => inp.focus(), 30); }
+  function close() { scrim.classList.remove('on'); if (last && last.focus) try { last.focus(); } catch (e) {} }
+  function pick(i) { const x = vis[i]; if (!x) return; close(); if (x.kind === 'act') x.run(); else { go(x.id); window.scrollTo(0, 0); } }
+  window.__openCmdK = open;
+  addEventListener('keydown', e => {
+    const on = scrim.classList.contains('on');
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); on ? close() : open(); return; }
+    if (!on) { if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName) && !(document.activeElement || {}).isContentEditable) { e.preventDefault(); open(); } return; }
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowDown') { e.preventDefault(); sel = Math.min(vis.length - 1, sel + 1); paint(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(0, sel - 1); paint(); }
+    else if (e.key === 'Enter') { e.preventDefault(); pick(sel); }
+  });
+  inp.addEventListener('input', () => { sel = 0; paint(); });
+  list.addEventListener('mousemove', e => { const r = e.target.closest('.kb-r'); if (r && +r.dataset.i !== sel) { sel = +r.dataset.i; list.querySelectorAll('.kb-r').forEach(x => x.classList.toggle('act', +x.dataset.i === sel)); } });
+  list.addEventListener('click', e => { const r = e.target.closest('.kb-r'); if (r) pick(+r.dataset.i); });
+  scrim.addEventListener('click', e => { if (e.target === scrim) close(); });
+  document.addEventListener('click', e => { const b = e.target.closest('[data-cmdk]'); if (b) { e.preventDefault(); open(); } });
+})();
+
+/* Map: the Photography zone shows 3 to 5 random photos from the photo series, rounded, draggable */
+(function () {
+  const stage = document.querySelector('#map .map-stage'); if (!stage) return;
+  const box = document.createElement('div'); box.id = 'map-photos'; stage.appendChild(box);
+  let cur = [], timer = null, active = false, recent = [];
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const pool = () => { const seen = new Set(), out = []; document.querySelectorAll('.page[id^="series-"] img').forEach(im => { const s = im.getAttribute('src'); if (!s || im.hidden || seen.has(s)) return; seen.add(s); out.push(s); }); return out; };
+  function drag(el) {
+    let sx, sy, ox, oy, on = false;
+    el.addEventListener('pointerdown', e => { on = true; sx = e.clientX; sy = e.clientY; ox = el.offsetLeft; oy = el.offsetTop; el.classList.add('drag'); el.setPointerCapture(e.pointerId); e.preventDefault(); });
+    el.addEventListener('pointermove', e => { if (!on) return; el.style.left = Math.max(-10, Math.min(box.clientWidth - el.offsetWidth + 10, ox + e.clientX - sx)) + 'px'; el.style.top = Math.max(-10, Math.min(box.clientHeight - el.offsetHeight + 10, oy + e.clientY - sy)) + 'px'; });
+    const end = () => { on = false; el.classList.remove('drag'); };
+    el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+  }
+  function slots(n) {
+    const W = box.clientWidth, H = box.clientHeight, mob = W < 769, L = mob ? 0 : 320;
+    const base = mob ? [[.04, .10], [.52, .06], [.28, .28], [.62, .30], [.04, .32]] : [[.58, .06], [.78, .22], [.50, .42], [.82, .50], [.66, .58]];
+    return shuffle(base).slice(0, n).map(s => [L + s[0] * (W - L), s[1] * H]);
+  }
+  function round() {
+    const all = pool(); if (!all.length) return;
+    const n = Math.min(all.length, 3 + Math.floor(Math.random() * 3));
+    let pick = shuffle(all.filter(s => !recent.includes(s))); if (pick.length < n) pick = shuffle(all); pick = pick.slice(0, n); recent = pick;
+    const old = cur; cur = [];
+    old.forEach(p => { p.classList.add('out'); setTimeout(() => p.remove(), 700); });
+    const sl = slots(n);
+    pick.forEach((src, k) => {
+      const p = document.createElement('div'); p.className = 'mph out'; const im = document.createElement('img'); im.src = src; im.alt = ''; p.appendChild(im);
+      p.style.left = sl[k][0] + 'px'; p.style.top = sl[k][1] + 'px'; p.style.transform = 'rotate(' + ((Math.random() - .5) * 10).toFixed(1) + 'deg)';
+      box.appendChild(p); cur.push(p); drag(p);
+      requestAnimationFrame(() => requestAnimationFrame(() => p.classList.remove('out')));
+    });
+  }
+  function stop() { clearInterval(timer); timer = null; active = false; cur.forEach(p => { p.classList.add('out'); setTimeout(() => p.remove(), 700); }); cur = []; }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.addEventListener('map-focus', e => {
+    stop();
+    if (e.detail !== 'photography') return;
+    active = true; setTimeout(() => { if (active) round(); }, 600);
+    if (!reduce) timer = setInterval(() => { if (active && !document.hidden && !box.querySelector('.drag') && document.getElementById('map').classList.contains('active')) round(); }, 5000);
+  });
+})();
+</script>
 </body>
 </html>
